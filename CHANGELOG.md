@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/cloudquery/cloudquery-platform-api-go/compare/v1.0.0...v1.0.1) (2025-05-31)
+
+
+### Miscellaneous Chores
+
+* release 1.0.1 ([17e52bd](https://github.com/cloudquery/cloudquery-platform-api-go/commit/17e52bd8a633054be7b6d55c3b5322f3b9810309))
+
 ## [1.0.0](https://github.com/cloudquery/cloudquery-platform-api-go/compare/v1.13.9...v1.0.0) (2025-05-31)
 
 
