@@ -1,4 +1,4 @@
-package: cloudquery_api
+package: cloudquery_platform_api
 generate:
   client: true
 output: client.gen.go
