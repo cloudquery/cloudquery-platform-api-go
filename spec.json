@@ -11320,7 +11320,6 @@
           "type" : "array"
         },
         "style" : "form",
-        "x-go-type-skip-optional-pointer" : true,
         "x-go-name" : "FilterTags"
       },
       "filter_name_filter" : {
@@ -11558,9 +11557,7 @@
           "enum" : [ "smart", "search", "column" ],
           "type" : "string"
         },
-        "style" : "form",
-        "x-go-type-skip-optional-pointer" : true,
-        "x-go-name" : "FilterMode"
+        "style" : "form"
       },
       "table_filters" : {
         "allowEmptyValue" : true,
