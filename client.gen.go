@@ -3625,6 +3625,9 @@ type CustomColumnSortBys = []CustomColumnSortBy
 // CustomColumnSortDirections defines model for custom_columns_sort_dirs.
 type CustomColumnSortDirections = []CustomColumnSortDirection
 
+// DownloadFile defines model for download_file.
+type DownloadFile = bool
+
 // EmailBasic defines model for email_basic.
 type EmailBasic = string
 
@@ -5035,8 +5038,11 @@ type GetSyncRunLogsQueryParams struct {
 	PerPage *PerPage `form:"per_page,omitempty" json:"per_page,omitempty"`
 
 	// Page Page number of the results to fetch
-	Page   *Page   `form:"page,omitempty" json:"page,omitempty"`
-	Accept *string `json:"Accept,omitempty"`
+	Page *Page `form:"page,omitempty" json:"page,omitempty"`
+
+	// Download Whether to generate a downloadable file for the response.
+	Download *DownloadFile `form:"download,omitempty" json:"download,omitempty"`
+	Accept   *string       `json:"Accept,omitempty"`
 }
 
 // CreateSyncRunProgressJSONBody defines parameters for CreateSyncRunProgress.
@@ -24814,6 +24820,22 @@ func NewGetSyncRunLogsQueryRequest(server string, teamName TeamName, syncName Sy
 		if params.Page != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page", runtime.ParamLocationQuery, *params.Page); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Download != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "download", runtime.ParamLocationQuery, *params.Download); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
 				return nil, err
@@ -50622,6 +50644,9 @@ func ParseGetSyncRunLogsQueryResponse(rsp *http.Response) (*GetSyncRunLogsQueryR
 			return nil, err
 		}
 		response.JSON500 = &dest
+
+	case rsp.StatusCode == 200:
+		// Content-type (text/plain) unsupported
 
 	}
 

@@ -12012,6 +12012,9 @@
           },
           {
             "$ref": "#/components/parameters/page"
+          },
+          {
+            "$ref": "#/components/parameters/download_file"
           }
         ],
         "responses": {
@@ -12032,6 +12035,12 @@
                       "$ref": "#/components/schemas/ListMetadata"
                     }
                   }
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "description": "Download file."
                 }
               }
             }
@@ -15626,6 +15635,15 @@
         "required": true,
         "schema": {
           "$ref": "#/components/schemas/SyncRunID"
+        }
+      },
+      "download_file": {
+        "description": "Whether to generate a downloadable file for the response.",
+        "in": "query",
+        "name": "download",
+        "required": false,
+        "schema": {
+          "type": "boolean"
         }
       }
     },
