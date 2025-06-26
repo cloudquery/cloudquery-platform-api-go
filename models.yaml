@@ -1,6 +1,0 @@
-package: cloudquery_platform_api
-generate:
-  models: true
-output: models.gen.go
-compatibility:
-  always-prefix-enum-values: true
