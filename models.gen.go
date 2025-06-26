@@ -259,11 +259,11 @@ const (
 	PluginSortByUpdatedAt PluginSortBy = "updated_at"
 )
 
-// Defines values for FilterMode.
+// Defines values for TableFilterMode.
 const (
-	FilterModeColumn FilterMode = "column"
-	FilterModeSearch FilterMode = "search"
-	FilterModeSmart  FilterMode = "smart"
+	TableFilterModeColumn TableFilterMode = "column"
+	TableFilterModeSearch TableFilterMode = "search"
+	TableFilterModeSmart  TableFilterMode = "smart"
 )
 
 // Defines values for VersionSortBy.
@@ -4360,8 +4360,8 @@ type TableColumnValueFilter = string
 // FilterIDs defines model for table_filter_ids.
 type FilterIDs = []FilterID
 
-// FilterMode defines model for table_filter_mode.
-type FilterMode string
+// TableFilterMode defines model for table_filter_mode.
+type TableFilterMode string
 
 // Filters defines model for table_filters.
 type Filters = []FilterExpression
@@ -4456,7 +4456,7 @@ type ListFiltersParams struct {
 	Page *Page `form:"page,omitempty" json:"page,omitempty"`
 
 	// FilterTags Filter tags
-	FilterTags       FilterTags              `form:"tag,omitempty" json:"tag,omitempty"`
+	FilterTags       *FilterTags             `form:"tag,omitempty" json:"tag,omitempty"`
 	NameFilter       *FilterNameFilter       `form:"name_filter,omitempty" json:"name_filter,omitempty"`
 	ExpressionFilter *FilterExpressionFilter `form:"expression_filter,omitempty" json:"expression_filter,omitempty"`
 }
@@ -4629,8 +4629,8 @@ type TableListColumnsParams struct {
 	//
 	// Column mode searches purely using the columns in the table.
 	// It will work on all table results but it is not optimized for arbitrary substring searches and so may be slow on larger tables.
-	FilterMode TableListColumnsParamsFilterMode `form:"filter_mode,omitempty" json:"filter_mode,omitempty"`
-	Filter     *TableColumnNameFilter           `form:"filter,omitempty" json:"filter,omitempty"`
+	FilterMode *TableListColumnsParamsFilterMode `form:"filter_mode,omitempty" json:"filter_mode,omitempty"`
+	Filter     *TableColumnNameFilter            `form:"filter,omitempty" json:"filter,omitempty"`
 
 	// Page Page number of the results to fetch
 	Page *Page `form:"page,omitempty" json:"page,omitempty"`
@@ -4654,8 +4654,8 @@ type TableColumnListValuesParams struct {
 	//
 	// Column mode searches purely using the columns in the table.
 	// It will work on all table results but it is not optimized for arbitrary substring searches and so may be slow on larger tables.
-	FilterMode TableColumnListValuesParamsFilterMode `form:"filter_mode,omitempty" json:"filter_mode,omitempty"`
-	Filter     *TableColumnValueFilter               `form:"filter,omitempty" json:"filter,omitempty"`
+	FilterMode *TableColumnListValuesParamsFilterMode `form:"filter_mode,omitempty" json:"filter_mode,omitempty"`
+	Filter     *TableColumnValueFilter                `form:"filter,omitempty" json:"filter,omitempty"`
 
 	// Page Page number of the results to fetch
 	Page *Page `form:"page,omitempty" json:"page,omitempty"`
@@ -4682,7 +4682,7 @@ type TableListRowsParams struct {
 	//
 	// Column mode searches purely using the columns in the table.
 	// It will work on all table results but it is not optimized for arbitrary substring searches and so may be slow on larger tables.
-	FilterMode TableListRowsParamsFilterMode `form:"filter_mode,omitempty" json:"filter_mode,omitempty"`
+	FilterMode *TableListRowsParamsFilterMode `form:"filter_mode,omitempty" json:"filter_mode,omitempty"`
 
 	// Filters Table filters. This filters the rows that are returned in the result set.
 	Filters Filters `form:"filter,omitempty" json:"filter,omitempty"`
@@ -4722,7 +4722,7 @@ type TableRowByIdParams struct {
 	//
 	// Column mode searches purely using the columns in the table.
 	// It will work on all table results but it is not optimized for arbitrary substring searches and so may be slow on larger tables.
-	FilterMode TableRowByIdParamsFilterMode `form:"filter_mode,omitempty" json:"filter_mode,omitempty"`
+	FilterMode *TableRowByIdParamsFilterMode `form:"filter_mode,omitempty" json:"filter_mode,omitempty"`
 
 	// Filters Table filters. This filters the rows that are returned in the result set.
 	Filters Filters `form:"filter,omitempty" json:"filter,omitempty"`
@@ -4744,7 +4744,7 @@ type TableListFiltersParams struct {
 	Page *Page `form:"page,omitempty" json:"page,omitempty"`
 
 	// FilterTags Filter tags
-	FilterTags FilterTags `form:"tag,omitempty" json:"tag,omitempty"`
+	FilterTags *FilterTags `form:"tag,omitempty" json:"tag,omitempty"`
 }
 
 // TableListFilterTagsParams defines parameters for TableListFilterTags.
@@ -4846,7 +4846,7 @@ type ListFiltersTeamParams struct {
 	Page *Page `form:"page,omitempty" json:"page,omitempty"`
 
 	// FilterTags Filter tags
-	FilterTags       FilterTags              `form:"tag,omitempty" json:"tag,omitempty"`
+	FilterTags       *FilterTags             `form:"tag,omitempty" json:"tag,omitempty"`
 	NameFilter       *FilterNameFilter       `form:"name_filter,omitempty" json:"name_filter,omitempty"`
 	ExpressionFilter *FilterExpressionFilter `form:"expression_filter,omitempty" json:"expression_filter,omitempty"`
 }
@@ -5059,7 +5059,7 @@ type ExecuteAdHocQueryTeamParams struct {
 	//
 	// Column mode searches purely using the columns in the table.
 	// It will work on all table results but it is not optimized for arbitrary substring searches and so may be slow on larger tables.
-	FilterMode ExecuteAdHocQueryTeamParamsFilterMode `form:"filter_mode,omitempty" json:"filter_mode,omitempty"`
+	FilterMode *ExecuteAdHocQueryTeamParamsFilterMode `form:"filter_mode,omitempty" json:"filter_mode,omitempty"`
 
 	// Filters Table filters. This filters the rows that are returned in the result set.
 	Filters Filters `form:"filter,omitempty" json:"filter,omitempty"`
@@ -5111,7 +5111,7 @@ type ExecuteSavedQueryTeamParams struct {
 	//
 	// Column mode searches purely using the columns in the table.
 	// It will work on all table results but it is not optimized for arbitrary substring searches and so may be slow on larger tables.
-	FilterMode ExecuteSavedQueryTeamParamsFilterMode `form:"filter_mode,omitempty" json:"filter_mode,omitempty"`
+	FilterMode *ExecuteSavedQueryTeamParamsFilterMode `form:"filter_mode,omitempty" json:"filter_mode,omitempty"`
 
 	// Filters Table filters. This filters the rows that are returned in the result set.
 	Filters Filters `form:"filter,omitempty" json:"filter,omitempty"`
@@ -5148,7 +5148,7 @@ type QueryListFiltersTeamParams struct {
 	Page *Page `form:"page,omitempty" json:"page,omitempty"`
 
 	// FilterTags Filter tags
-	FilterTags FilterTags `form:"tag,omitempty" json:"tag,omitempty"`
+	FilterTags *FilterTags `form:"tag,omitempty" json:"tag,omitempty"`
 }
 
 // QueryListFilterTagsTeamParams defines parameters for QueryListFilterTagsTeam.
@@ -5467,8 +5467,8 @@ type TableListColumnsTeamParams struct {
 	//
 	// Column mode searches purely using the columns in the table.
 	// It will work on all table results but it is not optimized for arbitrary substring searches and so may be slow on larger tables.
-	FilterMode TableListColumnsTeamParamsFilterMode `form:"filter_mode,omitempty" json:"filter_mode,omitempty"`
-	Filter     *TableColumnNameFilter               `form:"filter,omitempty" json:"filter,omitempty"`
+	FilterMode *TableListColumnsTeamParamsFilterMode `form:"filter_mode,omitempty" json:"filter_mode,omitempty"`
+	Filter     *TableColumnNameFilter                `form:"filter,omitempty" json:"filter,omitempty"`
 
 	// Page Page number of the results to fetch
 	Page *Page `form:"page,omitempty" json:"page,omitempty"`
@@ -5492,8 +5492,8 @@ type TableColumnListValuesTeamParams struct {
 	//
 	// Column mode searches purely using the columns in the table.
 	// It will work on all table results but it is not optimized for arbitrary substring searches and so may be slow on larger tables.
-	FilterMode TableColumnListValuesTeamParamsFilterMode `form:"filter_mode,omitempty" json:"filter_mode,omitempty"`
-	Filter     *TableColumnValueFilter                   `form:"filter,omitempty" json:"filter,omitempty"`
+	FilterMode *TableColumnListValuesTeamParamsFilterMode `form:"filter_mode,omitempty" json:"filter_mode,omitempty"`
+	Filter     *TableColumnValueFilter                    `form:"filter,omitempty" json:"filter,omitempty"`
 
 	// Page Page number of the results to fetch
 	Page *Page `form:"page,omitempty" json:"page,omitempty"`
@@ -5520,7 +5520,7 @@ type TableListRowsTeamParams struct {
 	//
 	// Column mode searches purely using the columns in the table.
 	// It will work on all table results but it is not optimized for arbitrary substring searches and so may be slow on larger tables.
-	FilterMode TableListRowsTeamParamsFilterMode `form:"filter_mode,omitempty" json:"filter_mode,omitempty"`
+	FilterMode *TableListRowsTeamParamsFilterMode `form:"filter_mode,omitempty" json:"filter_mode,omitempty"`
 
 	// Filters Table filters. This filters the rows that are returned in the result set.
 	Filters Filters `form:"filter,omitempty" json:"filter,omitempty"`
@@ -5560,7 +5560,7 @@ type TableRowByIdTeamParams struct {
 	//
 	// Column mode searches purely using the columns in the table.
 	// It will work on all table results but it is not optimized for arbitrary substring searches and so may be slow on larger tables.
-	FilterMode TableRowByIdTeamParamsFilterMode `form:"filter_mode,omitempty" json:"filter_mode,omitempty"`
+	FilterMode *TableRowByIdTeamParamsFilterMode `form:"filter_mode,omitempty" json:"filter_mode,omitempty"`
 
 	// Filters Table filters. This filters the rows that are returned in the result set.
 	Filters Filters `form:"filter,omitempty" json:"filter,omitempty"`
@@ -5582,7 +5582,7 @@ type TableListFiltersTeamParams struct {
 	Page *Page `form:"page,omitempty" json:"page,omitempty"`
 
 	// FilterTags Filter tags
-	FilterTags FilterTags `form:"tag,omitempty" json:"tag,omitempty"`
+	FilterTags *FilterTags `form:"tag,omitempty" json:"tag,omitempty"`
 }
 
 // TableListFilterTagsTeamParams defines parameters for TableListFilterTagsTeam.
