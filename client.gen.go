@@ -1435,6 +1435,9 @@ type LocalUser struct {
 	ID          openapi_types.UUID `json:"id"`
 	LastLoginAt *time.Time         `json:"last_login_at,omitempty"`
 
+	// MFAConfigured Whether the user has MFA configured
+	MFAConfigured *bool `json:"mfa_configured,omitempty"`
+
 	// Name The unique name for the user.
 	Name *UserName `json:"name,omitempty"`
 
@@ -1462,6 +1465,9 @@ type LocalUserWithTeams struct {
 	// ID ID of the User
 	ID          openapi_types.UUID `json:"id"`
 	LastLoginAt *time.Time         `json:"last_login_at,omitempty"`
+
+	// MFAConfigured Whether the user has MFA configured
+	MFAConfigured *bool `json:"mfa_configured,omitempty"`
 
 	// Name The unique name for the user.
 	Name *UserName `json:"name,omitempty"`
@@ -2957,6 +2963,15 @@ type SyncRunStatus string
 
 // SyncRunStatusReason The reason for the status
 type SyncRunStatusReason string
+
+// SyncRunTableProgress Table-specific progress information for a sync run
+type SyncRunTableProgress map[string]struct {
+	// Errors Number of errors for this table
+	Errors int64 `json:"errors"`
+
+	// Rows Number of rows processed for this table
+	Rows int64 `json:"rows"`
+}
 
 // SyncRunTableStat defines model for SyncRunTableStat.
 type SyncRunTableStat struct {
@@ -5061,6 +5076,9 @@ type CreateSyncRunProgressJSONBody struct {
 
 	// Status The status of the sync run
 	Status *SyncRunStatus `json:"status,omitempty"`
+
+	// TableProgress Table-specific progress information for a sync run
+	TableProgress *SyncRunTableProgress `json:"table_progress,omitempty"`
 
 	// Warnings Number of warnings encountered so far
 	Warnings int64 `json:"warnings"`

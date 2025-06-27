@@ -12192,6 +12192,10 @@
                     "type": "integer",
                     "format": "int32",
                     "description": "The total number of shards for this sync run"
+                  },
+                  "table_progress": {
+                    "$ref": "#/components/schemas/SyncRunTableProgress",
+                    "description": "Table-specific progress information including error and row counts per table"
                   }
                 }
               }
@@ -16328,6 +16332,11 @@
               "tracking_opted_in": {
                 "type": "boolean",
                 "description": "Whether anonymous user tracking was opted into"
+              },
+              "mfa_configured": {
+                "type": "boolean",
+                "description": "Whether the user has MFA configured",
+                "x-go-name": "MFAConfigured"
               }
             }
           }
@@ -21564,6 +21573,29 @@
             }
           }
         ]
+      },
+      "SyncRunTableProgress": {
+        "description": "Table-specific progress information for a sync run",
+        "type": "object",
+        "additionalProperties": {
+          "type": "object",
+          "properties": {
+            "errors": {
+              "type": "integer",
+              "format": "int64",
+              "description": "Number of errors for this table"
+            },
+            "rows": {
+              "type": "integer",
+              "format": "int64",
+              "description": "Number of rows processed for this table"
+            }
+          },
+          "required": [
+            "errors",
+            "rows"
+          ]
+        }
       },
       "SyncRunStats": {
         "type": "object",
