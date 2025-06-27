@@ -4,7 +4,7 @@ go 1.21.0
 
 require (
 	github.com/adrg/xdg v0.5.3
-	github.com/cloudquery/cloudquery-api-go v1.13.9
+	github.com/cloudquery/cloudquery-api-go v1.13.10
 	github.com/hashicorp/go-retryablehttp v0.7.7
 	github.com/oapi-codegen/runtime v1.1.1
 	github.com/stretchr/testify v1.10.0
