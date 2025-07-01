@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.0.3](https://github.com/cloudquery/cloudquery-platform-api-go/compare/v1.0.2...v1.0.3) (2025-07-01)
+
+
+### Bug Fixes
+
+* **deps:** Update module github.com/cloudquery/cloudquery-api-go to v1.13.10 ([e90c7cd](https://github.com/cloudquery/cloudquery-platform-api-go/commit/e90c7cd75afd29da7b4d6f36b9829d3fda2a3fe2))
+* **deps:** Update module github.com/cloudquery/cloudquery-api-go to v1.13.10 ([#11](https://github.com/cloudquery/cloudquery-platform-api-go/issues/11)) ([4a9b6bb](https://github.com/cloudquery/cloudquery-platform-api-go/commit/4a9b6bbbccdedd0f99908241de2c746312bd4fbc))
+* **deps:** Update module github.com/cloudquery/cloudquery-api-go to v1.13.11 ([6f41f17](https://github.com/cloudquery/cloudquery-platform-api-go/commit/6f41f174ffa47b81eb42dec680c7d4b96dbdb7c6))
+* **deps:** Update module github.com/cloudquery/cloudquery-api-go to v1.13.11 ([#15](https://github.com/cloudquery/cloudquery-platform-api-go/issues/15)) ([0623559](https://github.com/cloudquery/cloudquery-platform-api-go/commit/062355934984b5de98ee5c60bcbff8edb9eb5e22))
+* **deps:** Update module github.com/hashicorp/go-retryablehttp to v0.7.8 ([76a63bc](https://github.com/cloudquery/cloudquery-platform-api-go/commit/76a63bc431308ac359854c710a71c8d17858dc33))
+* **deps:** Update module github.com/hashicorp/go-retryablehttp to v0.7.8 ([#13](https://github.com/cloudquery/cloudquery-platform-api-go/issues/13)) ([7ea14ba](https://github.com/cloudquery/cloudquery-platform-api-go/commit/7ea14ba7b88c25441ab89514a7144302e578d877))
+* Generate CloudQuery Go API Client from `spec.json` ([3510ddb](https://github.com/cloudquery/cloudquery-platform-api-go/commit/3510ddb9237419e4c9092a4a78ebb8c694a86acc))
+* Generate CloudQuery Go API Client from `spec.json` ([#9](https://github.com/cloudquery/cloudquery-platform-api-go/issues/9)) ([aae3a9a](https://github.com/cloudquery/cloudquery-platform-api-go/commit/aae3a9a5f9f1343de242fd7dbc520af7f5c50158))
+
 ## [1.0.2](https://github.com/cloudquery/cloudquery-platform-api-go/compare/v1.0.1...v1.0.2) (2025-06-26)
 
 
