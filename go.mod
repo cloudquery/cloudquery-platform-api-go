@@ -8,7 +8,7 @@ require (
 	github.com/adrg/xdg v0.5.3
 	github.com/cloudquery/cloudquery-api-go v1.14.0
 	github.com/hashicorp/go-retryablehttp v0.7.8
-	github.com/oapi-codegen/runtime v1.1.1
+	github.com/oapi-codegen/runtime v1.1.2
 	github.com/stretchr/testify v1.10.0
 )
 
