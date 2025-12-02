@@ -1,5 +1,34 @@
 # Changelog
 
+## [1.0.3](https://github.com/cloudquery/cloudquery-platform-api-go/compare/v1.0.2...v1.0.3) (2025-12-02)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency go to v1.25.4 ([#14](https://github.com/cloudquery/cloudquery-platform-api-go/issues/14)) ([ec5df07](https://github.com/cloudquery/cloudquery-platform-api-go/commit/ec5df074b150b6e366ea6e52f602409d4ae27f82))
+* **deps:** Update module github.com/cloudquery/cloudquery-api-go to v1.13.10 ([e90c7cd](https://github.com/cloudquery/cloudquery-platform-api-go/commit/e90c7cd75afd29da7b4d6f36b9829d3fda2a3fe2))
+* **deps:** Update module github.com/cloudquery/cloudquery-api-go to v1.13.10 ([#11](https://github.com/cloudquery/cloudquery-platform-api-go/issues/11)) ([4a9b6bb](https://github.com/cloudquery/cloudquery-platform-api-go/commit/4a9b6bbbccdedd0f99908241de2c746312bd4fbc))
+* **deps:** Update module github.com/cloudquery/cloudquery-api-go to v1.13.11 ([6f41f17](https://github.com/cloudquery/cloudquery-platform-api-go/commit/6f41f174ffa47b81eb42dec680c7d4b96dbdb7c6))
+* **deps:** Update module github.com/cloudquery/cloudquery-api-go to v1.13.11 ([#15](https://github.com/cloudquery/cloudquery-platform-api-go/issues/15)) ([0623559](https://github.com/cloudquery/cloudquery-platform-api-go/commit/062355934984b5de98ee5c60bcbff8edb9eb5e22))
+* **deps:** Update module github.com/cloudquery/cloudquery-api-go to v1.14.0 ([ada2bb0](https://github.com/cloudquery/cloudquery-platform-api-go/commit/ada2bb05a858e47e226610ce4772d3a68fbc77c1))
+* **deps:** Update module github.com/cloudquery/cloudquery-api-go to v1.14.0 ([#16](https://github.com/cloudquery/cloudquery-platform-api-go/issues/16)) ([41c6180](https://github.com/cloudquery/cloudquery-platform-api-go/commit/41c618088c3da9a4b6093cdeb26e70c8b5e29fee))
+* **deps:** Update module github.com/cloudquery/cloudquery-api-go to v1.14.1 ([8583c1d](https://github.com/cloudquery/cloudquery-platform-api-go/commit/8583c1d9e046e851617d8d049f3404811eac5d24))
+* **deps:** Update module github.com/cloudquery/cloudquery-api-go to v1.14.1 ([#20](https://github.com/cloudquery/cloudquery-platform-api-go/issues/20)) ([ba8a841](https://github.com/cloudquery/cloudquery-platform-api-go/commit/ba8a8410d53ad758147bdd92b0127da0e83c9a48))
+* **deps:** Update module github.com/cloudquery/cloudquery-api-go to v1.14.2 ([#24](https://github.com/cloudquery/cloudquery-platform-api-go/issues/24)) ([007d942](https://github.com/cloudquery/cloudquery-platform-api-go/commit/007d942b4c1a0dc21512356cf3fa0d04428fda8a))
+* **deps:** Update module github.com/cloudquery/cloudquery-api-go to v1.14.3 ([#25](https://github.com/cloudquery/cloudquery-platform-api-go/issues/25)) ([a0665c9](https://github.com/cloudquery/cloudquery-platform-api-go/commit/a0665c9731f89e9d11288e100a0a1f569686fb1e))
+* **deps:** Update module github.com/cloudquery/cloudquery-api-go to v1.14.4 ([#26](https://github.com/cloudquery/cloudquery-platform-api-go/issues/26)) ([9cac958](https://github.com/cloudquery/cloudquery-platform-api-go/commit/9cac958d5966424d34cf940bb1dab4f3ba9762eb))
+* **deps:** Update module github.com/cloudquery/cloudquery-api-go to v1.14.5 ([#31](https://github.com/cloudquery/cloudquery-platform-api-go/issues/31)) ([32eb2cc](https://github.com/cloudquery/cloudquery-platform-api-go/commit/32eb2ccd7d4298c1f6d2e2ac457d7edfe04e6597))
+* **deps:** Update module github.com/cloudquery/cloudquery-api-go to v1.14.6 ([#35](https://github.com/cloudquery/cloudquery-platform-api-go/issues/35)) ([6b8e202](https://github.com/cloudquery/cloudquery-platform-api-go/commit/6b8e202da1559d1b22280bda749d61dd25861841))
+* **deps:** Update module github.com/hashicorp/go-retryablehttp to v0.7.8 ([76a63bc](https://github.com/cloudquery/cloudquery-platform-api-go/commit/76a63bc431308ac359854c710a71c8d17858dc33))
+* **deps:** Update module github.com/hashicorp/go-retryablehttp to v0.7.8 ([#13](https://github.com/cloudquery/cloudquery-platform-api-go/issues/13)) ([7ea14ba](https://github.com/cloudquery/cloudquery-platform-api-go/commit/7ea14ba7b88c25441ab89514a7144302e578d877))
+* **deps:** Update module github.com/oapi-codegen/runtime to v1.1.2 ([f0fef39](https://github.com/cloudquery/cloudquery-platform-api-go/commit/f0fef39c5bfd9ddb3d81a55d5c0d16ac5c788fd8))
+* **deps:** Update module github.com/oapi-codegen/runtime to v1.1.2 ([#17](https://github.com/cloudquery/cloudquery-platform-api-go/issues/17)) ([c13d941](https://github.com/cloudquery/cloudquery-platform-api-go/commit/c13d9418fb154532791873b3798ca2ecac18419d))
+* **deps:** Update module github.com/stretchr/testify to v1.11.0 ([#23](https://github.com/cloudquery/cloudquery-platform-api-go/issues/23)) ([e0ecc10](https://github.com/cloudquery/cloudquery-platform-api-go/commit/e0ecc1088d58eeefa300bb6ceae56b33123fa739))
+* **deps:** Update module github.com/stretchr/testify to v1.11.1 ([#27](https://github.com/cloudquery/cloudquery-platform-api-go/issues/27)) ([10f89cb](https://github.com/cloudquery/cloudquery-platform-api-go/commit/10f89cbfe2727021de6704393721af5b692ba275))
+* Generate CloudQuery Go API Client from `spec.json` ([3510ddb](https://github.com/cloudquery/cloudquery-platform-api-go/commit/3510ddb9237419e4c9092a4a78ebb8c694a86acc))
+* Generate CloudQuery Go API Client from `spec.json` ([#36](https://github.com/cloudquery/cloudquery-platform-api-go/issues/36)) ([9dbcbd9](https://github.com/cloudquery/cloudquery-platform-api-go/commit/9dbcbd9a9f872e3b3b03d8eae30754b626cbfef2))
+* Generate CloudQuery Go API Client from `spec.json` ([#9](https://github.com/cloudquery/cloudquery-platform-api-go/issues/9)) ([aae3a9a](https://github.com/cloudquery/cloudquery-platform-api-go/commit/aae3a9a5f9f1343de242fd7dbc520af7f5c50158))
+
 ## [1.0.2](https://github.com/cloudquery/cloudquery-platform-api-go/compare/v1.0.1...v1.0.2) (2025-06-26)
 
 
