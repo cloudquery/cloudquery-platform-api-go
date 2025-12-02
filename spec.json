@@ -44,6 +44,9 @@
       "name": "audit-logs"
     },
     {
+      "name": "chat"
+    },
+    {
       "name": "custom-columns"
     },
     {
@@ -81,6 +84,9 @@
     },
     {
       "name": "users"
+    },
+    {
+      "name": "rbac"
     }
   ],
   "paths": {
@@ -317,252 +323,6 @@
         ]
       }
     },
-    "/filters": {
-      "get": {
-        "description": "List Filters",
-        "operationId": "ListFilters",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/per_page"
-          },
-          {
-            "$ref": "#/components/parameters/page"
-          },
-          {
-            "$ref": "#/components/parameters/filter_tags"
-          },
-          {
-            "$ref": "#/components/parameters/filter_name_filter"
-          },
-          {
-            "$ref": "#/components/parameters/filter_expression_filter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "required": [
-                    "items",
-                    "metadata"
-                  ],
-                  "properties": {
-                    "items": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/Filter"
-                      }
-                    },
-                    "metadata": {
-                      "$ref": "#/components/schemas/ListMetadata"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/RequiresAuthentication"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "422": {
-            "$ref": "#/components/responses/UnprocessableEntity"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalError"
-          }
-        },
-        "tags": [
-          "filters"
-        ]
-      }
-    },
-    "/filters/tags": {
-      "get": {
-        "description": "List Filter Tags",
-        "operationId": "ListFilterTags",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/per_page"
-          },
-          {
-            "$ref": "#/components/parameters/page"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "required": [
-                    "items",
-                    "metadata"
-                  ],
-                  "properties": {
-                    "items": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/FilterTag"
-                      }
-                    },
-                    "metadata": {
-                      "$ref": "#/components/schemas/ListMetadata"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/RequiresAuthentication"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "422": {
-            "$ref": "#/components/responses/UnprocessableEntity"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalError"
-          }
-        },
-        "tags": [
-          "filters"
-        ]
-      }
-    },
-    "/filters/{filter_id}": {
-      "get": {
-        "description": "Get a table filter by ID",
-        "operationId": "GetFilterByID",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/filter_id"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Filter"
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/RequiresAuthentication"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "422": {
-            "$ref": "#/components/responses/UnprocessableEntity"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalError"
-          }
-        },
-        "tags": [
-          "filters"
-        ]
-      },
-      "patch": {
-        "description": "Update a table filter",
-        "operationId": "UpdateFilter",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/filter_id"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/FilterUpdate"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Filter"
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/RequiresAuthentication"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "422": {
-            "$ref": "#/components/responses/UnprocessableEntity"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalError"
-          }
-        },
-        "tags": [
-          "filters"
-        ]
-      },
-      "delete": {
-        "description": "Delete a table filter",
-        "operationId": "DeleteFilter",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/filter_id"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Deleted"
-          },
-          "401": {
-            "$ref": "#/components/responses/RequiresAuthentication"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "422": {
-            "$ref": "#/components/responses/UnprocessableEntity"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalError"
-          }
-        },
-        "tags": [
-          "filters"
-        ]
-      }
-    },
     "/healthcheck": {
       "head": {
         "description": "Health check endpoint, returns 200",
@@ -577,6 +337,9 @@
           },
           "500": {
             "$ref": "#/components/responses/InternalError"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
           }
         },
         "security": [],
@@ -596,6 +359,9 @@
           },
           "500": {
             "$ref": "#/components/responses/InternalError"
+          },
+          "503": {
+            "$ref": "#/components/responses/ServiceUnavailable"
           }
         },
         "security": [],
@@ -1295,6 +1061,30 @@
           },
           {
             "$ref": "#/components/parameters/per_page"
+          },
+          {
+            "name": "user_search",
+            "description": "Search by user name or email",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "role",
+            "description": "Search by user role. Only for default roles.",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/RBACDefaultRole"
+            }
+          },
+          {
+            "name": "custom_role_id",
+            "description": "Search by custom role.",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/RBACCustomRoleID"
+            }
           }
         ],
         "responses": {
@@ -1361,8 +1151,7 @@
                 "type": "object",
                 "additionalProperties": false,
                 "required": [
-                  "user_id",
-                  "roles"
+                  "user_id"
                 ],
                 "properties": {
                   "user_id": {
@@ -1375,13 +1164,13 @@
                   "roles": {
                     "type": "array",
                     "items": {
-                      "type": "string",
-                      "enum": [
-                        "admin:write",
-                        "admin:read",
-                        "general:read",
-                        "general:write"
-                      ]
+                      "$ref": "#/components/schemas/RBACDefaultRole"
+                    }
+                  },
+                  "custom_roles": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/RBACCustomRoleID"
                     }
                   }
                 }
@@ -2209,6 +1998,9 @@
           },
           {
             "$ref": "#/components/parameters/include_drafts"
+          },
+          {
+            "$ref": "#/components/parameters/include_fips"
           },
           {
             "$ref": "#/components/parameters/include_prereleases"
@@ -3327,727 +3119,6 @@
         },
         "tags": [
           "plugins"
-        ]
-      }
-    },
-    "/tables": {
-      "get": {
-        "description": "List Tables",
-        "operationId": "ListTables",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/per_page"
-          },
-          {
-            "$ref": "#/components/parameters/page"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "required": [
-                    "items",
-                    "metadata"
-                  ],
-                  "properties": {
-                    "items": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/TableListItem"
-                      }
-                    },
-                    "metadata": {
-                      "$ref": "#/components/schemas/ListMetadata"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/RequiresAuthentication"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "422": {
-            "$ref": "#/components/responses/UnprocessableEntity"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalError"
-          }
-        },
-        "tags": [
-          "tables"
-        ]
-      }
-    },
-    "/tables/{table_name}/data": {
-      "get": {
-        "description": "List Table Rows",
-        "operationId": "TableListRows",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/table_name"
-          },
-          {
-            "$ref": "#/components/parameters/table_selects"
-          },
-          {
-            "$ref": "#/components/parameters/table_filter_mode"
-          },
-          {
-            "$ref": "#/components/parameters/table_filters"
-          },
-          {
-            "$ref": "#/components/parameters/table_filter_ids"
-          },
-          {
-            "$ref": "#/components/parameters/table_sort_bys"
-          },
-          {
-            "$ref": "#/components/parameters/table_sort_dirs"
-          },
-          {
-            "$ref": "#/components/parameters/table_group_bys"
-          },
-          {
-            "$ref": "#/components/parameters/per_page"
-          },
-          {
-            "$ref": "#/components/parameters/page"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "required": [
-                    "data",
-                    "metadata"
-                  ],
-                  "properties": {
-                    "data": {
-                      "$ref": "#/components/schemas/TableData"
-                    },
-                    "metadata": {
-                      "$ref": "#/components/schemas/ListMetadata"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "401": {
-            "$ref": "#/components/responses/RequiresAuthentication"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "422": {
-            "$ref": "#/components/responses/UnprocessableEntity"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalError"
-          }
-        },
-        "tags": [
-          "tables"
-        ]
-      }
-    },
-    "/tables/{table_name}/data/{table_row_id}": {
-      "get": {
-        "description": "Get Table row",
-        "operationId": "TableRowById",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/table_name"
-          },
-          {
-            "$ref": "#/components/parameters/table_row_id"
-          },
-          {
-            "$ref": "#/components/parameters/table_filter_mode"
-          },
-          {
-            "$ref": "#/components/parameters/table_filters"
-          },
-          {
-            "$ref": "#/components/parameters/table_filter_ids"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "required": [
-                    "data",
-                    "matches"
-                  ],
-                  "properties": {
-                    "data": {
-                      "$ref": "#/components/schemas/TableRow"
-                    },
-                    "matches": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/TableRowFieldMatch"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "401": {
-            "$ref": "#/components/responses/RequiresAuthentication"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "422": {
-            "$ref": "#/components/responses/UnprocessableEntity"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalError"
-          }
-        },
-        "tags": [
-          "tables"
-        ]
-      }
-    },
-    "/tables/{table_name}/schema": {
-      "get": {
-        "description": "Get Table Schema",
-        "operationId": "TableSchema",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/table_name"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "required": [
-                    "schema",
-                    "default_columns"
-                  ],
-                  "properties": {
-                    "schema": {
-                      "$ref": "#/components/schemas/TableSchema"
-                    },
-                    "default_columns": {
-                      "type": "array",
-                      "items": {
-                        "type": "string",
-                        "description": "Column name"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/RequiresAuthentication"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "422": {
-            "$ref": "#/components/responses/UnprocessableEntity"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalError"
-          }
-        },
-        "tags": [
-          "tables"
-        ]
-      }
-    },
-    "/tables/schemas": {
-      "get": {
-        "description": "Get Table Schemas",
-        "operationId": "BatchTableSchemas",
-        "parameters": [
-          {
-            "name": "tables",
-            "in": "query",
-            "description": "A list of table names to retrieve schemas for",
-            "required": true,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "minLength": 1
-              },
-              "example": [
-                "aws_ec2_instances",
-                "aws_s3_buckets"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "required": [
-                    "items"
-                  ],
-                  "properties": {
-                    "items": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/BatchTableSchemaItem"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/RequiresAuthentication"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "422": {
-            "$ref": "#/components/responses/UnprocessableEntity"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalError"
-          }
-        },
-        "tags": [
-          "tables"
-        ]
-      }
-    },
-    "/tables/{table_name}/columns": {
-      "get": {
-        "description": "Get Table Columns",
-        "operationId": "TableListColumns",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/table_name"
-          },
-          {
-            "$ref": "#/components/parameters/table_filter_mode"
-          },
-          {
-            "$ref": "#/components/parameters/table_column_name_filter"
-          },
-          {
-            "$ref": "#/components/parameters/page"
-          },
-          {
-            "$ref": "#/components/parameters/per_page"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "required": [
-                    "items",
-                    "metadata"
-                  ],
-                  "properties": {
-                    "items": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/TableColumnListItem"
-                      }
-                    },
-                    "metadata": {
-                      "$ref": "#/components/schemas/ListMetadata"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/RequiresAuthentication"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "422": {
-            "$ref": "#/components/responses/UnprocessableEntity"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalError"
-          }
-        },
-        "tags": [
-          "tables"
-        ]
-      }
-    },
-    "/tables/{table_name}/columns/{column_name}/values": {
-      "get": {
-        "description": "Get Table Column Values",
-        "operationId": "TableColumnListValues",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/table_name"
-          },
-          {
-            "$ref": "#/components/parameters/column_name"
-          },
-          {
-            "$ref": "#/components/parameters/table_filter_mode"
-          },
-          {
-            "$ref": "#/components/parameters/table_column_value_filter"
-          },
-          {
-            "$ref": "#/components/parameters/page"
-          },
-          {
-            "$ref": "#/components/parameters/per_page"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "required": [
-                    "items",
-                    "metadata"
-                  ],
-                  "properties": {
-                    "items": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/TableColumnValueListItem"
-                      }
-                    },
-                    "metadata": {
-                      "$ref": "#/components/schemas/ListMetadata"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/RequiresAuthentication"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "422": {
-            "$ref": "#/components/responses/UnprocessableEntity"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalError"
-          }
-        },
-        "tags": [
-          "tables"
-        ]
-      }
-    },
-    "/tables/{table_name}/filters": {
-      "get": {
-        "description": "List Table Filters",
-        "operationId": "TableListFilters",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/table_name"
-          },
-          {
-            "$ref": "#/components/parameters/per_page"
-          },
-          {
-            "$ref": "#/components/parameters/page"
-          },
-          {
-            "$ref": "#/components/parameters/filter_tags"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "required": [
-                    "items",
-                    "metadata"
-                  ],
-                  "properties": {
-                    "items": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/Filter"
-                      }
-                    },
-                    "metadata": {
-                      "$ref": "#/components/schemas/ListMetadata"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "401": {
-            "$ref": "#/components/responses/RequiresAuthentication"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "422": {
-            "$ref": "#/components/responses/UnprocessableEntity"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalError"
-          }
-        },
-        "tags": [
-          "tables",
-          "filters"
-        ]
-      },
-      "post": {
-        "description": "Save Table Filter",
-        "operationId": "TableSaveFilter",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/table_name"
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/FilterCreate"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Filter already exists",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Filter"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Filter created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Filter"
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "401": {
-            "$ref": "#/components/responses/RequiresAuthentication"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "422": {
-            "$ref": "#/components/responses/UnprocessableEntity"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalError"
-          }
-        },
-        "tags": [
-          "tables",
-          "filters"
-        ]
-      }
-    },
-    "/tables/{table_name}/filters/tags": {
-      "get": {
-        "description": "List Filter Tags For A Table",
-        "operationId": "TableListFilterTags",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/table_name"
-          },
-          {
-            "$ref": "#/components/parameters/per_page"
-          },
-          {
-            "$ref": "#/components/parameters/page"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "required": [
-                    "items",
-                    "metadata"
-                  ],
-                  "properties": {
-                    "items": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/FilterTag"
-                      }
-                    },
-                    "metadata": {
-                      "$ref": "#/components/schemas/ListMetadata"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/RequiresAuthentication"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "422": {
-            "$ref": "#/components/responses/UnprocessableEntity"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalError"
-          }
-        },
-        "tags": [
-          "queries",
-          "filters"
-        ]
-      }
-    },
-    "/tables/{table_name}/relations": {
-      "get": {
-        "description": "List Table Relations",
-        "operationId": "TableListRelations",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/table_name"
-          },
-          {
-            "name": "relation_name",
-            "description": "Filter by related table name",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "required": [
-                    "data"
-                  ],
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/TableRelation"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "401": {
-            "$ref": "#/components/responses/RequiresAuthentication"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalError"
-          }
-        },
-        "tags": [
-          "tables"
         ]
       }
     },
@@ -5251,6 +4322,150 @@
             "$ref": "#/components/responses/InternalError"
           }
         }
+      }
+    },
+    "/teams/{team_name}/conversations": {
+      "post": {
+        "operationId": "CreateConversation",
+        "summary": "Start a new chat conversation",
+        "description": "Create a new AI chat conversation",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/team_name"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConversationCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Conversation created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Conversation"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        },
+        "tags": [
+          "chat"
+        ]
+      }
+    },
+    "/teams/{team_name}/conversations/{conversation_id}": {
+      "get": {
+        "operationId": "GetConversation",
+        "summary": "Retrieve a chat conversation",
+        "description": "Get details of an existing AI chat conversation. Useful for polling for updates.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/team_name"
+          },
+          {
+            "$ref": "#/components/parameters/conversation_id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Conversation retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Conversation"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        },
+        "tags": [
+          "chat"
+        ]
+      },
+      "post": {
+        "operationId": "SendMessage",
+        "summary": "Add a message to an existing conversation",
+        "description": "Send a new message to an existing AI chat conversation",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/team_name"
+          },
+          {
+            "$ref": "#/components/parameters/conversation_id"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConversationSendMessage"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Message sent successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationMessage"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        },
+        "tags": [
+          "chat"
+        ]
       }
     },
     "/teams/{team_name}/custom-columns": {
@@ -8690,7 +7905,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ReportCreateOrUpdate"
+                "$ref": "#/components/schemas/ReportCreate"
               }
             }
           }
@@ -8798,7 +8013,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ReportCreateOrUpdate"
+                "$ref": "#/components/schemas/ReportUpdate"
               }
             }
           }
@@ -9408,6 +8623,9 @@
           },
           {
             "$ref": "#/components/parameters/page"
+          },
+          {
+            "$ref": "#/components/parameters/download_file"
           }
         ],
         "responses": {
@@ -9428,6 +8646,12 @@
                       "$ref": "#/components/schemas/ListMetadata"
                     }
                   }
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "description": "Download file."
                 }
               }
             }
@@ -10195,6 +9419,9 @@
           },
           {
             "$ref": "#/components/parameters/page"
+          },
+          {
+            "$ref": "#/components/parameters/download_file"
           }
         ],
         "responses": {
@@ -10215,6 +9442,12 @@
                       "$ref": "#/components/schemas/ListMetadata"
                     }
                   }
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "description": "Download file."
                 }
               }
             }
@@ -10353,6 +9586,307 @@
           },
           "422": {
             "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/v2/teams/{team_name}/sync-integration-test-connections": {
+      "post": {
+        "description": "Create an integration test connection.",
+        "operationId": "CreateV2SyncIntegrationTestConnection",
+        "tags": [
+          "syncs"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/team_name"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SyncIntegrationTestConnectionCreateV2"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SyncIntegrationTestConnectionV2"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/v2/teams/{team_name}/sync-integrations": {
+      "get": {
+        "description": "List sync integrations",
+        "operationId": "ListV2SyncIntegrations",
+        "tags": [
+          "syncs"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/team_name"
+          },
+          {
+            "$ref": "#/components/parameters/per_page"
+          },
+          {
+            "$ref": "#/components/parameters/page"
+          },
+          {
+            "$ref": "#/components/parameters/sync_sort_bys"
+          },
+          {
+            "$ref": "#/components/parameters/sync_sort_dirs"
+          },
+          {
+            "$ref": "#/components/parameters/sync_name_filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "items",
+                    "metadata"
+                  ],
+                  "properties": {
+                    "items": {
+                      "items": {
+                        "$ref": "#/components/schemas/SyncIntegrationExpandedV2"
+                      },
+                      "type": "array"
+                    },
+                    "metadata": {
+                      "$ref": "#/components/schemas/ListMetadata"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      },
+      "post": {
+        "description": "Create a new integration associated with a completed test connection",
+        "operationId": "CreateV2SyncIntegration",
+        "tags": [
+          "syncs"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/team_name"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SyncIntegrationCreateV2"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SyncIntegrationV2"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/v2/teams/{team_name}/sync-integrations/{sync_name}": {
+      "get": {
+        "description": "Get a sync integration by name",
+        "operationId": "GetV2SyncIntegration",
+        "tags": [
+          "syncs"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/team_name"
+          },
+          {
+            "$ref": "#/components/parameters/sync_name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SyncIntegrationExpandedV2"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      },
+      "patch": {
+        "description": "Update attributes of an integration",
+        "operationId": "UpdateV2SyncIntegration",
+        "tags": [
+          "syncs"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/team_name"
+          },
+          {
+            "$ref": "#/components/parameters/sync_name"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SyncIntegrationUpdateV2"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SyncIntegrationV2"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete an integration",
+        "operationId": "DeleteV2SyncIntegration",
+        "tags": [
+          "syncs"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/team_name"
+          },
+          {
+            "$ref": "#/components/parameters/sync_name"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "405": {
+            "$ref": "#/components/responses/MethodNotAllowed"
           },
           "500": {
             "$ref": "#/components/responses/InternalError"
@@ -10703,318 +10237,6 @@
         }
       }
     },
-    "/teams/{team_name}/sync-transformer-test-connections": {
-      "post": {
-        "description": "Create a test transformer connection.",
-        "operationId": "CreateSyncTransformerTestConnection",
-        "tags": [
-          "syncs"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/team_name"
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SyncTransformerTestConnectionCreate"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SyncTransformerTestConnection"
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "401": {
-            "$ref": "#/components/responses/RequiresAuthentication"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "422": {
-            "$ref": "#/components/responses/UnprocessableEntity"
-          },
-          "429": {
-            "$ref": "#/components/responses/TooManyRequests"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalError"
-          }
-        }
-      }
-    },
-    "/teams/{team_name}/sync-transformer-test-connections/{sync_transformer_test_connection_id}": {
-      "get": {
-        "description": "Get a sync transformer test connection.",
-        "operationId": "GetSyncTransformerTestConnection",
-        "tags": [
-          "syncs"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/team_name"
-          },
-          {
-            "$ref": "#/components/parameters/sync_transformer_test_connection_id"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SyncTransformerTestConnection"
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/RequiresAuthentication"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalError"
-          }
-        }
-      },
-      "patch": {
-        "description": "Update a sync transformer test connection.",
-        "operationId": "UpdateSyncTestConnectionForSyncTransformer",
-        "tags": [
-          "syncs"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/team_name"
-          },
-          {
-            "$ref": "#/components/parameters/sync_transformer_test_connection_id"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": [
-                  "status"
-                ],
-                "properties": {
-                  "status": {
-                    "$ref": "#/components/schemas/SyncTestConnectionStatus"
-                  },
-                  "failure_reason": {
-                    "type": "string",
-                    "description": "Reason for failure",
-                    "example": "password authentication failed for user \"exampleuser\""
-                  },
-                  "failure_code": {
-                    "example": "INVALID_CREDENTIALS",
-                    "type": "string",
-                    "description": "Code for failure"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Updated",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SyncTransformerTestConnection"
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "422": {
-            "$ref": "#/components/responses/UnprocessableEntity"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalError"
-          }
-        }
-      }
-    },
-    "/teams/{team_name}/sync-transformer-test-connections/{sync_transformer_test_connection_id}/logs": {
-      "get": {
-        "description": "Get logs for a sync transformer test connection.",
-        "operationId": "GetSyncTransformerTestConnectionLogs",
-        "tags": [
-          "syncs"
-        ],
-        "parameters": [
-          {
-            "in": "header",
-            "name": "Accept",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "$ref": "#/components/parameters/team_name"
-          },
-          {
-            "$ref": "#/components/parameters/sync_transformer_test_connection_id"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "additionalProperties": false,
-                  "required": [
-                    "location"
-                  ],
-                  "properties": {
-                    "location": {
-                      "type": "string",
-                      "format": "uri",
-                      "description": "The location to download the test connection logs from"
-                    }
-                  },
-                  "title": "Test Connection Logs",
-                  "type": "object"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "type": "string",
-                  "description": "Chunked response logs for a test connection that is in progress."
-                }
-              }
-            }
-          },
-          "204": {
-            "description": "No logs available for a test connection that has not started."
-          },
-          "302": {
-            "description": "Redirect to the logs download URL for a test connection that has completed.",
-            "headers": {
-              "Location": {
-                "schema": {
-                  "type": "string",
-                  "description": "URL to download logs"
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "401": {
-            "$ref": "#/components/responses/RequiresAuthentication"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "422": {
-            "$ref": "#/components/responses/UnprocessableEntity"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalError"
-          }
-        }
-      }
-    },
-    "/teams/{team_name}/sync-transformer-test-connections/{sync_transformer_test_connection_id}/promote": {
-      "post": {
-        "description": "Promote a sync transformer test connection to a sync transformer.",
-        "operationId": "PromoteSyncTransformerTestConnection",
-        "tags": [
-          "syncs"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/team_name"
-          },
-          {
-            "$ref": "#/components/parameters/sync_transformer_test_connection_id"
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PromoteSyncTransformerTestConnection"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful response indicating that an existing sync transformer was replaced.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SyncTransformer"
-                }
-              }
-            }
-          },
-          "201": {
-            "description": "Successful response indicating that a new sync transformer was created.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SyncTransformer"
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "401": {
-            "$ref": "#/components/responses/RequiresAuthentication"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "422": {
-            "$ref": "#/components/responses/UnprocessableEntity"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalError"
-          }
-        }
-      }
-    },
     "/teams/{team_name}/sync-transformers": {
       "get": {
         "description": "List all sync transformer definitions.",
@@ -11307,50 +10529,6 @@
                 }
               }
             }
-          },
-          "401": {
-            "$ref": "#/components/responses/RequiresAuthentication"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalError"
-          }
-        }
-      }
-    },
-    "/teams/{team_name}/sync-transformers/{sync_transformer_name}/test-connections/{sync_test_connection_id}": {
-      "get": {
-        "description": "Get test connection details for sync transformer.",
-        "operationId": "GetTestConnectionForSyncTransformer",
-        "tags": [
-          "syncs"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/team_name"
-          },
-          {
-            "$ref": "#/components/parameters/sync_transformer_name"
-          },
-          {
-            "$ref": "#/components/parameters/sync_test_connection_id"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SyncTestConnection"
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
           },
           "401": {
             "$ref": "#/components/responses/RequiresAuthentication"
@@ -14154,7 +13332,8 @@
                 ],
                 "properties": {
                   "otp": {
-                    "type": "string"
+                    "type": "string",
+                    "x-go-name": "OTP"
                   }
                 }
               }
@@ -14191,6 +13370,9 @@
           },
           "422": {
             "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
           },
           "500": {
             "$ref": "#/components/responses/InternalError"
@@ -14722,6 +13904,842 @@
           }
         ]
       }
+    },
+    "/v2/teams/{team_name}/sync-destination-test-connections": {
+      "post": {
+        "description": "Create a test destination connection.",
+        "operationId": "CreateV2SyncDestinationTestConnection",
+        "tags": [
+          "syncs"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/team_name"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSyncDestinationTestConnectionV2"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SyncDestinationTestConnectionV2"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "429": {
+            "$ref": "#/components/responses/TooManyRequests"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/v2/teams/{team_name}/sync-destinations": {
+      "post": {
+        "description": "Create sync destination based on test connection.",
+        "operationId": "CreateV2SyncDestination",
+        "tags": [
+          "syncs"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/team_name"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSyncDestinationV2"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response indicating that an existing sync destination was replaced.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SyncDestinationV2"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SyncDestinationV2"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      },
+      "get": {
+        "description": "List all sync destination definitions.",
+        "operationId": "GetV2SyncDestinations",
+        "tags": [
+          "syncs"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/team_name"
+          },
+          {
+            "$ref": "#/components/parameters/per_page"
+          },
+          {
+            "$ref": "#/components/parameters/page"
+          },
+          {
+            "$ref": "#/components/parameters/sync_name_filter"
+          },
+          {
+            "$ref": "#/components/parameters/sync_generic_sort_bys"
+          },
+          {
+            "$ref": "#/components/parameters/sync_sort_dirs"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "items",
+                    "metadata"
+                  ],
+                  "properties": {
+                    "items": {
+                      "items": {
+                        "$ref": "#/components/schemas/SyncDestinationV2"
+                      },
+                      "type": "array"
+                    },
+                    "metadata": {
+                      "$ref": "#/components/schemas/ListMetadata"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/v2/teams/{team_name}/sync-destinations/{sync_destination_name}": {
+      "get": {
+        "description": "Get a single sync destination definition.",
+        "operationId": "GetV2SyncDestination",
+        "tags": [
+          "syncs"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/team_name"
+          },
+          {
+            "$ref": "#/components/parameters/sync_destination_name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SyncDestinationV2"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      },
+      "patch": {
+        "description": "Update a Sync Destination definition.",
+        "operationId": "PatchV2SyncDestination",
+        "tags": [
+          "syncs"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/team_name"
+          },
+          {
+            "$ref": "#/components/parameters/sync_destination_name"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SyncDestinationUpdateV2"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SyncDestination"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete a Sync Destination definition. Any syncs relying on this destination must be deleted first.",
+        "operationId": "DeleteV2SyncDestination",
+        "tags": [
+          "syncs"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/team_name"
+          },
+          {
+            "$ref": "#/components/parameters/sync_destination_name"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted"
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/teams/{team_name}/rbac/permissions": {
+      "get": {
+        "description": "List all permissions",
+        "operationId": "ListAllRBACPermissions",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/team_name"
+          },
+          {
+            "$ref": "#/components/parameters/per_page"
+          },
+          {
+            "$ref": "#/components/parameters/page"
+          },
+          {
+            "$ref": "#/components/parameters/rbac_permissions_sort_bys"
+          },
+          {
+            "$ref": "#/components/parameters/rbac_permissions_sort_dirs"
+          },
+          {
+            "name": "search_term",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter permissions by name or description."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "items",
+                    "metadata"
+                  ],
+                  "properties": {
+                    "items": {
+                      "items": {
+                        "$ref": "#/components/schemas/RBACPermission"
+                      },
+                      "type": "array"
+                    },
+                    "metadata": {
+                      "$ref": "#/components/schemas/ListMetadata"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        },
+        "tags": [
+          "rbac"
+        ]
+      },
+      "post": {
+        "description": "Create a permission",
+        "operationId": "CreateRBACPermission",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/team_name"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RBACPermissionCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RBACPermission"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        },
+        "tags": [
+          "rbac"
+        ]
+      }
+    },
+    "/teams/{team_name}/rbac/permissions/{permission_id}": {
+      "get": {
+        "description": "Get a permission",
+        "operationId": "GetRBACPermission",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/team_name"
+          },
+          {
+            "$ref": "#/components/parameters/rbac_permission_id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RBACPermission"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        },
+        "tags": [
+          "rbac"
+        ]
+      },
+      "patch": {
+        "description": "Update a permission",
+        "operationId": "UpdateRBACPermission",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/team_name"
+          },
+          {
+            "$ref": "#/components/parameters/rbac_permission_id"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RBACPermissionUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RBACPermission"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        },
+        "tags": [
+          "rbac"
+        ]
+      },
+      "delete": {
+        "description": "Delete a permission",
+        "operationId": "DeleteRBACPermission",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/team_name"
+          },
+          {
+            "$ref": "#/components/parameters/rbac_permission_id"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        },
+        "tags": [
+          "rbac"
+        ]
+      }
+    },
+    "/teams/{team_name}/rbac/roles": {
+      "get": {
+        "description": "List all roles",
+        "operationId": "ListAllRBACRoles",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/team_name"
+          },
+          {
+            "$ref": "#/components/parameters/per_page"
+          },
+          {
+            "$ref": "#/components/parameters/page"
+          },
+          {
+            "$ref": "#/components/parameters/rbac_roles_sort_bys"
+          },
+          {
+            "$ref": "#/components/parameters/rbac_roles_sort_dirs"
+          },
+          {
+            "name": "search_term",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter roles by name or description."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "items",
+                    "metadata"
+                  ],
+                  "properties": {
+                    "items": {
+                      "items": {
+                        "$ref": "#/components/schemas/RBACRole"
+                      },
+                      "type": "array"
+                    },
+                    "metadata": {
+                      "$ref": "#/components/schemas/ListMetadata"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        },
+        "tags": [
+          "rbac"
+        ]
+      },
+      "post": {
+        "description": "Create a role",
+        "operationId": "CreateRBACRole",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/team_name"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RBACRoleCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RBACRole"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        },
+        "tags": [
+          "rbac"
+        ]
+      }
+    },
+    "/teams/{team_name}/rbac/roles/{role_id}": {
+      "get": {
+        "description": "Get a role",
+        "operationId": "GetRBACRole",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/team_name"
+          },
+          {
+            "$ref": "#/components/parameters/rbac_role_id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RBACRole"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        },
+        "tags": [
+          "rbac"
+        ]
+      },
+      "patch": {
+        "description": "Update a role (custom roles only)",
+        "operationId": "UpdateRBACRole",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/team_name"
+          },
+          {
+            "$ref": "#/components/parameters/rbac_role_id"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RBACRoleUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RBACRole"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        },
+        "tags": [
+          "rbac"
+        ]
+      },
+      "delete": {
+        "description": "Delete a role",
+        "operationId": "DeleteRBACRole",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/team_name"
+          },
+          {
+            "$ref": "#/components/parameters/rbac_role_id"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        },
+        "tags": [
+          "rbac"
+        ]
+      }
     }
   },
   "components": {
@@ -14764,47 +14782,6 @@
           "type": "integer",
           "format": "int64"
         }
-      },
-      "filter_tags": {
-        "name": "tag",
-        "in": "query",
-        "description": "Filter tags",
-        "allowEmptyValue": true,
-        "explode": true,
-        "schema": {
-          "type": "array",
-          "items": {
-            "$ref": "#/components/schemas/FilterTag"
-          }
-        },
-        "x-go-name": "FilterTags"
-      },
-      "filter_name_filter": {
-        "name": "name_filter",
-        "in": "query",
-        "required": false,
-        "schema": {
-          "description": "Filter by filter name",
-          "type": "string"
-        }
-      },
-      "filter_expression_filter": {
-        "name": "expression_filter",
-        "in": "query",
-        "required": false,
-        "schema": {
-          "description": "Filter by filter expression",
-          "type": "string"
-        }
-      },
-      "filter_id": {
-        "in": "path",
-        "name": "filter_id",
-        "required": true,
-        "schema": {
-          "$ref": "#/components/schemas/FilterID"
-        },
-        "x-go-name": "FilterID"
       },
       "assetview_run_type": {
         "name": "type",
@@ -14920,6 +14897,15 @@
           "type": "boolean"
         }
       },
+      "include_fips": {
+        "description": "Whether to include fips versions",
+        "in": "query",
+        "name": "include_fips",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        }
+      },
       "include_prereleases": {
         "description": "Whether to include prerelease versions",
         "in": "query",
@@ -14950,152 +14936,6 @@
         "name": "target_name",
         "required": true,
         "schema": {
-          "type": "string"
-        }
-      },
-      "table_name": {
-        "in": "path",
-        "name": "table_name",
-        "required": true,
-        "schema": {
-          "$ref": "#/components/schemas/TableName"
-        }
-      },
-      "table_selects": {
-        "name": "select",
-        "in": "query",
-        "description": "Table selects. This filters the columns that are returned in the result set.",
-        "allowEmptyValue": true,
-        "explode": true,
-        "schema": {
-          "type": "array",
-          "items": {
-            "$ref": "#/components/schemas/TableSelect"
-          }
-        },
-        "x-go-type-skip-optional-pointer": true,
-        "x-go-name": "Selects"
-      },
-      "table_filter_mode": {
-        "name": "filter_mode",
-        "in": "query",
-        "description": "Table filter mode.\n\nSmart mode switches between column and search mode based on the filtered table and\n\nSearch mode allows searching deeply nested data but is not available on all tables as it requires a separate indexing step.\nSearch mode is only available on resource tables or queries derived from resource tables results that contain _cq_id and _cq_source_id.\nSearch mode may also be used against cloud_assets but it will only return results from resource tables.\n\nColumn mode searches purely using the columns in the table.\nIt will work on all table results but it is not optimized for arbitrary substring searches and so may be slow on larger tables.\n",
-        "schema": {
-          "type": "string",
-          "enum": [
-            "smart",
-            "search",
-            "column"
-          ],
-          "default": "smart"
-        }
-      },
-      "table_filters": {
-        "name": "filter",
-        "in": "query",
-        "description": "Table filters. This filters the rows that are returned in the result set.",
-        "allowEmptyValue": true,
-        "explode": true,
-        "schema": {
-          "type": "array",
-          "items": {
-            "$ref": "#/components/schemas/FilterExpression"
-          }
-        },
-        "x-go-type-skip-optional-pointer": true,
-        "x-go-name": "Filters"
-      },
-      "table_filter_ids": {
-        "name": "filter_id",
-        "in": "query",
-        "description": "Table filter IDs. These should be valid Saved Filter IDs. These filters\nwill be applied to the query results before returning them.\n",
-        "explode": true,
-        "schema": {
-          "type": "array",
-          "items": {
-            "$ref": "#/components/schemas/FilterID"
-          }
-        },
-        "x-go-type-skip-optional-pointer": true,
-        "x-go-name": "FilterIDs"
-      },
-      "table_sort_bys": {
-        "name": "sort_by",
-        "in": "query",
-        "description": "Table sort by options. This sorts the rows that are returned in the result set.",
-        "allowEmptyValue": true,
-        "explode": true,
-        "schema": {
-          "type": "array",
-          "items": {
-            "$ref": "#/components/schemas/TableSortBy"
-          }
-        },
-        "x-go-type-skip-optional-pointer": true,
-        "x-go-name": "SortBys"
-      },
-      "table_sort_dirs": {
-        "name": "sort_dir",
-        "in": "query",
-        "description": "Table sort direction options. This sorts the rows that are returned in the result set.",
-        "allowEmptyValue": true,
-        "explode": true,
-        "schema": {
-          "type": "array",
-          "items": {
-            "$ref": "#/components/schemas/TableSortDirection"
-          }
-        },
-        "x-go-type-skip-optional-pointer": true,
-        "x-go-name": "SortDirections"
-      },
-      "table_group_bys": {
-        "name": "group_by",
-        "in": "query",
-        "description": "Table group by options. This groups the rows that are returned in the result set by the given columns.",
-        "allowEmptyValue": true,
-        "explode": true,
-        "schema": {
-          "type": "array",
-          "items": {
-            "$ref": "#/components/schemas/TableGroupBy"
-          }
-        },
-        "x-go-type-skip-optional-pointer": true,
-        "x-go-name": "GroupBys"
-      },
-      "table_row_id": {
-        "in": "path",
-        "name": "table_row_id",
-        "required": true,
-        "schema": {
-          "$ref": "#/components/schemas/TableRowID"
-        }
-      },
-      "table_column_name_filter": {
-        "name": "filter",
-        "in": "query",
-        "required": false,
-        "schema": {
-          "description": "Filter by column name",
-          "type": "string"
-        }
-      },
-      "column_name": {
-        "in": "path",
-        "name": "column_name",
-        "required": true,
-        "schema": {
-          "description": "The name of a table column.",
-          "type": "string"
-        }
-      },
-      "table_column_value_filter": {
-        "name": "filter",
-        "in": "query",
-        "required": false,
-        "schema": {
-          "description": "Filter by column value.",
           "type": "string"
         }
       },
@@ -15140,6 +14980,17 @@
           "$ref": "#/components/schemas/ConnectorID"
         }
       },
+      "conversation_id": {
+        "name": "conversation_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "description": "ID of the chat conversation",
+        "x-go-name": "ConversationID"
+      },
       "custom_columns_sort_bys": {
         "name": "sort_by",
         "in": "query",
@@ -15178,6 +15029,47 @@
           "$ref": "#/components/schemas/CustomColumnID"
         },
         "x-go-name": "CustomColumnID"
+      },
+      "filter_tags": {
+        "name": "tag",
+        "in": "query",
+        "description": "Filter tags",
+        "allowEmptyValue": true,
+        "explode": true,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/FilterTag"
+          }
+        },
+        "x-go-name": "FilterTags"
+      },
+      "filter_name_filter": {
+        "name": "name_filter",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "description": "Filter by filter name",
+          "type": "string"
+        }
+      },
+      "filter_expression_filter": {
+        "name": "expression_filter",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "description": "Filter by filter expression",
+          "type": "string"
+        }
+      },
+      "filter_id": {
+        "in": "path",
+        "name": "filter_id",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/FilterID"
+        },
+        "x-go-name": "FilterID"
       },
       "email_basic": {
         "in": "path",
@@ -15365,6 +15257,109 @@
           "type": "boolean"
         }
       },
+      "table_selects": {
+        "name": "select",
+        "in": "query",
+        "description": "Table selects. This filters the columns that are returned in the result set.",
+        "allowEmptyValue": true,
+        "explode": true,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/TableSelect"
+          }
+        },
+        "x-go-type-skip-optional-pointer": true,
+        "x-go-name": "Selects"
+      },
+      "table_filter_mode": {
+        "name": "filter_mode",
+        "in": "query",
+        "description": "Table filter mode.\n\nSmart mode switches between column and search mode based on the filtered table and\n\nSearch mode allows searching deeply nested data but is not available on all tables as it requires a separate indexing step.\nSearch mode is only available on resource tables or queries derived from resource tables results that contain _cq_id and _cq_source_id.\nSearch mode may also be used against cloud_assets but it will only return results from resource tables.\n\nColumn mode searches purely using the columns in the table.\nIt will work on all table results but it is not optimized for arbitrary substring searches and so may be slow on larger tables.\n",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "smart",
+            "search",
+            "column"
+          ],
+          "default": "smart"
+        }
+      },
+      "table_filters": {
+        "name": "filter",
+        "in": "query",
+        "description": "Table filters. This filters the rows that are returned in the result set.",
+        "allowEmptyValue": true,
+        "explode": true,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/FilterExpression"
+          }
+        },
+        "x-go-type-skip-optional-pointer": true,
+        "x-go-name": "Filters"
+      },
+      "table_filter_ids": {
+        "name": "filter_id",
+        "in": "query",
+        "description": "Table filter IDs. These should be valid Saved Filter IDs. These filters\nwill be applied to the query results before returning them.\n",
+        "explode": true,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/FilterID"
+          }
+        },
+        "x-go-type-skip-optional-pointer": true,
+        "x-go-name": "FilterIDs"
+      },
+      "table_sort_bys": {
+        "name": "sort_by",
+        "in": "query",
+        "description": "Table sort by options. This sorts the rows that are returned in the result set.",
+        "allowEmptyValue": true,
+        "explode": true,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/TableSortBy"
+          }
+        },
+        "x-go-type-skip-optional-pointer": true,
+        "x-go-name": "SortBys"
+      },
+      "table_sort_dirs": {
+        "name": "sort_dir",
+        "in": "query",
+        "description": "Table sort direction options. This sorts the rows that are returned in the result set.",
+        "allowEmptyValue": true,
+        "explode": true,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/TableSortDirection"
+          }
+        },
+        "x-go-type-skip-optional-pointer": true,
+        "x-go-name": "SortDirections"
+      },
+      "table_group_bys": {
+        "name": "group_by",
+        "in": "query",
+        "description": "Table group by options. This groups the rows that are returned in the result set by the given columns.",
+        "allowEmptyValue": true,
+        "explode": true,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/TableGroupBy"
+          }
+        },
+        "x-go-type-skip-optional-pointer": true,
+        "x-go-name": "GroupBys"
+      },
       "query_id": {
         "in": "path",
         "name": "query_id",
@@ -15443,6 +15438,15 @@
         },
         "x-go-name": "SyncDestinationTestConnectionID"
       },
+      "download_file": {
+        "description": "Whether to generate a downloadable file for the response.",
+        "in": "query",
+        "name": "download",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        }
+      },
       "sync_name_filter": {
         "name": "filter",
         "in": "query",
@@ -15450,7 +15454,7 @@
         "schema": {
           "description": "Filter by name or display name",
           "type": "string",
-          "pattern": "^[a-zA-Z\\p{L}\\p{N}_][a-zA-Z\\p{L}\\p{N}_ \\-']*$",
+          "pattern": "^[a-zA-Z\\p{L}\\p{N}_ \\-']*$",
           "x-pattern-message": "can contain only letters, numbers, spaces, hyphens, underscores, and apostrophes"
         }
       },
@@ -15537,6 +15541,18 @@
         },
         "x-go-name": "SyncSourceTestConnectionID"
       },
+      "sync_name": {
+        "name": "sync_name",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "description": "Unique name of the sync",
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_-]+$",
+          "x-go-name": "SyncName",
+          "x-pattern-message": "can contain only alphanumerical characters, dashes, and underscores"
+        }
+      },
       "sync_source_name": {
         "name": "sync_source_name",
         "in": "path",
@@ -15548,15 +15564,6 @@
           "x-go-name": "SyncSourceName",
           "x-pattern-message": "can contain only alphanumerical characters, dashes, and underscores"
         }
-      },
-      "sync_transformer_test_connection_id": {
-        "name": "sync_transformer_test_connection_id",
-        "in": "path",
-        "required": true,
-        "schema": {
-          "$ref": "#/components/schemas/SyncTransformerTestConnectionID"
-        },
-        "x-go-name": "SyncTransformerTestConnectionID"
       },
       "sync_transformer_name": {
         "name": "sync_transformer_name",
@@ -15621,18 +15628,6 @@
           "description": "Filter by platform version"
         }
       },
-      "sync_name": {
-        "name": "sync_name",
-        "in": "path",
-        "required": true,
-        "schema": {
-          "description": "Unique name of the sync",
-          "type": "string",
-          "pattern": "^[a-zA-Z0-9_-]+$",
-          "x-go-name": "SyncName",
-          "x-pattern-message": "can contain only alphanumerical characters, dashes, and underscores"
-        }
-      },
       "sync_run_id": {
         "name": "sync_run_id",
         "in": "path",
@@ -15641,14 +15636,126 @@
           "$ref": "#/components/schemas/SyncRunID"
         }
       },
-      "download_file": {
-        "description": "Whether to generate a downloadable file for the response.",
+      "table_name": {
+        "in": "path",
+        "name": "table_name",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/TableName"
+        }
+      },
+      "table_row_id": {
+        "in": "path",
+        "name": "table_row_id",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/TableRowID"
+        }
+      },
+      "table_column_name_filter": {
+        "name": "filter",
         "in": "query",
-        "name": "download",
         "required": false,
         "schema": {
-          "type": "boolean"
+          "description": "Filter by column name",
+          "type": "string"
         }
+      },
+      "column_name": {
+        "in": "path",
+        "name": "column_name",
+        "required": true,
+        "schema": {
+          "description": "The name of a table column.",
+          "type": "string"
+        }
+      },
+      "table_column_value_filter": {
+        "name": "filter",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "description": "Filter by column value.",
+          "type": "string"
+        }
+      },
+      "rbac_permissions_sort_bys": {
+        "name": "sort_by",
+        "in": "query",
+        "description": "Sort by options",
+        "allowEmptyValue": true,
+        "explode": true,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/RBACPermissionSortBy"
+          }
+        },
+        "x-go-type-skip-optional-pointer": true,
+        "x-go-name": "RBACPermissionSortBys"
+      },
+      "rbac_permissions_sort_dirs": {
+        "name": "sort_dir",
+        "in": "query",
+        "description": "Sort direction options",
+        "allowEmptyValue": true,
+        "explode": true,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/RBACPermissionSortDirection"
+          }
+        },
+        "x-go-type-skip-optional-pointer": true,
+        "x-go-name": "RBACPermissionSortDirections"
+      },
+      "rbac_permission_id": {
+        "in": "path",
+        "name": "permission_id",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/RBACPermissionID"
+        },
+        "x-go-name": "RBACPermissionID"
+      },
+      "rbac_roles_sort_bys": {
+        "name": "sort_by",
+        "in": "query",
+        "description": "Sort by options",
+        "allowEmptyValue": true,
+        "explode": true,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/RBACRoleSortBy"
+          }
+        },
+        "x-go-type-skip-optional-pointer": true,
+        "x-go-name": "RBACRoleSortBys"
+      },
+      "rbac_roles_sort_dirs": {
+        "name": "sort_dir",
+        "in": "query",
+        "description": "Sort direction options",
+        "allowEmptyValue": true,
+        "explode": true,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/RBACRoleSortDirection"
+          }
+        },
+        "x-go-type-skip-optional-pointer": true,
+        "x-go-name": "RBACRoleSortDirections"
+      },
+      "rbac_role_id": {
+        "in": "path",
+        "name": "role_id",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/RBACCustomRoleID"
+        },
+        "x-go-name": "RBACCustomRoleID"
       }
     },
     "schemas": {
@@ -15820,115 +15927,6 @@
           }
         ]
       },
-      "FilterTag": {
-        "description": "A table column filter tag.",
-        "type": "string"
-      },
-      "FilterExpression": {
-        "description": "A table column filter.",
-        "type": "string",
-        "example": "resource_type=aws_s3_buckets"
-      },
-      "TableName": {
-        "description": "The name of the table.",
-        "type": "string",
-        "example": "cloud_assets"
-      },
-      "QueryID": {
-        "description": "The unique ID for the query.",
-        "type": "string",
-        "format": "uuid",
-        "x-go-name": "QueryID"
-      },
-      "UserID": {
-        "description": "ID of the User",
-        "type": "string",
-        "format": "uuid",
-        "example": "12345678-1234-1234-1234-1234567890ab",
-        "x-go-name": "UserID"
-      },
-      "Filter": {
-        "title": "Filter",
-        "type": "object",
-        "description": "Saved filter",
-        "additionalProperties": false,
-        "required": [
-          "id",
-          "name",
-          "expression",
-          "created_at"
-        ],
-        "properties": {
-          "id": {
-            "description": "ID of the Filter",
-            "type": "string",
-            "format": "uuid",
-            "example": "12345678-1234-1234-1234-1234567890ab",
-            "x-go-name": "ID"
-          },
-          "name": {
-            "type": "string",
-            "example": "t2.micro EC2 instances"
-          },
-          "expression": {
-            "$ref": "#/components/schemas/FilterExpression"
-          },
-          "description": {
-            "type": "string",
-            "example": "Filter to find all EC2 instances of type t2.micro from the aws_ec2_instance raw table"
-          },
-          "table": {
-            "$ref": "#/components/schemas/TableName"
-          },
-          "query_id": {
-            "$ref": "#/components/schemas/QueryID"
-          },
-          "user_id": {
-            "$ref": "#/components/schemas/UserID"
-          },
-          "tags": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FilterTag"
-            },
-            "x-go-type-skip-optional-pointer": true
-          },
-          "created_at": {
-            "example": "2017-07-14T16:53:42Z",
-            "format": "date-time",
-            "type": "string"
-          }
-        }
-      },
-      "FilterID": {
-        "description": "The unique ID for the filter.",
-        "type": "string",
-        "format": "uuid",
-        "x-go-name": "FilterID"
-      },
-      "FilterUpdate": {
-        "title": "Filter definition for updating a filter",
-        "description": "Filter Update Definition",
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "example": "t2.micro EC2 instances"
-          },
-          "description": {
-            "type": "string"
-          },
-          "expression": {
-            "$ref": "#/components/schemas/FilterExpression"
-          },
-          "tags": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FilterTag"
-            }
-          }
-        }
-      },
       "AssetViewRunType": {
         "description": "Type of assetview run",
         "type": "string",
@@ -15976,16 +15974,6 @@
             "example": "2020-01-01T00:00:00Z"
           }
         }
-      },
-      "Role": {
-        "description": "User roles",
-        "type": "string",
-        "enum": [
-          "admin:write",
-          "admin:read",
-          "general:read",
-          "general:write"
-        ]
       },
       "SAMLConfig": {
         "title": "SAML Configuration",
@@ -16055,7 +16043,7 @@
             "additionalProperties": {
               "type": "array",
               "items": {
-                "$ref": "#/components/schemas/Role"
+                "type": "string"
               }
             },
             "example": {
@@ -16080,7 +16068,7 @@
             "type": "array",
             "description": "Default roles for new users who are not in any group",
             "items": {
-              "$ref": "#/components/schemas/Role"
+              "type": "string"
             },
             "x-go-type-skip-optional-pointer": true,
             "x-omitempty": false
@@ -16138,7 +16126,7 @@
             "additionalProperties": {
               "type": "array",
               "items": {
-                "$ref": "#/components/schemas/Role"
+                "type": "string"
               }
             },
             "example": {
@@ -16162,7 +16150,7 @@
             "type": "array",
             "description": "Default roles for new users who are not in any group",
             "items": {
-              "$ref": "#/components/schemas/Role"
+              "type": "string"
             }
           },
           "disable_access_if_no_role_group": {
@@ -16268,14 +16256,157 @@
         "title": "Team",
         "type": "object"
       },
+      "RBACDefaultRole": {
+        "description": "Default RBAC roles",
+        "type": "string",
+        "enum": [
+          "admin:write",
+          "admin:read",
+          "general:read",
+          "general:write"
+        ]
+      },
+      "RBACCustomRoleID": {
+        "description": "The unique ID for the custom role.",
+        "type": "string",
+        "format": "uuid",
+        "x-go-name": "RBACCustomRoleID"
+      },
+      "RBACPermissionID": {
+        "description": "The unique ID for the data permission.",
+        "type": "string",
+        "format": "uuid",
+        "x-go-name": "RBACPermissionID"
+      },
+      "UserID": {
+        "description": "ID of the User",
+        "type": "string",
+        "format": "uuid",
+        "example": "12345678-1234-1234-1234-1234567890ab",
+        "x-go-name": "UserID"
+      },
+      "CreatedBy": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "email"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/UserID"
+          },
+          "name": {
+            "$ref": "#/components/schemas/UserName"
+          },
+          "email": {
+            "type": "string"
+          }
+        }
+      },
+      "RBACPermission": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "description",
+          "query",
+          "created_by",
+          "created_at",
+          "updated_at",
+          "number_of_affected_roles",
+          "number_of_affected_users"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/RBACPermissionID"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "query": {
+            "type": "string"
+          },
+          "created_by": {
+            "$ref": "#/components/schemas/CreatedBy"
+          },
+          "created_at": {
+            "example": "2017-07-14T16:53:42Z",
+            "format": "date-time",
+            "type": "string"
+          },
+          "updated_at": {
+            "example": "2017-07-14T16:53:42Z",
+            "format": "date-time",
+            "type": "string"
+          },
+          "number_of_affected_roles": {
+            "type": "integer"
+          },
+          "number_of_affected_users": {
+            "type": "integer"
+          }
+        }
+      },
+      "RBACRole": {
+        "type": "object",
+        "description": "Custom RBAC role",
+        "required": [
+          "id",
+          "name",
+          "description",
+          "permissions",
+          "created_by",
+          "created_at",
+          "updated_at"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/RBACCustomRoleID"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RBACPermission"
+            }
+          },
+          "created_by": {
+            "$ref": "#/components/schemas/CreatedBy"
+          },
+          "created_at": {
+            "example": "2017-07-14T16:53:42Z",
+            "format": "date-time",
+            "type": "string"
+          },
+          "updated_at": {
+            "example": "2017-07-14T16:53:42Z",
+            "format": "date-time",
+            "type": "string"
+          }
+        }
+      },
       "MembershipWithUser": {
         "additionalProperties": false,
         "properties": {
           "roles": {
             "type": "array",
             "items": {
-              "type": "string",
-              "example": "admin:read"
+              "$ref": "#/components/schemas/RBACDefaultRole"
+            }
+          },
+          "customRoles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RBACRole"
             }
           },
           "user": {
@@ -16998,6 +17129,11 @@
                 "type": "string",
                 "description": "Base URL for the plugin's UI. Only available for plugins with a UI and for logged in users.",
                 "x-go-name": "UIBaseURL"
+              },
+              "ui_base_url_v2": {
+                "type": "string",
+                "description": "Base URL for the plugin's UI. Only available for plugins with a UI and for logged in users.",
+                "x-go-name": "UIBaseURLv2"
               }
             }
           }
@@ -17400,326 +17536,6 @@
         "title": "CloudQuery Plugin UI Asset",
         "type": "object"
       },
-      "TableListItem": {
-        "additionalProperties": false,
-        "properties": {
-          "name": {
-            "$ref": "#/components/schemas/TableName"
-          },
-          "total_rows": {
-            "type": "integer",
-            "x-go-type": "uint64"
-          }
-        },
-        "required": [
-          "name",
-          "rows"
-        ],
-        "title": "TableListItem",
-        "type": "object"
-      },
-      "TableSelect": {
-        "title": "TableSelect",
-        "type": "string"
-      },
-      "TableSortBy": {
-        "title": "TableSortBy",
-        "type": "string"
-      },
-      "TableSortDirection": {
-        "title": "TableSortDirection",
-        "type": "string",
-        "enum": [
-          "asc",
-          "desc"
-        ],
-        "default": "asc"
-      },
-      "TableGroupBy": {
-        "title": "TableGroupBy",
-        "type": "string"
-      },
-      "QueryExpression": {
-        "title": "QueryExpression",
-        "type": "string",
-        "description": "Query expression",
-        "example": "SELECT account_id, instance_id, instance_type, region, name, tags FROM aws_ec2_instance WHERE instance_type = 't2.micro'"
-      },
-      "TableData": {
-        "additionalProperties": false,
-        "properties": {
-          "query": {
-            "$ref": "#/components/schemas/QueryExpression"
-          },
-          "columns": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "type": {
-                  "type": "string"
-                }
-              },
-              "required": [
-                "name",
-                "type"
-              ]
-            }
-          },
-          "rows": {
-            "type": "array",
-            "items": {
-              "type": "array",
-              "items": {}
-            }
-          }
-        },
-        "required": [
-          "columns",
-          "rows"
-        ],
-        "title": "TableData",
-        "type": "object"
-      },
-      "TableRowID": {
-        "description": "ID of the Resource",
-        "type": "string",
-        "example": "table_12345678-1234-1234-1234-1234567890ab"
-      },
-      "TableRow": {
-        "additionalProperties": true,
-        "title": "TableRow",
-        "type": "object"
-      },
-      "TableRowFieldMatch": {
-        "type": "object",
-        "title": "TableRowFieldMatch",
-        "required": [
-          "key",
-          "value"
-        ],
-        "properties": {
-          "key": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string"
-          },
-          "start_index": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "end_index": {
-            "type": "integer",
-            "format": "int64"
-          }
-        }
-      },
-      "TableSchemaColumnKind": {
-        "description": "The kind of the schema column type",
-        "type": "string",
-        "enum": [
-          "any",
-          "array",
-          "bool",
-          "date",
-          "datetime",
-          "enum",
-          "map",
-          "number",
-          "string",
-          "tuple",
-          "unknown",
-          "uuid"
-        ]
-      },
-      "TableSchemaColumn": {
-        "additionalProperties": false,
-        "properties": {
-          "name": {
-            "type": "string",
-            "example": "column_name",
-            "description": "Column name"
-          },
-          "type": {
-            "type": "string",
-            "example": "Nullable(String)",
-            "description": "Column type"
-          },
-          "default_kind": {
-            "type": "string",
-            "description": "Expression type (DEFAULT, MATERIALIZED, ALIAS) for the default value, or an empty string if it is not defined.",
-            "example": "DEFAULT"
-          },
-          "default_expression": {
-            "type": "string",
-            "description": "Expression for the default value, or an empty string if it is not defined."
-          },
-          "comment": {
-            "type": "string",
-            "description": "Comment on the column, or an empty string if it is not defined."
-          },
-          "kind": {
-            "$ref": "#/components/schemas/TableSchemaColumnKind"
-          },
-          "nullable": {
-            "type": "boolean",
-            "description": "Whether the column is nullable."
-          }
-        },
-        "required": [
-          "name",
-          "type",
-          "default_kind",
-          "default_expression",
-          "comment",
-          "kind",
-          "nullable"
-        ],
-        "title": "TableSchemaColumn",
-        "type": "object"
-      },
-      "TableSchema": {
-        "items": {
-          "$ref": "#/components/schemas/TableSchemaColumn"
-        },
-        "title": "TableSchema",
-        "type": "array"
-      },
-      "BatchTableSchemaItem": {
-        "title": "BatchTableSchemaItem",
-        "type": "object",
-        "required": [
-          "table_name",
-          "schema",
-          "default_columns"
-        ],
-        "properties": {
-          "table_name": {
-            "type": "string",
-            "description": "Table name"
-          },
-          "schema": {
-            "$ref": "#/components/schemas/TableSchema"
-          },
-          "default_columns": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "description": "Column name"
-            }
-          }
-        }
-      },
-      "TableColumnName": {
-        "description": "The name of the table column.",
-        "type": "string",
-        "example": "region"
-      },
-      "TableColumnListItem": {
-        "additionalProperties": false,
-        "properties": {
-          "name": {
-            "$ref": "#/components/schemas/TableColumnName"
-          },
-          "kind": {
-            "$ref": "#/components/schemas/TableSchemaColumnKind"
-          },
-          "nullable": {
-            "type": "boolean",
-            "description": "Whether the column is nullable."
-          }
-        },
-        "required": [
-          "name",
-          "kind",
-          "nullable"
-        ],
-        "title": "TableColumnListItem",
-        "type": "object"
-      },
-      "TableColumnValueListItem": {
-        "additionalProperties": false,
-        "properties": {
-          "value": {
-            "type": "string"
-          },
-          "kind": {
-            "$ref": "#/components/schemas/TableSchemaColumnKind"
-          }
-        },
-        "required": [
-          "name",
-          "kind"
-        ],
-        "title": "TableColumnValueListItem",
-        "type": "object"
-      },
-      "FilterCreate": {
-        "title": "Filter definition for creating a filter",
-        "type": "object",
-        "description": "Saved filter",
-        "additionalProperties": false,
-        "required": [
-          "name",
-          "expression"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "example": "t2.micro EC2 instances"
-          },
-          "expression": {
-            "$ref": "#/components/schemas/FilterExpression"
-          },
-          "public": {
-            "type": "boolean",
-            "default": true,
-            "x-omitempty": false,
-            "x-go-type-skip-optional-pointer": true,
-            "description": "Whether the filter is visible to all users in the team, or only to the user who created it"
-          },
-          "tags": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FilterTag"
-            },
-            "x-go-type-skip-optional-pointer": true
-          },
-          "description": {
-            "type": "string",
-            "example": "Filter to find all EC2 instances of type t2.micro from the aws_ec2_instance raw table"
-          }
-        }
-      },
-      "TableRelation": {
-        "additionalProperties": false,
-        "properties": {
-          "table_name": {
-            "type": "string",
-            "example": "aws_ec2_images",
-            "x-go-name": "Table"
-          },
-          "label": {
-            "type": "string",
-            "example": "EC2 Image"
-          },
-          "query": {
-            "type": "string",
-            "example": "SELECT aws_ec2_images.* FROM aws_ec2_instances JOIN aws_ec2_images ON aws_ec2_instances.image_id = aws_ec2_images.image_id"
-          }
-        },
-        "required": [
-          "table_name",
-          "label",
-          "query"
-        ],
-        "title": "TableRelation",
-        "type": "object"
-      },
       "AlertState": {
         "type": "string",
         "enum": [
@@ -17865,6 +17681,12 @@
           }
         }
       },
+      "QueryID": {
+        "description": "The unique ID for the query.",
+        "type": "string",
+        "format": "uuid",
+        "x-go-name": "QueryID"
+      },
       "AlertCreate": {
         "title": "Alert Create",
         "type": "object",
@@ -17988,7 +17810,8 @@
           "admin:read",
           "general:read",
           "general:write",
-          "ci"
+          "ci",
+          "schema-only"
         ]
       },
       "APIKeyTeamRole": {
@@ -18447,6 +18270,162 @@
         "type": "object",
         "description": "OAuth connector authentication request, filled in after the user has authenticated through OAuth"
       },
+      "ConversationCreate": {
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "The initial message to start the conversation."
+          },
+          "current_query": {
+            "type": "string",
+            "description": "An optional current query to provide context for the conversation."
+          },
+          "mode": {
+            "type": "string",
+            "description": "The mode of the conversation, which can influence the behavior of the AI.",
+            "default": "sql",
+            "enum": [
+              "ask",
+              "sql"
+            ]
+          }
+        }
+      },
+      "ConversationMessage": {
+        "type": "object",
+        "required": [
+          "id",
+          "role",
+          "content",
+          "created_at",
+          "message_type",
+          "end_turn",
+          "mode"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Unique identifier of the message",
+            "x-go-name": "ID"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "user",
+              "assistant",
+              "system"
+            ],
+            "description": "Role of the message sender"
+          },
+          "content": {
+            "type": "string",
+            "description": "Content of the message. In the case of tool use or tool result, this will contain JSON data."
+          },
+          "query_context": {
+            "type": "string",
+            "description": "The current query context when the message was sent, if applicable"
+          },
+          "message_type": {
+            "type": "string",
+            "enum": [
+              "error",
+              "message",
+              "tool_use",
+              "tool_result"
+            ],
+            "description": "Type of the message content"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "end_turn": {
+            "type": "boolean",
+            "description": "Whether this message ends the conversation turn",
+            "default": false
+          },
+          "mode": {
+            "type": "string",
+            "description": "The mode of the conversation when this message was sent, which can influence the behavior of the AI.",
+            "default": "sql",
+            "enum": [
+              "ask",
+              "sql"
+            ]
+          }
+        }
+      },
+      "Conversation": {
+        "type": "object",
+        "required": [
+          "id",
+          "messages",
+          "created_at",
+          "updated_at"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Unique identifier of the conversation",
+            "x-go-name": "ID"
+          },
+          "title": {
+            "type": "string",
+            "description": "Optional title of the conversation"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConversationMessage"
+            }
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ConversationSendMessage": {
+        "title": "Conversation Send Message",
+        "type": "object",
+        "description": "Send a message in a conversation",
+        "additionalProperties": false,
+        "required": [
+          "message"
+        ],
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Help me find all EC2 instances with open ports",
+            "description": "The message content to be sent"
+          },
+          "query_context": {
+            "type": "string",
+            "example": "SELECT * FROM ec2_instances WHERE open_ports IS NOT NULL",
+            "default": "",
+            "description": "Optional context for the message, such as the current SQL query being edited"
+          },
+          "mode": {
+            "type": "string",
+            "description": "The mode of the conversation, which can influence the behavior of the AI.",
+            "default": "sql",
+            "enum": [
+              "ask",
+              "sql"
+            ]
+          }
+        }
+      },
       "CustomColumnSortBy": {
         "title": "CustomColumnSortBy",
         "type": "string",
@@ -18496,25 +18475,6 @@
           "expression",
           "external"
         ]
-      },
-      "CreatedBy": {
-        "type": "object",
-        "required": [
-          "id",
-          "name",
-          "email"
-        ],
-        "properties": {
-          "id": {
-            "$ref": "#/components/schemas/UserID"
-          },
-          "name": {
-            "$ref": "#/components/schemas/UserName"
-          },
-          "email": {
-            "type": "string"
-          }
-        }
       },
       "CustomColumn": {
         "title": "Custom Column",
@@ -18667,6 +18627,102 @@
               "title": "The cq_id of the row and the value to set.",
               "description": "CQ_ID and corresponding value assignment",
               "additionalProperties": true
+            }
+          }
+        }
+      },
+      "FilterTag": {
+        "description": "A table column filter tag.",
+        "type": "string"
+      },
+      "FilterExpression": {
+        "description": "A table column filter.",
+        "type": "string",
+        "example": "resource_type=aws_s3_buckets"
+      },
+      "TableName": {
+        "description": "The name of the table.",
+        "type": "string",
+        "example": "cloud_assets"
+      },
+      "Filter": {
+        "title": "Filter",
+        "type": "object",
+        "description": "Saved filter",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "expression",
+          "created_at"
+        ],
+        "properties": {
+          "id": {
+            "description": "ID of the Filter",
+            "type": "string",
+            "format": "uuid",
+            "example": "12345678-1234-1234-1234-1234567890ab",
+            "x-go-name": "ID"
+          },
+          "name": {
+            "type": "string",
+            "example": "t2.micro EC2 instances"
+          },
+          "expression": {
+            "$ref": "#/components/schemas/FilterExpression"
+          },
+          "description": {
+            "type": "string",
+            "example": "Filter to find all EC2 instances of type t2.micro from the aws_ec2_instance raw table"
+          },
+          "table": {
+            "$ref": "#/components/schemas/TableName"
+          },
+          "query_id": {
+            "$ref": "#/components/schemas/QueryID"
+          },
+          "user_id": {
+            "$ref": "#/components/schemas/UserID"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterTag"
+            },
+            "x-go-type-skip-optional-pointer": true
+          },
+          "created_at": {
+            "example": "2017-07-14T16:53:42Z",
+            "format": "date-time",
+            "type": "string"
+          }
+        }
+      },
+      "FilterID": {
+        "description": "The unique ID for the filter.",
+        "type": "string",
+        "format": "uuid",
+        "x-go-name": "FilterID"
+      },
+      "FilterUpdate": {
+        "title": "Filter definition for updating a filter",
+        "description": "Filter Update Definition",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "t2.micro EC2 instances"
+          },
+          "description": {
+            "type": "string"
+          },
+          "expression": {
+            "$ref": "#/components/schemas/FilterExpression"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterTag"
             }
           }
         }
@@ -19648,6 +19704,12 @@
         "description": "A saved query tag.",
         "type": "string"
       },
+      "QueryExpression": {
+        "title": "QueryExpression",
+        "type": "string",
+        "description": "Query expression",
+        "example": "SELECT account_id, instance_id, instance_type, region, name, tags FROM aws_ec2_instance WHERE instance_type = 't2.micro'"
+      },
       "Alert": {
         "title": "Alert",
         "type": "object",
@@ -19723,6 +19785,12 @@
           }
         }
       },
+      "QueryViewName": {
+        "description": "The name of the view the query is saved to in the warehouse",
+        "type": "string",
+        "pattern": "^(saved_query_view_[a-zA-Z0-9_]+|)$",
+        "x-pattern-message": "can contain only alphanumerical characters and underscores. must start with `saved_query_view_`"
+      },
       "Query": {
         "title": "Query",
         "type": "object",
@@ -19771,8 +19839,71 @@
           },
           "alert": {
             "$ref": "#/components/schemas/Alert"
+          },
+          "view_name": {
+            "$ref": "#/components/schemas/QueryViewName"
           }
         }
+      },
+      "TableSelect": {
+        "title": "TableSelect",
+        "type": "string"
+      },
+      "TableSortBy": {
+        "title": "TableSortBy",
+        "type": "string"
+      },
+      "TableSortDirection": {
+        "title": "TableSortDirection",
+        "type": "string",
+        "enum": [
+          "asc",
+          "desc"
+        ],
+        "default": "asc"
+      },
+      "TableGroupBy": {
+        "title": "TableGroupBy",
+        "type": "string"
+      },
+      "TableData": {
+        "additionalProperties": false,
+        "properties": {
+          "query": {
+            "$ref": "#/components/schemas/QueryExpression"
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "type"
+              ]
+            }
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {}
+            }
+          }
+        },
+        "required": [
+          "columns",
+          "rows"
+        ],
+        "title": "TableData",
+        "type": "object"
       },
       "QueryCreate": {
         "title": "Query Create",
@@ -19808,6 +19939,9 @@
           "description": {
             "type": "string",
             "example": "Query to find all EC2 instances of type t2.micro from the aws_ec2_instance raw table"
+          },
+          "view_name": {
+            "$ref": "#/components/schemas/QueryViewName"
           },
           "alert": {
             "$ref": "#/components/schemas/AlertCreate"
@@ -19862,6 +19996,9 @@
           },
           "alert": {
             "$ref": "#/components/schemas/AlertDetail"
+          },
+          "view_name": {
+            "$ref": "#/components/schemas/QueryViewName"
           }
         }
       },
@@ -19919,8 +20056,48 @@
             "type": "string",
             "example": "Query to find all EC2 instances of type t2.micro from the aws_ec2_instances raw table"
           },
+          "view_name": {
+            "$ref": "#/components/schemas/QueryViewName"
+          },
           "alert": {
             "$ref": "#/components/schemas/AlertUpdate"
+          }
+        }
+      },
+      "FilterCreate": {
+        "title": "Filter definition for creating a filter",
+        "type": "object",
+        "description": "Saved filter",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "expression"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "t2.micro EC2 instances"
+          },
+          "expression": {
+            "$ref": "#/components/schemas/FilterExpression"
+          },
+          "public": {
+            "type": "boolean",
+            "default": true,
+            "x-omitempty": false,
+            "x-go-type-skip-optional-pointer": true,
+            "description": "Whether the filter is visible to all users in the team, or only to the user who created it"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterTag"
+            },
+            "x-go-type-skip-optional-pointer": true
+          },
+          "description": {
+            "type": "string",
+            "example": "Filter to find all EC2 instances of type t2.micro from the aws_ec2_instance raw table"
           }
         }
       },
@@ -19989,7 +20166,35 @@
           }
         }
       },
-      "ReportCreateOrUpdate": {
+      "ReportCreate": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string",
+            "description": "YAML body"
+          },
+          "private": {
+            "type": "boolean"
+          },
+          "template_id": {
+            "type": "string",
+            "format": "uuid",
+            "x-go-name": "TemplateID",
+            "description": "Template ID, if report is being created from a template"
+          }
+        },
+        "required": [
+          "title",
+          "content"
+        ]
+      },
+      "ReportUpdate": {
         "type": "object",
         "properties": {
           "title": {
@@ -20626,7 +20831,8 @@
           "created_at",
           "total_rows",
           "warnings",
-          "errors"
+          "errors",
+          "ingested"
         ],
         "properties": {
           "id": {
@@ -20674,6 +20880,10 @@
             "type": "integer",
             "format": "int64",
             "description": "Number of errors encountered during the sync"
+          },
+          "ingested": {
+            "type": "boolean",
+            "description": "Whether the sync run's data has been ingested"
           }
         }
       },
@@ -21004,35 +21214,8 @@
           }
         ]
       },
-      "SyncSourceUpdate": {
-        "title": "Sync Source definition for updating a source",
-        "description": "Sync Source Update Definition",
-        "type": "object",
-        "properties": {
-          "display_name": {
-            "$ref": "#/components/schemas/DisplayName"
-          },
-          "tables": {
-            "type": "array",
-            "description": "Tables to sync. Wildcards are supported. Note that child tables are excluded by default, and need to be explicitly specified.",
-            "items": {
-              "type": "string"
-            }
-          },
-          "skip_tables": {
-            "type": "array",
-            "description": "Tables matched by `tables` that should be skipped. Wildcards are supported.",
-            "items": {
-              "type": "string"
-            }
-          },
-          "last_update_source": {
-            "$ref": "#/components/schemas/SyncLastUpdateSource"
-          }
-        }
-      },
-      "SyncTransformerTestConnectionCreate": {
-        "title": "Sync Transformer Test Connection creation definition",
+      "SyncIntegrationTestConnectionCreateV2": {
+        "title": "Sync Integration Test Connection creation definition",
         "type": "object",
         "required": [
           "path",
@@ -21043,9 +21226,9 @@
             "$ref": "#/components/schemas/SyncPluginPath",
             "example": "cloudquery/postgresql"
           },
-          "transformer_name": {
+          "source_name": {
             "type": "string",
-            "description": "Name of an existing transformer"
+            "description": "Name of an existing source"
           },
           "version": {
             "type": "string",
@@ -21067,10 +21250,14 @@
           "connector_id": {
             "$ref": "#/components/schemas/ConnectorID",
             "description": "ID of the connector that will be used to authenticate the destination."
+          },
+          "onboarding_id": {
+            "$ref": "#/components/schemas/OnboardingID",
+            "description": "ID of the onboarding that will be used to authenticate the source."
           }
         }
       },
-      "SyncTransformerTestConnection": {
+      "SyncIntegrationTestConnectionV2": {
         "type": "object",
         "required": [
           "id",
@@ -21118,34 +21305,307 @@
           }
         }
       },
-      "SyncTransformerTestConnectionID": {
-        "description": "ID of the Sync Transformer Test Connection",
-        "type": "string",
-        "format": "uuid",
-        "example": "12345678-1234-1234-1234-1234567890ab",
-        "x-go-name": "SyncTransformerTestConnectionID"
-      },
-      "PromoteSyncTransformerTestConnection": {
-        "title": "Sync Transformer definition for creating a new transformer",
-        "description": "Sync Transformer Definition",
+      "SyncIntegrationSourceV2": {
+        "description": "Integration Source Definition",
         "type": "object",
+        "required": [
+          "path",
+          "version",
+          "tables",
+          "env",
+          "spec"
+        ],
+        "properties": {
+          "test_connection_id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "12345678-1234-1234-1234-1234567890ab",
+            "description": "unique ID of the test connection",
+            "x-go-name": "TestConnectionID"
+          },
+          "path": {
+            "$ref": "#/components/schemas/SyncPluginPath",
+            "example": "cloudquery/aws"
+          },
+          "version": {
+            "type": "string",
+            "description": "Version of the plugin",
+            "example": "v1.2.3"
+          },
+          "tables": {
+            "type": "array",
+            "description": "Tables to sync. Wildcards are supported. Note that child tables are excluded by default, and need to be explicitly specified.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "skip_tables": {
+            "type": "array",
+            "description": "Tables matched by `tables` that should be skipped. Wildcards are supported.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "spec": {
+            "type": "object",
+            "additionalProperties": true,
+            "format": "Plugin parameters, specific to each plugin"
+          },
+          "env": {
+            "description": "Environment variables for the plugin. All environment variables will be stored as secrets.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SyncEnv"
+            }
+          },
+          "last_update_source": {
+            "$ref": "#/components/schemas/SyncLastUpdateSource"
+          },
+          "connector_id": {
+            "$ref": "#/components/schemas/ConnectorID",
+            "description": "ID of the connector that will be used to authenticate the source."
+          },
+          "onboarding_id": {
+            "$ref": "#/components/schemas/OnboardingID",
+            "description": "ID of the onboarding that will be used to authenticate the source."
+          }
+        }
+      },
+      "SyncIntegrationV2": {
+        "type": "object",
+        "description": "An integration definition",
         "required": [
           "name"
         ],
         "properties": {
           "name": {
             "type": "string",
-            "example": "my-transformer-definition",
-            "description": "Descriptive, unique name for the transformer",
+            "description": "Descriptive, unique name for the integration",
             "pattern": "^[a-zA-Z0-9_-]+$",
             "x-pattern-message": "can contain only alphanumerical characters, dashes, and underscores"
           },
           "display_name": {
             "$ref": "#/components/schemas/DisplayName"
           },
-          "overwrite_transformer": {
+          "source": {
+            "$ref": "#/components/schemas/SyncIntegrationSourceV2"
+          },
+          "plugin": {
+            "$ref": "#/components/schemas/Plugin"
+          },
+          "schedule": {
+            "type": "string",
+            "description": "Cron schedule for the integration"
+          },
+          "disabled": {
             "type": "boolean",
-            "description": "Set this to allow overwriting an existing sync transformer. Defaults to true to preserve compatibility."
+            "description": "Whether the integration is disabled",
+            "default": false
+          },
+          "cpu": {
+            "type": "string",
+            "description": "CPU quota for the integration",
+            "default": "1",
+            "x-go-name": "CPU"
+          },
+          "memory": {
+            "type": "string",
+            "description": "Memory quota for the integration",
+            "default": "2Gi"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Time when the sync was created"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Time when the sync was updated"
+          },
+          "created_by": {
+            "type": "string"
+          }
+        }
+      },
+      "SyncIntegrationExpandedV2": {
+        "description": "Managed Sync List Entry",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SyncIntegrationV2"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "last_run": {
+                "$ref": "#/components/schemas/ListSyncLastRun"
+              }
+            }
+          }
+        ]
+      },
+      "SyncIntegrationSourceCreateV2": {
+        "description": "Integration Source Definition",
+        "type": "object",
+        "required": [
+          "test_connection_id",
+          "tables"
+        ],
+        "properties": {
+          "test_connection_id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "12345678-1234-1234-1234-1234567890ab",
+            "description": "unique ID of the test connection",
+            "x-go-name": "TestConnectionID"
+          },
+          "tables": {
+            "type": "array",
+            "description": "Tables to sync. Wildcards are supported. Note that child tables are excluded by default, and need to be explicitly specified.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "skip_tables": {
+            "type": "array",
+            "description": "Tables matched by `tables` that should be skipped. Wildcards are supported.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "last_update_source": {
+            "$ref": "#/components/schemas/SyncLastUpdateSource"
+          }
+        }
+      },
+      "SyncIntegrationCreateV2": {
+        "type": "object",
+        "description": "Create a new sync integration",
+        "required": [
+          "name",
+          "source"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Descriptive, unique name for the integration",
+            "pattern": "^[a-zA-Z0-9_-]+$",
+            "x-pattern-message": "can contain only alphanumerical characters, dashes, and underscores"
+          },
+          "display_name": {
+            "$ref": "#/components/schemas/DisplayName"
+          },
+          "source": {
+            "$ref": "#/components/schemas/SyncIntegrationSourceCreateV2"
+          },
+          "schedule": {
+            "type": "string",
+            "description": "Cron schedule for the integration"
+          },
+          "disabled": {
+            "type": "boolean",
+            "description": "Whether the integration is disabled",
+            "default": false
+          },
+          "cpu": {
+            "type": "string",
+            "description": "CPU quota for the integration",
+            "default": "1",
+            "x-go-name": "CPU"
+          },
+          "memory": {
+            "type": "string",
+            "description": "Memory quota for the integration",
+            "default": "2Gi"
+          }
+        }
+      },
+      "SyncIntegrationSourceUpdateV2": {
+        "description": "Integration Definition",
+        "type": "object",
+        "properties": {
+          "test_connection_id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "12345678-1234-1234-1234-1234567890ab",
+            "description": "unique ID of the test connection",
+            "x-go-name": "TestConnectionID"
+          },
+          "tables": {
+            "type": "array",
+            "description": "Tables to sync. Wildcards are supported. Note that child tables are excluded by default, and need to be explicitly specified.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "skip_tables": {
+            "type": "array",
+            "description": "Tables matched by `tables` that should be skipped. Wildcards are supported.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "last_update_source": {
+            "$ref": "#/components/schemas/SyncLastUpdateSource"
+          }
+        }
+      },
+      "SyncIntegrationUpdateV2": {
+        "type": "object",
+        "description": "Update an existing integration",
+        "properties": {
+          "display_name": {
+            "$ref": "#/components/schemas/DisplayName"
+          },
+          "source": {
+            "$ref": "#/components/schemas/SyncIntegrationSourceUpdateV2"
+          },
+          "schedule": {
+            "type": "string",
+            "description": "Cron schedule for the integration"
+          },
+          "disabled": {
+            "type": "boolean",
+            "description": "Whether the integration is disabled"
+          },
+          "cpu": {
+            "type": "string",
+            "description": "CPU quota for the integration",
+            "x-go-name": "CPU"
+          },
+          "memory": {
+            "type": "string",
+            "description": "Memory quota for the integration"
+          },
+          "last_update_source": {
+            "$ref": "#/components/schemas/SyncLastUpdateSource"
+          }
+        }
+      },
+      "SyncSourceUpdate": {
+        "title": "Sync Source definition for updating a source",
+        "description": "Sync Source Update Definition",
+        "type": "object",
+        "properties": {
+          "display_name": {
+            "$ref": "#/components/schemas/DisplayName"
+          },
+          "tables": {
+            "type": "array",
+            "description": "Tables to sync. Wildcards are supported. Note that child tables are excluded by default, and need to be explicitly specified.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "skip_tables": {
+            "type": "array",
+            "description": "Tables matched by `tables` that should be skipped. Wildcards are supported.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "last_update_source": {
+            "$ref": "#/components/schemas/SyncLastUpdateSource"
           }
         }
       },
@@ -21468,7 +21928,8 @@
           "total_rows",
           "warnings",
           "errors",
-          "migrate"
+          "migrate",
+          "ingested"
         ],
         "properties": {
           "sync_name": {
@@ -21527,6 +21988,10 @@
           "migration": {
             "type": "boolean",
             "description": "Whether the sync run is a migration"
+          },
+          "ingested": {
+            "type": "boolean",
+            "description": "Whether the sync run's data has been ingested"
           }
         }
       },
@@ -21551,7 +22016,8 @@
               "status",
               "total_rows",
               "warnings",
-              "errors"
+              "errors",
+              "ingested"
             ],
             "properties": {
               "cpu_seconds": {
@@ -21685,6 +22151,11 @@
             "type": "integer",
             "format": "uint64",
             "description": "Number of panics encountered"
+          },
+          "runtime_seconds": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Number of seconds it took to sync a table"
           }
         }
       },
@@ -21753,6 +22224,223 @@
         },
         "type": "object",
         "description": "AWS connector identity response"
+      },
+      "TableListItem": {
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "$ref": "#/components/schemas/TableName"
+          },
+          "total_rows": {
+            "type": "integer",
+            "x-go-type": "uint64"
+          }
+        },
+        "required": [
+          "name",
+          "rows"
+        ],
+        "title": "TableListItem",
+        "type": "object"
+      },
+      "TableRowID": {
+        "description": "ID of the Resource",
+        "type": "string",
+        "example": "table_12345678-1234-1234-1234-1234567890ab"
+      },
+      "TableRow": {
+        "additionalProperties": true,
+        "title": "TableRow",
+        "type": "object"
+      },
+      "TableRowFieldMatch": {
+        "type": "object",
+        "title": "TableRowFieldMatch",
+        "required": [
+          "key",
+          "value"
+        ],
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "start_index": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "end_index": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "TableSchemaColumnKind": {
+        "description": "The kind of the schema column type",
+        "type": "string",
+        "enum": [
+          "any",
+          "array",
+          "bool",
+          "date",
+          "datetime",
+          "enum",
+          "map",
+          "number",
+          "string",
+          "tuple",
+          "unknown",
+          "uuid"
+        ]
+      },
+      "TableSchemaColumn": {
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "column_name",
+            "description": "Column name"
+          },
+          "type": {
+            "type": "string",
+            "example": "Nullable(String)",
+            "description": "Column type"
+          },
+          "default_kind": {
+            "type": "string",
+            "description": "Expression type (DEFAULT, MATERIALIZED, ALIAS) for the default value, or an empty string if it is not defined.",
+            "example": "DEFAULT"
+          },
+          "default_expression": {
+            "type": "string",
+            "description": "Expression for the default value, or an empty string if it is not defined."
+          },
+          "comment": {
+            "type": "string",
+            "description": "Comment on the column, or an empty string if it is not defined."
+          },
+          "kind": {
+            "$ref": "#/components/schemas/TableSchemaColumnKind"
+          },
+          "nullable": {
+            "type": "boolean",
+            "description": "Whether the column is nullable."
+          }
+        },
+        "required": [
+          "name",
+          "type",
+          "default_kind",
+          "default_expression",
+          "comment",
+          "kind",
+          "nullable"
+        ],
+        "title": "TableSchemaColumn",
+        "type": "object"
+      },
+      "TableSchema": {
+        "items": {
+          "$ref": "#/components/schemas/TableSchemaColumn"
+        },
+        "title": "TableSchema",
+        "type": "array"
+      },
+      "BatchTableSchemaItem": {
+        "title": "BatchTableSchemaItem",
+        "type": "object",
+        "required": [
+          "table_name",
+          "schema",
+          "default_columns"
+        ],
+        "properties": {
+          "table_name": {
+            "type": "string",
+            "description": "Table name"
+          },
+          "schema": {
+            "$ref": "#/components/schemas/TableSchema"
+          },
+          "default_columns": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Column name"
+            }
+          }
+        }
+      },
+      "TableColumnName": {
+        "description": "The name of the table column.",
+        "type": "string",
+        "example": "region"
+      },
+      "TableColumnListItem": {
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "$ref": "#/components/schemas/TableColumnName"
+          },
+          "kind": {
+            "$ref": "#/components/schemas/TableSchemaColumnKind"
+          },
+          "nullable": {
+            "type": "boolean",
+            "description": "Whether the column is nullable."
+          }
+        },
+        "required": [
+          "name",
+          "kind",
+          "nullable"
+        ],
+        "title": "TableColumnListItem",
+        "type": "object"
+      },
+      "TableColumnValueListItem": {
+        "additionalProperties": false,
+        "properties": {
+          "value": {
+            "type": "string"
+          },
+          "kind": {
+            "$ref": "#/components/schemas/TableSchemaColumnKind"
+          }
+        },
+        "required": [
+          "name",
+          "kind"
+        ],
+        "title": "TableColumnValueListItem",
+        "type": "object"
+      },
+      "TableRelation": {
+        "additionalProperties": false,
+        "properties": {
+          "table_name": {
+            "type": "string",
+            "example": "aws_ec2_images",
+            "x-go-name": "Table"
+          },
+          "label": {
+            "type": "string",
+            "example": "EC2 Image"
+          },
+          "query": {
+            "type": "string",
+            "example": "SELECT aws_ec2_images.* FROM aws_ec2_instances JOIN aws_ec2_images ON aws_ec2_instances.image_id = aws_ec2_images.image_id"
+          }
+        },
+        "required": [
+          "table_name",
+          "label",
+          "query"
+        ],
+        "title": "TableRelation",
+        "type": "object"
       },
       "UsageSummaryGroup": {
         "title": "CloudQuery Usage Summary Group",
@@ -21999,6 +22687,364 @@
         },
         "title": "Docker Error",
         "type": "object"
+      },
+      "CreateSyncDestinationTestConnectionV2": {
+        "title": "Sync Destination Test Connection creation definition",
+        "type": "object",
+        "required": [
+          "path",
+          "version"
+        ],
+        "properties": {
+          "path": {
+            "$ref": "#/components/schemas/SyncPluginPath",
+            "example": "cloudquery/postgresql"
+          },
+          "destination_name": {
+            "type": "string",
+            "description": "Name of an existing destination"
+          },
+          "version": {
+            "type": "string",
+            "description": "Version of the plugin",
+            "example": "v1.2.3"
+          },
+          "write_mode": {
+            "$ref": "#/components/schemas/SyncDestinationWriteMode"
+          },
+          "migrate_mode": {
+            "$ref": "#/components/schemas/SyncDestinationMigrateMode"
+          },
+          "sync_group_id": {
+            "type": "string",
+            "x-go-name": "SyncGroupID"
+          },
+          "spec": {
+            "type": "object",
+            "additionalProperties": true,
+            "format": "Plugin parameters, specific to each plugin"
+          },
+          "env": {
+            "description": "Environment variables for the plugin. All environment variables will be stored as secrets.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SyncEnvCreate"
+            }
+          },
+          "connector_id": {
+            "$ref": "#/components/schemas/ConnectorID",
+            "description": "ID of the connector that will be used to authenticate the destination."
+          }
+        }
+      },
+      "SyncDestinationTestConnectionV2": {
+        "type": "object",
+        "required": [
+          "id",
+          "created_at",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/SyncTestConnectionID",
+            "x-go-name": "ID"
+          },
+          "status": {
+            "$ref": "#/components/schemas/SyncTestConnectionStatus",
+            "description": "Status of the sync test connection"
+          },
+          "failure_reason": {
+            "type": "string",
+            "description": "Reason for failure",
+            "example": "password authentication failed for user \"exampleuser\""
+          },
+          "failure_code": {
+            "example": "INVALID_CREDENTIALS",
+            "type": "string",
+            "description": "Code for failure"
+          },
+          "created_at": {
+            "example": "2017-07-14T16:53:42Z",
+            "format": "date-time",
+            "type": "string",
+            "description": "Time the test connection was created"
+          },
+          "completed_at": {
+            "example": "2017-07-14T16:53:42Z",
+            "format": "date-time",
+            "type": "string",
+            "description": "Time the test connection was completed"
+          },
+          "plugin_path": {
+            "$ref": "#/components/schemas/SyncPluginPath",
+            "example": "cloudquery/postgresql"
+          },
+          "plugin_version": {
+            "$ref": "#/components/schemas/VersionName",
+            "description": "Version of the plugin"
+          },
+          "sync_group_id": {
+            "type": "string",
+            "x-go-name": "SyncGroupID"
+          }
+        }
+      },
+      "SyncDestinationV2": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SyncDestinationCreate"
+          },
+          {
+            "type": "object",
+            "required": [
+              "name",
+              "display_name",
+              "path",
+              "version",
+              "write_mode",
+              "migrate_mode",
+              "spec",
+              "env",
+              "created_at",
+              "updated_at",
+              "last_update_source",
+              "draft",
+              "transformers",
+              "disabled"
+            ],
+            "properties": {
+              "created_at": {
+                "type": "string",
+                "format": "date-time",
+                "example": "2023-07-14T16:53:42Z",
+                "description": "Time when the source was created"
+              },
+              "updated_at": {
+                "type": "string",
+                "format": "date-time",
+                "example": "2023-07-14T16:53:42Z",
+                "description": "Time when the source was last updated"
+              },
+              "env": {
+                "description": "Environment variables for the plugin.",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/SyncEnv"
+                }
+              },
+              "draft": {
+                "type": "boolean",
+                "description": "If a sync destination is in draft, it cannot be used in syncs. To get it out of draft, 'promote' it using a successful test connection ID."
+              },
+              "previous_version": {
+                "type": "string",
+                "description": "Previous version of the plugin during a version upgrade",
+                "example": "v1.2.2"
+              },
+              "disabled": {
+                "type": "boolean",
+                "description": "If true, the sync destination is disabled and cannot be used in syncs."
+              },
+              "last_run": {
+                "$ref": "#/components/schemas/SyncRun"
+              },
+              "plugin": {
+                "$ref": "#/components/schemas/Plugin"
+              }
+            }
+          }
+        ]
+      },
+      "CreateSyncDestinationV2": {
+        "title": "Sync Destination definition for creating a new source",
+        "description": "Sync Destination Definition",
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "my-destination-definition",
+            "description": "Descriptive, unique name for the destination",
+            "pattern": "^[a-zA-Z0-9_-]+$",
+            "x-pattern-message": "can contain only alphanumerical characters, dashes, and underscores"
+          },
+          "display_name": {
+            "$ref": "#/components/schemas/DisplayName"
+          },
+          "write_mode": {
+            "$ref": "#/components/schemas/SyncDestinationWriteMode"
+          },
+          "migrate_mode": {
+            "$ref": "#/components/schemas/SyncDestinationMigrateMode"
+          },
+          "send_sync_summary": {
+            "type": "boolean"
+          },
+          "last_update_source": {
+            "$ref": "#/components/schemas/SyncLastUpdateSource"
+          },
+          "overwrite_destination": {
+            "type": "boolean",
+            "description": "Set this to allow overwriting an existing sync destination. Defaults to true to preserve compatibility."
+          },
+          "sync_destination_test_connection_id": {
+            "$ref": "#/components/schemas/SyncDestinationTestConnectionID"
+          }
+        }
+      },
+      "SyncDestinationUpdateV2": {
+        "title": "Sync Destination definition for updating a destination",
+        "description": "Sync Destination Update Definition",
+        "type": "object",
+        "properties": {
+          "display_name": {
+            "$ref": "#/components/schemas/DisplayName"
+          },
+          "write_mode": {
+            "$ref": "#/components/schemas/SyncDestinationWriteModeUpdate"
+          },
+          "migrate_mode": {
+            "$ref": "#/components/schemas/SyncDestinationMigrateModeUpdate"
+          },
+          "send_sync_summary": {
+            "type": "boolean"
+          },
+          "last_update_source": {
+            "$ref": "#/components/schemas/SyncLastUpdateSource"
+          },
+          "disabled": {
+            "type": "boolean",
+            "description": "Whether the sync destination is disabled"
+          },
+          "transformers": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Unique name of the transformer",
+              "pattern": "^[a-zA-Z0-9_-]+$",
+              "x-pattern-message": "can contain only alphanumerical characters, dashes, and underscores"
+            }
+          }
+        }
+      },
+      "RBACPermissionSortBy": {
+        "title": "RBACPermissionSortBy",
+        "type": "string",
+        "enum": [
+          "id",
+          "name",
+          "description",
+          "created_by",
+          "created_at",
+          "updated_at"
+        ]
+      },
+      "RBACPermissionSortDirection": {
+        "title": "RBACPermissionSortDirection",
+        "type": "string",
+        "enum": [
+          "asc",
+          "desc"
+        ],
+        "default": "asc"
+      },
+      "RBACPermissionCreate": {
+        "type": "object",
+        "required": [
+          "name",
+          "description",
+          "query"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "query": {
+            "type": "string"
+          },
+          "dry_run": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "RBACPermissionUpdate": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "query": {
+            "type": "string"
+          }
+        }
+      },
+      "RBACRoleSortBy": {
+        "title": "RBACRoleSortBy",
+        "type": "string",
+        "enum": [
+          "id",
+          "name",
+          "description",
+          "created_by",
+          "created_at",
+          "updated_at"
+        ]
+      },
+      "RBACRoleSortDirection": {
+        "title": "RBACRoleSortDirection",
+        "type": "string",
+        "enum": [
+          "asc",
+          "desc"
+        ],
+        "default": "asc"
+      },
+      "RBACRoleCreate": {
+        "type": "object",
+        "required": [
+          "name",
+          "permissions"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RBACPermissionID"
+            }
+          }
+        }
+      },
+      "RBACRoleUpdate": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RBACPermissionID"
+            }
+          }
+        }
       }
     },
     "responses": {
@@ -22042,16 +23088,6 @@
         },
         "description": "Resource not found"
       },
-      "UnprocessableEntity": {
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/FieldError"
-            }
-          }
-        },
-        "description": "UnprocessableEntity"
-      },
       "BadRequest": {
         "content": {
           "application/json": {
@@ -22061,6 +23097,26 @@
           }
         },
         "description": "Bad request"
+      },
+      "ServiceUnavailable": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/BasicError"
+            }
+          }
+        },
+        "description": "Service unavailable"
+      },
+      "UnprocessableEntity": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/FieldError"
+            }
+          }
+        },
+        "description": "UnprocessableEntity"
       },
       "TooManyRequests": {
         "content": {
