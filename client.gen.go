@@ -33,6 +33,7 @@ const (
 	APIKeyRoleCi           APIKeyRole = "ci"
 	APIKeyRoleGeneralRead  APIKeyRole = "general:read"
 	APIKeyRoleGeneralWrite APIKeyRole = "general:write"
+	APIKeyRoleSchemaOnly   APIKeyRole = "schema-only"
 )
 
 // Defines values for AlertSeverity.
@@ -69,6 +70,39 @@ const (
 	ContentTypeImagejpeg ContentType = "image/jpeg"
 	ContentTypeImagepng  ContentType = "image/png"
 	ContentTypeImagewebp ContentType = "image/webp"
+)
+
+// Defines values for ConversationCreateMode.
+const (
+	ConversationCreateModeAsk ConversationCreateMode = "ask"
+	ConversationCreateModeSql ConversationCreateMode = "sql"
+)
+
+// Defines values for ConversationMessageMessageType.
+const (
+	ConversationMessageMessageTypeError      ConversationMessageMessageType = "error"
+	ConversationMessageMessageTypeMessage    ConversationMessageMessageType = "message"
+	ConversationMessageMessageTypeToolResult ConversationMessageMessageType = "tool_result"
+	ConversationMessageMessageTypeToolUse    ConversationMessageMessageType = "tool_use"
+)
+
+// Defines values for ConversationMessageMode.
+const (
+	ConversationMessageModeAsk ConversationMessageMode = "ask"
+	ConversationMessageModeSql ConversationMessageMode = "sql"
+)
+
+// Defines values for ConversationMessageRole.
+const (
+	ConversationMessageRoleAssistant ConversationMessageRole = "assistant"
+	ConversationMessageRoleSystem    ConversationMessageRole = "system"
+	ConversationMessageRoleUser      ConversationMessageRole = "user"
+)
+
+// Defines values for ConversationSendMessageMode.
+const (
+	ConversationSendMessageModeAsk ConversationSendMessageMode = "ask"
+	ConversationSendMessageModeSql ConversationSendMessageMode = "sql"
 )
 
 // Defines values for CustomColumnColumnType.
@@ -259,6 +293,46 @@ const (
 	PluginTierPaid     PluginTier = "paid"
 )
 
+// Defines values for RBACDefaultRole.
+const (
+	RBACDefaultRoleAdminRead    RBACDefaultRole = "admin:read"
+	RBACDefaultRoleAdminWrite   RBACDefaultRole = "admin:write"
+	RBACDefaultRoleGeneralRead  RBACDefaultRole = "general:read"
+	RBACDefaultRoleGeneralWrite RBACDefaultRole = "general:write"
+)
+
+// Defines values for RBACPermissionSortBy.
+const (
+	RBACPermissionSortByCreatedAt   RBACPermissionSortBy = "created_at"
+	RBACPermissionSortByCreatedBy   RBACPermissionSortBy = "created_by"
+	RBACPermissionSortByDescription RBACPermissionSortBy = "description"
+	RBACPermissionSortById          RBACPermissionSortBy = "id"
+	RBACPermissionSortByName        RBACPermissionSortBy = "name"
+	RBACPermissionSortByUpdatedAt   RBACPermissionSortBy = "updated_at"
+)
+
+// Defines values for RBACPermissionSortDirection.
+const (
+	RBACPermissionSortDirectionAsc  RBACPermissionSortDirection = "asc"
+	RBACPermissionSortDirectionDesc RBACPermissionSortDirection = "desc"
+)
+
+// Defines values for RBACRoleSortBy.
+const (
+	RBACRoleSortByCreatedAt   RBACRoleSortBy = "created_at"
+	RBACRoleSortByCreatedBy   RBACRoleSortBy = "created_by"
+	RBACRoleSortByDescription RBACRoleSortBy = "description"
+	RBACRoleSortById          RBACRoleSortBy = "id"
+	RBACRoleSortByName        RBACRoleSortBy = "name"
+	RBACRoleSortByUpdatedAt   RBACRoleSortBy = "updated_at"
+)
+
+// Defines values for RBACRoleSortDirection.
+const (
+	RBACRoleSortDirectionAsc  RBACRoleSortDirection = "asc"
+	RBACRoleSortDirectionDesc RBACRoleSortDirection = "desc"
+)
+
 // Defines values for ReportSortBy.
 const (
 	ReportSortByCreatedAt   ReportSortBy = "created_at"
@@ -289,14 +363,6 @@ const (
 const (
 	ReportTemplateSortDirectionAsc  ReportTemplateSortDirection = "asc"
 	ReportTemplateSortDirectionDesc ReportTemplateSortDirection = "desc"
-)
-
-// Defines values for Role.
-const (
-	RoleAdminRead    Role = "admin:read"
-	RoleAdminWrite   Role = "admin:write"
-	RoleGeneralRead  Role = "general:read"
-	RoleGeneralWrite Role = "general:write"
 )
 
 // Defines values for SyncDestinationMigrateMode.
@@ -469,14 +535,6 @@ const (
 	VersionSortByCreatedAt VersionSortBy = "created_at"
 )
 
-// Defines values for ManageAddTeamMemberJSONBodyRoles.
-const (
-	ManageAddTeamMemberJSONBodyRolesAdminRead    ManageAddTeamMemberJSONBodyRoles = "admin:read"
-	ManageAddTeamMemberJSONBodyRolesAdminWrite   ManageAddTeamMemberJSONBodyRoles = "admin:write"
-	ManageAddTeamMemberJSONBodyRolesGeneralRead  ManageAddTeamMemberJSONBodyRoles = "general:read"
-	ManageAddTeamMemberJSONBodyRolesGeneralWrite ManageAddTeamMemberJSONBodyRoles = "general:write"
-)
-
 // Defines values for AddLocalUserJSONBodyRoles.
 const (
 	AddLocalUserJSONBodyRolesAdminRead  AddLocalUserJSONBodyRoles = "admin:read"
@@ -500,34 +558,6 @@ const (
 // Defines values for ListPluginVersionsParamsSortBy.
 const (
 	ListPluginVersionsParamsSortByCreatedAt ListPluginVersionsParamsSortBy = "created_at"
-)
-
-// Defines values for TableListColumnsParamsFilterMode.
-const (
-	TableListColumnsParamsFilterModeColumn TableListColumnsParamsFilterMode = "column"
-	TableListColumnsParamsFilterModeSearch TableListColumnsParamsFilterMode = "search"
-	TableListColumnsParamsFilterModeSmart  TableListColumnsParamsFilterMode = "smart"
-)
-
-// Defines values for TableColumnListValuesParamsFilterMode.
-const (
-	TableColumnListValuesParamsFilterModeColumn TableColumnListValuesParamsFilterMode = "column"
-	TableColumnListValuesParamsFilterModeSearch TableColumnListValuesParamsFilterMode = "search"
-	TableColumnListValuesParamsFilterModeSmart  TableColumnListValuesParamsFilterMode = "smart"
-)
-
-// Defines values for TableListRowsParamsFilterMode.
-const (
-	TableListRowsParamsFilterModeColumn TableListRowsParamsFilterMode = "column"
-	TableListRowsParamsFilterModeSearch TableListRowsParamsFilterMode = "search"
-	TableListRowsParamsFilterModeSmart  TableListRowsParamsFilterMode = "smart"
-)
-
-// Defines values for TableRowByIdParamsFilterMode.
-const (
-	TableRowByIdParamsFilterModeColumn TableRowByIdParamsFilterMode = "column"
-	TableRowByIdParamsFilterModeSearch TableRowByIdParamsFilterMode = "search"
-	TableRowByIdParamsFilterModeSmart  TableRowByIdParamsFilterMode = "smart"
 )
 
 // Defines values for TogglePolicyParamsStatus.
@@ -1061,6 +1091,134 @@ type ConnectorUpdate struct {
 // ContentType The HTTP Content-Type of the image or asset
 type ContentType string
 
+// Conversation defines model for Conversation.
+type Conversation struct {
+	CreatedAt time.Time `json:"created_at"`
+
+	// ID Unique identifier of the conversation
+	ID       openapi_types.UUID    `json:"id"`
+	Messages []ConversationMessage `json:"messages"`
+
+	// Title Optional title of the conversation
+	Title     *string   `json:"title,omitempty"`
+	UpdatedAt time.Time `json:"updated_at"`
+}
+
+// ConversationCreate defines model for ConversationCreate.
+type ConversationCreate struct {
+	// CurrentQuery An optional current query to provide context for the conversation.
+	CurrentQuery *string `json:"current_query,omitempty"`
+
+	// Message The initial message to start the conversation.
+	Message string `json:"message"`
+
+	// Mode The mode of the conversation, which can influence the behavior of the AI.
+	Mode *ConversationCreateMode `json:"mode,omitempty"`
+}
+
+// ConversationCreateMode The mode of the conversation, which can influence the behavior of the AI.
+type ConversationCreateMode string
+
+// ConversationMessage defines model for ConversationMessage.
+type ConversationMessage struct {
+	// Content Content of the message. In the case of tool use or tool result, this will contain JSON data.
+	Content   string    `json:"content"`
+	CreatedAt time.Time `json:"created_at"`
+
+	// EndTurn Whether this message ends the conversation turn
+	EndTurn bool `json:"end_turn"`
+
+	// ID Unique identifier of the message
+	ID openapi_types.UUID `json:"id"`
+
+	// MessageType Type of the message content
+	MessageType ConversationMessageMessageType `json:"message_type"`
+
+	// Mode The mode of the conversation when this message was sent, which can influence the behavior of the AI.
+	Mode ConversationMessageMode `json:"mode"`
+
+	// QueryContext The current query context when the message was sent, if applicable
+	QueryContext *string `json:"query_context,omitempty"`
+
+	// Role Role of the message sender
+	Role ConversationMessageRole `json:"role"`
+}
+
+// ConversationMessageMessageType Type of the message content
+type ConversationMessageMessageType string
+
+// ConversationMessageMode The mode of the conversation when this message was sent, which can influence the behavior of the AI.
+type ConversationMessageMode string
+
+// ConversationMessageRole Role of the message sender
+type ConversationMessageRole string
+
+// ConversationSendMessage Send a message in a conversation
+type ConversationSendMessage struct {
+	// Message The message content to be sent
+	Message string `json:"message"`
+
+	// Mode The mode of the conversation, which can influence the behavior of the AI.
+	Mode *ConversationSendMessageMode `json:"mode,omitempty"`
+
+	// QueryContext Optional context for the message, such as the current SQL query being edited
+	QueryContext *string `json:"query_context,omitempty"`
+}
+
+// ConversationSendMessageMode The mode of the conversation, which can influence the behavior of the AI.
+type ConversationSendMessageMode string
+
+// CreateSyncDestinationTestConnectionV2 defines model for CreateSyncDestinationTestConnectionV2.
+type CreateSyncDestinationTestConnectionV2 struct {
+	// ConnectorID ID of the Connector
+	ConnectorID *ConnectorID `json:"connector_id,omitempty"`
+
+	// DestinationName Name of an existing destination
+	DestinationName *string `json:"destination_name,omitempty"`
+
+	// Env Environment variables for the plugin. All environment variables will be stored as secrets.
+	Env *[]SyncEnvCreate `json:"env,omitempty"`
+
+	// MigrateMode Migrate mode for the destination
+	MigrateMode *SyncDestinationMigrateMode `json:"migrate_mode,omitempty"`
+
+	// Path Plugin path in CloudQuery registry
+	Path        SyncPluginPath          `json:"path"`
+	Spec        *map[string]interface{} `json:"spec,omitempty"`
+	SyncGroupID *string                 `json:"sync_group_id,omitempty"`
+
+	// Version Version of the plugin
+	Version string `json:"version"`
+
+	// WriteMode Write mode for the destination
+	WriteMode *SyncDestinationWriteMode `json:"write_mode,omitempty"`
+}
+
+// CreateSyncDestinationV2 Sync Destination Definition
+type CreateSyncDestinationV2 struct {
+	// DisplayName A human-readable display name
+	DisplayName *DisplayName `json:"display_name,omitempty"`
+
+	// LastUpdateSource How was the source or destination been created or updated last
+	LastUpdateSource *SyncLastUpdateSource `json:"last_update_source,omitempty"`
+
+	// MigrateMode Migrate mode for the destination
+	MigrateMode *SyncDestinationMigrateMode `json:"migrate_mode,omitempty"`
+
+	// Name Descriptive, unique name for the destination
+	Name string `json:"name"`
+
+	// OverwriteDestination Set this to allow overwriting an existing sync destination. Defaults to true to preserve compatibility.
+	OverwriteDestination *bool `json:"overwrite_destination,omitempty"`
+	SendSyncSummary      *bool `json:"send_sync_summary,omitempty"`
+
+	// SyncDestinationTestConnectionID ID of the Sync Destination Test Connection
+	SyncDestinationTestConnectionID *SyncDestinationTestConnectionID `json:"sync_destination_test_connection_id,omitempty"`
+
+	// WriteMode Write mode for the destination
+	WriteMode *SyncDestinationWriteMode `json:"write_mode,omitempty"`
+}
+
 // CreatedBy defines model for CreatedBy.
 type CreatedBy struct {
 	Email string `json:"email"`
@@ -1409,6 +1567,9 @@ type ListSyncLastRun struct {
 	// ID unique ID of the run
 	ID openapi_types.UUID `json:"id"`
 
+	// Ingested Whether the sync run's data has been ingested
+	Ingested bool `json:"ingested"`
+
 	// Migration Whether the sync run was a migration
 	Migration bool `json:"migration"`
 
@@ -1505,7 +1666,8 @@ type MembershipWithTeamName struct {
 
 // MembershipWithUser defines model for MembershipWithUser.
 type MembershipWithUser struct {
-	Roles []string `json:"roles"`
+	CustomRoles *[]RBACRole       `json:"customRoles,omitempty"`
+	Roles       []RBACDefaultRole `json:"roles"`
 
 	// User CloudQuery User
 	User User `json:"user"`
@@ -2292,6 +2454,9 @@ type PluginVersionDetails struct {
 
 	// UIBaseURL Base URL for the plugin's UI. Only available for plugins with a UI and for logged in users.
 	UIBaseURL *string `json:"ui_base_url,omitempty"`
+
+	// UIBaseURLv2 Base URL for the plugin's UI. Only available for plugins with a UI and for logged in users.
+	UIBaseURLv2 *string `json:"ui_base_url_v2,omitempty"`
 }
 
 // PluginVersionList CloudQuery Plugin Version
@@ -2359,18 +2524,6 @@ type PromoteSyncSourceTestConnection struct {
 	Tables []string `json:"tables"`
 }
 
-// PromoteSyncTransformerTestConnection Sync Transformer Definition
-type PromoteSyncTransformerTestConnection struct {
-	// DisplayName A human-readable display name
-	DisplayName *DisplayName `json:"display_name,omitempty"`
-
-	// Name Descriptive, unique name for the transformer
-	Name string `json:"name"`
-
-	// OverwriteTransformer Set this to allow overwriting an existing sync transformer. Defaults to true to preserve compatibility.
-	OverwriteTransformer *bool `json:"overwrite_transformer,omitempty"`
-}
-
 // Query Saved query
 type Query struct {
 	// Alert An alert instance that can be triggered by a query
@@ -2391,6 +2544,9 @@ type Query struct {
 
 	// UserID ID of the User
 	UserID *UserID `json:"user_id,omitempty"`
+
+	// ViewName The name of the view the query is saved to in the warehouse
+	ViewName *QueryViewName `json:"view_name,omitempty"`
 }
 
 // QueryCreate Create a saved query
@@ -2402,6 +2558,9 @@ type QueryCreate struct {
 	Public      bool         `json:"public"`
 	Query       string       `json:"query"`
 	Tags        []QueryTag   `json:"tags,omitempty"`
+
+	// ViewName The name of the view the query is saved to in the warehouse
+	ViewName *QueryViewName `json:"view_name,omitempty"`
 }
 
 // QueryDetail Query Detail
@@ -2424,6 +2583,9 @@ type QueryDetail struct {
 
 	// UserID ID of the User
 	UserID *UserID `json:"user_id,omitempty"`
+
+	// ViewName The name of the view the query is saved to in the warehouse
+	ViewName *QueryViewName `json:"view_name,omitempty"`
 }
 
 // QueryExpression Query expression
@@ -2444,6 +2606,90 @@ type QueryUpdate struct {
 	Public      *bool        `json:"public,omitempty"`
 	Query       *string      `json:"query,omitempty"`
 	Tags        *[]QueryTag  `json:"tags,omitempty"`
+
+	// ViewName The name of the view the query is saved to in the warehouse
+	ViewName *QueryViewName `json:"view_name,omitempty"`
+}
+
+// QueryViewName The name of the view the query is saved to in the warehouse
+type QueryViewName = string
+
+// RBACCustomRoleID The unique ID for the custom role.
+type RBACCustomRoleID = openapi_types.UUID
+
+// RBACDefaultRole Default RBAC roles
+type RBACDefaultRole string
+
+// RBACPermission defines model for RBACPermission.
+type RBACPermission struct {
+	CreatedAt   time.Time `json:"created_at"`
+	CreatedBy   CreatedBy `json:"created_by"`
+	Description string    `json:"description"`
+
+	// RBACPermissionID The unique ID for the data permission.
+	RBACPermissionID      RBACPermissionID `json:"id"`
+	Name                  string           `json:"name"`
+	NumberOfAffectedRoles int              `json:"number_of_affected_roles"`
+	NumberOfAffectedUsers int              `json:"number_of_affected_users"`
+	Query                 string           `json:"query"`
+	UpdatedAt             time.Time        `json:"updated_at"`
+}
+
+// RBACPermissionCreate defines model for RBACPermissionCreate.
+type RBACPermissionCreate struct {
+	Description string `json:"description"`
+	DryRun      *bool  `json:"dry_run,omitempty"`
+	Name        string `json:"name"`
+	Query       string `json:"query"`
+}
+
+// RBACPermissionID The unique ID for the data permission.
+type RBACPermissionID = openapi_types.UUID
+
+// RBACPermissionSortBy defines model for RBACPermissionSortBy.
+type RBACPermissionSortBy string
+
+// RBACPermissionSortDirection defines model for RBACPermissionSortDirection.
+type RBACPermissionSortDirection string
+
+// RBACPermissionUpdate defines model for RBACPermissionUpdate.
+type RBACPermissionUpdate struct {
+	Description *string `json:"description,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	Query       *string `json:"query,omitempty"`
+}
+
+// RBACRole Custom RBAC role
+type RBACRole struct {
+	CreatedAt   time.Time `json:"created_at"`
+	CreatedBy   CreatedBy `json:"created_by"`
+	Description string    `json:"description"`
+
+	// RBACCustomRoleID The unique ID for the custom role.
+	RBACCustomRoleID RBACCustomRoleID `json:"id"`
+	Name             string           `json:"name"`
+	Permissions      []RBACPermission `json:"permissions"`
+	UpdatedAt        time.Time        `json:"updated_at"`
+}
+
+// RBACRoleCreate defines model for RBACRoleCreate.
+type RBACRoleCreate struct {
+	Description *string            `json:"description,omitempty"`
+	Name        string             `json:"name"`
+	Permissions []RBACPermissionID `json:"permissions"`
+}
+
+// RBACRoleSortBy defines model for RBACRoleSortBy.
+type RBACRoleSortBy string
+
+// RBACRoleSortDirection defines model for RBACRoleSortDirection.
+type RBACRoleSortDirection string
+
+// RBACRoleUpdate defines model for RBACRoleUpdate.
+type RBACRoleUpdate struct {
+	Description *string             `json:"description,omitempty"`
+	Name        *string             `json:"name,omitempty"`
+	Permissions *[]RBACPermissionID `json:"permissions,omitempty"`
 }
 
 // RegistryAuthToken JWT token for the image registry
@@ -2471,16 +2717,16 @@ type Report struct {
 	UpdatedBy   *CreatedBy         `json:"updated_by,omitempty"`
 }
 
-// ReportCreateOrUpdate defines model for ReportCreateOrUpdate.
-type ReportCreateOrUpdate struct {
+// ReportCreate defines model for ReportCreate.
+type ReportCreate struct {
 	// Content YAML body
-	Content     *string `json:"content,omitempty"`
+	Content     string  `json:"content"`
 	Description *string `json:"description,omitempty"`
 	Private     *bool   `json:"private,omitempty"`
 
 	// TemplateID Template ID, if report is being created from a template
 	TemplateID *openapi_types.UUID `json:"template_id,omitempty"`
-	Title      *string             `json:"title,omitempty"`
+	Title      string              `json:"title"`
 }
 
 // ReportSortBy defines model for ReportSortBy.
@@ -2516,13 +2762,22 @@ type ReportTemplateSortBy string
 // ReportTemplateSortDirection defines model for ReportTemplateSortDirection.
 type ReportTemplateSortDirection string
 
+// ReportUpdate defines model for ReportUpdate.
+type ReportUpdate struct {
+	// Content YAML body
+	Content     *string `json:"content,omitempty"`
+	Description *string `json:"description,omitempty"`
+	Private     *bool   `json:"private,omitempty"`
+
+	// TemplateID Template ID, if report is being created from a template
+	TemplateID *openapi_types.UUID `json:"template_id,omitempty"`
+	Title      *string             `json:"title,omitempty"`
+}
+
 // RevokedNotification defines model for RevokedNotification.
 type RevokedNotification struct {
 	Status interface{} `json:"status"`
 }
-
-// Role User roles
-type Role string
 
 // SAMLConfig defines model for SAMLConfig.
 type SAMLConfig struct {
@@ -2530,7 +2785,7 @@ type SAMLConfig struct {
 	CanEnable bool `json:"can_enable"`
 
 	// DefaultRoles Default roles for new users who are not in any group
-	DefaultRoles []Role `json:"default_roles"`
+	DefaultRoles []string `json:"default_roles"`
 
 	// DisableAccessIfNoRoleGroup Whether to disable access if no role group is found in the SAML assertion. If true, users without a role group will not be able to log in.
 	DisableAccessIfNoRoleGroup *bool `json:"disable_access_if_no_role_group,omitempty"`
@@ -2566,13 +2821,13 @@ type SAMLConfig struct {
 	RoleGroupKey *string `json:"role_group_key,omitempty"`
 
 	// RoleMappings Mapping from IdP group names to roles. Each key is a potential IdP group value for the specified role_group_key, and each value is an array of roles to assign to users in that group.
-	RoleMappings map[string][]Role `json:"role_mappings,omitempty"`
+	RoleMappings map[string][]string `json:"role_mappings,omitempty"`
 }
 
 // SAMLConfigUpdate defines model for SAMLConfigUpdate.
 type SAMLConfigUpdate struct {
 	// DefaultRoles Default roles for new users who are not in any group
-	DefaultRoles *[]Role `json:"default_roles,omitempty"`
+	DefaultRoles *[]string `json:"default_roles,omitempty"`
 
 	// DisableAccessIfNoRoleGroup Whether to disable access if no role group is found in the SAML assertion. If true, users without a role group will not be able to log in.
 	DisableAccessIfNoRoleGroup *bool `json:"disable_access_if_no_role_group,omitempty"`
@@ -2596,7 +2851,7 @@ type SAMLConfigUpdate struct {
 	RoleGroupKey *string `json:"role_group_key,omitempty"`
 
 	// RoleMappings Mapping from IdP group names to roles. Each key is a potential IdP group value for the specified role_group_key, and each value is an array of roles to assign to users in that group.
-	RoleMappings *map[string][]Role `json:"role_mappings,omitempty"`
+	RoleMappings *map[string][]string `json:"role_mappings,omitempty"`
 }
 
 // StartedNotification defines model for StartedNotification.
@@ -2806,6 +3061,34 @@ type SyncDestinationTestConnectionCreate struct {
 // SyncDestinationTestConnectionID ID of the Sync Destination Test Connection
 type SyncDestinationTestConnectionID = openapi_types.UUID
 
+// SyncDestinationTestConnectionV2 defines model for SyncDestinationTestConnectionV2.
+type SyncDestinationTestConnectionV2 struct {
+	// CompletedAt Time the test connection was completed
+	CompletedAt *time.Time `json:"completed_at,omitempty"`
+
+	// CreatedAt Time the test connection was created
+	CreatedAt time.Time `json:"created_at"`
+
+	// FailureCode Code for failure
+	FailureCode *string `json:"failure_code,omitempty"`
+
+	// FailureReason Reason for failure
+	FailureReason *string `json:"failure_reason,omitempty"`
+
+	// ID unique ID of the test connection
+	ID ID `json:"id"`
+
+	// PluginPath Plugin path in CloudQuery registry
+	PluginPath *SyncPluginPath `json:"plugin_path,omitempty"`
+
+	// PluginVersion The version in semantic version format.
+	PluginVersion *VersionName `json:"plugin_version,omitempty"`
+
+	// Status The status of the sync run
+	Status      SyncTestConnectionStatus `json:"status"`
+	SyncGroupID *string                  `json:"sync_group_id,omitempty"`
+}
+
 // SyncDestinationUpdate Sync Destination Update Definition
 type SyncDestinationUpdate struct {
 	// DisplayName A human-readable display name
@@ -2821,6 +3104,81 @@ type SyncDestinationUpdate struct {
 
 	// WriteMode Write mode for the destination, for updating
 	WriteMode *SyncDestinationWriteModeUpdate `json:"write_mode,omitempty"`
+}
+
+// SyncDestinationUpdateV2 Sync Destination Update Definition
+type SyncDestinationUpdateV2 struct {
+	// Disabled Whether the sync destination is disabled
+	Disabled *bool `json:"disabled,omitempty"`
+
+	// DisplayName A human-readable display name
+	DisplayName *DisplayName `json:"display_name,omitempty"`
+
+	// LastUpdateSource How was the source or destination been created or updated last
+	LastUpdateSource *SyncLastUpdateSource `json:"last_update_source,omitempty"`
+
+	// MigrateMode Migrate mode for the destination, for updating
+	MigrateMode     *SyncDestinationMigrateModeUpdate `json:"migrate_mode,omitempty"`
+	SendSyncSummary *bool                             `json:"send_sync_summary,omitempty"`
+	Transformers    *[]string                         `json:"transformers,omitempty"`
+
+	// WriteMode Write mode for the destination, for updating
+	WriteMode *SyncDestinationWriteModeUpdate `json:"write_mode,omitempty"`
+}
+
+// SyncDestinationV2 defines model for SyncDestinationV2.
+type SyncDestinationV2 struct {
+	// ConnectorID ID of the Connector
+	ConnectorID *ConnectorID `json:"connector_id,omitempty"`
+
+	// CreatedAt Time when the source was created
+	CreatedAt time.Time `json:"created_at"`
+
+	// Disabled If true, the sync destination is disabled and cannot be used in syncs.
+	Disabled bool `json:"disabled"`
+
+	// DisplayName A human-readable display name
+	DisplayName DisplayName `json:"display_name"`
+
+	// Draft If a sync destination is in draft, it cannot be used in syncs. To get it out of draft, 'promote' it using a successful test connection ID.
+	Draft bool `json:"draft"`
+
+	// Env Environment variables for the plugin.
+	Env []SyncEnv `json:"env"`
+
+	// LastRun Managed Sync Run definition
+	LastRun *SyncRun `json:"last_run,omitempty"`
+
+	// LastUpdateSource How was the source or destination been created or updated last
+	LastUpdateSource SyncLastUpdateSource `json:"last_update_source"`
+
+	// MigrateMode Migrate mode for the destination
+	MigrateMode SyncDestinationMigrateMode `json:"migrate_mode"`
+
+	// Name Descriptive, unique name for the destination
+	Name string `json:"name"`
+
+	// Path Plugin path in CloudQuery registry
+	Path SyncPluginPath `json:"path"`
+
+	// Plugin CloudQuery Plugin
+	Plugin *Plugin `json:"plugin,omitempty"`
+
+	// PreviousVersion Previous version of the plugin during a version upgrade
+	PreviousVersion *string                `json:"previous_version,omitempty"`
+	SendSyncSummary *bool                  `json:"send_sync_summary,omitempty"`
+	Spec            map[string]interface{} `json:"spec"`
+	SyncGroupID     *string                `json:"sync_group_id,omitempty"`
+	Transformers    []string               `json:"transformers"`
+
+	// UpdatedAt Time when the source was last updated
+	UpdatedAt time.Time `json:"updated_at"`
+
+	// Version Version of the plugin
+	Version string `json:"version"`
+
+	// WriteMode Write mode for the destination
+	WriteMode SyncDestinationWriteMode `json:"write_mode"`
 }
 
 // SyncDestinationWriteMode Write mode for the destination
@@ -2847,6 +3205,235 @@ type SyncEnvCreate struct {
 // SyncGenericSortBy defines model for SyncGenericSortBy.
 type SyncGenericSortBy string
 
+// SyncIntegrationCreateV2 Create a new sync integration
+type SyncIntegrationCreateV2 struct {
+	// CPU CPU quota for the integration
+	CPU *string `json:"cpu,omitempty"`
+
+	// Disabled Whether the integration is disabled
+	Disabled *bool `json:"disabled,omitempty"`
+
+	// DisplayName A human-readable display name
+	DisplayName *DisplayName `json:"display_name,omitempty"`
+
+	// Memory Memory quota for the integration
+	Memory *string `json:"memory,omitempty"`
+
+	// Name Descriptive, unique name for the integration
+	Name string `json:"name"`
+
+	// Schedule Cron schedule for the integration
+	Schedule *string `json:"schedule,omitempty"`
+
+	// Source Integration Source Definition
+	Source SyncIntegrationSourceCreateV2 `json:"source"`
+}
+
+// SyncIntegrationExpandedV2 defines model for SyncIntegrationExpandedV2.
+type SyncIntegrationExpandedV2 struct {
+	// CPU CPU quota for the integration
+	CPU *string `json:"cpu,omitempty"`
+
+	// CreatedAt Time when the sync was created
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	CreatedBy *string    `json:"created_by,omitempty"`
+
+	// Disabled Whether the integration is disabled
+	Disabled *bool `json:"disabled,omitempty"`
+
+	// DisplayName A human-readable display name
+	DisplayName *DisplayName `json:"display_name,omitempty"`
+
+	// LastRun Managed Sync List Entry Last Run Info
+	LastRun *ListSyncLastRun `json:"last_run,omitempty"`
+
+	// Memory Memory quota for the integration
+	Memory *string `json:"memory,omitempty"`
+
+	// Name Descriptive, unique name for the integration
+	Name string `json:"name"`
+
+	// Plugin CloudQuery Plugin
+	Plugin *Plugin `json:"plugin,omitempty"`
+
+	// Schedule Cron schedule for the integration
+	Schedule *string `json:"schedule,omitempty"`
+
+	// Source Integration Source Definition
+	Source *SyncIntegrationSourceV2 `json:"source,omitempty"`
+
+	// UpdatedAt Time when the sync was updated
+	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+}
+
+// SyncIntegrationSourceCreateV2 Integration Source Definition
+type SyncIntegrationSourceCreateV2 struct {
+	// LastUpdateSource How was the source or destination been created or updated last
+	LastUpdateSource *SyncLastUpdateSource `json:"last_update_source,omitempty"`
+
+	// SkipTables Tables matched by `tables` that should be skipped. Wildcards are supported.
+	SkipTables *[]string `json:"skip_tables,omitempty"`
+
+	// Tables Tables to sync. Wildcards are supported. Note that child tables are excluded by default, and need to be explicitly specified.
+	Tables []string `json:"tables"`
+
+	// TestConnectionID unique ID of the test connection
+	TestConnectionID openapi_types.UUID `json:"test_connection_id"`
+}
+
+// SyncIntegrationSourceUpdateV2 Integration Definition
+type SyncIntegrationSourceUpdateV2 struct {
+	// LastUpdateSource How was the source or destination been created or updated last
+	LastUpdateSource *SyncLastUpdateSource `json:"last_update_source,omitempty"`
+
+	// SkipTables Tables matched by `tables` that should be skipped. Wildcards are supported.
+	SkipTables *[]string `json:"skip_tables,omitempty"`
+
+	// Tables Tables to sync. Wildcards are supported. Note that child tables are excluded by default, and need to be explicitly specified.
+	Tables *[]string `json:"tables,omitempty"`
+
+	// TestConnectionID unique ID of the test connection
+	TestConnectionID *openapi_types.UUID `json:"test_connection_id,omitempty"`
+}
+
+// SyncIntegrationSourceV2 Integration Source Definition
+type SyncIntegrationSourceV2 struct {
+	// ConnectorID ID of the Connector
+	ConnectorID *ConnectorID `json:"connector_id,omitempty"`
+
+	// Env Environment variables for the plugin. All environment variables will be stored as secrets.
+	Env []SyncEnv `json:"env"`
+
+	// LastUpdateSource How was the source or destination been created or updated last
+	LastUpdateSource *SyncLastUpdateSource `json:"last_update_source,omitempty"`
+
+	// OnboardingID ID of the cloud provider onboarding session
+	OnboardingID *OnboardingID `json:"onboarding_id,omitempty"`
+
+	// Path Plugin path in CloudQuery registry
+	Path SyncPluginPath `json:"path"`
+
+	// SkipTables Tables matched by `tables` that should be skipped. Wildcards are supported.
+	SkipTables *[]string              `json:"skip_tables,omitempty"`
+	Spec       map[string]interface{} `json:"spec"`
+
+	// Tables Tables to sync. Wildcards are supported. Note that child tables are excluded by default, and need to be explicitly specified.
+	Tables []string `json:"tables"`
+
+	// TestConnectionID unique ID of the test connection
+	TestConnectionID *openapi_types.UUID `json:"test_connection_id,omitempty"`
+
+	// Version Version of the plugin
+	Version string `json:"version"`
+}
+
+// SyncIntegrationTestConnectionCreateV2 defines model for SyncIntegrationTestConnectionCreateV2.
+type SyncIntegrationTestConnectionCreateV2 struct {
+	// ConnectorID ID of the Connector
+	ConnectorID *ConnectorID `json:"connector_id,omitempty"`
+
+	// Env Environment variables for the plugin. All environment variables will be stored as secrets.
+	Env *[]SyncEnvCreate `json:"env,omitempty"`
+
+	// OnboardingID ID of the cloud provider onboarding session
+	OnboardingID *OnboardingID `json:"onboarding_id,omitempty"`
+
+	// Path Plugin path in CloudQuery registry
+	Path SyncPluginPath `json:"path"`
+
+	// SourceName Name of an existing source
+	SourceName *string                 `json:"source_name,omitempty"`
+	Spec       *map[string]interface{} `json:"spec,omitempty"`
+
+	// Version Version of the plugin
+	Version string `json:"version"`
+}
+
+// SyncIntegrationTestConnectionV2 defines model for SyncIntegrationTestConnectionV2.
+type SyncIntegrationTestConnectionV2 struct {
+	// CompletedAt Time the test connection was completed
+	CompletedAt *time.Time `json:"completed_at,omitempty"`
+
+	// CreatedAt Time the test connection was created
+	CreatedAt time.Time `json:"created_at"`
+
+	// FailureCode Code for failure
+	FailureCode *string `json:"failure_code,omitempty"`
+
+	// FailureReason Reason for failure
+	FailureReason *string `json:"failure_reason,omitempty"`
+
+	// ID unique ID of the test connection
+	ID ID `json:"id"`
+
+	// PluginPath Plugin path in CloudQuery registry
+	PluginPath *SyncPluginPath `json:"plugin_path,omitempty"`
+
+	// PluginVersion The version in semantic version format.
+	PluginVersion *VersionName `json:"plugin_version,omitempty"`
+
+	// Status The status of the sync run
+	Status SyncTestConnectionStatus `json:"status"`
+}
+
+// SyncIntegrationUpdateV2 Update an existing integration
+type SyncIntegrationUpdateV2 struct {
+	// CPU CPU quota for the integration
+	CPU *string `json:"cpu,omitempty"`
+
+	// Disabled Whether the integration is disabled
+	Disabled *bool `json:"disabled,omitempty"`
+
+	// DisplayName A human-readable display name
+	DisplayName *DisplayName `json:"display_name,omitempty"`
+
+	// LastUpdateSource How was the source or destination been created or updated last
+	LastUpdateSource *SyncLastUpdateSource `json:"last_update_source,omitempty"`
+
+	// Memory Memory quota for the integration
+	Memory *string `json:"memory,omitempty"`
+
+	// Schedule Cron schedule for the integration
+	Schedule *string `json:"schedule,omitempty"`
+
+	// Source Integration Definition
+	Source *SyncIntegrationSourceUpdateV2 `json:"source,omitempty"`
+}
+
+// SyncIntegrationV2 An integration definition
+type SyncIntegrationV2 struct {
+	// CPU CPU quota for the integration
+	CPU *string `json:"cpu,omitempty"`
+
+	// CreatedAt Time when the sync was created
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	CreatedBy *string    `json:"created_by,omitempty"`
+
+	// Disabled Whether the integration is disabled
+	Disabled *bool `json:"disabled,omitempty"`
+
+	// DisplayName A human-readable display name
+	DisplayName *DisplayName `json:"display_name,omitempty"`
+
+	// Memory Memory quota for the integration
+	Memory *string `json:"memory,omitempty"`
+
+	// Name Descriptive, unique name for the integration
+	Name string `json:"name"`
+
+	// Plugin CloudQuery Plugin
+	Plugin *Plugin `json:"plugin,omitempty"`
+
+	// Schedule Cron schedule for the integration
+	Schedule *string `json:"schedule,omitempty"`
+
+	// Source Integration Source Definition
+	Source *SyncIntegrationSourceV2 `json:"source,omitempty"`
+
+	// UpdatedAt Time when the sync was updated
+	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+}
+
 // SyncLastUpdateSource How was the source or destination been created or updated last
 type SyncLastUpdateSource string
 
@@ -2866,6 +3453,9 @@ type SyncRun struct {
 
 	// ID unique ID of the run
 	ID openapi_types.UUID `json:"id"`
+
+	// Ingested Whether the sync run's data has been ingested
+	Ingested bool `json:"ingested"`
 
 	// Migration Whether the sync run is a migration
 	Migration *bool `json:"migration,omitempty"`
@@ -2905,6 +3495,9 @@ type SyncRunDetails struct {
 
 	// ID unique ID of the run
 	ID openapi_types.UUID `json:"id"`
+
+	// Ingested Whether the sync run's data has been ingested
+	Ingested bool `json:"ingested"`
 
 	// MemoryByteSeconds Total memory byte seconds utilized during this sync run
 	MemoryByteSeconds *float64 `json:"memory_byte_seconds,omitempty"`
@@ -2989,6 +3582,9 @@ type SyncRunTableStat struct {
 
 	// Resources Number of resources fetched
 	Resources *uint64 `json:"resources,omitempty"`
+
+	// RuntimeSeconds Number of seconds it took to sync a table
+	RuntimeSeconds *int64 `json:"runtime_seconds,omitempty"`
 
 	// ServiceName Name of the service
 	ServiceName string `json:"service_name"`
@@ -3256,55 +3852,6 @@ type SyncTransformerCreate struct {
 	// Version Version of the plugin
 	Version string `json:"version"`
 }
-
-// SyncTransformerTestConnection defines model for SyncTransformerTestConnection.
-type SyncTransformerTestConnection struct {
-	// CompletedAt Time the test connection was completed
-	CompletedAt *time.Time `json:"completed_at,omitempty"`
-
-	// CreatedAt Time the test connection was created
-	CreatedAt time.Time `json:"created_at"`
-
-	// FailureCode Code for failure
-	FailureCode *string `json:"failure_code,omitempty"`
-
-	// FailureReason Reason for failure
-	FailureReason *string `json:"failure_reason,omitempty"`
-
-	// ID unique ID of the test connection
-	ID ID `json:"id"`
-
-	// PluginPath Plugin path in CloudQuery registry
-	PluginPath *SyncPluginPath `json:"plugin_path,omitempty"`
-
-	// PluginVersion The version in semantic version format.
-	PluginVersion *VersionName `json:"plugin_version,omitempty"`
-
-	// Status The status of the sync run
-	Status SyncTestConnectionStatus `json:"status"`
-}
-
-// SyncTransformerTestConnectionCreate defines model for SyncTransformerTestConnectionCreate.
-type SyncTransformerTestConnectionCreate struct {
-	// ConnectorID ID of the Connector
-	ConnectorID *ConnectorID `json:"connector_id,omitempty"`
-
-	// Env Environment variables for the plugin. All environment variables will be stored as secrets.
-	Env *[]SyncEnvCreate `json:"env,omitempty"`
-
-	// Path Plugin path in CloudQuery registry
-	Path SyncPluginPath          `json:"path"`
-	Spec *map[string]interface{} `json:"spec,omitempty"`
-
-	// TransformerName Name of an existing transformer
-	TransformerName *string `json:"transformer_name,omitempty"`
-
-	// Version Version of the plugin
-	Version string `json:"version"`
-}
-
-// SyncTransformerTestConnectionID ID of the Sync Transformer Test Connection
-type SyncTransformerTestConnectionID = openapi_types.UUID
 
 // SyncTransformerUpdate Sync Transformer Update Definition
 type SyncTransformerUpdate struct {
@@ -3634,6 +4181,9 @@ type AssetViewRunTypes = []AssetViewRunType
 // ColumnName The name of a table column.
 type ColumnName = string
 
+// ConversationID defines model for conversation_id.
+type ConversationID = openapi_types.UUID
+
 // CustomColumnSortBys defines model for custom_columns_sort_bys.
 type CustomColumnSortBys = []CustomColumnSortBy
 
@@ -3660,6 +4210,9 @@ type FilterTags = []FilterTag
 
 // IncludeDrafts defines model for include_drafts.
 type IncludeDrafts = bool
+
+// IncludeFips defines model for include_fips.
+type IncludeFips = bool
 
 // IncludePrereleases defines model for include_prereleases.
 type IncludePrereleases = bool
@@ -3711,6 +4264,18 @@ type QueryNameFilter = string
 
 // QueryTags defines model for query_tags.
 type QueryTags = []QueryTag
+
+// RBACPermissionSortBys defines model for rbac_permissions_sort_bys.
+type RBACPermissionSortBys = []RBACPermissionSortBy
+
+// RBACPermissionSortDirections defines model for rbac_permissions_sort_dirs.
+type RBACPermissionSortDirections = []RBACPermissionSortDirection
+
+// RBACRoleSortBys defines model for rbac_roles_sort_bys.
+type RBACRoleSortBys = []RBACRoleSortBy
+
+// RBACRoleSortDirections defines model for rbac_roles_sort_dirs.
+type RBACRoleSortDirections = []RBACRoleSortDirection
 
 // ReportSortBys defines model for report_sort_bys.
 type ReportSortBys = []ReportSortBy
@@ -3823,6 +4388,9 @@ type NotFound = BasicError
 // RequiresAuthentication Basic Error
 type RequiresAuthentication = BasicError
 
+// ServiceUnavailable Basic Error
+type ServiceUnavailable = BasicError
+
 // TooManyRequests Basic Error
 type TooManyRequests = BasicError
 
@@ -3860,29 +4428,6 @@ type ListAuditLogsParams struct {
 
 	// Search Search across user name, team name, event type, entity display name, and user IP address
 	Search *string `form:"search,omitempty" json:"search,omitempty"`
-}
-
-// ListFiltersParams defines parameters for ListFilters.
-type ListFiltersParams struct {
-	// PerPage The number of results per page (max 1000).
-	PerPage *PerPage `form:"per_page,omitempty" json:"per_page,omitempty"`
-
-	// Page Page number of the results to fetch
-	Page *Page `form:"page,omitempty" json:"page,omitempty"`
-
-	// FilterTags Filter tags
-	FilterTags       *FilterTags             `form:"tag,omitempty" json:"tag,omitempty"`
-	NameFilter       *FilterNameFilter       `form:"name_filter,omitempty" json:"name_filter,omitempty"`
-	ExpressionFilter *FilterExpressionFilter `form:"expression_filter,omitempty" json:"expression_filter,omitempty"`
-}
-
-// ListFilterTagsParams defines parameters for ListFilterTags.
-type ListFilterTagsParams struct {
-	// PerPage The number of results per page (max 1000).
-	PerPage *PerPage `form:"per_page,omitempty" json:"per_page,omitempty"`
-
-	// Page Page number of the results to fetch
-	Page *Page `form:"page,omitempty" json:"page,omitempty"`
 }
 
 // AssetViewListLogsParams defines parameters for AssetViewListLogs.
@@ -3931,18 +4476,25 @@ type ManageListTeamMembersParams struct {
 
 	// PerPage The number of results per page (max 1000).
 	PerPage *PerPage `form:"per_page,omitempty" json:"per_page,omitempty"`
+
+	// UserSearch Search by user name or email
+	UserSearch *string `form:"user_search,omitempty" json:"user_search,omitempty"`
+
+	// Role Search by user role. Only for default roles.
+	Role *RBACDefaultRole `form:"role,omitempty" json:"role,omitempty"`
+
+	// CustomRoleId Search by custom role.
+	CustomRoleId *RBACCustomRoleID `form:"custom_role_id,omitempty" json:"custom_role_id,omitempty"`
 }
 
 // ManageAddTeamMemberJSONBody defines parameters for ManageAddTeamMember.
 type ManageAddTeamMemberJSONBody struct {
-	Roles []ManageAddTeamMemberJSONBodyRoles `json:"roles"`
+	CustomRoles *[]RBACCustomRoleID `json:"custom_roles,omitempty"`
+	Roles       *[]RBACDefaultRole  `json:"roles,omitempty"`
 
 	// UserID ID of the User
 	UserID openapi_types.UUID `json:"user_id"`
 }
-
-// ManageAddTeamMemberJSONBodyRoles defines parameters for ManageAddTeamMember.
-type ManageAddTeamMemberJSONBodyRoles string
 
 // ListLocalUsersParams defines parameters for ListLocalUsers.
 type ListLocalUsersParams struct {
@@ -4023,6 +4575,9 @@ type ListPluginVersionsParams struct {
 
 	// IncludeDrafts Whether to include draft versions
 	IncludeDrafts *IncludeDrafts `form:"include_drafts,omitempty" json:"include_drafts,omitempty"`
+
+	// IncludeFips Whether to include fips versions
+	IncludeFips *IncludeFips `form:"include_fips,omitempty" json:"include_fips,omitempty"`
 
 	// IncludePrereleases Whether to include prerelease versions
 	IncludePrereleases *IncludePrereleases `form:"include_prereleases,omitempty" json:"include_prereleases,omitempty"`
@@ -4132,166 +4687,6 @@ type AuthRegistryRequestParams struct {
 
 	// XMetaUserTeamName User's team name
 	XMetaUserTeamName *string `json:"X-Meta-User-Team-Name,omitempty"`
-}
-
-// ListTablesParams defines parameters for ListTables.
-type ListTablesParams struct {
-	// PerPage The number of results per page (max 1000).
-	PerPage *PerPage `form:"per_page,omitempty" json:"per_page,omitempty"`
-
-	// Page Page number of the results to fetch
-	Page *Page `form:"page,omitempty" json:"page,omitempty"`
-}
-
-// BatchTableSchemasParams defines parameters for BatchTableSchemas.
-type BatchTableSchemasParams struct {
-	// Tables A list of table names to retrieve schemas for
-	Tables []string `form:"tables" json:"tables"`
-}
-
-// TableListColumnsParams defines parameters for TableListColumns.
-type TableListColumnsParams struct {
-	// FilterMode Table filter mode.
-	//
-	// Smart mode switches between column and search mode based on the filtered table and
-	//
-	// Search mode allows searching deeply nested data but is not available on all tables as it requires a separate indexing step.
-	// Search mode is only available on resource tables or queries derived from resource tables results that contain _cq_id and _cq_source_id.
-	// Search mode may also be used against cloud_assets but it will only return results from resource tables.
-	//
-	// Column mode searches purely using the columns in the table.
-	// It will work on all table results but it is not optimized for arbitrary substring searches and so may be slow on larger tables.
-	FilterMode *TableListColumnsParamsFilterMode `form:"filter_mode,omitempty" json:"filter_mode,omitempty"`
-	Filter     *TableColumnNameFilter            `form:"filter,omitempty" json:"filter,omitempty"`
-
-	// Page Page number of the results to fetch
-	Page *Page `form:"page,omitempty" json:"page,omitempty"`
-
-	// PerPage The number of results per page (max 1000).
-	PerPage *PerPage `form:"per_page,omitempty" json:"per_page,omitempty"`
-}
-
-// TableListColumnsParamsFilterMode defines parameters for TableListColumns.
-type TableListColumnsParamsFilterMode string
-
-// TableColumnListValuesParams defines parameters for TableColumnListValues.
-type TableColumnListValuesParams struct {
-	// FilterMode Table filter mode.
-	//
-	// Smart mode switches between column and search mode based on the filtered table and
-	//
-	// Search mode allows searching deeply nested data but is not available on all tables as it requires a separate indexing step.
-	// Search mode is only available on resource tables or queries derived from resource tables results that contain _cq_id and _cq_source_id.
-	// Search mode may also be used against cloud_assets but it will only return results from resource tables.
-	//
-	// Column mode searches purely using the columns in the table.
-	// It will work on all table results but it is not optimized for arbitrary substring searches and so may be slow on larger tables.
-	FilterMode *TableColumnListValuesParamsFilterMode `form:"filter_mode,omitempty" json:"filter_mode,omitempty"`
-	Filter     *TableColumnValueFilter                `form:"filter,omitempty" json:"filter,omitempty"`
-
-	// Page Page number of the results to fetch
-	Page *Page `form:"page,omitempty" json:"page,omitempty"`
-
-	// PerPage The number of results per page (max 1000).
-	PerPage *PerPage `form:"per_page,omitempty" json:"per_page,omitempty"`
-}
-
-// TableColumnListValuesParamsFilterMode defines parameters for TableColumnListValues.
-type TableColumnListValuesParamsFilterMode string
-
-// TableListRowsParams defines parameters for TableListRows.
-type TableListRowsParams struct {
-	// Selects Table selects. This filters the columns that are returned in the result set.
-	Selects Selects `form:"select,omitempty" json:"select,omitempty"`
-
-	// FilterMode Table filter mode.
-	//
-	// Smart mode switches between column and search mode based on the filtered table and
-	//
-	// Search mode allows searching deeply nested data but is not available on all tables as it requires a separate indexing step.
-	// Search mode is only available on resource tables or queries derived from resource tables results that contain _cq_id and _cq_source_id.
-	// Search mode may also be used against cloud_assets but it will only return results from resource tables.
-	//
-	// Column mode searches purely using the columns in the table.
-	// It will work on all table results but it is not optimized for arbitrary substring searches and so may be slow on larger tables.
-	FilterMode *TableListRowsParamsFilterMode `form:"filter_mode,omitempty" json:"filter_mode,omitempty"`
-
-	// Filters Table filters. This filters the rows that are returned in the result set.
-	Filters Filters `form:"filter,omitempty" json:"filter,omitempty"`
-
-	// FilterIDs Table filter IDs. These should be valid Saved Filter IDs. These filters
-	// will be applied to the query results before returning them.
-	FilterIDs FilterIDs `form:"filter_id,omitempty" json:"filter_id,omitempty"`
-
-	// SortBys Table sort by options. This sorts the rows that are returned in the result set.
-	SortBys SortBys `form:"sort_by,omitempty" json:"sort_by,omitempty"`
-
-	// SortDirections Table sort direction options. This sorts the rows that are returned in the result set.
-	SortDirections SortDirections `form:"sort_dir,omitempty" json:"sort_dir,omitempty"`
-
-	// GroupBys Table group by options. This groups the rows that are returned in the result set by the given columns.
-	GroupBys GroupBys `form:"group_by,omitempty" json:"group_by,omitempty"`
-
-	// PerPage The number of results per page (max 1000).
-	PerPage *PerPage `form:"per_page,omitempty" json:"per_page,omitempty"`
-
-	// Page Page number of the results to fetch
-	Page *Page `form:"page,omitempty" json:"page,omitempty"`
-}
-
-// TableListRowsParamsFilterMode defines parameters for TableListRows.
-type TableListRowsParamsFilterMode string
-
-// TableRowByIdParams defines parameters for TableRowById.
-type TableRowByIdParams struct {
-	// FilterMode Table filter mode.
-	//
-	// Smart mode switches between column and search mode based on the filtered table and
-	//
-	// Search mode allows searching deeply nested data but is not available on all tables as it requires a separate indexing step.
-	// Search mode is only available on resource tables or queries derived from resource tables results that contain _cq_id and _cq_source_id.
-	// Search mode may also be used against cloud_assets but it will only return results from resource tables.
-	//
-	// Column mode searches purely using the columns in the table.
-	// It will work on all table results but it is not optimized for arbitrary substring searches and so may be slow on larger tables.
-	FilterMode *TableRowByIdParamsFilterMode `form:"filter_mode,omitempty" json:"filter_mode,omitempty"`
-
-	// Filters Table filters. This filters the rows that are returned in the result set.
-	Filters Filters `form:"filter,omitempty" json:"filter,omitempty"`
-
-	// FilterIDs Table filter IDs. These should be valid Saved Filter IDs. These filters
-	// will be applied to the query results before returning them.
-	FilterIDs FilterIDs `form:"filter_id,omitempty" json:"filter_id,omitempty"`
-}
-
-// TableRowByIdParamsFilterMode defines parameters for TableRowById.
-type TableRowByIdParamsFilterMode string
-
-// TableListFiltersParams defines parameters for TableListFilters.
-type TableListFiltersParams struct {
-	// PerPage The number of results per page (max 1000).
-	PerPage *PerPage `form:"per_page,omitempty" json:"per_page,omitempty"`
-
-	// Page Page number of the results to fetch
-	Page *Page `form:"page,omitempty" json:"page,omitempty"`
-
-	// FilterTags Filter tags
-	FilterTags *FilterTags `form:"tag,omitempty" json:"tag,omitempty"`
-}
-
-// TableListFilterTagsParams defines parameters for TableListFilterTags.
-type TableListFilterTagsParams struct {
-	// PerPage The number of results per page (max 1000).
-	PerPage *PerPage `form:"per_page,omitempty" json:"per_page,omitempty"`
-
-	// Page Page number of the results to fetch
-	Page *Page `form:"page,omitempty" json:"page,omitempty"`
-}
-
-// TableListRelationsParams defines parameters for TableListRelations.
-type TableListRelationsParams struct {
-	// RelationName Filter by related table name
-	RelationName *string `form:"relation_name,omitempty" json:"relation_name,omitempty"`
 }
 
 // ListTeamsParams defines parameters for ListTeams.
@@ -4747,6 +5142,42 @@ type QueryListFilterTagsTeamParams struct {
 	Page *Page `form:"page,omitempty" json:"page,omitempty"`
 }
 
+// ListAllRBACPermissionsParams defines parameters for ListAllRBACPermissions.
+type ListAllRBACPermissionsParams struct {
+	// PerPage The number of results per page (max 1000).
+	PerPage *PerPage `form:"per_page,omitempty" json:"per_page,omitempty"`
+
+	// Page Page number of the results to fetch
+	Page *Page `form:"page,omitempty" json:"page,omitempty"`
+
+	// RBACPermissionSortBys Sort by options
+	RBACPermissionSortBys RBACPermissionSortBys `form:"sort_by,omitempty" json:"sort_by,omitempty"`
+
+	// RBACPermissionSortDirections Sort direction options
+	RBACPermissionSortDirections RBACPermissionSortDirections `form:"sort_dir,omitempty" json:"sort_dir,omitempty"`
+
+	// SearchTerm Filter permissions by name or description.
+	SearchTerm *string `form:"search_term,omitempty" json:"search_term,omitempty"`
+}
+
+// ListAllRBACRolesParams defines parameters for ListAllRBACRoles.
+type ListAllRBACRolesParams struct {
+	// PerPage The number of results per page (max 1000).
+	PerPage *PerPage `form:"per_page,omitempty" json:"per_page,omitempty"`
+
+	// Page Page number of the results to fetch
+	Page *Page `form:"page,omitempty" json:"page,omitempty"`
+
+	// RBACRoleSortBys Sort by options
+	RBACRoleSortBys RBACRoleSortBys `form:"sort_by,omitempty" json:"sort_by,omitempty"`
+
+	// RBACRoleSortDirections Sort direction options
+	RBACRoleSortDirections RBACRoleSortDirections `form:"sort_dir,omitempty" json:"sort_dir,omitempty"`
+
+	// SearchTerm Filter roles by name or description.
+	SearchTerm *string `form:"search_term,omitempty" json:"search_term,omitempty"`
+}
+
 // ListReportsParams defines parameters for ListReports.
 type ListReportsParams struct {
 	// SearchTerm Filter reports by title or description.
@@ -4818,8 +5249,11 @@ type GetSyncDestinationTestConnectionLogsQueryParams struct {
 	PerPage *PerPage `form:"per_page,omitempty" json:"per_page,omitempty"`
 
 	// Page Page number of the results to fetch
-	Page   *Page   `form:"page,omitempty" json:"page,omitempty"`
-	Accept *string `json:"Accept,omitempty"`
+	Page *Page `form:"page,omitempty" json:"page,omitempty"`
+
+	// Download Whether to generate a downloadable file for the response.
+	Download *DownloadFile `form:"download,omitempty" json:"download,omitempty"`
+	Accept   *string       `json:"Accept,omitempty"`
 }
 
 // ListSyncDestinationsParams defines parameters for ListSyncDestinations.
@@ -4886,8 +5320,11 @@ type GetSyncSourceTestConnectionLogsQueryParams struct {
 	PerPage *PerPage `form:"per_page,omitempty" json:"per_page,omitempty"`
 
 	// Page Page number of the results to fetch
-	Page   *Page   `form:"page,omitempty" json:"page,omitempty"`
-	Accept *string `json:"Accept,omitempty"`
+	Page *Page `form:"page,omitempty" json:"page,omitempty"`
+
+	// Download Whether to generate a downloadable file for the response.
+	Download *DownloadFile `form:"download,omitempty" json:"download,omitempty"`
+	Accept   *string       `json:"Accept,omitempty"`
 }
 
 // ListSyncSourcesParams defines parameters for ListSyncSources.
@@ -4921,23 +5358,6 @@ type ListSyncSourceSyncsParams struct {
 	SyncSortDirections SyncSortDirections `form:"sort_dir,omitempty" json:"sort_dir,omitempty"`
 	Filter             *SyncNameFilter    `form:"filter,omitempty" json:"filter,omitempty"`
 	MigrationFilter    *MigrationFilter   `form:"migration_filter,omitempty" json:"migration_filter,omitempty"`
-}
-
-// UpdateSyncTestConnectionForSyncTransformerJSONBody defines parameters for UpdateSyncTestConnectionForSyncTransformer.
-type UpdateSyncTestConnectionForSyncTransformerJSONBody struct {
-	// FailureCode Code for failure
-	FailureCode *string `json:"failure_code,omitempty"`
-
-	// FailureReason Reason for failure
-	FailureReason *string `json:"failure_reason,omitempty"`
-
-	// Status The status of the sync run
-	Status SyncTestConnectionStatus `json:"status"`
-}
-
-// GetSyncTransformerTestConnectionLogsParams defines parameters for GetSyncTransformerTestConnectionLogs.
-type GetSyncTransformerTestConnectionLogsParams struct {
-	Accept *string `json:"Accept,omitempty"`
 }
 
 // ListSyncTransformersParams defines parameters for ListSyncTransformers.
@@ -5394,7 +5814,7 @@ type ResetLocalUserPasswordJSONBody struct {
 
 // UserTOTPVerifyJSONBody defines parameters for UserTOTPVerify.
 type UserTOTPVerifyJSONBody struct {
-	Otp string `json:"otp"`
+	OTP string `json:"otp"`
 }
 
 // UserTOTPVerifyParams defines parameters for UserTOTPVerify.
@@ -5402,8 +5822,37 @@ type UserTOTPVerifyParams struct {
 	CqpSess *string `form:"__cqp_sess,omitempty" json:"__cqp_sess,omitempty"`
 }
 
-// UpdateFilterJSONRequestBody defines body for UpdateFilter for application/json ContentType.
-type UpdateFilterJSONRequestBody = FilterUpdate
+// GetV2SyncDestinationsParams defines parameters for GetV2SyncDestinations.
+type GetV2SyncDestinationsParams struct {
+	// PerPage The number of results per page (max 1000).
+	PerPage *PerPage `form:"per_page,omitempty" json:"per_page,omitempty"`
+
+	// Page Page number of the results to fetch
+	Page   *Page           `form:"page,omitempty" json:"page,omitempty"`
+	Filter *SyncNameFilter `form:"filter,omitempty" json:"filter,omitempty"`
+
+	// SyncGenericSortBys Sort by options
+	SyncGenericSortBys SyncGenericSortBys `form:"sort_by,omitempty" json:"sort_by,omitempty"`
+
+	// SyncSortDirections Sync sort direction options
+	SyncSortDirections SyncSortDirections `form:"sort_dir,omitempty" json:"sort_dir,omitempty"`
+}
+
+// ListV2SyncIntegrationsParams defines parameters for ListV2SyncIntegrations.
+type ListV2SyncIntegrationsParams struct {
+	// PerPage The number of results per page (max 1000).
+	PerPage *PerPage `form:"per_page,omitempty" json:"per_page,omitempty"`
+
+	// Page Page number of the results to fetch
+	Page *Page `form:"page,omitempty" json:"page,omitempty"`
+
+	// SyncSortBys Sort by options
+	SyncSortBys SyncSortBys `form:"sort_by,omitempty" json:"sort_by,omitempty"`
+
+	// SyncSortDirections Sync sort direction options
+	SyncSortDirections SyncSortDirections `form:"sort_dir,omitempty" json:"sort_dir,omitempty"`
+	Filter             *SyncNameFilter    `form:"filter,omitempty" json:"filter,omitempty"`
+}
 
 // ManageUpdateSAMLJSONRequestBody defines body for ManageUpdateSAML for application/json ContentType.
 type ManageUpdateSAMLJSONRequestBody = SAMLConfigUpdate
@@ -5462,9 +5911,6 @@ type UploadPluginUIAssetsJSONRequestBody UploadPluginUIAssetsJSONBody
 // FinalizePluginUIAssetUploadJSONRequestBody defines body for FinalizePluginUIAssetUpload for application/json ContentType.
 type FinalizePluginUIAssetUploadJSONRequestBody FinalizePluginUIAssetUploadJSONBody
 
-// TableSaveFilterJSONRequestBody defines body for TableSaveFilter for application/json ContentType.
-type TableSaveFilterJSONRequestBody = FilterCreate
-
 // CreateTeamJSONRequestBody defines body for CreateTeam for application/json ContentType.
 type CreateTeamJSONRequestBody CreateTeamJSONBody
 
@@ -5497,6 +5943,12 @@ type AuthenticateConnectorFinishOAuthJSONRequestBody = ConnectorAuthFinishReques
 
 // AuthenticateConnectorOAuthJSONRequestBody defines body for AuthenticateConnectorOAuth for application/json ContentType.
 type AuthenticateConnectorOAuthJSONRequestBody = ConnectorAuthRequestOAuth
+
+// CreateConversationJSONRequestBody defines body for CreateConversation for application/json ContentType.
+type CreateConversationJSONRequestBody = ConversationCreate
+
+// SendMessageJSONRequestBody defines body for SendMessage for application/json ContentType.
+type SendMessageJSONRequestBody = ConversationSendMessage
 
 // SaveCustomColumnJSONRequestBody defines body for SaveCustomColumn for application/json ContentType.
 type SaveCustomColumnJSONRequestBody = CustomColumnCreateOrUpdate
@@ -5561,8 +6013,20 @@ type UpdateQueryTeamJSONRequestBody = QueryUpdate
 // QuerySaveFilterTeamJSONRequestBody defines body for QuerySaveFilterTeam for application/json ContentType.
 type QuerySaveFilterTeamJSONRequestBody = FilterCreate
 
+// CreateRBACPermissionJSONRequestBody defines body for CreateRBACPermission for application/json ContentType.
+type CreateRBACPermissionJSONRequestBody = RBACPermissionCreate
+
+// UpdateRBACPermissionJSONRequestBody defines body for UpdateRBACPermission for application/json ContentType.
+type UpdateRBACPermissionJSONRequestBody = RBACPermissionUpdate
+
+// CreateRBACRoleJSONRequestBody defines body for CreateRBACRole for application/json ContentType.
+type CreateRBACRoleJSONRequestBody = RBACRoleCreate
+
+// UpdateRBACRoleJSONRequestBody defines body for UpdateRBACRole for application/json ContentType.
+type UpdateRBACRoleJSONRequestBody = RBACRoleUpdate
+
 // CreateReportJSONRequestBody defines body for CreateReport for application/json ContentType.
-type CreateReportJSONRequestBody = ReportCreateOrUpdate
+type CreateReportJSONRequestBody = ReportCreate
 
 // CreateReportTemplateJSONRequestBody defines body for CreateReportTemplate for application/json ContentType.
 type CreateReportTemplateJSONRequestBody = ReportTemplateCreateOrUpdate
@@ -5571,7 +6035,7 @@ type CreateReportTemplateJSONRequestBody = ReportTemplateCreateOrUpdate
 type UpdateReportTemplateJSONRequestBody = ReportTemplateCreateOrUpdate
 
 // UpdateReportJSONRequestBody defines body for UpdateReport for application/json ContentType.
-type UpdateReportJSONRequestBody = ReportCreateOrUpdate
+type UpdateReportJSONRequestBody = ReportUpdate
 
 // CreateSyncDestinationTestConnectionJSONRequestBody defines body for CreateSyncDestinationTestConnection for application/json ContentType.
 type CreateSyncDestinationTestConnectionJSONRequestBody = SyncDestinationTestConnectionCreate
@@ -5596,15 +6060,6 @@ type PromoteSyncSourceTestConnectionJSONRequestBody = PromoteSyncSourceTestConne
 
 // UpdateSyncSourceJSONRequestBody defines body for UpdateSyncSource for application/json ContentType.
 type UpdateSyncSourceJSONRequestBody = SyncSourceUpdate
-
-// CreateSyncTransformerTestConnectionJSONRequestBody defines body for CreateSyncTransformerTestConnection for application/json ContentType.
-type CreateSyncTransformerTestConnectionJSONRequestBody = SyncTransformerTestConnectionCreate
-
-// UpdateSyncTestConnectionForSyncTransformerJSONRequestBody defines body for UpdateSyncTestConnectionForSyncTransformer for application/json ContentType.
-type UpdateSyncTestConnectionForSyncTransformerJSONRequestBody UpdateSyncTestConnectionForSyncTransformerJSONBody
-
-// PromoteSyncTransformerTestConnectionJSONRequestBody defines body for PromoteSyncTransformerTestConnection for application/json ContentType.
-type PromoteSyncTransformerTestConnectionJSONRequestBody = PromoteSyncTransformerTestConnection
 
 // UpdateSyncTransformerJSONRequestBody defines body for UpdateSyncTransformer for application/json ContentType.
 type UpdateSyncTransformerJSONRequestBody = SyncTransformerUpdate
@@ -5653,6 +6108,24 @@ type ResetLocalUserPasswordJSONRequestBody ResetLocalUserPasswordJSONBody
 
 // UserTOTPVerifyJSONRequestBody defines body for UserTOTPVerify for application/json ContentType.
 type UserTOTPVerifyJSONRequestBody UserTOTPVerifyJSONBody
+
+// CreateV2SyncDestinationTestConnectionJSONRequestBody defines body for CreateV2SyncDestinationTestConnection for application/json ContentType.
+type CreateV2SyncDestinationTestConnectionJSONRequestBody = CreateSyncDestinationTestConnectionV2
+
+// CreateV2SyncDestinationJSONRequestBody defines body for CreateV2SyncDestination for application/json ContentType.
+type CreateV2SyncDestinationJSONRequestBody = CreateSyncDestinationV2
+
+// PatchV2SyncDestinationJSONRequestBody defines body for PatchV2SyncDestination for application/json ContentType.
+type PatchV2SyncDestinationJSONRequestBody = SyncDestinationUpdateV2
+
+// CreateV2SyncIntegrationTestConnectionJSONRequestBody defines body for CreateV2SyncIntegrationTestConnection for application/json ContentType.
+type CreateV2SyncIntegrationTestConnectionJSONRequestBody = SyncIntegrationTestConnectionCreateV2
+
+// CreateV2SyncIntegrationJSONRequestBody defines body for CreateV2SyncIntegration for application/json ContentType.
+type CreateV2SyncIntegrationJSONRequestBody = SyncIntegrationCreateV2
+
+// UpdateV2SyncIntegrationJSONRequestBody defines body for UpdateV2SyncIntegration for application/json ContentType.
+type UpdateV2SyncIntegrationJSONRequestBody = SyncIntegrationUpdateV2
 
 // AsStartedNotification returns the union data inside the OnboardingAWSNotification as a StartedNotification
 func (t OnboardingAWSNotification) AsStartedNotification() (StartedNotification, error) {
@@ -5948,23 +6421,6 @@ type ClientInterface interface {
 	// GetAuditLog request
 	GetAuditLog(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// ListFilters request
-	ListFilters(ctx context.Context, params *ListFiltersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// ListFilterTags request
-	ListFilterTags(ctx context.Context, params *ListFilterTagsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// DeleteFilter request
-	DeleteFilter(ctx context.Context, filterID FilterID, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GetFilterByID request
-	GetFilterByID(ctx context.Context, filterID FilterID, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// UpdateFilterWithBody request with any body
-	UpdateFilterWithBody(ctx context.Context, filterID FilterID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	UpdateFilter(ctx context.Context, filterID FilterID, body UpdateFilterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
-
 	// HealthCheck request
 	HealthCheck(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -6156,41 +6612,6 @@ type ClientInterface interface {
 	// AuthRegistryRequest request
 	AuthRegistryRequest(ctx context.Context, params *AuthRegistryRequestParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// ListTables request
-	ListTables(ctx context.Context, params *ListTablesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// BatchTableSchemas request
-	BatchTableSchemas(ctx context.Context, params *BatchTableSchemasParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// TableListColumns request
-	TableListColumns(ctx context.Context, tableName TableName, params *TableListColumnsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// TableColumnListValues request
-	TableColumnListValues(ctx context.Context, tableName TableName, columnName ColumnName, params *TableColumnListValuesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// TableListRows request
-	TableListRows(ctx context.Context, tableName TableName, params *TableListRowsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// TableRowById request
-	TableRowById(ctx context.Context, tableName TableName, tableRowId TableRowId, params *TableRowByIdParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// TableListFilters request
-	TableListFilters(ctx context.Context, tableName TableName, params *TableListFiltersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// TableSaveFilterWithBody request with any body
-	TableSaveFilterWithBody(ctx context.Context, tableName TableName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	TableSaveFilter(ctx context.Context, tableName TableName, body TableSaveFilterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// TableListFilterTags request
-	TableListFilterTags(ctx context.Context, tableName TableName, params *TableListFilterTagsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// TableListRelations request
-	TableListRelations(ctx context.Context, tableName TableName, params *TableListRelationsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// TableSchema request
-	TableSchema(ctx context.Context, tableName TableName, reqEditors ...RequestEditorFn) (*http.Response, error)
-
 	// ListTeams request
 	ListTeams(ctx context.Context, params *ListTeamsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -6281,6 +6702,19 @@ type ClientInterface interface {
 	AuthenticateConnectorOAuthWithBody(ctx context.Context, teamName TeamName, connectorID ConnectorID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	AuthenticateConnectorOAuth(ctx context.Context, teamName TeamName, connectorID ConnectorID, body AuthenticateConnectorOAuthJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateConversationWithBody request with any body
+	CreateConversationWithBody(ctx context.Context, teamName TeamName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateConversation(ctx context.Context, teamName TeamName, body CreateConversationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetConversation request
+	GetConversation(ctx context.Context, teamName TeamName, conversationID ConversationID, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// SendMessageWithBody request with any body
+	SendMessageWithBody(ctx context.Context, teamName TeamName, conversationID ConversationID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	SendMessage(ctx context.Context, teamName TeamName, conversationID ConversationID, body SendMessageJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListAllCustomColumns request
 	ListAllCustomColumns(ctx context.Context, teamName TeamName, params *ListAllCustomColumnsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -6501,6 +6935,44 @@ type ClientInterface interface {
 	// QueryListFilterTagsTeam request
 	QueryListFilterTagsTeam(ctx context.Context, teamName TeamName, queryID QueryID, params *QueryListFilterTagsTeamParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// ListAllRBACPermissions request
+	ListAllRBACPermissions(ctx context.Context, teamName TeamName, params *ListAllRBACPermissionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateRBACPermissionWithBody request with any body
+	CreateRBACPermissionWithBody(ctx context.Context, teamName TeamName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateRBACPermission(ctx context.Context, teamName TeamName, body CreateRBACPermissionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteRBACPermission request
+	DeleteRBACPermission(ctx context.Context, teamName TeamName, rbacPermissionID RBACPermissionID, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetRBACPermission request
+	GetRBACPermission(ctx context.Context, teamName TeamName, rbacPermissionID RBACPermissionID, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateRBACPermissionWithBody request with any body
+	UpdateRBACPermissionWithBody(ctx context.Context, teamName TeamName, rbacPermissionID RBACPermissionID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateRBACPermission(ctx context.Context, teamName TeamName, rbacPermissionID RBACPermissionID, body UpdateRBACPermissionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListAllRBACRoles request
+	ListAllRBACRoles(ctx context.Context, teamName TeamName, params *ListAllRBACRolesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateRBACRoleWithBody request with any body
+	CreateRBACRoleWithBody(ctx context.Context, teamName TeamName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateRBACRole(ctx context.Context, teamName TeamName, body CreateRBACRoleJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteRBACRole request
+	DeleteRBACRole(ctx context.Context, teamName TeamName, rbacCustomRoleID RBACCustomRoleID, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetRBACRole request
+	GetRBACRole(ctx context.Context, teamName TeamName, rbacCustomRoleID RBACCustomRoleID, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateRBACRoleWithBody request with any body
+	UpdateRBACRoleWithBody(ctx context.Context, teamName TeamName, rbacCustomRoleID RBACCustomRoleID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateRBACRole(ctx context.Context, teamName TeamName, rbacCustomRoleID RBACCustomRoleID, body UpdateRBACRoleJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// ListReports request
 	ListReports(ctx context.Context, teamName TeamName, params *ListReportsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -6639,27 +7111,6 @@ type ClientInterface interface {
 	// GetTestConnectionForSyncSource request
 	GetTestConnectionForSyncSource(ctx context.Context, teamName TeamName, syncSourceName SyncSourceName, syncTestConnectionId SyncTestConnectionId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// CreateSyncTransformerTestConnectionWithBody request with any body
-	CreateSyncTransformerTestConnectionWithBody(ctx context.Context, teamName TeamName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	CreateSyncTransformerTestConnection(ctx context.Context, teamName TeamName, body CreateSyncTransformerTestConnectionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GetSyncTransformerTestConnection request
-	GetSyncTransformerTestConnection(ctx context.Context, teamName TeamName, syncTransformerTestConnectionID SyncTransformerTestConnectionID, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// UpdateSyncTestConnectionForSyncTransformerWithBody request with any body
-	UpdateSyncTestConnectionForSyncTransformerWithBody(ctx context.Context, teamName TeamName, syncTransformerTestConnectionID SyncTransformerTestConnectionID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	UpdateSyncTestConnectionForSyncTransformer(ctx context.Context, teamName TeamName, syncTransformerTestConnectionID SyncTransformerTestConnectionID, body UpdateSyncTestConnectionForSyncTransformerJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GetSyncTransformerTestConnectionLogs request
-	GetSyncTransformerTestConnectionLogs(ctx context.Context, teamName TeamName, syncTransformerTestConnectionID SyncTransformerTestConnectionID, params *GetSyncTransformerTestConnectionLogsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// PromoteSyncTransformerTestConnectionWithBody request with any body
-	PromoteSyncTransformerTestConnectionWithBody(ctx context.Context, teamName TeamName, syncTransformerTestConnectionID SyncTransformerTestConnectionID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	PromoteSyncTransformerTestConnection(ctx context.Context, teamName TeamName, syncTransformerTestConnectionID SyncTransformerTestConnectionID, body PromoteSyncTransformerTestConnectionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
-
 	// ListSyncTransformers request
 	ListSyncTransformers(ctx context.Context, teamName TeamName, params *ListSyncTransformersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -6679,9 +7130,6 @@ type ClientInterface interface {
 
 	// ListSyncTransformerSyncs request
 	ListSyncTransformerSyncs(ctx context.Context, teamName TeamName, syncTransformerName SyncTransformerName, params *ListSyncTransformerSyncsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GetTestConnectionForSyncTransformer request
-	GetTestConnectionForSyncTransformer(ctx context.Context, teamName TeamName, syncTransformerName SyncTransformerName, syncTestConnectionId SyncTestConnectionId, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListSyncUpgrades request
 	ListSyncUpgrades(ctx context.Context, teamName TeamName, params *ListSyncUpgradesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -6871,6 +7319,54 @@ type ClientInterface interface {
 
 	// DeleteUser request
 	DeleteUser(ctx context.Context, userID UserID, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateV2SyncDestinationTestConnectionWithBody request with any body
+	CreateV2SyncDestinationTestConnectionWithBody(ctx context.Context, teamName TeamName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateV2SyncDestinationTestConnection(ctx context.Context, teamName TeamName, body CreateV2SyncDestinationTestConnectionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetV2SyncDestinations request
+	GetV2SyncDestinations(ctx context.Context, teamName TeamName, params *GetV2SyncDestinationsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateV2SyncDestinationWithBody request with any body
+	CreateV2SyncDestinationWithBody(ctx context.Context, teamName TeamName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateV2SyncDestination(ctx context.Context, teamName TeamName, body CreateV2SyncDestinationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteV2SyncDestination request
+	DeleteV2SyncDestination(ctx context.Context, teamName TeamName, syncDestinationName SyncDestinationName, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetV2SyncDestination request
+	GetV2SyncDestination(ctx context.Context, teamName TeamName, syncDestinationName SyncDestinationName, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// PatchV2SyncDestinationWithBody request with any body
+	PatchV2SyncDestinationWithBody(ctx context.Context, teamName TeamName, syncDestinationName SyncDestinationName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	PatchV2SyncDestination(ctx context.Context, teamName TeamName, syncDestinationName SyncDestinationName, body PatchV2SyncDestinationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateV2SyncIntegrationTestConnectionWithBody request with any body
+	CreateV2SyncIntegrationTestConnectionWithBody(ctx context.Context, teamName TeamName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateV2SyncIntegrationTestConnection(ctx context.Context, teamName TeamName, body CreateV2SyncIntegrationTestConnectionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListV2SyncIntegrations request
+	ListV2SyncIntegrations(ctx context.Context, teamName TeamName, params *ListV2SyncIntegrationsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateV2SyncIntegrationWithBody request with any body
+	CreateV2SyncIntegrationWithBody(ctx context.Context, teamName TeamName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateV2SyncIntegration(ctx context.Context, teamName TeamName, body CreateV2SyncIntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteV2SyncIntegration request
+	DeleteV2SyncIntegration(ctx context.Context, teamName TeamName, syncName SyncName, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetV2SyncIntegration request
+	GetV2SyncIntegration(ctx context.Context, teamName TeamName, syncName SyncName, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateV2SyncIntegrationWithBody request with any body
+	UpdateV2SyncIntegrationWithBody(ctx context.Context, teamName TeamName, syncName SyncName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateV2SyncIntegration(ctx context.Context, teamName TeamName, syncName SyncName, body UpdateV2SyncIntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
 func (c *Client) Index(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
@@ -6899,78 +7395,6 @@ func (c *Client) ListAuditLogs(ctx context.Context, params *ListAuditLogsParams,
 
 func (c *Client) GetAuditLog(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetAuditLogRequest(c.Server, id)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) ListFilters(ctx context.Context, params *ListFiltersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewListFiltersRequest(c.Server, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) ListFilterTags(ctx context.Context, params *ListFilterTagsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewListFilterTagsRequest(c.Server, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) DeleteFilter(ctx context.Context, filterID FilterID, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewDeleteFilterRequest(c.Server, filterID)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) GetFilterByID(ctx context.Context, filterID FilterID, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetFilterByIDRequest(c.Server, filterID)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) UpdateFilterWithBody(ctx context.Context, filterID FilterID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewUpdateFilterRequestWithBody(c.Server, filterID, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) UpdateFilter(ctx context.Context, filterID FilterID, body UpdateFilterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewUpdateFilterRequest(c.Server, filterID, body)
 	if err != nil {
 		return nil, err
 	}
@@ -7821,150 +8245,6 @@ func (c *Client) AuthRegistryRequest(ctx context.Context, params *AuthRegistryRe
 	return c.Client.Do(req)
 }
 
-func (c *Client) ListTables(ctx context.Context, params *ListTablesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewListTablesRequest(c.Server, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) BatchTableSchemas(ctx context.Context, params *BatchTableSchemasParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewBatchTableSchemasRequest(c.Server, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) TableListColumns(ctx context.Context, tableName TableName, params *TableListColumnsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewTableListColumnsRequest(c.Server, tableName, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) TableColumnListValues(ctx context.Context, tableName TableName, columnName ColumnName, params *TableColumnListValuesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewTableColumnListValuesRequest(c.Server, tableName, columnName, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) TableListRows(ctx context.Context, tableName TableName, params *TableListRowsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewTableListRowsRequest(c.Server, tableName, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) TableRowById(ctx context.Context, tableName TableName, tableRowId TableRowId, params *TableRowByIdParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewTableRowByIdRequest(c.Server, tableName, tableRowId, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) TableListFilters(ctx context.Context, tableName TableName, params *TableListFiltersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewTableListFiltersRequest(c.Server, tableName, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) TableSaveFilterWithBody(ctx context.Context, tableName TableName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewTableSaveFilterRequestWithBody(c.Server, tableName, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) TableSaveFilter(ctx context.Context, tableName TableName, body TableSaveFilterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewTableSaveFilterRequest(c.Server, tableName, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) TableListFilterTags(ctx context.Context, tableName TableName, params *TableListFilterTagsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewTableListFilterTagsRequest(c.Server, tableName, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) TableListRelations(ctx context.Context, tableName TableName, params *TableListRelationsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewTableListRelationsRequest(c.Server, tableName, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) TableSchema(ctx context.Context, tableName TableName, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewTableSchemaRequest(c.Server, tableName)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
 func (c *Client) ListTeams(ctx context.Context, params *ListTeamsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListTeamsRequest(c.Server, params)
 	if err != nil {
@@ -8363,6 +8643,66 @@ func (c *Client) AuthenticateConnectorOAuthWithBody(ctx context.Context, teamNam
 
 func (c *Client) AuthenticateConnectorOAuth(ctx context.Context, teamName TeamName, connectorID ConnectorID, body AuthenticateConnectorOAuthJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewAuthenticateConnectorOAuthRequest(c.Server, teamName, connectorID, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateConversationWithBody(ctx context.Context, teamName TeamName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateConversationRequestWithBody(c.Server, teamName, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateConversation(ctx context.Context, teamName TeamName, body CreateConversationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateConversationRequest(c.Server, teamName, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetConversation(ctx context.Context, teamName TeamName, conversationID ConversationID, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetConversationRequest(c.Server, teamName, conversationID)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) SendMessageWithBody(ctx context.Context, teamName TeamName, conversationID ConversationID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewSendMessageRequestWithBody(c.Server, teamName, conversationID, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) SendMessage(ctx context.Context, teamName TeamName, conversationID ConversationID, body SendMessageJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewSendMessageRequest(c.Server, teamName, conversationID, body)
 	if err != nil {
 		return nil, err
 	}
@@ -9333,6 +9673,174 @@ func (c *Client) QueryListFilterTagsTeam(ctx context.Context, teamName TeamName,
 	return c.Client.Do(req)
 }
 
+func (c *Client) ListAllRBACPermissions(ctx context.Context, teamName TeamName, params *ListAllRBACPermissionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListAllRBACPermissionsRequest(c.Server, teamName, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateRBACPermissionWithBody(ctx context.Context, teamName TeamName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateRBACPermissionRequestWithBody(c.Server, teamName, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateRBACPermission(ctx context.Context, teamName TeamName, body CreateRBACPermissionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateRBACPermissionRequest(c.Server, teamName, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteRBACPermission(ctx context.Context, teamName TeamName, rbacPermissionID RBACPermissionID, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteRBACPermissionRequest(c.Server, teamName, rbacPermissionID)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetRBACPermission(ctx context.Context, teamName TeamName, rbacPermissionID RBACPermissionID, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetRBACPermissionRequest(c.Server, teamName, rbacPermissionID)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateRBACPermissionWithBody(ctx context.Context, teamName TeamName, rbacPermissionID RBACPermissionID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateRBACPermissionRequestWithBody(c.Server, teamName, rbacPermissionID, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateRBACPermission(ctx context.Context, teamName TeamName, rbacPermissionID RBACPermissionID, body UpdateRBACPermissionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateRBACPermissionRequest(c.Server, teamName, rbacPermissionID, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListAllRBACRoles(ctx context.Context, teamName TeamName, params *ListAllRBACRolesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListAllRBACRolesRequest(c.Server, teamName, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateRBACRoleWithBody(ctx context.Context, teamName TeamName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateRBACRoleRequestWithBody(c.Server, teamName, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateRBACRole(ctx context.Context, teamName TeamName, body CreateRBACRoleJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateRBACRoleRequest(c.Server, teamName, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteRBACRole(ctx context.Context, teamName TeamName, rbacCustomRoleID RBACCustomRoleID, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteRBACRoleRequest(c.Server, teamName, rbacCustomRoleID)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetRBACRole(ctx context.Context, teamName TeamName, rbacCustomRoleID RBACCustomRoleID, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetRBACRoleRequest(c.Server, teamName, rbacCustomRoleID)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateRBACRoleWithBody(ctx context.Context, teamName TeamName, rbacCustomRoleID RBACCustomRoleID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateRBACRoleRequestWithBody(c.Server, teamName, rbacCustomRoleID, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateRBACRole(ctx context.Context, teamName TeamName, rbacCustomRoleID RBACCustomRoleID, body UpdateRBACRoleJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateRBACRoleRequest(c.Server, teamName, rbacCustomRoleID, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) ListReports(ctx context.Context, teamName TeamName, params *ListReportsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListReportsRequest(c.Server, teamName, params)
 	if err != nil {
@@ -9933,102 +10441,6 @@ func (c *Client) GetTestConnectionForSyncSource(ctx context.Context, teamName Te
 	return c.Client.Do(req)
 }
 
-func (c *Client) CreateSyncTransformerTestConnectionWithBody(ctx context.Context, teamName TeamName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateSyncTransformerTestConnectionRequestWithBody(c.Server, teamName, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) CreateSyncTransformerTestConnection(ctx context.Context, teamName TeamName, body CreateSyncTransformerTestConnectionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateSyncTransformerTestConnectionRequest(c.Server, teamName, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) GetSyncTransformerTestConnection(ctx context.Context, teamName TeamName, syncTransformerTestConnectionID SyncTransformerTestConnectionID, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetSyncTransformerTestConnectionRequest(c.Server, teamName, syncTransformerTestConnectionID)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) UpdateSyncTestConnectionForSyncTransformerWithBody(ctx context.Context, teamName TeamName, syncTransformerTestConnectionID SyncTransformerTestConnectionID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewUpdateSyncTestConnectionForSyncTransformerRequestWithBody(c.Server, teamName, syncTransformerTestConnectionID, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) UpdateSyncTestConnectionForSyncTransformer(ctx context.Context, teamName TeamName, syncTransformerTestConnectionID SyncTransformerTestConnectionID, body UpdateSyncTestConnectionForSyncTransformerJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewUpdateSyncTestConnectionForSyncTransformerRequest(c.Server, teamName, syncTransformerTestConnectionID, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) GetSyncTransformerTestConnectionLogs(ctx context.Context, teamName TeamName, syncTransformerTestConnectionID SyncTransformerTestConnectionID, params *GetSyncTransformerTestConnectionLogsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetSyncTransformerTestConnectionLogsRequest(c.Server, teamName, syncTransformerTestConnectionID, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) PromoteSyncTransformerTestConnectionWithBody(ctx context.Context, teamName TeamName, syncTransformerTestConnectionID SyncTransformerTestConnectionID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPromoteSyncTransformerTestConnectionRequestWithBody(c.Server, teamName, syncTransformerTestConnectionID, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) PromoteSyncTransformerTestConnection(ctx context.Context, teamName TeamName, syncTransformerTestConnectionID SyncTransformerTestConnectionID, body PromoteSyncTransformerTestConnectionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPromoteSyncTransformerTestConnectionRequest(c.Server, teamName, syncTransformerTestConnectionID, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
 func (c *Client) ListSyncTransformers(ctx context.Context, teamName TeamName, params *ListSyncTransformersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListSyncTransformersRequest(c.Server, teamName, params)
 	if err != nil {
@@ -10103,18 +10515,6 @@ func (c *Client) ListSyncTransformerSyncDestinations(ctx context.Context, teamNa
 
 func (c *Client) ListSyncTransformerSyncs(ctx context.Context, teamName TeamName, syncTransformerName SyncTransformerName, params *ListSyncTransformerSyncsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListSyncTransformerSyncsRequest(c.Server, teamName, syncTransformerName, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) GetTestConnectionForSyncTransformer(ctx context.Context, teamName TeamName, syncTransformerName SyncTransformerName, syncTestConnectionId SyncTestConnectionId, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetTestConnectionForSyncTransformerRequest(c.Server, teamName, syncTransformerName, syncTestConnectionId)
 	if err != nil {
 		return nil, err
 	}
@@ -10941,6 +11341,222 @@ func (c *Client) DeleteUser(ctx context.Context, userID UserID, reqEditors ...Re
 	return c.Client.Do(req)
 }
 
+func (c *Client) CreateV2SyncDestinationTestConnectionWithBody(ctx context.Context, teamName TeamName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateV2SyncDestinationTestConnectionRequestWithBody(c.Server, teamName, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateV2SyncDestinationTestConnection(ctx context.Context, teamName TeamName, body CreateV2SyncDestinationTestConnectionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateV2SyncDestinationTestConnectionRequest(c.Server, teamName, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetV2SyncDestinations(ctx context.Context, teamName TeamName, params *GetV2SyncDestinationsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetV2SyncDestinationsRequest(c.Server, teamName, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateV2SyncDestinationWithBody(ctx context.Context, teamName TeamName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateV2SyncDestinationRequestWithBody(c.Server, teamName, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateV2SyncDestination(ctx context.Context, teamName TeamName, body CreateV2SyncDestinationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateV2SyncDestinationRequest(c.Server, teamName, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteV2SyncDestination(ctx context.Context, teamName TeamName, syncDestinationName SyncDestinationName, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteV2SyncDestinationRequest(c.Server, teamName, syncDestinationName)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetV2SyncDestination(ctx context.Context, teamName TeamName, syncDestinationName SyncDestinationName, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetV2SyncDestinationRequest(c.Server, teamName, syncDestinationName)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) PatchV2SyncDestinationWithBody(ctx context.Context, teamName TeamName, syncDestinationName SyncDestinationName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPatchV2SyncDestinationRequestWithBody(c.Server, teamName, syncDestinationName, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) PatchV2SyncDestination(ctx context.Context, teamName TeamName, syncDestinationName SyncDestinationName, body PatchV2SyncDestinationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPatchV2SyncDestinationRequest(c.Server, teamName, syncDestinationName, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateV2SyncIntegrationTestConnectionWithBody(ctx context.Context, teamName TeamName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateV2SyncIntegrationTestConnectionRequestWithBody(c.Server, teamName, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateV2SyncIntegrationTestConnection(ctx context.Context, teamName TeamName, body CreateV2SyncIntegrationTestConnectionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateV2SyncIntegrationTestConnectionRequest(c.Server, teamName, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListV2SyncIntegrations(ctx context.Context, teamName TeamName, params *ListV2SyncIntegrationsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListV2SyncIntegrationsRequest(c.Server, teamName, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateV2SyncIntegrationWithBody(ctx context.Context, teamName TeamName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateV2SyncIntegrationRequestWithBody(c.Server, teamName, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateV2SyncIntegration(ctx context.Context, teamName TeamName, body CreateV2SyncIntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateV2SyncIntegrationRequest(c.Server, teamName, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteV2SyncIntegration(ctx context.Context, teamName TeamName, syncName SyncName, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteV2SyncIntegrationRequest(c.Server, teamName, syncName)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetV2SyncIntegration(ctx context.Context, teamName TeamName, syncName SyncName, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetV2SyncIntegrationRequest(c.Server, teamName, syncName)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateV2SyncIntegrationWithBody(ctx context.Context, teamName TeamName, syncName SyncName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateV2SyncIntegrationRequestWithBody(c.Server, teamName, syncName, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateV2SyncIntegration(ctx context.Context, teamName TeamName, syncName SyncName, body UpdateV2SyncIntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateV2SyncIntegrationRequest(c.Server, teamName, syncName, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 // NewIndexRequest generates requests for Index
 func NewIndexRequest(server string) (*http.Request, error) {
 	var err error
@@ -11191,299 +11807,6 @@ func NewGetAuditLogRequest(server string, id openapi_types.UUID) (*http.Request,
 	if err != nil {
 		return nil, err
 	}
-
-	return req, nil
-}
-
-// NewListFiltersRequest generates requests for ListFilters
-func NewListFiltersRequest(server string, params *ListFiltersParams) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/filters")
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		queryValues := queryURL.Query()
-
-		if params.PerPage != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "per_page", runtime.ParamLocationQuery, *params.PerPage); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.Page != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page", runtime.ParamLocationQuery, *params.Page); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.FilterTags != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "tag", runtime.ParamLocationQuery, params.FilterTags); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.NameFilter != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name_filter", runtime.ParamLocationQuery, *params.NameFilter); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.ExpressionFilter != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "expression_filter", runtime.ParamLocationQuery, *params.ExpressionFilter); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		queryURL.RawQuery = queryValues.Encode()
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewListFilterTagsRequest generates requests for ListFilterTags
-func NewListFilterTagsRequest(server string, params *ListFilterTagsParams) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/filters/tags")
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		queryValues := queryURL.Query()
-
-		if params.PerPage != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "per_page", runtime.ParamLocationQuery, *params.PerPage); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.Page != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page", runtime.ParamLocationQuery, *params.Page); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		queryURL.RawQuery = queryValues.Encode()
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewDeleteFilterRequest generates requests for DeleteFilter
-func NewDeleteFilterRequest(server string, filterID FilterID) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "filter_id", runtime.ParamLocationPath, filterID)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/filters/%s", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGetFilterByIDRequest generates requests for GetFilterByID
-func NewGetFilterByIDRequest(server string, filterID FilterID) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "filter_id", runtime.ParamLocationPath, filterID)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/filters/%s", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewUpdateFilterRequest calls the generic UpdateFilter builder with application/json body
-func NewUpdateFilterRequest(server string, filterID FilterID, body UpdateFilterJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewUpdateFilterRequestWithBody(server, filterID, "application/json", bodyReader)
-}
-
-// NewUpdateFilterRequestWithBody generates requests for UpdateFilter with any type of body
-func NewUpdateFilterRequestWithBody(server string, filterID FilterID, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "filter_id", runtime.ParamLocationPath, filterID)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/filters/%s", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("PATCH", queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
 
 	return req, nil
 }
@@ -12146,6 +12469,54 @@ func NewManageListTeamMembersRequest(server string, teamName TeamName, params *M
 		if params.PerPage != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "per_page", runtime.ParamLocationQuery, *params.PerPage); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.UserSearch != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "user_search", runtime.ParamLocationQuery, *params.UserSearch); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Role != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "role", runtime.ParamLocationQuery, *params.Role); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.CustomRoleId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "custom_role_id", runtime.ParamLocationQuery, *params.CustomRoleId); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
 				return nil, err
@@ -13028,6 +13399,22 @@ func NewListPluginVersionsRequest(server string, teamName TeamName, pluginKind P
 		if params.IncludeDrafts != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include_drafts", runtime.ParamLocationQuery, *params.IncludeDrafts); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.IncludeFips != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include_fips", runtime.ParamLocationQuery, *params.IncludeFips); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
 				return nil, err
@@ -14300,907 +14687,6 @@ func NewAuthRegistryRequestRequest(server string, params *AuthRegistryRequestPar
 	return req, nil
 }
 
-// NewListTablesRequest generates requests for ListTables
-func NewListTablesRequest(server string, params *ListTablesParams) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/tables")
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		queryValues := queryURL.Query()
-
-		if params.PerPage != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "per_page", runtime.ParamLocationQuery, *params.PerPage); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.Page != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page", runtime.ParamLocationQuery, *params.Page); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		queryURL.RawQuery = queryValues.Encode()
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewBatchTableSchemasRequest generates requests for BatchTableSchemas
-func NewBatchTableSchemasRequest(server string, params *BatchTableSchemasParams) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/tables/schemas")
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "tables", runtime.ParamLocationQuery, params.Tables); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
-		queryURL.RawQuery = queryValues.Encode()
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewTableListColumnsRequest generates requests for TableListColumns
-func NewTableListColumnsRequest(server string, tableName TableName, params *TableListColumnsParams) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "table_name", runtime.ParamLocationPath, tableName)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/tables/%s/columns", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		queryValues := queryURL.Query()
-
-		if params.FilterMode != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter_mode", runtime.ParamLocationQuery, *params.FilterMode); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.Filter != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter", runtime.ParamLocationQuery, *params.Filter); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.Page != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page", runtime.ParamLocationQuery, *params.Page); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.PerPage != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "per_page", runtime.ParamLocationQuery, *params.PerPage); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		queryURL.RawQuery = queryValues.Encode()
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewTableColumnListValuesRequest generates requests for TableColumnListValues
-func NewTableColumnListValuesRequest(server string, tableName TableName, columnName ColumnName, params *TableColumnListValuesParams) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "table_name", runtime.ParamLocationPath, tableName)
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "column_name", runtime.ParamLocationPath, columnName)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/tables/%s/columns/%s/values", pathParam0, pathParam1)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		queryValues := queryURL.Query()
-
-		if params.FilterMode != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter_mode", runtime.ParamLocationQuery, *params.FilterMode); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.Filter != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter", runtime.ParamLocationQuery, *params.Filter); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.Page != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page", runtime.ParamLocationQuery, *params.Page); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.PerPage != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "per_page", runtime.ParamLocationQuery, *params.PerPage); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		queryURL.RawQuery = queryValues.Encode()
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewTableListRowsRequest generates requests for TableListRows
-func NewTableListRowsRequest(server string, tableName TableName, params *TableListRowsParams) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "table_name", runtime.ParamLocationPath, tableName)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/tables/%s/data", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		queryValues := queryURL.Query()
-
-		if params.Selects != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "select", runtime.ParamLocationQuery, params.Selects); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.FilterMode != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter_mode", runtime.ParamLocationQuery, *params.FilterMode); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.Filters != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter", runtime.ParamLocationQuery, params.Filters); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.FilterIDs != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter_id", runtime.ParamLocationQuery, params.FilterIDs); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.SortBys != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort_by", runtime.ParamLocationQuery, params.SortBys); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.SortDirections != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort_dir", runtime.ParamLocationQuery, params.SortDirections); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.GroupBys != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "group_by", runtime.ParamLocationQuery, params.GroupBys); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.PerPage != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "per_page", runtime.ParamLocationQuery, *params.PerPage); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.Page != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page", runtime.ParamLocationQuery, *params.Page); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		queryURL.RawQuery = queryValues.Encode()
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewTableRowByIdRequest generates requests for TableRowById
-func NewTableRowByIdRequest(server string, tableName TableName, tableRowId TableRowId, params *TableRowByIdParams) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "table_name", runtime.ParamLocationPath, tableName)
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "table_row_id", runtime.ParamLocationPath, tableRowId)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/tables/%s/data/%s", pathParam0, pathParam1)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		queryValues := queryURL.Query()
-
-		if params.FilterMode != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter_mode", runtime.ParamLocationQuery, *params.FilterMode); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.Filters != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter", runtime.ParamLocationQuery, params.Filters); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.FilterIDs != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter_id", runtime.ParamLocationQuery, params.FilterIDs); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		queryURL.RawQuery = queryValues.Encode()
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewTableListFiltersRequest generates requests for TableListFilters
-func NewTableListFiltersRequest(server string, tableName TableName, params *TableListFiltersParams) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "table_name", runtime.ParamLocationPath, tableName)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/tables/%s/filters", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		queryValues := queryURL.Query()
-
-		if params.PerPage != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "per_page", runtime.ParamLocationQuery, *params.PerPage); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.Page != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page", runtime.ParamLocationQuery, *params.Page); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.FilterTags != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "tag", runtime.ParamLocationQuery, params.FilterTags); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		queryURL.RawQuery = queryValues.Encode()
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewTableSaveFilterRequest calls the generic TableSaveFilter builder with application/json body
-func NewTableSaveFilterRequest(server string, tableName TableName, body TableSaveFilterJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewTableSaveFilterRequestWithBody(server, tableName, "application/json", bodyReader)
-}
-
-// NewTableSaveFilterRequestWithBody generates requests for TableSaveFilter with any type of body
-func NewTableSaveFilterRequestWithBody(server string, tableName TableName, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "table_name", runtime.ParamLocationPath, tableName)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/tables/%s/filters", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("POST", queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
-// NewTableListFilterTagsRequest generates requests for TableListFilterTags
-func NewTableListFilterTagsRequest(server string, tableName TableName, params *TableListFilterTagsParams) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "table_name", runtime.ParamLocationPath, tableName)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/tables/%s/filters/tags", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		queryValues := queryURL.Query()
-
-		if params.PerPage != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "per_page", runtime.ParamLocationQuery, *params.PerPage); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		if params.Page != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page", runtime.ParamLocationQuery, *params.Page); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		queryURL.RawQuery = queryValues.Encode()
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewTableListRelationsRequest generates requests for TableListRelations
-func NewTableListRelationsRequest(server string, tableName TableName, params *TableListRelationsParams) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "table_name", runtime.ParamLocationPath, tableName)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/tables/%s/relations", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		queryValues := queryURL.Query()
-
-		if params.RelationName != nil {
-
-			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "relation_name", runtime.ParamLocationQuery, *params.RelationName); err != nil {
-				return nil, err
-			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-				return nil, err
-			} else {
-				for k, v := range parsed {
-					for _, v2 := range v {
-						queryValues.Add(k, v2)
-					}
-				}
-			}
-
-		}
-
-		queryURL.RawQuery = queryValues.Encode()
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewTableSchemaRequest generates requests for TableSchema
-func NewTableSchemaRequest(server string, tableName TableName) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "table_name", runtime.ParamLocationPath, tableName)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/tables/%s/schema", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
 // NewListTeamsRequest generates requests for ListTeams
 func NewListTeamsRequest(server string, params *ListTeamsParams) (*http.Request, error) {
 	var err error
@@ -16415,6 +15901,148 @@ func NewAuthenticateConnectorOAuthRequestWithBody(server string, teamName TeamNa
 	}
 
 	operationPath := fmt.Sprintf("/teams/%s/connectors/%s/authenticate/oauth", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewCreateConversationRequest calls the generic CreateConversation builder with application/json body
+func NewCreateConversationRequest(server string, teamName TeamName, body CreateConversationJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateConversationRequestWithBody(server, teamName, "application/json", bodyReader)
+}
+
+// NewCreateConversationRequestWithBody generates requests for CreateConversation with any type of body
+func NewCreateConversationRequestWithBody(server string, teamName TeamName, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "team_name", runtime.ParamLocationPath, teamName)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/teams/%s/conversations", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewGetConversationRequest generates requests for GetConversation
+func NewGetConversationRequest(server string, teamName TeamName, conversationID ConversationID) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "team_name", runtime.ParamLocationPath, teamName)
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "conversation_id", runtime.ParamLocationPath, conversationID)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/teams/%s/conversations/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewSendMessageRequest calls the generic SendMessage builder with application/json body
+func NewSendMessageRequest(server string, teamName TeamName, conversationID ConversationID, body SendMessageJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewSendMessageRequestWithBody(server, teamName, conversationID, "application/json", bodyReader)
+}
+
+// NewSendMessageRequestWithBody generates requests for SendMessage with any type of body
+func NewSendMessageRequestWithBody(server string, teamName TeamName, conversationID ConversationID, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "team_name", runtime.ParamLocationPath, teamName)
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "conversation_id", runtime.ParamLocationPath, conversationID)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/teams/%s/conversations/%s", pathParam0, pathParam1)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -20520,6 +20148,612 @@ func NewQueryListFilterTagsTeamRequest(server string, teamName TeamName, queryID
 	return req, nil
 }
 
+// NewListAllRBACPermissionsRequest generates requests for ListAllRBACPermissions
+func NewListAllRBACPermissionsRequest(server string, teamName TeamName, params *ListAllRBACPermissionsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "team_name", runtime.ParamLocationPath, teamName)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/teams/%s/rbac/permissions", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.PerPage != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "per_page", runtime.ParamLocationQuery, *params.PerPage); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Page != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page", runtime.ParamLocationQuery, *params.Page); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.RBACPermissionSortBys != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort_by", runtime.ParamLocationQuery, params.RBACPermissionSortBys); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.RBACPermissionSortDirections != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort_dir", runtime.ParamLocationQuery, params.RBACPermissionSortDirections); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.SearchTerm != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "search_term", runtime.ParamLocationQuery, *params.SearchTerm); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateRBACPermissionRequest calls the generic CreateRBACPermission builder with application/json body
+func NewCreateRBACPermissionRequest(server string, teamName TeamName, body CreateRBACPermissionJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateRBACPermissionRequestWithBody(server, teamName, "application/json", bodyReader)
+}
+
+// NewCreateRBACPermissionRequestWithBody generates requests for CreateRBACPermission with any type of body
+func NewCreateRBACPermissionRequestWithBody(server string, teamName TeamName, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "team_name", runtime.ParamLocationPath, teamName)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/teams/%s/rbac/permissions", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteRBACPermissionRequest generates requests for DeleteRBACPermission
+func NewDeleteRBACPermissionRequest(server string, teamName TeamName, rbacPermissionID RBACPermissionID) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "team_name", runtime.ParamLocationPath, teamName)
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "permission_id", runtime.ParamLocationPath, rbacPermissionID)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/teams/%s/rbac/permissions/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetRBACPermissionRequest generates requests for GetRBACPermission
+func NewGetRBACPermissionRequest(server string, teamName TeamName, rbacPermissionID RBACPermissionID) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "team_name", runtime.ParamLocationPath, teamName)
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "permission_id", runtime.ParamLocationPath, rbacPermissionID)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/teams/%s/rbac/permissions/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateRBACPermissionRequest calls the generic UpdateRBACPermission builder with application/json body
+func NewUpdateRBACPermissionRequest(server string, teamName TeamName, rbacPermissionID RBACPermissionID, body UpdateRBACPermissionJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateRBACPermissionRequestWithBody(server, teamName, rbacPermissionID, "application/json", bodyReader)
+}
+
+// NewUpdateRBACPermissionRequestWithBody generates requests for UpdateRBACPermission with any type of body
+func NewUpdateRBACPermissionRequestWithBody(server string, teamName TeamName, rbacPermissionID RBACPermissionID, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "team_name", runtime.ParamLocationPath, teamName)
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "permission_id", runtime.ParamLocationPath, rbacPermissionID)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/teams/%s/rbac/permissions/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PATCH", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListAllRBACRolesRequest generates requests for ListAllRBACRoles
+func NewListAllRBACRolesRequest(server string, teamName TeamName, params *ListAllRBACRolesParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "team_name", runtime.ParamLocationPath, teamName)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/teams/%s/rbac/roles", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.PerPage != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "per_page", runtime.ParamLocationQuery, *params.PerPage); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Page != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page", runtime.ParamLocationQuery, *params.Page); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.RBACRoleSortBys != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort_by", runtime.ParamLocationQuery, params.RBACRoleSortBys); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.RBACRoleSortDirections != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort_dir", runtime.ParamLocationQuery, params.RBACRoleSortDirections); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.SearchTerm != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "search_term", runtime.ParamLocationQuery, *params.SearchTerm); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateRBACRoleRequest calls the generic CreateRBACRole builder with application/json body
+func NewCreateRBACRoleRequest(server string, teamName TeamName, body CreateRBACRoleJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateRBACRoleRequestWithBody(server, teamName, "application/json", bodyReader)
+}
+
+// NewCreateRBACRoleRequestWithBody generates requests for CreateRBACRole with any type of body
+func NewCreateRBACRoleRequestWithBody(server string, teamName TeamName, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "team_name", runtime.ParamLocationPath, teamName)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/teams/%s/rbac/roles", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteRBACRoleRequest generates requests for DeleteRBACRole
+func NewDeleteRBACRoleRequest(server string, teamName TeamName, rbacCustomRoleID RBACCustomRoleID) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "team_name", runtime.ParamLocationPath, teamName)
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "role_id", runtime.ParamLocationPath, rbacCustomRoleID)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/teams/%s/rbac/roles/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetRBACRoleRequest generates requests for GetRBACRole
+func NewGetRBACRoleRequest(server string, teamName TeamName, rbacCustomRoleID RBACCustomRoleID) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "team_name", runtime.ParamLocationPath, teamName)
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "role_id", runtime.ParamLocationPath, rbacCustomRoleID)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/teams/%s/rbac/roles/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateRBACRoleRequest calls the generic UpdateRBACRole builder with application/json body
+func NewUpdateRBACRoleRequest(server string, teamName TeamName, rbacCustomRoleID RBACCustomRoleID, body UpdateRBACRoleJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateRBACRoleRequestWithBody(server, teamName, rbacCustomRoleID, "application/json", bodyReader)
+}
+
+// NewUpdateRBACRoleRequestWithBody generates requests for UpdateRBACRole with any type of body
+func NewUpdateRBACRoleRequestWithBody(server string, teamName TeamName, rbacCustomRoleID RBACCustomRoleID, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "team_name", runtime.ParamLocationPath, teamName)
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "role_id", runtime.ParamLocationPath, rbacCustomRoleID)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/teams/%s/rbac/roles/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PATCH", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewListReportsRequest generates requests for ListReports
 func NewListReportsRequest(server string, teamName TeamName, params *ListReportsParams) (*http.Request, error) {
 	var err error
@@ -21480,6 +21714,22 @@ func NewGetSyncDestinationTestConnectionLogsQueryRequest(server string, teamName
 
 		}
 
+		if params.Download != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "download", runtime.ParamLocationQuery, *params.Download); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
 		queryURL.RawQuery = queryValues.Encode()
 	}
 
@@ -22386,6 +22636,22 @@ func NewGetSyncSourceTestConnectionLogsQueryRequest(server string, teamName Team
 
 		}
 
+		if params.Download != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "download", runtime.ParamLocationQuery, *params.Download); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
 		queryURL.RawQuery = queryValues.Encode()
 	}
 
@@ -22954,258 +23220,6 @@ func NewGetTestConnectionForSyncSourceRequest(server string, teamName TeamName, 
 	return req, nil
 }
 
-// NewCreateSyncTransformerTestConnectionRequest calls the generic CreateSyncTransformerTestConnection builder with application/json body
-func NewCreateSyncTransformerTestConnectionRequest(server string, teamName TeamName, body CreateSyncTransformerTestConnectionJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewCreateSyncTransformerTestConnectionRequestWithBody(server, teamName, "application/json", bodyReader)
-}
-
-// NewCreateSyncTransformerTestConnectionRequestWithBody generates requests for CreateSyncTransformerTestConnection with any type of body
-func NewCreateSyncTransformerTestConnectionRequestWithBody(server string, teamName TeamName, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "team_name", runtime.ParamLocationPath, teamName)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/teams/%s/sync-transformer-test-connections", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("POST", queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
-// NewGetSyncTransformerTestConnectionRequest generates requests for GetSyncTransformerTestConnection
-func NewGetSyncTransformerTestConnectionRequest(server string, teamName TeamName, syncTransformerTestConnectionID SyncTransformerTestConnectionID) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "team_name", runtime.ParamLocationPath, teamName)
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "sync_transformer_test_connection_id", runtime.ParamLocationPath, syncTransformerTestConnectionID)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/teams/%s/sync-transformer-test-connections/%s", pathParam0, pathParam1)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewUpdateSyncTestConnectionForSyncTransformerRequest calls the generic UpdateSyncTestConnectionForSyncTransformer builder with application/json body
-func NewUpdateSyncTestConnectionForSyncTransformerRequest(server string, teamName TeamName, syncTransformerTestConnectionID SyncTransformerTestConnectionID, body UpdateSyncTestConnectionForSyncTransformerJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewUpdateSyncTestConnectionForSyncTransformerRequestWithBody(server, teamName, syncTransformerTestConnectionID, "application/json", bodyReader)
-}
-
-// NewUpdateSyncTestConnectionForSyncTransformerRequestWithBody generates requests for UpdateSyncTestConnectionForSyncTransformer with any type of body
-func NewUpdateSyncTestConnectionForSyncTransformerRequestWithBody(server string, teamName TeamName, syncTransformerTestConnectionID SyncTransformerTestConnectionID, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "team_name", runtime.ParamLocationPath, teamName)
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "sync_transformer_test_connection_id", runtime.ParamLocationPath, syncTransformerTestConnectionID)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/teams/%s/sync-transformer-test-connections/%s", pathParam0, pathParam1)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("PATCH", queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
-// NewGetSyncTransformerTestConnectionLogsRequest generates requests for GetSyncTransformerTestConnectionLogs
-func NewGetSyncTransformerTestConnectionLogsRequest(server string, teamName TeamName, syncTransformerTestConnectionID SyncTransformerTestConnectionID, params *GetSyncTransformerTestConnectionLogsParams) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "team_name", runtime.ParamLocationPath, teamName)
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "sync_transformer_test_connection_id", runtime.ParamLocationPath, syncTransformerTestConnectionID)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/teams/%s/sync-transformer-test-connections/%s/logs", pathParam0, pathParam1)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-
-		if params.Accept != nil {
-			var headerParam0 string
-
-			headerParam0, err = runtime.StyleParamWithLocation("simple", false, "Accept", runtime.ParamLocationHeader, *params.Accept)
-			if err != nil {
-				return nil, err
-			}
-
-			req.Header.Set("Accept", headerParam0)
-		}
-
-	}
-
-	return req, nil
-}
-
-// NewPromoteSyncTransformerTestConnectionRequest calls the generic PromoteSyncTransformerTestConnection builder with application/json body
-func NewPromoteSyncTransformerTestConnectionRequest(server string, teamName TeamName, syncTransformerTestConnectionID SyncTransformerTestConnectionID, body PromoteSyncTransformerTestConnectionJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewPromoteSyncTransformerTestConnectionRequestWithBody(server, teamName, syncTransformerTestConnectionID, "application/json", bodyReader)
-}
-
-// NewPromoteSyncTransformerTestConnectionRequestWithBody generates requests for PromoteSyncTransformerTestConnection with any type of body
-func NewPromoteSyncTransformerTestConnectionRequestWithBody(server string, teamName TeamName, syncTransformerTestConnectionID SyncTransformerTestConnectionID, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "team_name", runtime.ParamLocationPath, teamName)
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "sync_transformer_test_connection_id", runtime.ParamLocationPath, syncTransformerTestConnectionID)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/teams/%s/sync-transformer-test-connections/%s/promote", pathParam0, pathParam1)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest("POST", queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
 // NewListSyncTransformersRequest generates requests for ListSyncTransformers
 func NewListSyncTransformersRequest(server string, teamName TeamName, params *ListSyncTransformersParams) (*http.Request, error) {
 	var err error
@@ -23610,54 +23624,6 @@ func NewListSyncTransformerSyncsRequest(server string, teamName TeamName, syncTr
 		}
 
 		queryURL.RawQuery = queryValues.Encode()
-	}
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGetTestConnectionForSyncTransformerRequest generates requests for GetTestConnectionForSyncTransformer
-func NewGetTestConnectionForSyncTransformerRequest(server string, teamName TeamName, syncTransformerName SyncTransformerName, syncTestConnectionId SyncTestConnectionId) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "team_name", runtime.ParamLocationPath, teamName)
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "sync_transformer_name", runtime.ParamLocationPath, syncTransformerName)
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam2 string
-
-	pathParam2, err = runtime.StyleParamWithLocation("simple", false, "sync_test_connection_id", runtime.ParamLocationPath, syncTestConnectionId)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/teams/%s/sync-transformers/%s/test-connections/%s", pathParam0, pathParam1, pathParam2)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
 	}
 
 	req, err := http.NewRequest("GET", queryURL.String(), nil)
@@ -27128,6 +27094,706 @@ func NewDeleteUserRequest(server string, userID UserID) (*http.Request, error) {
 	return req, nil
 }
 
+// NewCreateV2SyncDestinationTestConnectionRequest calls the generic CreateV2SyncDestinationTestConnection builder with application/json body
+func NewCreateV2SyncDestinationTestConnectionRequest(server string, teamName TeamName, body CreateV2SyncDestinationTestConnectionJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateV2SyncDestinationTestConnectionRequestWithBody(server, teamName, "application/json", bodyReader)
+}
+
+// NewCreateV2SyncDestinationTestConnectionRequestWithBody generates requests for CreateV2SyncDestinationTestConnection with any type of body
+func NewCreateV2SyncDestinationTestConnectionRequestWithBody(server string, teamName TeamName, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "team_name", runtime.ParamLocationPath, teamName)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v2/teams/%s/sync-destination-test-connections", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewGetV2SyncDestinationsRequest generates requests for GetV2SyncDestinations
+func NewGetV2SyncDestinationsRequest(server string, teamName TeamName, params *GetV2SyncDestinationsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "team_name", runtime.ParamLocationPath, teamName)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v2/teams/%s/sync-destinations", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.PerPage != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "per_page", runtime.ParamLocationQuery, *params.PerPage); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Page != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page", runtime.ParamLocationQuery, *params.Page); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Filter != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter", runtime.ParamLocationQuery, *params.Filter); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.SyncGenericSortBys != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort_by", runtime.ParamLocationQuery, params.SyncGenericSortBys); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.SyncSortDirections != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort_dir", runtime.ParamLocationQuery, params.SyncSortDirections); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateV2SyncDestinationRequest calls the generic CreateV2SyncDestination builder with application/json body
+func NewCreateV2SyncDestinationRequest(server string, teamName TeamName, body CreateV2SyncDestinationJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateV2SyncDestinationRequestWithBody(server, teamName, "application/json", bodyReader)
+}
+
+// NewCreateV2SyncDestinationRequestWithBody generates requests for CreateV2SyncDestination with any type of body
+func NewCreateV2SyncDestinationRequestWithBody(server string, teamName TeamName, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "team_name", runtime.ParamLocationPath, teamName)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v2/teams/%s/sync-destinations", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteV2SyncDestinationRequest generates requests for DeleteV2SyncDestination
+func NewDeleteV2SyncDestinationRequest(server string, teamName TeamName, syncDestinationName SyncDestinationName) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "team_name", runtime.ParamLocationPath, teamName)
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "sync_destination_name", runtime.ParamLocationPath, syncDestinationName)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v2/teams/%s/sync-destinations/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetV2SyncDestinationRequest generates requests for GetV2SyncDestination
+func NewGetV2SyncDestinationRequest(server string, teamName TeamName, syncDestinationName SyncDestinationName) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "team_name", runtime.ParamLocationPath, teamName)
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "sync_destination_name", runtime.ParamLocationPath, syncDestinationName)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v2/teams/%s/sync-destinations/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewPatchV2SyncDestinationRequest calls the generic PatchV2SyncDestination builder with application/json body
+func NewPatchV2SyncDestinationRequest(server string, teamName TeamName, syncDestinationName SyncDestinationName, body PatchV2SyncDestinationJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewPatchV2SyncDestinationRequestWithBody(server, teamName, syncDestinationName, "application/json", bodyReader)
+}
+
+// NewPatchV2SyncDestinationRequestWithBody generates requests for PatchV2SyncDestination with any type of body
+func NewPatchV2SyncDestinationRequestWithBody(server string, teamName TeamName, syncDestinationName SyncDestinationName, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "team_name", runtime.ParamLocationPath, teamName)
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "sync_destination_name", runtime.ParamLocationPath, syncDestinationName)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v2/teams/%s/sync-destinations/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PATCH", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewCreateV2SyncIntegrationTestConnectionRequest calls the generic CreateV2SyncIntegrationTestConnection builder with application/json body
+func NewCreateV2SyncIntegrationTestConnectionRequest(server string, teamName TeamName, body CreateV2SyncIntegrationTestConnectionJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateV2SyncIntegrationTestConnectionRequestWithBody(server, teamName, "application/json", bodyReader)
+}
+
+// NewCreateV2SyncIntegrationTestConnectionRequestWithBody generates requests for CreateV2SyncIntegrationTestConnection with any type of body
+func NewCreateV2SyncIntegrationTestConnectionRequestWithBody(server string, teamName TeamName, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "team_name", runtime.ParamLocationPath, teamName)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v2/teams/%s/sync-integration-test-connections", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListV2SyncIntegrationsRequest generates requests for ListV2SyncIntegrations
+func NewListV2SyncIntegrationsRequest(server string, teamName TeamName, params *ListV2SyncIntegrationsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "team_name", runtime.ParamLocationPath, teamName)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v2/teams/%s/sync-integrations", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.PerPage != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "per_page", runtime.ParamLocationQuery, *params.PerPage); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Page != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page", runtime.ParamLocationQuery, *params.Page); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.SyncSortBys != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort_by", runtime.ParamLocationQuery, params.SyncSortBys); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.SyncSortDirections != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort_dir", runtime.ParamLocationQuery, params.SyncSortDirections); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Filter != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter", runtime.ParamLocationQuery, *params.Filter); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateV2SyncIntegrationRequest calls the generic CreateV2SyncIntegration builder with application/json body
+func NewCreateV2SyncIntegrationRequest(server string, teamName TeamName, body CreateV2SyncIntegrationJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateV2SyncIntegrationRequestWithBody(server, teamName, "application/json", bodyReader)
+}
+
+// NewCreateV2SyncIntegrationRequestWithBody generates requests for CreateV2SyncIntegration with any type of body
+func NewCreateV2SyncIntegrationRequestWithBody(server string, teamName TeamName, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "team_name", runtime.ParamLocationPath, teamName)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v2/teams/%s/sync-integrations", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewDeleteV2SyncIntegrationRequest generates requests for DeleteV2SyncIntegration
+func NewDeleteV2SyncIntegrationRequest(server string, teamName TeamName, syncName SyncName) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "team_name", runtime.ParamLocationPath, teamName)
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "sync_name", runtime.ParamLocationPath, syncName)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v2/teams/%s/sync-integrations/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetV2SyncIntegrationRequest generates requests for GetV2SyncIntegration
+func NewGetV2SyncIntegrationRequest(server string, teamName TeamName, syncName SyncName) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "team_name", runtime.ParamLocationPath, teamName)
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "sync_name", runtime.ParamLocationPath, syncName)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v2/teams/%s/sync-integrations/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateV2SyncIntegrationRequest calls the generic UpdateV2SyncIntegration builder with application/json body
+func NewUpdateV2SyncIntegrationRequest(server string, teamName TeamName, syncName SyncName, body UpdateV2SyncIntegrationJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateV2SyncIntegrationRequestWithBody(server, teamName, syncName, "application/json", bodyReader)
+}
+
+// NewUpdateV2SyncIntegrationRequestWithBody generates requests for UpdateV2SyncIntegration with any type of body
+func NewUpdateV2SyncIntegrationRequestWithBody(server string, teamName TeamName, syncName SyncName, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "team_name", runtime.ParamLocationPath, teamName)
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "sync_name", runtime.ParamLocationPath, syncName)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v2/teams/%s/sync-integrations/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PATCH", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 func (c *Client) applyEditors(ctx context.Context, req *http.Request, additionalEditors []RequestEditorFn) error {
 	for _, r := range c.RequestEditors {
 		if err := r(ctx, req); err != nil {
@@ -27179,23 +27845,6 @@ type ClientWithResponsesInterface interface {
 
 	// GetAuditLogWithResponse request
 	GetAuditLogWithResponse(ctx context.Context, id openapi_types.UUID, reqEditors ...RequestEditorFn) (*GetAuditLogResponse, error)
-
-	// ListFiltersWithResponse request
-	ListFiltersWithResponse(ctx context.Context, params *ListFiltersParams, reqEditors ...RequestEditorFn) (*ListFiltersResponse, error)
-
-	// ListFilterTagsWithResponse request
-	ListFilterTagsWithResponse(ctx context.Context, params *ListFilterTagsParams, reqEditors ...RequestEditorFn) (*ListFilterTagsResponse, error)
-
-	// DeleteFilterWithResponse request
-	DeleteFilterWithResponse(ctx context.Context, filterID FilterID, reqEditors ...RequestEditorFn) (*DeleteFilterResponse, error)
-
-	// GetFilterByIDWithResponse request
-	GetFilterByIDWithResponse(ctx context.Context, filterID FilterID, reqEditors ...RequestEditorFn) (*GetFilterByIDResponse, error)
-
-	// UpdateFilterWithBodyWithResponse request with any body
-	UpdateFilterWithBodyWithResponse(ctx context.Context, filterID FilterID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateFilterResponse, error)
-
-	UpdateFilterWithResponse(ctx context.Context, filterID FilterID, body UpdateFilterJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateFilterResponse, error)
 
 	// HealthCheckWithResponse request
 	HealthCheckWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*HealthCheckResponse, error)
@@ -27388,41 +28037,6 @@ type ClientWithResponsesInterface interface {
 	// AuthRegistryRequestWithResponse request
 	AuthRegistryRequestWithResponse(ctx context.Context, params *AuthRegistryRequestParams, reqEditors ...RequestEditorFn) (*AuthRegistryRequestResponse, error)
 
-	// ListTablesWithResponse request
-	ListTablesWithResponse(ctx context.Context, params *ListTablesParams, reqEditors ...RequestEditorFn) (*ListTablesResponse, error)
-
-	// BatchTableSchemasWithResponse request
-	BatchTableSchemasWithResponse(ctx context.Context, params *BatchTableSchemasParams, reqEditors ...RequestEditorFn) (*BatchTableSchemasResponse, error)
-
-	// TableListColumnsWithResponse request
-	TableListColumnsWithResponse(ctx context.Context, tableName TableName, params *TableListColumnsParams, reqEditors ...RequestEditorFn) (*TableListColumnsResponse, error)
-
-	// TableColumnListValuesWithResponse request
-	TableColumnListValuesWithResponse(ctx context.Context, tableName TableName, columnName ColumnName, params *TableColumnListValuesParams, reqEditors ...RequestEditorFn) (*TableColumnListValuesResponse, error)
-
-	// TableListRowsWithResponse request
-	TableListRowsWithResponse(ctx context.Context, tableName TableName, params *TableListRowsParams, reqEditors ...RequestEditorFn) (*TableListRowsResponse, error)
-
-	// TableRowByIdWithResponse request
-	TableRowByIdWithResponse(ctx context.Context, tableName TableName, tableRowId TableRowId, params *TableRowByIdParams, reqEditors ...RequestEditorFn) (*TableRowByIdResponse, error)
-
-	// TableListFiltersWithResponse request
-	TableListFiltersWithResponse(ctx context.Context, tableName TableName, params *TableListFiltersParams, reqEditors ...RequestEditorFn) (*TableListFiltersResponse, error)
-
-	// TableSaveFilterWithBodyWithResponse request with any body
-	TableSaveFilterWithBodyWithResponse(ctx context.Context, tableName TableName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*TableSaveFilterResponse, error)
-
-	TableSaveFilterWithResponse(ctx context.Context, tableName TableName, body TableSaveFilterJSONRequestBody, reqEditors ...RequestEditorFn) (*TableSaveFilterResponse, error)
-
-	// TableListFilterTagsWithResponse request
-	TableListFilterTagsWithResponse(ctx context.Context, tableName TableName, params *TableListFilterTagsParams, reqEditors ...RequestEditorFn) (*TableListFilterTagsResponse, error)
-
-	// TableListRelationsWithResponse request
-	TableListRelationsWithResponse(ctx context.Context, tableName TableName, params *TableListRelationsParams, reqEditors ...RequestEditorFn) (*TableListRelationsResponse, error)
-
-	// TableSchemaWithResponse request
-	TableSchemaWithResponse(ctx context.Context, tableName TableName, reqEditors ...RequestEditorFn) (*TableSchemaResponse, error)
-
 	// ListTeamsWithResponse request
 	ListTeamsWithResponse(ctx context.Context, params *ListTeamsParams, reqEditors ...RequestEditorFn) (*ListTeamsResponse, error)
 
@@ -27513,6 +28127,19 @@ type ClientWithResponsesInterface interface {
 	AuthenticateConnectorOAuthWithBodyWithResponse(ctx context.Context, teamName TeamName, connectorID ConnectorID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AuthenticateConnectorOAuthResponse, error)
 
 	AuthenticateConnectorOAuthWithResponse(ctx context.Context, teamName TeamName, connectorID ConnectorID, body AuthenticateConnectorOAuthJSONRequestBody, reqEditors ...RequestEditorFn) (*AuthenticateConnectorOAuthResponse, error)
+
+	// CreateConversationWithBodyWithResponse request with any body
+	CreateConversationWithBodyWithResponse(ctx context.Context, teamName TeamName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateConversationResponse, error)
+
+	CreateConversationWithResponse(ctx context.Context, teamName TeamName, body CreateConversationJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateConversationResponse, error)
+
+	// GetConversationWithResponse request
+	GetConversationWithResponse(ctx context.Context, teamName TeamName, conversationID ConversationID, reqEditors ...RequestEditorFn) (*GetConversationResponse, error)
+
+	// SendMessageWithBodyWithResponse request with any body
+	SendMessageWithBodyWithResponse(ctx context.Context, teamName TeamName, conversationID ConversationID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*SendMessageResponse, error)
+
+	SendMessageWithResponse(ctx context.Context, teamName TeamName, conversationID ConversationID, body SendMessageJSONRequestBody, reqEditors ...RequestEditorFn) (*SendMessageResponse, error)
 
 	// ListAllCustomColumnsWithResponse request
 	ListAllCustomColumnsWithResponse(ctx context.Context, teamName TeamName, params *ListAllCustomColumnsParams, reqEditors ...RequestEditorFn) (*ListAllCustomColumnsResponse, error)
@@ -27733,6 +28360,44 @@ type ClientWithResponsesInterface interface {
 	// QueryListFilterTagsTeamWithResponse request
 	QueryListFilterTagsTeamWithResponse(ctx context.Context, teamName TeamName, queryID QueryID, params *QueryListFilterTagsTeamParams, reqEditors ...RequestEditorFn) (*QueryListFilterTagsTeamResponse, error)
 
+	// ListAllRBACPermissionsWithResponse request
+	ListAllRBACPermissionsWithResponse(ctx context.Context, teamName TeamName, params *ListAllRBACPermissionsParams, reqEditors ...RequestEditorFn) (*ListAllRBACPermissionsResponse, error)
+
+	// CreateRBACPermissionWithBodyWithResponse request with any body
+	CreateRBACPermissionWithBodyWithResponse(ctx context.Context, teamName TeamName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateRBACPermissionResponse, error)
+
+	CreateRBACPermissionWithResponse(ctx context.Context, teamName TeamName, body CreateRBACPermissionJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateRBACPermissionResponse, error)
+
+	// DeleteRBACPermissionWithResponse request
+	DeleteRBACPermissionWithResponse(ctx context.Context, teamName TeamName, rbacPermissionID RBACPermissionID, reqEditors ...RequestEditorFn) (*DeleteRBACPermissionResponse, error)
+
+	// GetRBACPermissionWithResponse request
+	GetRBACPermissionWithResponse(ctx context.Context, teamName TeamName, rbacPermissionID RBACPermissionID, reqEditors ...RequestEditorFn) (*GetRBACPermissionResponse, error)
+
+	// UpdateRBACPermissionWithBodyWithResponse request with any body
+	UpdateRBACPermissionWithBodyWithResponse(ctx context.Context, teamName TeamName, rbacPermissionID RBACPermissionID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateRBACPermissionResponse, error)
+
+	UpdateRBACPermissionWithResponse(ctx context.Context, teamName TeamName, rbacPermissionID RBACPermissionID, body UpdateRBACPermissionJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateRBACPermissionResponse, error)
+
+	// ListAllRBACRolesWithResponse request
+	ListAllRBACRolesWithResponse(ctx context.Context, teamName TeamName, params *ListAllRBACRolesParams, reqEditors ...RequestEditorFn) (*ListAllRBACRolesResponse, error)
+
+	// CreateRBACRoleWithBodyWithResponse request with any body
+	CreateRBACRoleWithBodyWithResponse(ctx context.Context, teamName TeamName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateRBACRoleResponse, error)
+
+	CreateRBACRoleWithResponse(ctx context.Context, teamName TeamName, body CreateRBACRoleJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateRBACRoleResponse, error)
+
+	// DeleteRBACRoleWithResponse request
+	DeleteRBACRoleWithResponse(ctx context.Context, teamName TeamName, rbacCustomRoleID RBACCustomRoleID, reqEditors ...RequestEditorFn) (*DeleteRBACRoleResponse, error)
+
+	// GetRBACRoleWithResponse request
+	GetRBACRoleWithResponse(ctx context.Context, teamName TeamName, rbacCustomRoleID RBACCustomRoleID, reqEditors ...RequestEditorFn) (*GetRBACRoleResponse, error)
+
+	// UpdateRBACRoleWithBodyWithResponse request with any body
+	UpdateRBACRoleWithBodyWithResponse(ctx context.Context, teamName TeamName, rbacCustomRoleID RBACCustomRoleID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateRBACRoleResponse, error)
+
+	UpdateRBACRoleWithResponse(ctx context.Context, teamName TeamName, rbacCustomRoleID RBACCustomRoleID, body UpdateRBACRoleJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateRBACRoleResponse, error)
+
 	// ListReportsWithResponse request
 	ListReportsWithResponse(ctx context.Context, teamName TeamName, params *ListReportsParams, reqEditors ...RequestEditorFn) (*ListReportsResponse, error)
 
@@ -27871,27 +28536,6 @@ type ClientWithResponsesInterface interface {
 	// GetTestConnectionForSyncSourceWithResponse request
 	GetTestConnectionForSyncSourceWithResponse(ctx context.Context, teamName TeamName, syncSourceName SyncSourceName, syncTestConnectionId SyncTestConnectionId, reqEditors ...RequestEditorFn) (*GetTestConnectionForSyncSourceResponse, error)
 
-	// CreateSyncTransformerTestConnectionWithBodyWithResponse request with any body
-	CreateSyncTransformerTestConnectionWithBodyWithResponse(ctx context.Context, teamName TeamName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateSyncTransformerTestConnectionResponse, error)
-
-	CreateSyncTransformerTestConnectionWithResponse(ctx context.Context, teamName TeamName, body CreateSyncTransformerTestConnectionJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateSyncTransformerTestConnectionResponse, error)
-
-	// GetSyncTransformerTestConnectionWithResponse request
-	GetSyncTransformerTestConnectionWithResponse(ctx context.Context, teamName TeamName, syncTransformerTestConnectionID SyncTransformerTestConnectionID, reqEditors ...RequestEditorFn) (*GetSyncTransformerTestConnectionResponse, error)
-
-	// UpdateSyncTestConnectionForSyncTransformerWithBodyWithResponse request with any body
-	UpdateSyncTestConnectionForSyncTransformerWithBodyWithResponse(ctx context.Context, teamName TeamName, syncTransformerTestConnectionID SyncTransformerTestConnectionID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateSyncTestConnectionForSyncTransformerResponse, error)
-
-	UpdateSyncTestConnectionForSyncTransformerWithResponse(ctx context.Context, teamName TeamName, syncTransformerTestConnectionID SyncTransformerTestConnectionID, body UpdateSyncTestConnectionForSyncTransformerJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateSyncTestConnectionForSyncTransformerResponse, error)
-
-	// GetSyncTransformerTestConnectionLogsWithResponse request
-	GetSyncTransformerTestConnectionLogsWithResponse(ctx context.Context, teamName TeamName, syncTransformerTestConnectionID SyncTransformerTestConnectionID, params *GetSyncTransformerTestConnectionLogsParams, reqEditors ...RequestEditorFn) (*GetSyncTransformerTestConnectionLogsResponse, error)
-
-	// PromoteSyncTransformerTestConnectionWithBodyWithResponse request with any body
-	PromoteSyncTransformerTestConnectionWithBodyWithResponse(ctx context.Context, teamName TeamName, syncTransformerTestConnectionID SyncTransformerTestConnectionID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PromoteSyncTransformerTestConnectionResponse, error)
-
-	PromoteSyncTransformerTestConnectionWithResponse(ctx context.Context, teamName TeamName, syncTransformerTestConnectionID SyncTransformerTestConnectionID, body PromoteSyncTransformerTestConnectionJSONRequestBody, reqEditors ...RequestEditorFn) (*PromoteSyncTransformerTestConnectionResponse, error)
-
 	// ListSyncTransformersWithResponse request
 	ListSyncTransformersWithResponse(ctx context.Context, teamName TeamName, params *ListSyncTransformersParams, reqEditors ...RequestEditorFn) (*ListSyncTransformersResponse, error)
 
@@ -27911,9 +28555,6 @@ type ClientWithResponsesInterface interface {
 
 	// ListSyncTransformerSyncsWithResponse request
 	ListSyncTransformerSyncsWithResponse(ctx context.Context, teamName TeamName, syncTransformerName SyncTransformerName, params *ListSyncTransformerSyncsParams, reqEditors ...RequestEditorFn) (*ListSyncTransformerSyncsResponse, error)
-
-	// GetTestConnectionForSyncTransformerWithResponse request
-	GetTestConnectionForSyncTransformerWithResponse(ctx context.Context, teamName TeamName, syncTransformerName SyncTransformerName, syncTestConnectionId SyncTestConnectionId, reqEditors ...RequestEditorFn) (*GetTestConnectionForSyncTransformerResponse, error)
 
 	// ListSyncUpgradesWithResponse request
 	ListSyncUpgradesWithResponse(ctx context.Context, teamName TeamName, params *ListSyncUpgradesParams, reqEditors ...RequestEditorFn) (*ListSyncUpgradesResponse, error)
@@ -28103,6 +28744,54 @@ type ClientWithResponsesInterface interface {
 
 	// DeleteUserWithResponse request
 	DeleteUserWithResponse(ctx context.Context, userID UserID, reqEditors ...RequestEditorFn) (*DeleteUserResponse, error)
+
+	// CreateV2SyncDestinationTestConnectionWithBodyWithResponse request with any body
+	CreateV2SyncDestinationTestConnectionWithBodyWithResponse(ctx context.Context, teamName TeamName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateV2SyncDestinationTestConnectionResponse, error)
+
+	CreateV2SyncDestinationTestConnectionWithResponse(ctx context.Context, teamName TeamName, body CreateV2SyncDestinationTestConnectionJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateV2SyncDestinationTestConnectionResponse, error)
+
+	// GetV2SyncDestinationsWithResponse request
+	GetV2SyncDestinationsWithResponse(ctx context.Context, teamName TeamName, params *GetV2SyncDestinationsParams, reqEditors ...RequestEditorFn) (*GetV2SyncDestinationsResponse, error)
+
+	// CreateV2SyncDestinationWithBodyWithResponse request with any body
+	CreateV2SyncDestinationWithBodyWithResponse(ctx context.Context, teamName TeamName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateV2SyncDestinationResponse, error)
+
+	CreateV2SyncDestinationWithResponse(ctx context.Context, teamName TeamName, body CreateV2SyncDestinationJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateV2SyncDestinationResponse, error)
+
+	// DeleteV2SyncDestinationWithResponse request
+	DeleteV2SyncDestinationWithResponse(ctx context.Context, teamName TeamName, syncDestinationName SyncDestinationName, reqEditors ...RequestEditorFn) (*DeleteV2SyncDestinationResponse, error)
+
+	// GetV2SyncDestinationWithResponse request
+	GetV2SyncDestinationWithResponse(ctx context.Context, teamName TeamName, syncDestinationName SyncDestinationName, reqEditors ...RequestEditorFn) (*GetV2SyncDestinationResponse, error)
+
+	// PatchV2SyncDestinationWithBodyWithResponse request with any body
+	PatchV2SyncDestinationWithBodyWithResponse(ctx context.Context, teamName TeamName, syncDestinationName SyncDestinationName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PatchV2SyncDestinationResponse, error)
+
+	PatchV2SyncDestinationWithResponse(ctx context.Context, teamName TeamName, syncDestinationName SyncDestinationName, body PatchV2SyncDestinationJSONRequestBody, reqEditors ...RequestEditorFn) (*PatchV2SyncDestinationResponse, error)
+
+	// CreateV2SyncIntegrationTestConnectionWithBodyWithResponse request with any body
+	CreateV2SyncIntegrationTestConnectionWithBodyWithResponse(ctx context.Context, teamName TeamName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateV2SyncIntegrationTestConnectionResponse, error)
+
+	CreateV2SyncIntegrationTestConnectionWithResponse(ctx context.Context, teamName TeamName, body CreateV2SyncIntegrationTestConnectionJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateV2SyncIntegrationTestConnectionResponse, error)
+
+	// ListV2SyncIntegrationsWithResponse request
+	ListV2SyncIntegrationsWithResponse(ctx context.Context, teamName TeamName, params *ListV2SyncIntegrationsParams, reqEditors ...RequestEditorFn) (*ListV2SyncIntegrationsResponse, error)
+
+	// CreateV2SyncIntegrationWithBodyWithResponse request with any body
+	CreateV2SyncIntegrationWithBodyWithResponse(ctx context.Context, teamName TeamName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateV2SyncIntegrationResponse, error)
+
+	CreateV2SyncIntegrationWithResponse(ctx context.Context, teamName TeamName, body CreateV2SyncIntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateV2SyncIntegrationResponse, error)
+
+	// DeleteV2SyncIntegrationWithResponse request
+	DeleteV2SyncIntegrationWithResponse(ctx context.Context, teamName TeamName, syncName SyncName, reqEditors ...RequestEditorFn) (*DeleteV2SyncIntegrationResponse, error)
+
+	// GetV2SyncIntegrationWithResponse request
+	GetV2SyncIntegrationWithResponse(ctx context.Context, teamName TeamName, syncName SyncName, reqEditors ...RequestEditorFn) (*GetV2SyncIntegrationResponse, error)
+
+	// UpdateV2SyncIntegrationWithBodyWithResponse request with any body
+	UpdateV2SyncIntegrationWithBodyWithResponse(ctx context.Context, teamName TeamName, syncName SyncName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateV2SyncIntegrationResponse, error)
+
+	UpdateV2SyncIntegrationWithResponse(ctx context.Context, teamName TeamName, syncName SyncName, body UpdateV2SyncIntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateV2SyncIntegrationResponse, error)
 }
 
 type IndexResponse struct {
@@ -28186,151 +28875,12 @@ func (r GetAuditLogResponse) StatusCode() int {
 	return 0
 }
 
-type ListFiltersResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON200      *struct {
-		Items    []Filter     `json:"items"`
-		Metadata ListMetadata `json:"metadata"`
-	}
-	JSON401 *RequiresAuthentication
-	JSON403 *Forbidden
-	JSON404 *NotFound
-	JSON422 *UnprocessableEntity
-	JSON500 *InternalError
-}
-
-// Status returns HTTPResponse.Status
-func (r ListFiltersResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r ListFiltersResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type ListFilterTagsResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON200      *struct {
-		Items    []FilterTag  `json:"items"`
-		Metadata ListMetadata `json:"metadata"`
-	}
-	JSON401 *RequiresAuthentication
-	JSON403 *Forbidden
-	JSON404 *NotFound
-	JSON422 *UnprocessableEntity
-	JSON500 *InternalError
-}
-
-// Status returns HTTPResponse.Status
-func (r ListFilterTagsResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r ListFilterTagsResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type DeleteFilterResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON401      *RequiresAuthentication
-	JSON403      *Forbidden
-	JSON404      *NotFound
-	JSON422      *UnprocessableEntity
-	JSON500      *InternalError
-}
-
-// Status returns HTTPResponse.Status
-func (r DeleteFilterResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r DeleteFilterResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type GetFilterByIDResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON200      *Filter
-	JSON401      *RequiresAuthentication
-	JSON403      *Forbidden
-	JSON404      *NotFound
-	JSON422      *UnprocessableEntity
-	JSON500      *InternalError
-}
-
-// Status returns HTTPResponse.Status
-func (r GetFilterByIDResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GetFilterByIDResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type UpdateFilterResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON200      *Filter
-	JSON401      *RequiresAuthentication
-	JSON403      *Forbidden
-	JSON404      *NotFound
-	JSON422      *UnprocessableEntity
-	JSON500      *InternalError
-}
-
-// Status returns HTTPResponse.Status
-func (r UpdateFilterResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r UpdateFilterResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
 type HealthCheckResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON400      *BadRequest
 	JSON500      *InternalError
+	JSON503      *ServiceUnavailable
 }
 
 // Status returns HTTPResponse.Status
@@ -28354,6 +28904,7 @@ type HealthCheckHeadResponse struct {
 	HTTPResponse *http.Response
 	JSON400      *BadRequest
 	JSON500      *InternalError
+	JSON503      *ServiceUnavailable
 }
 
 // Status returns HTTPResponse.Status
@@ -29752,336 +30303,6 @@ func (r AuthRegistryRequestResponse) StatusCode() int {
 	return 0
 }
 
-type ListTablesResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON200      *struct {
-		Items    []TableListItem `json:"items"`
-		Metadata ListMetadata    `json:"metadata"`
-	}
-	JSON401 *RequiresAuthentication
-	JSON403 *Forbidden
-	JSON404 *NotFound
-	JSON422 *UnprocessableEntity
-	JSON500 *InternalError
-}
-
-// Status returns HTTPResponse.Status
-func (r ListTablesResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r ListTablesResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type BatchTableSchemasResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON200      *struct {
-		Items []BatchTableSchemaItem `json:"items"`
-	}
-	JSON401 *RequiresAuthentication
-	JSON403 *Forbidden
-	JSON404 *NotFound
-	JSON422 *UnprocessableEntity
-	JSON500 *InternalError
-}
-
-// Status returns HTTPResponse.Status
-func (r BatchTableSchemasResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r BatchTableSchemasResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type TableListColumnsResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON200      *struct {
-		Items    []TableColumnListItem `json:"items"`
-		Metadata ListMetadata          `json:"metadata"`
-	}
-	JSON401 *RequiresAuthentication
-	JSON403 *Forbidden
-	JSON404 *NotFound
-	JSON422 *UnprocessableEntity
-	JSON500 *InternalError
-}
-
-// Status returns HTTPResponse.Status
-func (r TableListColumnsResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r TableListColumnsResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type TableColumnListValuesResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON200      *struct {
-		Items    []TableColumnValueListItem `json:"items"`
-		Metadata ListMetadata               `json:"metadata"`
-	}
-	JSON401 *RequiresAuthentication
-	JSON403 *Forbidden
-	JSON404 *NotFound
-	JSON422 *UnprocessableEntity
-	JSON500 *InternalError
-}
-
-// Status returns HTTPResponse.Status
-func (r TableColumnListValuesResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r TableColumnListValuesResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type TableListRowsResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON200      *struct {
-		Data     TableData    `json:"data"`
-		Metadata ListMetadata `json:"metadata"`
-	}
-	JSON400 *BadRequest
-	JSON401 *RequiresAuthentication
-	JSON403 *Forbidden
-	JSON404 *NotFound
-	JSON422 *UnprocessableEntity
-	JSON500 *InternalError
-}
-
-// Status returns HTTPResponse.Status
-func (r TableListRowsResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r TableListRowsResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type TableRowByIdResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON200      *struct {
-		Data    TableRow             `json:"data"`
-		Matches []TableRowFieldMatch `json:"matches"`
-	}
-	JSON400 *BadRequest
-	JSON401 *RequiresAuthentication
-	JSON403 *Forbidden
-	JSON404 *NotFound
-	JSON422 *UnprocessableEntity
-	JSON500 *InternalError
-}
-
-// Status returns HTTPResponse.Status
-func (r TableRowByIdResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r TableRowByIdResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type TableListFiltersResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON200      *struct {
-		Items    []Filter     `json:"items"`
-		Metadata ListMetadata `json:"metadata"`
-	}
-	JSON400 *BadRequest
-	JSON401 *RequiresAuthentication
-	JSON403 *Forbidden
-	JSON404 *NotFound
-	JSON422 *UnprocessableEntity
-	JSON500 *InternalError
-}
-
-// Status returns HTTPResponse.Status
-func (r TableListFiltersResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r TableListFiltersResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type TableSaveFilterResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON200      *Filter
-	JSON201      *Filter
-	JSON400      *BadRequest
-	JSON401      *RequiresAuthentication
-	JSON403      *Forbidden
-	JSON404      *NotFound
-	JSON422      *UnprocessableEntity
-	JSON500      *InternalError
-}
-
-// Status returns HTTPResponse.Status
-func (r TableSaveFilterResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r TableSaveFilterResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type TableListFilterTagsResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON200      *struct {
-		Items    []FilterTag  `json:"items"`
-		Metadata ListMetadata `json:"metadata"`
-	}
-	JSON401 *RequiresAuthentication
-	JSON403 *Forbidden
-	JSON404 *NotFound
-	JSON422 *UnprocessableEntity
-	JSON500 *InternalError
-}
-
-// Status returns HTTPResponse.Status
-func (r TableListFilterTagsResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r TableListFilterTagsResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type TableListRelationsResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON200      *struct {
-		Data []TableRelation `json:"data"`
-	}
-	JSON400 *BadRequest
-	JSON401 *RequiresAuthentication
-	JSON403 *Forbidden
-	JSON404 *NotFound
-	JSON500 *InternalError
-}
-
-// Status returns HTTPResponse.Status
-func (r TableListRelationsResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r TableListRelationsResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type TableSchemaResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON200      *struct {
-		DefaultColumns []string    `json:"default_columns"`
-		Schema         TableSchema `json:"schema"`
-	}
-	JSON401 *RequiresAuthentication
-	JSON403 *Forbidden
-	JSON404 *NotFound
-	JSON422 *UnprocessableEntity
-	JSON500 *InternalError
-}
-
-// Status returns HTTPResponse.Status
-func (r TableSchemaResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r TableSchemaResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
 type ListTeamsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -30712,6 +30933,85 @@ func (r AuthenticateConnectorOAuthResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r AuthenticateConnectorOAuthResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateConversationResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON201      *Conversation
+	JSON400      *BadRequest
+	JSON401      *RequiresAuthentication
+	JSON429      *TooManyRequests
+	JSON500      *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateConversationResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateConversationResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetConversationResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *Conversation
+	JSON400      *BadRequest
+	JSON401      *RequiresAuthentication
+	JSON404      *NotFound
+	JSON500      *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r GetConversationResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetConversationResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type SendMessageResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON201      *ConversationMessage
+	JSON400      *BadRequest
+	JSON401      *RequiresAuthentication
+	JSON403      *Forbidden
+	JSON404      *NotFound
+	JSON500      *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r SendMessageResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r SendMessageResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -32329,6 +32629,288 @@ func (r QueryListFilterTagsTeamResponse) StatusCode() int {
 	return 0
 }
 
+type ListAllRBACPermissionsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *struct {
+		Items    []RBACPermission `json:"items"`
+		Metadata ListMetadata     `json:"metadata"`
+	}
+	JSON400 *BadRequest
+	JSON401 *RequiresAuthentication
+	JSON403 *Forbidden
+	JSON404 *NotFound
+	JSON422 *UnprocessableEntity
+	JSON500 *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r ListAllRBACPermissionsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListAllRBACPermissionsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateRBACPermissionResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON201      *RBACPermission
+	JSON400      *BadRequest
+	JSON401      *RequiresAuthentication
+	JSON403      *Forbidden
+	JSON404      *NotFound
+	JSON422      *UnprocessableEntity
+	JSON500      *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateRBACPermissionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateRBACPermissionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteRBACPermissionResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON401      *RequiresAuthentication
+	JSON403      *Forbidden
+	JSON404      *NotFound
+	JSON422      *UnprocessableEntity
+	JSON500      *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteRBACPermissionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteRBACPermissionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetRBACPermissionResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *RBACPermission
+	JSON400      *BadRequest
+	JSON401      *RequiresAuthentication
+	JSON403      *Forbidden
+	JSON404      *NotFound
+	JSON422      *UnprocessableEntity
+	JSON500      *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r GetRBACPermissionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetRBACPermissionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateRBACPermissionResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *RBACPermission
+	JSON400      *BadRequest
+	JSON401      *RequiresAuthentication
+	JSON403      *Forbidden
+	JSON404      *NotFound
+	JSON422      *UnprocessableEntity
+	JSON500      *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateRBACPermissionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateRBACPermissionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListAllRBACRolesResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *struct {
+		Items    []RBACRole   `json:"items"`
+		Metadata ListMetadata `json:"metadata"`
+	}
+	JSON400 *BadRequest
+	JSON401 *RequiresAuthentication
+	JSON403 *Forbidden
+	JSON404 *NotFound
+	JSON422 *UnprocessableEntity
+	JSON500 *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r ListAllRBACRolesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListAllRBACRolesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateRBACRoleResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON201      *RBACRole
+	JSON400      *BadRequest
+	JSON401      *RequiresAuthentication
+	JSON403      *Forbidden
+	JSON404      *NotFound
+	JSON422      *UnprocessableEntity
+	JSON500      *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateRBACRoleResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateRBACRoleResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteRBACRoleResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON401      *RequiresAuthentication
+	JSON403      *Forbidden
+	JSON404      *NotFound
+	JSON422      *UnprocessableEntity
+	JSON500      *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteRBACRoleResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteRBACRoleResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetRBACRoleResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *RBACRole
+	JSON400      *BadRequest
+	JSON401      *RequiresAuthentication
+	JSON403      *Forbidden
+	JSON404      *NotFound
+	JSON422      *UnprocessableEntity
+	JSON500      *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r GetRBACRoleResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetRBACRoleResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateRBACRoleResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *RBACRole
+	JSON400      *BadRequest
+	JSON401      *RequiresAuthentication
+	JSON403      *Forbidden
+	JSON404      *NotFound
+	JSON422      *UnprocessableEntity
+	JSON500      *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateRBACRoleResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateRBACRoleResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type ListReportsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -33353,145 +33935,6 @@ func (r GetTestConnectionForSyncSourceResponse) StatusCode() int {
 	return 0
 }
 
-type CreateSyncTransformerTestConnectionResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON201      *SyncTransformerTestConnection
-	JSON400      *BadRequest
-	JSON401      *RequiresAuthentication
-	JSON404      *NotFound
-	JSON422      *UnprocessableEntity
-	JSON429      *TooManyRequests
-	JSON500      *InternalError
-}
-
-// Status returns HTTPResponse.Status
-func (r CreateSyncTransformerTestConnectionResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r CreateSyncTransformerTestConnectionResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type GetSyncTransformerTestConnectionResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON200      *SyncTransformerTestConnection
-	JSON401      *RequiresAuthentication
-	JSON403      *Forbidden
-	JSON404      *NotFound
-	JSON500      *InternalError
-}
-
-// Status returns HTTPResponse.Status
-func (r GetSyncTransformerTestConnectionResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GetSyncTransformerTestConnectionResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type UpdateSyncTestConnectionForSyncTransformerResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON200      *SyncTransformerTestConnection
-	JSON400      *BadRequest
-	JSON403      *Forbidden
-	JSON404      *NotFound
-	JSON422      *UnprocessableEntity
-	JSON500      *InternalError
-}
-
-// Status returns HTTPResponse.Status
-func (r UpdateSyncTestConnectionForSyncTransformerResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r UpdateSyncTestConnectionForSyncTransformerResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type GetSyncTransformerTestConnectionLogsResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON200      *struct {
-		// Location The location to download the test connection logs from
-		Location string `json:"location"`
-	}
-	JSON400 *BadRequest
-	JSON401 *RequiresAuthentication
-	JSON404 *NotFound
-	JSON422 *UnprocessableEntity
-	JSON500 *InternalError
-}
-
-// Status returns HTTPResponse.Status
-func (r GetSyncTransformerTestConnectionLogsResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GetSyncTransformerTestConnectionLogsResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type PromoteSyncTransformerTestConnectionResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON200      *SyncTransformer
-	JSON201      *SyncTransformer
-	JSON400      *BadRequest
-	JSON401      *RequiresAuthentication
-	JSON404      *NotFound
-	JSON422      *UnprocessableEntity
-	JSON500      *InternalError
-}
-
-// Status returns HTTPResponse.Status
-func (r PromoteSyncTransformerTestConnectionResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r PromoteSyncTransformerTestConnectionResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
 type ListSyncTransformersResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -33648,32 +34091,6 @@ func (r ListSyncTransformerSyncsResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r ListSyncTransformerSyncsResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type GetTestConnectionForSyncTransformerResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON200      *SyncTestConnection
-	JSON400      *BadRequest
-	JSON401      *RequiresAuthentication
-	JSON404      *NotFound
-	JSON500      *InternalError
-}
-
-// Status returns HTTPResponse.Status
-func (r GetTestConnectionForSyncTransformerResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GetTestConnectionForSyncTransformerResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -35155,6 +35572,7 @@ type UserTOTPVerifyResponse struct {
 	JSON404      *NotFound
 	JSON405      *MethodNotAllowed
 	JSON422      *UnprocessableEntity
+	JSON429      *TooManyRequests
 	JSON500      *InternalError
 }
 
@@ -35201,6 +35619,332 @@ func (r DeleteUserResponse) StatusCode() int {
 	return 0
 }
 
+type CreateV2SyncDestinationTestConnectionResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON201      *SyncDestinationTestConnectionV2
+	JSON400      *BadRequest
+	JSON401      *RequiresAuthentication
+	JSON404      *NotFound
+	JSON422      *UnprocessableEntity
+	JSON429      *TooManyRequests
+	JSON500      *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateV2SyncDestinationTestConnectionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateV2SyncDestinationTestConnectionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetV2SyncDestinationsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *struct {
+		Items    []SyncDestinationV2 `json:"items"`
+		Metadata ListMetadata        `json:"metadata"`
+	}
+	JSON400 *BadRequest
+	JSON401 *RequiresAuthentication
+	JSON404 *NotFound
+	JSON500 *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r GetV2SyncDestinationsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetV2SyncDestinationsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateV2SyncDestinationResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *SyncDestinationV2
+	JSON201      *SyncDestinationV2
+	JSON400      *BadRequest
+	JSON401      *RequiresAuthentication
+	JSON404      *NotFound
+	JSON422      *UnprocessableEntity
+	JSON500      *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateV2SyncDestinationResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateV2SyncDestinationResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteV2SyncDestinationResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON401      *RequiresAuthentication
+	JSON404      *NotFound
+	JSON422      *UnprocessableEntity
+	JSON500      *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteV2SyncDestinationResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteV2SyncDestinationResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetV2SyncDestinationResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *SyncDestinationV2
+	JSON401      *RequiresAuthentication
+	JSON404      *NotFound
+	JSON500      *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r GetV2SyncDestinationResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetV2SyncDestinationResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type PatchV2SyncDestinationResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *SyncDestination
+	JSON400      *BadRequest
+	JSON401      *RequiresAuthentication
+	JSON404      *NotFound
+	JSON422      *UnprocessableEntity
+	JSON500      *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r PatchV2SyncDestinationResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r PatchV2SyncDestinationResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateV2SyncIntegrationTestConnectionResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON201      *SyncIntegrationTestConnectionV2
+	JSON400      *BadRequest
+	JSON401      *RequiresAuthentication
+	JSON404      *NotFound
+	JSON422      *UnprocessableEntity
+	JSON429      *TooManyRequests
+	JSON500      *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateV2SyncIntegrationTestConnectionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateV2SyncIntegrationTestConnectionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListV2SyncIntegrationsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *struct {
+		Items    []SyncIntegrationExpandedV2 `json:"items"`
+		Metadata ListMetadata                `json:"metadata"`
+	}
+	JSON400 *BadRequest
+	JSON401 *RequiresAuthentication
+	JSON404 *NotFound
+	JSON500 *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r ListV2SyncIntegrationsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListV2SyncIntegrationsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateV2SyncIntegrationResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON201      *SyncIntegrationV2
+	JSON400      *BadRequest
+	JSON401      *RequiresAuthentication
+	JSON404      *NotFound
+	JSON422      *UnprocessableEntity
+	JSON500      *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateV2SyncIntegrationResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateV2SyncIntegrationResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteV2SyncIntegrationResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON400      *BadRequest
+	JSON401      *RequiresAuthentication
+	JSON403      *Forbidden
+	JSON404      *NotFound
+	JSON405      *MethodNotAllowed
+	JSON500      *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteV2SyncIntegrationResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteV2SyncIntegrationResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetV2SyncIntegrationResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *SyncIntegrationExpandedV2
+	JSON400      *BadRequest
+	JSON401      *RequiresAuthentication
+	JSON404      *NotFound
+	JSON500      *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r GetV2SyncIntegrationResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetV2SyncIntegrationResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateV2SyncIntegrationResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *SyncIntegrationV2
+	JSON400      *BadRequest
+	JSON401      *RequiresAuthentication
+	JSON404      *NotFound
+	JSON422      *UnprocessableEntity
+	JSON500      *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateV2SyncIntegrationResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateV2SyncIntegrationResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 // IndexWithResponse request returning *IndexResponse
 func (c *ClientWithResponses) IndexWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*IndexResponse, error) {
 	rsp, err := c.Index(ctx, reqEditors...)
@@ -35226,59 +35970,6 @@ func (c *ClientWithResponses) GetAuditLogWithResponse(ctx context.Context, id op
 		return nil, err
 	}
 	return ParseGetAuditLogResponse(rsp)
-}
-
-// ListFiltersWithResponse request returning *ListFiltersResponse
-func (c *ClientWithResponses) ListFiltersWithResponse(ctx context.Context, params *ListFiltersParams, reqEditors ...RequestEditorFn) (*ListFiltersResponse, error) {
-	rsp, err := c.ListFilters(ctx, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseListFiltersResponse(rsp)
-}
-
-// ListFilterTagsWithResponse request returning *ListFilterTagsResponse
-func (c *ClientWithResponses) ListFilterTagsWithResponse(ctx context.Context, params *ListFilterTagsParams, reqEditors ...RequestEditorFn) (*ListFilterTagsResponse, error) {
-	rsp, err := c.ListFilterTags(ctx, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseListFilterTagsResponse(rsp)
-}
-
-// DeleteFilterWithResponse request returning *DeleteFilterResponse
-func (c *ClientWithResponses) DeleteFilterWithResponse(ctx context.Context, filterID FilterID, reqEditors ...RequestEditorFn) (*DeleteFilterResponse, error) {
-	rsp, err := c.DeleteFilter(ctx, filterID, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseDeleteFilterResponse(rsp)
-}
-
-// GetFilterByIDWithResponse request returning *GetFilterByIDResponse
-func (c *ClientWithResponses) GetFilterByIDWithResponse(ctx context.Context, filterID FilterID, reqEditors ...RequestEditorFn) (*GetFilterByIDResponse, error) {
-	rsp, err := c.GetFilterByID(ctx, filterID, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGetFilterByIDResponse(rsp)
-}
-
-// UpdateFilterWithBodyWithResponse request with arbitrary body returning *UpdateFilterResponse
-func (c *ClientWithResponses) UpdateFilterWithBodyWithResponse(ctx context.Context, filterID FilterID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateFilterResponse, error) {
-	rsp, err := c.UpdateFilterWithBody(ctx, filterID, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseUpdateFilterResponse(rsp)
-}
-
-func (c *ClientWithResponses) UpdateFilterWithResponse(ctx context.Context, filterID FilterID, body UpdateFilterJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateFilterResponse, error) {
-	rsp, err := c.UpdateFilter(ctx, filterID, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseUpdateFilterResponse(rsp)
 }
 
 // HealthCheckWithResponse request returning *HealthCheckResponse
@@ -35892,113 +36583,6 @@ func (c *ClientWithResponses) AuthRegistryRequestWithResponse(ctx context.Contex
 	return ParseAuthRegistryRequestResponse(rsp)
 }
 
-// ListTablesWithResponse request returning *ListTablesResponse
-func (c *ClientWithResponses) ListTablesWithResponse(ctx context.Context, params *ListTablesParams, reqEditors ...RequestEditorFn) (*ListTablesResponse, error) {
-	rsp, err := c.ListTables(ctx, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseListTablesResponse(rsp)
-}
-
-// BatchTableSchemasWithResponse request returning *BatchTableSchemasResponse
-func (c *ClientWithResponses) BatchTableSchemasWithResponse(ctx context.Context, params *BatchTableSchemasParams, reqEditors ...RequestEditorFn) (*BatchTableSchemasResponse, error) {
-	rsp, err := c.BatchTableSchemas(ctx, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseBatchTableSchemasResponse(rsp)
-}
-
-// TableListColumnsWithResponse request returning *TableListColumnsResponse
-func (c *ClientWithResponses) TableListColumnsWithResponse(ctx context.Context, tableName TableName, params *TableListColumnsParams, reqEditors ...RequestEditorFn) (*TableListColumnsResponse, error) {
-	rsp, err := c.TableListColumns(ctx, tableName, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseTableListColumnsResponse(rsp)
-}
-
-// TableColumnListValuesWithResponse request returning *TableColumnListValuesResponse
-func (c *ClientWithResponses) TableColumnListValuesWithResponse(ctx context.Context, tableName TableName, columnName ColumnName, params *TableColumnListValuesParams, reqEditors ...RequestEditorFn) (*TableColumnListValuesResponse, error) {
-	rsp, err := c.TableColumnListValues(ctx, tableName, columnName, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseTableColumnListValuesResponse(rsp)
-}
-
-// TableListRowsWithResponse request returning *TableListRowsResponse
-func (c *ClientWithResponses) TableListRowsWithResponse(ctx context.Context, tableName TableName, params *TableListRowsParams, reqEditors ...RequestEditorFn) (*TableListRowsResponse, error) {
-	rsp, err := c.TableListRows(ctx, tableName, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseTableListRowsResponse(rsp)
-}
-
-// TableRowByIdWithResponse request returning *TableRowByIdResponse
-func (c *ClientWithResponses) TableRowByIdWithResponse(ctx context.Context, tableName TableName, tableRowId TableRowId, params *TableRowByIdParams, reqEditors ...RequestEditorFn) (*TableRowByIdResponse, error) {
-	rsp, err := c.TableRowById(ctx, tableName, tableRowId, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseTableRowByIdResponse(rsp)
-}
-
-// TableListFiltersWithResponse request returning *TableListFiltersResponse
-func (c *ClientWithResponses) TableListFiltersWithResponse(ctx context.Context, tableName TableName, params *TableListFiltersParams, reqEditors ...RequestEditorFn) (*TableListFiltersResponse, error) {
-	rsp, err := c.TableListFilters(ctx, tableName, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseTableListFiltersResponse(rsp)
-}
-
-// TableSaveFilterWithBodyWithResponse request with arbitrary body returning *TableSaveFilterResponse
-func (c *ClientWithResponses) TableSaveFilterWithBodyWithResponse(ctx context.Context, tableName TableName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*TableSaveFilterResponse, error) {
-	rsp, err := c.TableSaveFilterWithBody(ctx, tableName, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseTableSaveFilterResponse(rsp)
-}
-
-func (c *ClientWithResponses) TableSaveFilterWithResponse(ctx context.Context, tableName TableName, body TableSaveFilterJSONRequestBody, reqEditors ...RequestEditorFn) (*TableSaveFilterResponse, error) {
-	rsp, err := c.TableSaveFilter(ctx, tableName, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseTableSaveFilterResponse(rsp)
-}
-
-// TableListFilterTagsWithResponse request returning *TableListFilterTagsResponse
-func (c *ClientWithResponses) TableListFilterTagsWithResponse(ctx context.Context, tableName TableName, params *TableListFilterTagsParams, reqEditors ...RequestEditorFn) (*TableListFilterTagsResponse, error) {
-	rsp, err := c.TableListFilterTags(ctx, tableName, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseTableListFilterTagsResponse(rsp)
-}
-
-// TableListRelationsWithResponse request returning *TableListRelationsResponse
-func (c *ClientWithResponses) TableListRelationsWithResponse(ctx context.Context, tableName TableName, params *TableListRelationsParams, reqEditors ...RequestEditorFn) (*TableListRelationsResponse, error) {
-	rsp, err := c.TableListRelations(ctx, tableName, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseTableListRelationsResponse(rsp)
-}
-
-// TableSchemaWithResponse request returning *TableSchemaResponse
-func (c *ClientWithResponses) TableSchemaWithResponse(ctx context.Context, tableName TableName, reqEditors ...RequestEditorFn) (*TableSchemaResponse, error) {
-	rsp, err := c.TableSchema(ctx, tableName, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseTableSchemaResponse(rsp)
-}
-
 // ListTeamsWithResponse request returning *ListTeamsResponse
 func (c *ClientWithResponses) ListTeamsWithResponse(ctx context.Context, params *ListTeamsParams, reqEditors ...RequestEditorFn) (*ListTeamsResponse, error) {
 	rsp, err := c.ListTeams(ctx, params, reqEditors...)
@@ -36292,6 +36876,49 @@ func (c *ClientWithResponses) AuthenticateConnectorOAuthWithResponse(ctx context
 		return nil, err
 	}
 	return ParseAuthenticateConnectorOAuthResponse(rsp)
+}
+
+// CreateConversationWithBodyWithResponse request with arbitrary body returning *CreateConversationResponse
+func (c *ClientWithResponses) CreateConversationWithBodyWithResponse(ctx context.Context, teamName TeamName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateConversationResponse, error) {
+	rsp, err := c.CreateConversationWithBody(ctx, teamName, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateConversationResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateConversationWithResponse(ctx context.Context, teamName TeamName, body CreateConversationJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateConversationResponse, error) {
+	rsp, err := c.CreateConversation(ctx, teamName, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateConversationResponse(rsp)
+}
+
+// GetConversationWithResponse request returning *GetConversationResponse
+func (c *ClientWithResponses) GetConversationWithResponse(ctx context.Context, teamName TeamName, conversationID ConversationID, reqEditors ...RequestEditorFn) (*GetConversationResponse, error) {
+	rsp, err := c.GetConversation(ctx, teamName, conversationID, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetConversationResponse(rsp)
+}
+
+// SendMessageWithBodyWithResponse request with arbitrary body returning *SendMessageResponse
+func (c *ClientWithResponses) SendMessageWithBodyWithResponse(ctx context.Context, teamName TeamName, conversationID ConversationID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*SendMessageResponse, error) {
+	rsp, err := c.SendMessageWithBody(ctx, teamName, conversationID, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseSendMessageResponse(rsp)
+}
+
+func (c *ClientWithResponses) SendMessageWithResponse(ctx context.Context, teamName TeamName, conversationID ConversationID, body SendMessageJSONRequestBody, reqEditors ...RequestEditorFn) (*SendMessageResponse, error) {
+	rsp, err := c.SendMessage(ctx, teamName, conversationID, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseSendMessageResponse(rsp)
 }
 
 // ListAllCustomColumnsWithResponse request returning *ListAllCustomColumnsResponse
@@ -36993,6 +37620,128 @@ func (c *ClientWithResponses) QueryListFilterTagsTeamWithResponse(ctx context.Co
 	return ParseQueryListFilterTagsTeamResponse(rsp)
 }
 
+// ListAllRBACPermissionsWithResponse request returning *ListAllRBACPermissionsResponse
+func (c *ClientWithResponses) ListAllRBACPermissionsWithResponse(ctx context.Context, teamName TeamName, params *ListAllRBACPermissionsParams, reqEditors ...RequestEditorFn) (*ListAllRBACPermissionsResponse, error) {
+	rsp, err := c.ListAllRBACPermissions(ctx, teamName, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListAllRBACPermissionsResponse(rsp)
+}
+
+// CreateRBACPermissionWithBodyWithResponse request with arbitrary body returning *CreateRBACPermissionResponse
+func (c *ClientWithResponses) CreateRBACPermissionWithBodyWithResponse(ctx context.Context, teamName TeamName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateRBACPermissionResponse, error) {
+	rsp, err := c.CreateRBACPermissionWithBody(ctx, teamName, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateRBACPermissionResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateRBACPermissionWithResponse(ctx context.Context, teamName TeamName, body CreateRBACPermissionJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateRBACPermissionResponse, error) {
+	rsp, err := c.CreateRBACPermission(ctx, teamName, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateRBACPermissionResponse(rsp)
+}
+
+// DeleteRBACPermissionWithResponse request returning *DeleteRBACPermissionResponse
+func (c *ClientWithResponses) DeleteRBACPermissionWithResponse(ctx context.Context, teamName TeamName, rbacPermissionID RBACPermissionID, reqEditors ...RequestEditorFn) (*DeleteRBACPermissionResponse, error) {
+	rsp, err := c.DeleteRBACPermission(ctx, teamName, rbacPermissionID, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteRBACPermissionResponse(rsp)
+}
+
+// GetRBACPermissionWithResponse request returning *GetRBACPermissionResponse
+func (c *ClientWithResponses) GetRBACPermissionWithResponse(ctx context.Context, teamName TeamName, rbacPermissionID RBACPermissionID, reqEditors ...RequestEditorFn) (*GetRBACPermissionResponse, error) {
+	rsp, err := c.GetRBACPermission(ctx, teamName, rbacPermissionID, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetRBACPermissionResponse(rsp)
+}
+
+// UpdateRBACPermissionWithBodyWithResponse request with arbitrary body returning *UpdateRBACPermissionResponse
+func (c *ClientWithResponses) UpdateRBACPermissionWithBodyWithResponse(ctx context.Context, teamName TeamName, rbacPermissionID RBACPermissionID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateRBACPermissionResponse, error) {
+	rsp, err := c.UpdateRBACPermissionWithBody(ctx, teamName, rbacPermissionID, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateRBACPermissionResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateRBACPermissionWithResponse(ctx context.Context, teamName TeamName, rbacPermissionID RBACPermissionID, body UpdateRBACPermissionJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateRBACPermissionResponse, error) {
+	rsp, err := c.UpdateRBACPermission(ctx, teamName, rbacPermissionID, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateRBACPermissionResponse(rsp)
+}
+
+// ListAllRBACRolesWithResponse request returning *ListAllRBACRolesResponse
+func (c *ClientWithResponses) ListAllRBACRolesWithResponse(ctx context.Context, teamName TeamName, params *ListAllRBACRolesParams, reqEditors ...RequestEditorFn) (*ListAllRBACRolesResponse, error) {
+	rsp, err := c.ListAllRBACRoles(ctx, teamName, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListAllRBACRolesResponse(rsp)
+}
+
+// CreateRBACRoleWithBodyWithResponse request with arbitrary body returning *CreateRBACRoleResponse
+func (c *ClientWithResponses) CreateRBACRoleWithBodyWithResponse(ctx context.Context, teamName TeamName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateRBACRoleResponse, error) {
+	rsp, err := c.CreateRBACRoleWithBody(ctx, teamName, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateRBACRoleResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateRBACRoleWithResponse(ctx context.Context, teamName TeamName, body CreateRBACRoleJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateRBACRoleResponse, error) {
+	rsp, err := c.CreateRBACRole(ctx, teamName, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateRBACRoleResponse(rsp)
+}
+
+// DeleteRBACRoleWithResponse request returning *DeleteRBACRoleResponse
+func (c *ClientWithResponses) DeleteRBACRoleWithResponse(ctx context.Context, teamName TeamName, rbacCustomRoleID RBACCustomRoleID, reqEditors ...RequestEditorFn) (*DeleteRBACRoleResponse, error) {
+	rsp, err := c.DeleteRBACRole(ctx, teamName, rbacCustomRoleID, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteRBACRoleResponse(rsp)
+}
+
+// GetRBACRoleWithResponse request returning *GetRBACRoleResponse
+func (c *ClientWithResponses) GetRBACRoleWithResponse(ctx context.Context, teamName TeamName, rbacCustomRoleID RBACCustomRoleID, reqEditors ...RequestEditorFn) (*GetRBACRoleResponse, error) {
+	rsp, err := c.GetRBACRole(ctx, teamName, rbacCustomRoleID, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetRBACRoleResponse(rsp)
+}
+
+// UpdateRBACRoleWithBodyWithResponse request with arbitrary body returning *UpdateRBACRoleResponse
+func (c *ClientWithResponses) UpdateRBACRoleWithBodyWithResponse(ctx context.Context, teamName TeamName, rbacCustomRoleID RBACCustomRoleID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateRBACRoleResponse, error) {
+	rsp, err := c.UpdateRBACRoleWithBody(ctx, teamName, rbacCustomRoleID, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateRBACRoleResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateRBACRoleWithResponse(ctx context.Context, teamName TeamName, rbacCustomRoleID RBACCustomRoleID, body UpdateRBACRoleJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateRBACRoleResponse, error) {
+	rsp, err := c.UpdateRBACRole(ctx, teamName, rbacCustomRoleID, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateRBACRoleResponse(rsp)
+}
+
 // ListReportsWithResponse request returning *ListReportsResponse
 func (c *ClientWithResponses) ListReportsWithResponse(ctx context.Context, teamName TeamName, params *ListReportsParams, reqEditors ...RequestEditorFn) (*ListReportsResponse, error) {
 	rsp, err := c.ListReports(ctx, teamName, params, reqEditors...)
@@ -37431,75 +38180,6 @@ func (c *ClientWithResponses) GetTestConnectionForSyncSourceWithResponse(ctx con
 	return ParseGetTestConnectionForSyncSourceResponse(rsp)
 }
 
-// CreateSyncTransformerTestConnectionWithBodyWithResponse request with arbitrary body returning *CreateSyncTransformerTestConnectionResponse
-func (c *ClientWithResponses) CreateSyncTransformerTestConnectionWithBodyWithResponse(ctx context.Context, teamName TeamName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateSyncTransformerTestConnectionResponse, error) {
-	rsp, err := c.CreateSyncTransformerTestConnectionWithBody(ctx, teamName, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseCreateSyncTransformerTestConnectionResponse(rsp)
-}
-
-func (c *ClientWithResponses) CreateSyncTransformerTestConnectionWithResponse(ctx context.Context, teamName TeamName, body CreateSyncTransformerTestConnectionJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateSyncTransformerTestConnectionResponse, error) {
-	rsp, err := c.CreateSyncTransformerTestConnection(ctx, teamName, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseCreateSyncTransformerTestConnectionResponse(rsp)
-}
-
-// GetSyncTransformerTestConnectionWithResponse request returning *GetSyncTransformerTestConnectionResponse
-func (c *ClientWithResponses) GetSyncTransformerTestConnectionWithResponse(ctx context.Context, teamName TeamName, syncTransformerTestConnectionID SyncTransformerTestConnectionID, reqEditors ...RequestEditorFn) (*GetSyncTransformerTestConnectionResponse, error) {
-	rsp, err := c.GetSyncTransformerTestConnection(ctx, teamName, syncTransformerTestConnectionID, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGetSyncTransformerTestConnectionResponse(rsp)
-}
-
-// UpdateSyncTestConnectionForSyncTransformerWithBodyWithResponse request with arbitrary body returning *UpdateSyncTestConnectionForSyncTransformerResponse
-func (c *ClientWithResponses) UpdateSyncTestConnectionForSyncTransformerWithBodyWithResponse(ctx context.Context, teamName TeamName, syncTransformerTestConnectionID SyncTransformerTestConnectionID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateSyncTestConnectionForSyncTransformerResponse, error) {
-	rsp, err := c.UpdateSyncTestConnectionForSyncTransformerWithBody(ctx, teamName, syncTransformerTestConnectionID, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseUpdateSyncTestConnectionForSyncTransformerResponse(rsp)
-}
-
-func (c *ClientWithResponses) UpdateSyncTestConnectionForSyncTransformerWithResponse(ctx context.Context, teamName TeamName, syncTransformerTestConnectionID SyncTransformerTestConnectionID, body UpdateSyncTestConnectionForSyncTransformerJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateSyncTestConnectionForSyncTransformerResponse, error) {
-	rsp, err := c.UpdateSyncTestConnectionForSyncTransformer(ctx, teamName, syncTransformerTestConnectionID, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseUpdateSyncTestConnectionForSyncTransformerResponse(rsp)
-}
-
-// GetSyncTransformerTestConnectionLogsWithResponse request returning *GetSyncTransformerTestConnectionLogsResponse
-func (c *ClientWithResponses) GetSyncTransformerTestConnectionLogsWithResponse(ctx context.Context, teamName TeamName, syncTransformerTestConnectionID SyncTransformerTestConnectionID, params *GetSyncTransformerTestConnectionLogsParams, reqEditors ...RequestEditorFn) (*GetSyncTransformerTestConnectionLogsResponse, error) {
-	rsp, err := c.GetSyncTransformerTestConnectionLogs(ctx, teamName, syncTransformerTestConnectionID, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGetSyncTransformerTestConnectionLogsResponse(rsp)
-}
-
-// PromoteSyncTransformerTestConnectionWithBodyWithResponse request with arbitrary body returning *PromoteSyncTransformerTestConnectionResponse
-func (c *ClientWithResponses) PromoteSyncTransformerTestConnectionWithBodyWithResponse(ctx context.Context, teamName TeamName, syncTransformerTestConnectionID SyncTransformerTestConnectionID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PromoteSyncTransformerTestConnectionResponse, error) {
-	rsp, err := c.PromoteSyncTransformerTestConnectionWithBody(ctx, teamName, syncTransformerTestConnectionID, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParsePromoteSyncTransformerTestConnectionResponse(rsp)
-}
-
-func (c *ClientWithResponses) PromoteSyncTransformerTestConnectionWithResponse(ctx context.Context, teamName TeamName, syncTransformerTestConnectionID SyncTransformerTestConnectionID, body PromoteSyncTransformerTestConnectionJSONRequestBody, reqEditors ...RequestEditorFn) (*PromoteSyncTransformerTestConnectionResponse, error) {
-	rsp, err := c.PromoteSyncTransformerTestConnection(ctx, teamName, syncTransformerTestConnectionID, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParsePromoteSyncTransformerTestConnectionResponse(rsp)
-}
-
 // ListSyncTransformersWithResponse request returning *ListSyncTransformersResponse
 func (c *ClientWithResponses) ListSyncTransformersWithResponse(ctx context.Context, teamName TeamName, params *ListSyncTransformersParams, reqEditors ...RequestEditorFn) (*ListSyncTransformersResponse, error) {
 	rsp, err := c.ListSyncTransformers(ctx, teamName, params, reqEditors...)
@@ -37560,15 +38240,6 @@ func (c *ClientWithResponses) ListSyncTransformerSyncsWithResponse(ctx context.C
 		return nil, err
 	}
 	return ParseListSyncTransformerSyncsResponse(rsp)
-}
-
-// GetTestConnectionForSyncTransformerWithResponse request returning *GetTestConnectionForSyncTransformerResponse
-func (c *ClientWithResponses) GetTestConnectionForSyncTransformerWithResponse(ctx context.Context, teamName TeamName, syncTransformerName SyncTransformerName, syncTestConnectionId SyncTestConnectionId, reqEditors ...RequestEditorFn) (*GetTestConnectionForSyncTransformerResponse, error) {
-	rsp, err := c.GetTestConnectionForSyncTransformer(ctx, teamName, syncTransformerName, syncTestConnectionId, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGetTestConnectionForSyncTransformerResponse(rsp)
 }
 
 // ListSyncUpgradesWithResponse request returning *ListSyncUpgradesResponse
@@ -38168,6 +38839,162 @@ func (c *ClientWithResponses) DeleteUserWithResponse(ctx context.Context, userID
 	return ParseDeleteUserResponse(rsp)
 }
 
+// CreateV2SyncDestinationTestConnectionWithBodyWithResponse request with arbitrary body returning *CreateV2SyncDestinationTestConnectionResponse
+func (c *ClientWithResponses) CreateV2SyncDestinationTestConnectionWithBodyWithResponse(ctx context.Context, teamName TeamName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateV2SyncDestinationTestConnectionResponse, error) {
+	rsp, err := c.CreateV2SyncDestinationTestConnectionWithBody(ctx, teamName, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateV2SyncDestinationTestConnectionResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateV2SyncDestinationTestConnectionWithResponse(ctx context.Context, teamName TeamName, body CreateV2SyncDestinationTestConnectionJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateV2SyncDestinationTestConnectionResponse, error) {
+	rsp, err := c.CreateV2SyncDestinationTestConnection(ctx, teamName, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateV2SyncDestinationTestConnectionResponse(rsp)
+}
+
+// GetV2SyncDestinationsWithResponse request returning *GetV2SyncDestinationsResponse
+func (c *ClientWithResponses) GetV2SyncDestinationsWithResponse(ctx context.Context, teamName TeamName, params *GetV2SyncDestinationsParams, reqEditors ...RequestEditorFn) (*GetV2SyncDestinationsResponse, error) {
+	rsp, err := c.GetV2SyncDestinations(ctx, teamName, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetV2SyncDestinationsResponse(rsp)
+}
+
+// CreateV2SyncDestinationWithBodyWithResponse request with arbitrary body returning *CreateV2SyncDestinationResponse
+func (c *ClientWithResponses) CreateV2SyncDestinationWithBodyWithResponse(ctx context.Context, teamName TeamName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateV2SyncDestinationResponse, error) {
+	rsp, err := c.CreateV2SyncDestinationWithBody(ctx, teamName, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateV2SyncDestinationResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateV2SyncDestinationWithResponse(ctx context.Context, teamName TeamName, body CreateV2SyncDestinationJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateV2SyncDestinationResponse, error) {
+	rsp, err := c.CreateV2SyncDestination(ctx, teamName, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateV2SyncDestinationResponse(rsp)
+}
+
+// DeleteV2SyncDestinationWithResponse request returning *DeleteV2SyncDestinationResponse
+func (c *ClientWithResponses) DeleteV2SyncDestinationWithResponse(ctx context.Context, teamName TeamName, syncDestinationName SyncDestinationName, reqEditors ...RequestEditorFn) (*DeleteV2SyncDestinationResponse, error) {
+	rsp, err := c.DeleteV2SyncDestination(ctx, teamName, syncDestinationName, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteV2SyncDestinationResponse(rsp)
+}
+
+// GetV2SyncDestinationWithResponse request returning *GetV2SyncDestinationResponse
+func (c *ClientWithResponses) GetV2SyncDestinationWithResponse(ctx context.Context, teamName TeamName, syncDestinationName SyncDestinationName, reqEditors ...RequestEditorFn) (*GetV2SyncDestinationResponse, error) {
+	rsp, err := c.GetV2SyncDestination(ctx, teamName, syncDestinationName, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetV2SyncDestinationResponse(rsp)
+}
+
+// PatchV2SyncDestinationWithBodyWithResponse request with arbitrary body returning *PatchV2SyncDestinationResponse
+func (c *ClientWithResponses) PatchV2SyncDestinationWithBodyWithResponse(ctx context.Context, teamName TeamName, syncDestinationName SyncDestinationName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PatchV2SyncDestinationResponse, error) {
+	rsp, err := c.PatchV2SyncDestinationWithBody(ctx, teamName, syncDestinationName, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParsePatchV2SyncDestinationResponse(rsp)
+}
+
+func (c *ClientWithResponses) PatchV2SyncDestinationWithResponse(ctx context.Context, teamName TeamName, syncDestinationName SyncDestinationName, body PatchV2SyncDestinationJSONRequestBody, reqEditors ...RequestEditorFn) (*PatchV2SyncDestinationResponse, error) {
+	rsp, err := c.PatchV2SyncDestination(ctx, teamName, syncDestinationName, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParsePatchV2SyncDestinationResponse(rsp)
+}
+
+// CreateV2SyncIntegrationTestConnectionWithBodyWithResponse request with arbitrary body returning *CreateV2SyncIntegrationTestConnectionResponse
+func (c *ClientWithResponses) CreateV2SyncIntegrationTestConnectionWithBodyWithResponse(ctx context.Context, teamName TeamName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateV2SyncIntegrationTestConnectionResponse, error) {
+	rsp, err := c.CreateV2SyncIntegrationTestConnectionWithBody(ctx, teamName, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateV2SyncIntegrationTestConnectionResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateV2SyncIntegrationTestConnectionWithResponse(ctx context.Context, teamName TeamName, body CreateV2SyncIntegrationTestConnectionJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateV2SyncIntegrationTestConnectionResponse, error) {
+	rsp, err := c.CreateV2SyncIntegrationTestConnection(ctx, teamName, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateV2SyncIntegrationTestConnectionResponse(rsp)
+}
+
+// ListV2SyncIntegrationsWithResponse request returning *ListV2SyncIntegrationsResponse
+func (c *ClientWithResponses) ListV2SyncIntegrationsWithResponse(ctx context.Context, teamName TeamName, params *ListV2SyncIntegrationsParams, reqEditors ...RequestEditorFn) (*ListV2SyncIntegrationsResponse, error) {
+	rsp, err := c.ListV2SyncIntegrations(ctx, teamName, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListV2SyncIntegrationsResponse(rsp)
+}
+
+// CreateV2SyncIntegrationWithBodyWithResponse request with arbitrary body returning *CreateV2SyncIntegrationResponse
+func (c *ClientWithResponses) CreateV2SyncIntegrationWithBodyWithResponse(ctx context.Context, teamName TeamName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateV2SyncIntegrationResponse, error) {
+	rsp, err := c.CreateV2SyncIntegrationWithBody(ctx, teamName, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateV2SyncIntegrationResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateV2SyncIntegrationWithResponse(ctx context.Context, teamName TeamName, body CreateV2SyncIntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateV2SyncIntegrationResponse, error) {
+	rsp, err := c.CreateV2SyncIntegration(ctx, teamName, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateV2SyncIntegrationResponse(rsp)
+}
+
+// DeleteV2SyncIntegrationWithResponse request returning *DeleteV2SyncIntegrationResponse
+func (c *ClientWithResponses) DeleteV2SyncIntegrationWithResponse(ctx context.Context, teamName TeamName, syncName SyncName, reqEditors ...RequestEditorFn) (*DeleteV2SyncIntegrationResponse, error) {
+	rsp, err := c.DeleteV2SyncIntegration(ctx, teamName, syncName, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteV2SyncIntegrationResponse(rsp)
+}
+
+// GetV2SyncIntegrationWithResponse request returning *GetV2SyncIntegrationResponse
+func (c *ClientWithResponses) GetV2SyncIntegrationWithResponse(ctx context.Context, teamName TeamName, syncName SyncName, reqEditors ...RequestEditorFn) (*GetV2SyncIntegrationResponse, error) {
+	rsp, err := c.GetV2SyncIntegration(ctx, teamName, syncName, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetV2SyncIntegrationResponse(rsp)
+}
+
+// UpdateV2SyncIntegrationWithBodyWithResponse request with arbitrary body returning *UpdateV2SyncIntegrationResponse
+func (c *ClientWithResponses) UpdateV2SyncIntegrationWithBodyWithResponse(ctx context.Context, teamName TeamName, syncName SyncName, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateV2SyncIntegrationResponse, error) {
+	rsp, err := c.UpdateV2SyncIntegrationWithBody(ctx, teamName, syncName, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateV2SyncIntegrationResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateV2SyncIntegrationWithResponse(ctx context.Context, teamName TeamName, syncName SyncName, body UpdateV2SyncIntegrationJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateV2SyncIntegrationResponse, error) {
+	rsp, err := c.UpdateV2SyncIntegration(ctx, teamName, syncName, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateV2SyncIntegrationResponse(rsp)
+}
+
 // ParseIndexResponse parses an HTTP response from a IndexWithResponse call
 func ParseIndexResponse(rsp *http.Response) (*IndexResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -38303,310 +39130,6 @@ func ParseGetAuditLogResponse(rsp *http.Response) (*GetAuditLogResponse, error) 
 	return response, nil
 }
 
-// ParseListFiltersResponse parses an HTTP response from a ListFiltersWithResponse call
-func ParseListFiltersResponse(rsp *http.Response) (*ListFiltersResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &ListFiltersResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest struct {
-			Items    []Filter     `json:"items"`
-			Metadata ListMetadata `json:"metadata"`
-		}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest RequiresAuthentication
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest Forbidden
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON403 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest NotFound
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
-		var dest UnprocessableEntity
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON422 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest InternalError
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON500 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseListFilterTagsResponse parses an HTTP response from a ListFilterTagsWithResponse call
-func ParseListFilterTagsResponse(rsp *http.Response) (*ListFilterTagsResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &ListFilterTagsResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest struct {
-			Items    []FilterTag  `json:"items"`
-			Metadata ListMetadata `json:"metadata"`
-		}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest RequiresAuthentication
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest Forbidden
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON403 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest NotFound
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
-		var dest UnprocessableEntity
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON422 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest InternalError
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON500 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseDeleteFilterResponse parses an HTTP response from a DeleteFilterWithResponse call
-func ParseDeleteFilterResponse(rsp *http.Response) (*DeleteFilterResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &DeleteFilterResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest RequiresAuthentication
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest Forbidden
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON403 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest NotFound
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
-		var dest UnprocessableEntity
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON422 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest InternalError
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON500 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGetFilterByIDResponse parses an HTTP response from a GetFilterByIDWithResponse call
-func ParseGetFilterByIDResponse(rsp *http.Response) (*GetFilterByIDResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GetFilterByIDResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest Filter
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest RequiresAuthentication
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest Forbidden
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON403 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest NotFound
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
-		var dest UnprocessableEntity
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON422 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest InternalError
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON500 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseUpdateFilterResponse parses an HTTP response from a UpdateFilterWithResponse call
-func ParseUpdateFilterResponse(rsp *http.Response) (*UpdateFilterResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &UpdateFilterResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest Filter
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest RequiresAuthentication
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest Forbidden
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON403 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest NotFound
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
-		var dest UnprocessableEntity
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON422 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest InternalError
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON500 = &dest
-
-	}
-
-	return response, nil
-}
-
 // ParseHealthCheckResponse parses an HTTP response from a HealthCheckWithResponse call
 func ParseHealthCheckResponse(rsp *http.Response) (*HealthCheckResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -38634,6 +39157,13 @@ func ParseHealthCheckResponse(rsp *http.Response) (*HealthCheckResponse, error) 
 			return nil, err
 		}
 		response.JSON500 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 503:
+		var dest ServiceUnavailable
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON503 = &dest
 
 	}
 
@@ -38667,6 +39197,13 @@ func ParseHealthCheckHeadResponse(rsp *http.Response) (*HealthCheckHeadResponse,
 			return nil, err
 		}
 		response.JSON500 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 503:
+		var dest ServiceUnavailable
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON503 = &dest
 
 	}
 
@@ -41539,740 +42076,6 @@ func ParseAuthRegistryRequestResponse(rsp *http.Response) (*AuthRegistryRequestR
 	return response, nil
 }
 
-// ParseListTablesResponse parses an HTTP response from a ListTablesWithResponse call
-func ParseListTablesResponse(rsp *http.Response) (*ListTablesResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &ListTablesResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest struct {
-			Items    []TableListItem `json:"items"`
-			Metadata ListMetadata    `json:"metadata"`
-		}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest RequiresAuthentication
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest Forbidden
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON403 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest NotFound
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
-		var dest UnprocessableEntity
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON422 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest InternalError
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON500 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseBatchTableSchemasResponse parses an HTTP response from a BatchTableSchemasWithResponse call
-func ParseBatchTableSchemasResponse(rsp *http.Response) (*BatchTableSchemasResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &BatchTableSchemasResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest struct {
-			Items []BatchTableSchemaItem `json:"items"`
-		}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest RequiresAuthentication
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest Forbidden
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON403 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest NotFound
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
-		var dest UnprocessableEntity
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON422 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest InternalError
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON500 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseTableListColumnsResponse parses an HTTP response from a TableListColumnsWithResponse call
-func ParseTableListColumnsResponse(rsp *http.Response) (*TableListColumnsResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &TableListColumnsResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest struct {
-			Items    []TableColumnListItem `json:"items"`
-			Metadata ListMetadata          `json:"metadata"`
-		}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest RequiresAuthentication
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest Forbidden
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON403 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest NotFound
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
-		var dest UnprocessableEntity
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON422 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest InternalError
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON500 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseTableColumnListValuesResponse parses an HTTP response from a TableColumnListValuesWithResponse call
-func ParseTableColumnListValuesResponse(rsp *http.Response) (*TableColumnListValuesResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &TableColumnListValuesResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest struct {
-			Items    []TableColumnValueListItem `json:"items"`
-			Metadata ListMetadata               `json:"metadata"`
-		}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest RequiresAuthentication
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest Forbidden
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON403 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest NotFound
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
-		var dest UnprocessableEntity
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON422 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest InternalError
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON500 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseTableListRowsResponse parses an HTTP response from a TableListRowsWithResponse call
-func ParseTableListRowsResponse(rsp *http.Response) (*TableListRowsResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &TableListRowsResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest struct {
-			Data     TableData    `json:"data"`
-			Metadata ListMetadata `json:"metadata"`
-		}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest BadRequest
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON400 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest RequiresAuthentication
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest Forbidden
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON403 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest NotFound
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
-		var dest UnprocessableEntity
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON422 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest InternalError
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON500 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseTableRowByIdResponse parses an HTTP response from a TableRowByIdWithResponse call
-func ParseTableRowByIdResponse(rsp *http.Response) (*TableRowByIdResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &TableRowByIdResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest struct {
-			Data    TableRow             `json:"data"`
-			Matches []TableRowFieldMatch `json:"matches"`
-		}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest BadRequest
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON400 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest RequiresAuthentication
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest Forbidden
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON403 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest NotFound
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
-		var dest UnprocessableEntity
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON422 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest InternalError
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON500 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseTableListFiltersResponse parses an HTTP response from a TableListFiltersWithResponse call
-func ParseTableListFiltersResponse(rsp *http.Response) (*TableListFiltersResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &TableListFiltersResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest struct {
-			Items    []Filter     `json:"items"`
-			Metadata ListMetadata `json:"metadata"`
-		}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest BadRequest
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON400 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest RequiresAuthentication
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest Forbidden
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON403 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest NotFound
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
-		var dest UnprocessableEntity
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON422 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest InternalError
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON500 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseTableSaveFilterResponse parses an HTTP response from a TableSaveFilterWithResponse call
-func ParseTableSaveFilterResponse(rsp *http.Response) (*TableSaveFilterResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &TableSaveFilterResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest Filter
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
-		var dest Filter
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON201 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest BadRequest
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON400 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest RequiresAuthentication
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest Forbidden
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON403 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest NotFound
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
-		var dest UnprocessableEntity
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON422 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest InternalError
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON500 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseTableListFilterTagsResponse parses an HTTP response from a TableListFilterTagsWithResponse call
-func ParseTableListFilterTagsResponse(rsp *http.Response) (*TableListFilterTagsResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &TableListFilterTagsResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest struct {
-			Items    []FilterTag  `json:"items"`
-			Metadata ListMetadata `json:"metadata"`
-		}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest RequiresAuthentication
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest Forbidden
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON403 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest NotFound
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
-		var dest UnprocessableEntity
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON422 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest InternalError
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON500 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseTableListRelationsResponse parses an HTTP response from a TableListRelationsWithResponse call
-func ParseTableListRelationsResponse(rsp *http.Response) (*TableListRelationsResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &TableListRelationsResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest struct {
-			Data []TableRelation `json:"data"`
-		}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest BadRequest
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON400 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest RequiresAuthentication
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest Forbidden
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON403 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest NotFound
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest InternalError
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON500 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseTableSchemaResponse parses an HTTP response from a TableSchemaWithResponse call
-func ParseTableSchemaResponse(rsp *http.Response) (*TableSchemaResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &TableSchemaResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest struct {
-			DefaultColumns []string    `json:"default_columns"`
-			Schema         TableSchema `json:"schema"`
-		}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest RequiresAuthentication
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest Forbidden
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON403 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest NotFound
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
-		var dest UnprocessableEntity
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON422 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest InternalError
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON500 = &dest
-
-	}
-
-	return response, nil
-}
-
 // ParseListTeamsResponse parses an HTTP response from a ListTeamsWithResponse call
 func ParseListTeamsResponse(rsp *http.Response) (*ListTeamsResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -43612,6 +43415,175 @@ func ParseAuthenticateConnectorOAuthResponse(rsp *http.Response) (*AuthenticateC
 			return nil, err
 		}
 		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateConversationResponse parses an HTTP response from a CreateConversationWithResponse call
+func ParseCreateConversationResponse(rsp *http.Response) (*CreateConversationResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateConversationResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest Conversation
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest TooManyRequests
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetConversationResponse parses an HTTP response from a GetConversationWithResponse call
+func ParseGetConversationResponse(rsp *http.Response) (*GetConversationResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetConversationResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest Conversation
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseSendMessageResponse parses an HTTP response from a SendMessageWithResponse call
+func ParseSendMessageResponse(rsp *http.Response) (*SendMessageResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &SendMessageResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest ConversationMessage
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest InternalError
@@ -46930,6 +46902,664 @@ func ParseQueryListFilterTagsTeamResponse(rsp *http.Response) (*QueryListFilterT
 	return response, nil
 }
 
+// ParseListAllRBACPermissionsResponse parses an HTTP response from a ListAllRBACPermissionsWithResponse call
+func ParseListAllRBACPermissionsResponse(rsp *http.Response) (*ListAllRBACPermissionsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListAllRBACPermissionsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest struct {
+			Items    []RBACPermission `json:"items"`
+			Metadata ListMetadata     `json:"metadata"`
+		}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest UnprocessableEntity
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateRBACPermissionResponse parses an HTTP response from a CreateRBACPermissionWithResponse call
+func ParseCreateRBACPermissionResponse(rsp *http.Response) (*CreateRBACPermissionResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateRBACPermissionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest RBACPermission
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest UnprocessableEntity
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteRBACPermissionResponse parses an HTTP response from a DeleteRBACPermissionWithResponse call
+func ParseDeleteRBACPermissionResponse(rsp *http.Response) (*DeleteRBACPermissionResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteRBACPermissionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest UnprocessableEntity
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetRBACPermissionResponse parses an HTTP response from a GetRBACPermissionWithResponse call
+func ParseGetRBACPermissionResponse(rsp *http.Response) (*GetRBACPermissionResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetRBACPermissionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest RBACPermission
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest UnprocessableEntity
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateRBACPermissionResponse parses an HTTP response from a UpdateRBACPermissionWithResponse call
+func ParseUpdateRBACPermissionResponse(rsp *http.Response) (*UpdateRBACPermissionResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateRBACPermissionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest RBACPermission
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest UnprocessableEntity
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListAllRBACRolesResponse parses an HTTP response from a ListAllRBACRolesWithResponse call
+func ParseListAllRBACRolesResponse(rsp *http.Response) (*ListAllRBACRolesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListAllRBACRolesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest struct {
+			Items    []RBACRole   `json:"items"`
+			Metadata ListMetadata `json:"metadata"`
+		}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest UnprocessableEntity
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateRBACRoleResponse parses an HTTP response from a CreateRBACRoleWithResponse call
+func ParseCreateRBACRoleResponse(rsp *http.Response) (*CreateRBACRoleResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateRBACRoleResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest RBACRole
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest UnprocessableEntity
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteRBACRoleResponse parses an HTTP response from a DeleteRBACRoleWithResponse call
+func ParseDeleteRBACRoleResponse(rsp *http.Response) (*DeleteRBACRoleResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteRBACRoleResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest UnprocessableEntity
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetRBACRoleResponse parses an HTTP response from a GetRBACRoleWithResponse call
+func ParseGetRBACRoleResponse(rsp *http.Response) (*GetRBACRoleResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetRBACRoleResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest RBACRole
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest UnprocessableEntity
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateRBACRoleResponse parses an HTTP response from a UpdateRBACRoleWithResponse call
+func ParseUpdateRBACRoleResponse(rsp *http.Response) (*UpdateRBACRoleResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateRBACRoleResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest RBACRole
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest UnprocessableEntity
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseListReportsResponse parses an HTTP response from a ListReportsWithResponse call
 func ParseListReportsResponse(rsp *http.Response) (*ListReportsResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -47724,6 +48354,9 @@ func ParseGetSyncDestinationTestConnectionLogsQueryResponse(rsp *http.Response) 
 			return nil, err
 		}
 		response.JSON500 = &dest
+
+	case rsp.StatusCode == 200:
+		// Content-type (text/plain) unsupported
 
 	}
 
@@ -48538,6 +49171,9 @@ func ParseGetSyncSourceTestConnectionLogsQueryResponse(rsp *http.Response) (*Get
 		}
 		response.JSON500 = &dest
 
+	case rsp.StatusCode == 200:
+		// Content-type (text/plain) unsupported
+
 	}
 
 	return response, nil
@@ -48988,324 +49624,6 @@ func ParseGetTestConnectionForSyncSourceResponse(rsp *http.Response) (*GetTestCo
 	return response, nil
 }
 
-// ParseCreateSyncTransformerTestConnectionResponse parses an HTTP response from a CreateSyncTransformerTestConnectionWithResponse call
-func ParseCreateSyncTransformerTestConnectionResponse(rsp *http.Response) (*CreateSyncTransformerTestConnectionResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &CreateSyncTransformerTestConnectionResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
-		var dest SyncTransformerTestConnection
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON201 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest BadRequest
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON400 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest RequiresAuthentication
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest NotFound
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
-		var dest UnprocessableEntity
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON422 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
-		var dest TooManyRequests
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON429 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest InternalError
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON500 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGetSyncTransformerTestConnectionResponse parses an HTTP response from a GetSyncTransformerTestConnectionWithResponse call
-func ParseGetSyncTransformerTestConnectionResponse(rsp *http.Response) (*GetSyncTransformerTestConnectionResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GetSyncTransformerTestConnectionResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest SyncTransformerTestConnection
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest RequiresAuthentication
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest Forbidden
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON403 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest NotFound
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest InternalError
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON500 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseUpdateSyncTestConnectionForSyncTransformerResponse parses an HTTP response from a UpdateSyncTestConnectionForSyncTransformerWithResponse call
-func ParseUpdateSyncTestConnectionForSyncTransformerResponse(rsp *http.Response) (*UpdateSyncTestConnectionForSyncTransformerResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &UpdateSyncTestConnectionForSyncTransformerResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest SyncTransformerTestConnection
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest BadRequest
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON400 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
-		var dest Forbidden
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON403 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest NotFound
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
-		var dest UnprocessableEntity
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON422 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest InternalError
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON500 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGetSyncTransformerTestConnectionLogsResponse parses an HTTP response from a GetSyncTransformerTestConnectionLogsWithResponse call
-func ParseGetSyncTransformerTestConnectionLogsResponse(rsp *http.Response) (*GetSyncTransformerTestConnectionLogsResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GetSyncTransformerTestConnectionLogsResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest struct {
-			// Location The location to download the test connection logs from
-			Location string `json:"location"`
-		}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest BadRequest
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON400 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest RequiresAuthentication
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest NotFound
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
-		var dest UnprocessableEntity
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON422 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest InternalError
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON500 = &dest
-
-	case rsp.StatusCode == 200:
-		// Content-type (text/plain) unsupported
-
-	}
-
-	return response, nil
-}
-
-// ParsePromoteSyncTransformerTestConnectionResponse parses an HTTP response from a PromoteSyncTransformerTestConnectionWithResponse call
-func ParsePromoteSyncTransformerTestConnectionResponse(rsp *http.Response) (*PromoteSyncTransformerTestConnectionResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &PromoteSyncTransformerTestConnectionResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest SyncTransformer
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
-		var dest SyncTransformer
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON201 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest BadRequest
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON400 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest RequiresAuthentication
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest NotFound
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
-		var dest UnprocessableEntity
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON422 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest InternalError
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON500 = &dest
-
-	}
-
-	return response, nil
-}
-
 // ParseListSyncTransformersResponse parses an HTTP response from a ListSyncTransformersWithResponse call
 func ParseListSyncTransformersResponse(rsp *http.Response) (*ListSyncTransformersResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -49591,60 +49909,6 @@ func ParseListSyncTransformerSyncsResponse(rsp *http.Response) (*ListSyncTransfo
 			return nil, err
 		}
 		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest RequiresAuthentication
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest NotFound
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
-		var dest InternalError
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON500 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGetTestConnectionForSyncTransformerResponse parses an HTTP response from a GetTestConnectionForSyncTransformerWithResponse call
-func ParseGetTestConnectionForSyncTransformerResponse(rsp *http.Response) (*GetTestConnectionForSyncTransformerResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GetTestConnectionForSyncTransformerResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest SyncTestConnection
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest BadRequest
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON400 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
 		var dest RequiresAuthentication
@@ -52814,6 +53078,13 @@ func ParseUserTOTPVerifyResponse(rsp *http.Response) (*UserTOTPVerifyResponse, e
 		}
 		response.JSON422 = &dest
 
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest TooManyRequests
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest InternalError
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -52860,6 +53131,716 @@ func ParseDeleteUserResponse(rsp *http.Response) (*DeleteUserResponse, error) {
 			return nil, err
 		}
 		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest UnprocessableEntity
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateV2SyncDestinationTestConnectionResponse parses an HTTP response from a CreateV2SyncDestinationTestConnectionWithResponse call
+func ParseCreateV2SyncDestinationTestConnectionResponse(rsp *http.Response) (*CreateV2SyncDestinationTestConnectionResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateV2SyncDestinationTestConnectionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest SyncDestinationTestConnectionV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest UnprocessableEntity
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest TooManyRequests
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetV2SyncDestinationsResponse parses an HTTP response from a GetV2SyncDestinationsWithResponse call
+func ParseGetV2SyncDestinationsResponse(rsp *http.Response) (*GetV2SyncDestinationsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetV2SyncDestinationsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest struct {
+			Items    []SyncDestinationV2 `json:"items"`
+			Metadata ListMetadata        `json:"metadata"`
+		}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateV2SyncDestinationResponse parses an HTTP response from a CreateV2SyncDestinationWithResponse call
+func ParseCreateV2SyncDestinationResponse(rsp *http.Response) (*CreateV2SyncDestinationResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateV2SyncDestinationResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest SyncDestinationV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest SyncDestinationV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest UnprocessableEntity
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteV2SyncDestinationResponse parses an HTTP response from a DeleteV2SyncDestinationWithResponse call
+func ParseDeleteV2SyncDestinationResponse(rsp *http.Response) (*DeleteV2SyncDestinationResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteV2SyncDestinationResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest UnprocessableEntity
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetV2SyncDestinationResponse parses an HTTP response from a GetV2SyncDestinationWithResponse call
+func ParseGetV2SyncDestinationResponse(rsp *http.Response) (*GetV2SyncDestinationResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetV2SyncDestinationResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest SyncDestinationV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParsePatchV2SyncDestinationResponse parses an HTTP response from a PatchV2SyncDestinationWithResponse call
+func ParsePatchV2SyncDestinationResponse(rsp *http.Response) (*PatchV2SyncDestinationResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &PatchV2SyncDestinationResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest SyncDestination
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest UnprocessableEntity
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateV2SyncIntegrationTestConnectionResponse parses an HTTP response from a CreateV2SyncIntegrationTestConnectionWithResponse call
+func ParseCreateV2SyncIntegrationTestConnectionResponse(rsp *http.Response) (*CreateV2SyncIntegrationTestConnectionResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateV2SyncIntegrationTestConnectionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest SyncIntegrationTestConnectionV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest UnprocessableEntity
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 429:
+		var dest TooManyRequests
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON429 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListV2SyncIntegrationsResponse parses an HTTP response from a ListV2SyncIntegrationsWithResponse call
+func ParseListV2SyncIntegrationsResponse(rsp *http.Response) (*ListV2SyncIntegrationsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListV2SyncIntegrationsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest struct {
+			Items    []SyncIntegrationExpandedV2 `json:"items"`
+			Metadata ListMetadata                `json:"metadata"`
+		}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateV2SyncIntegrationResponse parses an HTTP response from a CreateV2SyncIntegrationWithResponse call
+func ParseCreateV2SyncIntegrationResponse(rsp *http.Response) (*CreateV2SyncIntegrationResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateV2SyncIntegrationResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest SyncIntegrationV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest UnprocessableEntity
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteV2SyncIntegrationResponse parses an HTTP response from a DeleteV2SyncIntegrationWithResponse call
+func ParseDeleteV2SyncIntegrationResponse(rsp *http.Response) (*DeleteV2SyncIntegrationResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteV2SyncIntegrationResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 405:
+		var dest MethodNotAllowed
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON405 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetV2SyncIntegrationResponse parses an HTTP response from a GetV2SyncIntegrationWithResponse call
+func ParseGetV2SyncIntegrationResponse(rsp *http.Response) (*GetV2SyncIntegrationResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetV2SyncIntegrationResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest SyncIntegrationExpandedV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateV2SyncIntegrationResponse parses an HTTP response from a UpdateV2SyncIntegrationWithResponse call
+func ParseUpdateV2SyncIntegrationResponse(rsp *http.Response) (*UpdateV2SyncIntegrationResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateV2SyncIntegrationResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest SyncIntegrationV2
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest NotFound
