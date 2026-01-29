@@ -4328,10 +4328,15 @@
       "post": {
         "operationId": "CreateConversation",
         "summary": "Start a new chat conversation",
-        "description": "Create a new AI chat conversation",
+        "description": "Create a new AI chat conversation. Note that this endpoint does not currently support API key authentication.",
         "parameters": [
           {
             "$ref": "#/components/parameters/team_name"
+          }
+        ],
+        "security": [
+          {
+            "cookieAuth": []
           }
         ],
         "requestBody": {
@@ -4377,7 +4382,12 @@
       "get": {
         "operationId": "GetConversation",
         "summary": "Retrieve a chat conversation",
-        "description": "Get details of an existing AI chat conversation. Useful for polling for updates.",
+        "description": "Get details of an existing AI chat conversation. Useful for polling for updates. Note that this endpoint does not currently support API key authentication.",
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
         "parameters": [
           {
             "$ref": "#/components/parameters/team_name"
@@ -4417,13 +4427,18 @@
       "post": {
         "operationId": "SendMessage",
         "summary": "Add a message to an existing conversation",
-        "description": "Send a new message to an existing AI chat conversation",
+        "description": "Send a new message to an existing AI chat conversation. Note that this endpoint does not currently support API key authentication.",
         "parameters": [
           {
             "$ref": "#/components/parameters/team_name"
           },
           {
             "$ref": "#/components/parameters/conversation_id"
+          }
+        ],
+        "security": [
+          {
+            "cookieAuth": []
           }
         ],
         "requestBody": {
