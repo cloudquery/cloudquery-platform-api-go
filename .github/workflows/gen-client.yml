@@ -14,7 +14,7 @@ jobs:
 
       - name: Get Specs File
         run: |
-          curl -H "Authorization: token ${{ secrets.GH_CQ_BOT }}" https://raw.githubusercontent.com/cloudquery/cloud/main/platform/internal/servergen/spec.json -o spec.json
+          curl -H "Authorization: token ${{ secrets.GH_CQ_BOT }}" https://raw.githubusercontent.com/cloudquery/platform/main/platform/api/servergen/spec.json -o spec.json
 
       - name: Set up Go 1.x
         uses: actions/setup-go@v6
