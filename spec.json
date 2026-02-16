@@ -396,14 +396,21 @@
               "application/json": {
                 "schema": {
                   "required": [
-                    "items"
+                    "items",
+                    "version"
                   ],
                   "properties": {
                     "public_ips": {
                       "type": "array",
+                      "description": "List of public IPs for the platform",
                       "items": {
                         "type": "string"
-                      }
+                      },
+                      "x-go-name": "PublicIPs"
+                    },
+                    "version": {
+                      "type": "string",
+                      "description": "Version of the platform"
                     }
                   }
                 }

@@ -23465,7 +23465,11 @@ type GetPlatformInfoResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *struct {
-		PublicIps *[]string `json:"public_ips,omitempty"`
+		// PublicIPs List of public IPs for the platform
+		PublicIPs *[]string `json:"public_ips,omitempty"`
+
+		// Version Version of the platform
+		Version string `json:"version"`
 	}
 	JSON401 *RequiresAuthentication
 	JSON500 *InternalError
@@ -32490,7 +32494,11 @@ func ParseGetPlatformInfoResponse(rsp *http.Response) (*GetPlatformInfoResponse,
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest struct {
-			PublicIps *[]string `json:"public_ips,omitempty"`
+			// PublicIPs List of public IPs for the platform
+			PublicIPs *[]string `json:"public_ips,omitempty"`
+
+			// Version Version of the platform
+			Version string `json:"version"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
