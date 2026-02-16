@@ -1,4 +1,4 @@
-module github.com/cloudquery/cloudquery-platform-api-go
+module github.com/cloudquery/cloudquery-platform-api-go/v2
 
 go 1.25.5
 
