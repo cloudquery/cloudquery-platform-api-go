@@ -6,7 +6,7 @@
       "name": "CloudQuery Support Team",
       "url": "https://cloudquery.io"
     },
-    "description": "Welcome to the CloudQuery Platform API documentation! This API can be used to interact with the CloudQuery platform. As a user, the API allows you to search the CloudQuery asset inventory, run SQL queries against the data warehouse, save and load searches, and much more. As an administrator, it allows you to manage your teams, syncs, and other objects.\n### Authentication\nThe API is secured using bearer tokens. To get started, you can generate an API key for your Platform deployment from your platform dashboard. For a step-by-step guide, see: https://docs.cloudquery.io/docs/deployment/generate-api-key.\nThe base URL for the API depends on where your CloudQuery Platform is hosted. If running locally, this is usually http://localhost:3000/api. In a production deployment it should be an HTTPS URL. For purposes of illustration, we will assume the platform instance is available at https://cloudquery.mycompany.com. In this case, the base API endpoint will be https://cloudquery.mycompany.com/api.\n### Example Request\nTo test your connection to the API, we can use the `/plugins` endpoint. For example:\n`curl -v -H \"Authorization: Bearer $CLOUDQUERY_API_KEY\" \\ https://cloudquery.mycompany.com/api/plugins`\n",
+    "description": "Welcome to the CloudQuery Platform API documentation! This API can be used to interact with the CloudQuery platform. As a user, the API allows you to search the CloudQuery asset inventory, run SQL queries against the data warehouse, save and load searches, and much more. As an administrator, it allows you to manage your teams, syncs, and other objects.\n### Authentication\nThe API is secured using bearer tokens. To get started, you can generate an API key for your Platform deployment from your platform dashboard. For a step-by-step guide, see: https://www.cloudquery.io/docs/cli/managing-cloudquery/deployments/generate-api-key.\nThe base URL for the API depends on where your CloudQuery Platform is hosted. If running locally, this is usually http://localhost:3000/api. In a production deployment it should be an HTTPS URL. For purposes of illustration, we will assume the platform instance is available at https://cloudquery.mycompany.com. In this case, the base API endpoint will be https://cloudquery.mycompany.com/api.\n### Example Request\nTo test your connection to the API, we can use the `/plugins` endpoint. For example:\n`curl -v -H \"Authorization: Bearer $CLOUDQUERY_API_KEY\" \\ https://cloudquery.mycompany.com/api/plugins`\n",
     "license": {
       "name": "MIT",
       "url": "https://spdx.org/licenses/MIT"
@@ -69,6 +69,9 @@
     },
     {
       "name": "queries"
+    },
+    {
+      "name": "insights"
     },
     {
       "name": "reports"
@@ -396,8 +399,9 @@
               "application/json": {
                 "schema": {
                   "required": [
-                    "items",
-                    "version"
+                    "public_ips",
+                    "version",
+                    "tenant_id"
                   ],
                   "properties": {
                     "public_ips": {
@@ -411,6 +415,12 @@
                     "version": {
                       "type": "string",
                       "description": "Version of the platform"
+                    },
+                    "tenant_id": {
+                      "type": "string",
+                      "format": "uuid",
+                      "description": "The tenant ID of the current user",
+                      "x-go-name": "TenantID"
                     }
                   }
                 }
@@ -3626,6 +3636,136 @@
         }
       }
     },
+    "/onboardings/aws/cur": {
+      "post": {
+        "operationId": "CreateAWSCUROnboarding",
+        "description": "Create an interactive onboarding for AWS CUR",
+        "tags": [
+          "onboardings"
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OnboardingAWSCURCreateResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/onboardings/aws/cur/{onboarding_id}": {
+      "get": {
+        "operationId": "GetAWSCUROnboarding",
+        "description": "Query an interactive onboarding for AWS CUR",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/onboarding_id"
+          }
+        ],
+        "tags": [
+          "onboardings"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OnboardingAWSCUR"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/onboardings/aws/cur/{onboarding_id}/notify": {
+      "post": {
+        "operationId": "NotifyAWSCUROnboarding",
+        "description": "Update AWS CUR onboarding state",
+        "tags": [
+          "onboardings"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/onboarding_id"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OnboardingAWSCURNotification"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {},
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
+    "/onboardings/aws/cur/{onboarding_id}/verify": {
+      "post": {
+        "operationId": "VerifyAWSCUROnboarding",
+        "description": "Trigger verification of the AWS CUR onboarding",
+        "tags": [
+          "onboardings"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/onboarding_id"
+          }
+        ],
+        "responses": {
+          "202": {},
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        }
+      }
+    },
     "/queries": {
       "get": {
         "description": "List all queries",
@@ -3654,6 +3794,9 @@
           },
           {
             "$ref": "#/components/parameters/alert_enabled"
+          },
+          {
+            "$ref": "#/components/parameters/query_column_filter"
           }
         ],
         "responses": {
@@ -4335,6 +4478,965 @@
         "tags": [
           "queries",
           "filters"
+        ]
+      }
+    },
+    "/insights": {
+      "get": {
+        "description": "List insights with optional filtering",
+        "operationId": "ListPlatformInsights",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/page"
+          },
+          {
+            "$ref": "#/components/parameters/per_page"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Search in title, evidence (description), mitigation, or related fields"
+          },
+          {
+            "name": "severities",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/InsightSeverity"
+              }
+            },
+            "style": "form",
+            "explode": true,
+            "description": "Filter by severities (any match)"
+          },
+          {
+            "name": "cloud",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by cloud"
+          },
+          {
+            "name": "account",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by account"
+          },
+          {
+            "name": "region",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by region"
+          },
+          {
+            "name": "insight_category",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by insight category"
+          },
+          {
+            "name": "source_category",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by source category"
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by source"
+          },
+          {
+            "name": "resource_types",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": true,
+            "description": "Filter by resource types"
+          },
+          {
+            "name": "tags",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": true,
+            "description": "Filter by tags (any match)"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "title",
+                "severity",
+                "insight_category",
+                "source_category",
+                "account",
+                "source",
+                "resource_types",
+                "resources_count",
+                "accounts_count",
+                "created_at",
+                "detected_at"
+              ],
+              "default": "detected_at"
+            },
+            "description": "Field to sort by"
+          },
+          {
+            "name": "sort_dir",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "default": "desc"
+            },
+            "description": "Sort direction"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "items",
+                    "metadata"
+                  ],
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Insight"
+                      }
+                    },
+                    "metadata": {
+                      "$ref": "#/components/schemas/InsightsListMetadata"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        },
+        "tags": [
+          "insights"
+        ]
+      }
+    },
+    "/insights/columns/{column_name}/distinct-values": {
+      "get": {
+        "description": "Get the candidate values for the next filter dimension (`column_name`), given the current active filters. The supplied filter parameters represent where the user currently is in the filter matrix; only values for `column_name` that would yield at least one insight when added to that current position are returned. Values that would produce zero results are omitted, preventing the user from navigating to an empty state.\nThe filter parameter corresponding to `column_name` is always ignored when computing candidates — asking \"which severities exist where severity=X\" is self-referential and nonsensical. For example, if `column_name=severity` then any `severities` filter in the request is not applied; if `column_name=source` then any `source` filter is not applied; and so on. This ensures the full set of viable values for that dimension is always returned given the other active filters.\nWhen `owner_tag` is specified (e.g., \"team\", \"department\"), this endpoint returns distinct values for that specific ownership tag key, ignoring the `column_name` parameter. The corresponding tags filter for this owner key is ignored to prevent self-referential queries.\nWhen querying for `column_name=tag` without `owner_tag`, ownership tags configured in platform settings are automatically excluded from results.",
+        "operationId": "GetPlatformInsightColumnDistinctValues",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/page"
+          },
+          {
+            "$ref": "#/components/parameters/per_page"
+          },
+          {
+            "$ref": "#/components/parameters/insight_column_name"
+          },
+          {
+            "name": "owner_tag",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "When specified, returns distinct values for this ownership tag key (e.g., \"team\", \"department\"). The column_name parameter is ignored when owner_tag is provided."
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Search in title, evidence (description), mitigation, or related fields"
+          },
+          {
+            "name": "severities",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/InsightSeverity"
+              }
+            },
+            "style": "form",
+            "explode": true,
+            "description": "Filter by severities (any match)"
+          },
+          {
+            "name": "cloud",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by cloud"
+          },
+          {
+            "name": "account",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by account"
+          },
+          {
+            "name": "region",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by region"
+          },
+          {
+            "name": "insight_category",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by insight category"
+          },
+          {
+            "name": "source_category",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by source category"
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by source"
+          },
+          {
+            "name": "resource_types",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": true,
+            "description": "Filter by resource types"
+          },
+          {
+            "name": "tags",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": true,
+            "description": "Filter by tags (any match)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "values"
+                  ],
+                  "properties": {
+                    "values": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        },
+        "tags": [
+          "insights"
+        ]
+      }
+    },
+    "/insights/saved-filters": {
+      "get": {
+        "description": "List saved insight filters",
+        "operationId": "PlatformListInsightFilters",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/per_page"
+          },
+          {
+            "$ref": "#/components/parameters/page"
+          },
+          {
+            "name": "search_term",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Search in filter name or description"
+          },
+          {
+            "name": "insight_category",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": true,
+            "description": "Filter by insight category"
+          },
+          {
+            "name": "severities",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/InsightSeverity"
+              }
+            },
+            "style": "form",
+            "explode": true,
+            "description": "Filter by severities (any match)"
+          },
+          {
+            "name": "resource_types",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": true,
+            "description": "Filter by resource types"
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": true,
+            "description": "Filter by source"
+          },
+          {
+            "name": "source_category",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": true,
+            "description": "Filter by source category"
+          },
+          {
+            "name": "tags",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": true,
+            "description": "Filter by tags (any match)"
+          },
+          {
+            "name": "group_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": true,
+            "description": "Filter by group by fields"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "items",
+                    "metadata"
+                  ],
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/PlatformInsightFilter"
+                      }
+                    },
+                    "metadata": {
+                      "$ref": "#/components/schemas/ListMetadata"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        },
+        "tags": [
+          "insights"
+        ]
+      },
+      "post": {
+        "description": "Create a new saved insight filter",
+        "operationId": "PlatformCreateInsightFilter",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlatformInsightFilterCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlatformInsightFilter"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        },
+        "tags": [
+          "insights"
+        ]
+      }
+    },
+    "/insights/saved-filters/{insight_filter_id}": {
+      "get": {
+        "description": "Get a saved insight filter by ID",
+        "operationId": "PlatformGetInsightFilterByID",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/platform_insight_filter_id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlatformInsightFilter"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        },
+        "tags": [
+          "insights"
+        ]
+      },
+      "patch": {
+        "description": "Update a saved insight filter",
+        "operationId": "PlatformUpdateInsightFilter",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/platform_insight_filter_id"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlatformInsightFilterUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlatformInsightFilter"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        },
+        "tags": [
+          "insights"
+        ]
+      },
+      "delete": {
+        "description": "Delete a saved insight filter",
+        "operationId": "PlatformDeleteInsightFilter",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/platform_insight_filter_id"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted"
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        },
+        "tags": [
+          "insights"
+        ]
+      }
+    },
+    "/insights/{insight_id}": {
+      "get": {
+        "description": "Get insight by ID",
+        "operationId": "GetPlatformInsight",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/insight_id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Insight"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        },
+        "tags": [
+          "insights"
+        ]
+      }
+    },
+    "/insights/{insight_id}/assets": {
+      "get": {
+        "description": "List assets affected by an insight",
+        "operationId": "GetPlatformInsightAssets",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/insight_id"
+          },
+          {
+            "$ref": "#/components/parameters/page"
+          },
+          {
+            "$ref": "#/components/parameters/per_page"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Search in asset name, account, region, etc."
+          },
+          {
+            "name": "accounts",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": true,
+            "description": "Filter by account IDs"
+          },
+          {
+            "name": "clouds",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": true,
+            "description": "Filter by cloud providers (e.g. aws, azure, gcp, github, backstage, digitalocean, wiz)"
+          },
+          {
+            "name": "regions",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": true,
+            "description": "Filter by regions"
+          },
+          {
+            "name": "resource_type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": true,
+            "description": "Filter by resource type"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "items",
+                    "metadata"
+                  ],
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/PolicyViolation"
+                      }
+                    },
+                    "metadata": {
+                      "$ref": "#/components/schemas/ListMetadata"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        },
+        "tags": [
+          "insights"
+        ]
+      }
+    },
+    "/insights/assets/{asset_id}": {
+      "get": {
+        "description": "List insights for a specific asset (by _cq_platform_id)",
+        "operationId": "GetPlatformAssetInsights",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/asset_id"
+          },
+          {
+            "$ref": "#/components/parameters/page"
+          },
+          {
+            "$ref": "#/components/parameters/per_page"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Search in asset name, account, region, etc."
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "title",
+                "severity",
+                "insight_category",
+                "source_category",
+                "account",
+                "source",
+                "resource_types",
+                "resources_count",
+                "accounts_count",
+                "created_at",
+                "detected_at"
+              ],
+              "default": "detected_at"
+            },
+            "description": "Field to sort by"
+          },
+          {
+            "name": "sort_dir",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "default": "desc"
+            },
+            "description": "Sort direction"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "items",
+                    "metadata"
+                  ],
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Insight"
+                      }
+                    },
+                    "metadata": {
+                      "$ref": "#/components/schemas/ListMetadata"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        },
+        "tags": [
+          "insights"
         ]
       }
     },
@@ -7578,7 +8680,7 @@
     },
     "/tables/data": {
       "get": {
-        "description": "Get all syncs and their associated tables. Returns data in the format needed for the delete action.",
+        "description": "Get all sources and their associated tables. Returns data in the format needed for the delete action.",
         "operationId": "GetTablesData",
         "tags": [
           "tables"
@@ -7599,11 +8701,11 @@
                 "schema": {
                   "type": "object",
                   "required": [
-                    "syncs",
+                    "sources",
                     "metadata"
                   ],
                   "properties": {
-                    "syncs": {
+                    "sources": {
                       "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/TableDataListItem"
@@ -7614,9 +8716,9 @@
                     }
                   },
                   "example": {
-                    "syncs": [
+                    "sources": [
                       {
-                        "sync_name": "aws-integration",
+                        "source_name": "aws-integration",
                         "display_name": "AWS Integration",
                         "tables": [
                           {
@@ -7631,7 +8733,7 @@
                         "plugin": "cloudquery/aws"
                       },
                       {
-                        "sync_name": "gcp-integration",
+                        "source_name": "gcp-integration",
                         "display_name": "GCP Integration",
                         "tables": [
                           {
@@ -7664,7 +8766,7 @@
         }
       },
       "post": {
-        "description": "Perform an action on table data across multiple syncs. Supported actions: delete (drops partitions for specified tenant/source/table combinations).",
+        "description": "Perform an action on table data across multiple sources. Supported actions: delete (drops partitions for specified tenant/source/table combinations).",
         "operationId": "TablesDataAction",
         "tags": [
           "tables"
@@ -7899,6 +9001,39 @@
           },
           "422": {
             "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        },
+        "tags": [
+          "tables"
+        ]
+      }
+    },
+    "/tables/relations": {
+      "get": {
+        "description": "Get resource relations for all configured tables.",
+        "operationId": "GetTablesRelations",
+        "responses": {
+          "200": {
+            "description": "Resource relations keyed by source table name.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/RelationDef"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/RequiresAuthentication"
           },
           "500": {
             "$ref": "#/components/responses/InternalError"
@@ -8887,6 +10022,139 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/SAMLConfigUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SAMLConfig"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        },
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/auth/saml/rollover": {
+      "put": {
+        "description": "Create new SAML rollover certificate",
+        "operationId": "CreateSAMLRolloverCertificate",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SAMLConfig"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        },
+        "tags": [
+          "admin"
+        ]
+      },
+      "delete": {
+        "description": "Delete current SAML rollover certificate",
+        "operationId": "DeleteSAMLRolloverCertificate",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "fingerprint"
+                ],
+                "properties": {
+                  "fingerprint": {
+                    "type": "string",
+                    "description": "The fingerprint of the rollover certificate to delete",
+                    "example": "SHA256:AB:CD:EF:12:34:56:78:90:AB:CD:EF:12:34:56:78:90"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "422": {
+            "$ref": "#/components/responses/UnprocessableEntity"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          }
+        },
+        "tags": [
+          "admin"
+        ]
+      }
+    },
+    "/auth/saml/rollover/promote": {
+      "put": {
+        "description": "Promote SAML rollover certificate",
+        "operationId": "PromoteSAMLRolloverCertificate",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "fingerprint"
+                ],
+                "properties": {
+                  "fingerprint": {
+                    "type": "string",
+                    "description": "The fingerprint of the rollover certificate to promote",
+                    "example": "SHA256:AB:CD:EF:12:34:56:78:90:AB:CD:EF:12:34:56:78:90"
+                  }
+                }
               }
             }
           }
@@ -11352,10 +12620,23 @@
           "type": "boolean"
         }
       },
+      "query_column_filter": {
+        "name": "column_filter",
+        "in": "query",
+        "description": "Filter queries that return all specified columns",
+        "required": false,
+        "explode": true,
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
       "table_selects": {
         "name": "select",
         "in": "query",
-        "description": "Table selects. This filters the columns that are returned in the result set.",
+        "description": "Table selects. This filters the columns that are returned in the result set. If empty, all default columns + internal _cq_* columns are returned. To select all columns, use the `*` wildcard.",
         "allowEmptyValue": true,
         "explode": true,
         "schema": {
@@ -11463,6 +12744,43 @@
           "$ref": "#/components/schemas/QueryID"
         },
         "x-go-name": "QueryID"
+      },
+      "insight_column_name": {
+        "in": "path",
+        "name": "column_name",
+        "required": true,
+        "description": "Column for distinct values. Can be a standard column (severity, insight-category, source-category, source, resource-type, account, tag) or an arbitrary owner tag key when is_owner=true.",
+        "schema": {
+          "type": "string"
+        },
+        "x-go-name": "InsightColumnName"
+      },
+      "platform_insight_filter_id": {
+        "in": "path",
+        "name": "insight_filter_id",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/PlatformInsightFilterID"
+        },
+        "x-go-name": "InsightFilterID"
+      },
+      "insight_id": {
+        "in": "path",
+        "name": "insight_id",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/InsightID"
+        },
+        "x-go-name": "InsightID"
+      },
+      "asset_id": {
+        "in": "path",
+        "name": "asset_id",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/TableRowID"
+        },
+        "x-go-name": "AssetID"
       },
       "report_sort_bys": {
         "name": "sort_by",
@@ -12889,6 +14207,14 @@
             "example": "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXX",
             "x-go-name": "URL"
           },
+          "slack_channels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of Slack channel names (only for slack type)",
+            "x-go-name": "SlackChannels"
+          },
           "created_at": {
             "example": "2017-07-14T16:53:42Z",
             "format": "date-time",
@@ -13403,6 +14729,13 @@
           "_cq_platform_id": {
             "type": "string",
             "example": "aws_ec2_instances_12345678-1234-1234-1234-123456789abc"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Tags associated with the resource (e.g. for insights)"
           }
         }
       },
@@ -14963,6 +16296,206 @@
           }
         }
       },
+      "OnboardingAWSCURCreateResponse": {
+        "type": "object",
+        "description": "AWS CUR onboarding create response",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "region",
+          "issuer_url",
+          "audience",
+          "subject",
+          "template_url",
+          "notify_path",
+          "notify_token"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/OnboardingID"
+          },
+          "region": {
+            "type": "string",
+            "description": "AWS region where the CUR stack must be deployed. Always 'us-east-1' because AWS Cost and Usage Reports are only available in that region."
+          },
+          "stack_name": {
+            "type": "string",
+            "description": "Stack name that should be used",
+            "maxLength": 128
+          },
+          "issuer_url": {
+            "type": "string",
+            "description": "URL of the OpenID server to use when setting up a trust relationship",
+            "x-go-name": "IssuerURL"
+          },
+          "audience": {
+            "type": "string",
+            "description": "OpenID audience claim for the trust relationship",
+            "x-go-name": "Audience"
+          },
+          "subject": {
+            "type": "string",
+            "description": "OpenID subject claim for the trust relationship",
+            "x-go-name": "Subject"
+          },
+          "notify_path": {
+            "type": "string",
+            "description": "Path of the notify endpoint to use for status updates",
+            "x-go-name": "NotifyPath"
+          },
+          "template_url": {
+            "type": "string",
+            "description": "URL of the CloudFormation template to use for the CUR setup",
+            "x-go-name": "TemplateURL"
+          },
+          "notify_token": {
+            "type": "string",
+            "description": "An authentication token that should be used for notifications"
+          }
+        }
+      },
+      "OnboardingAWSCUR": {
+        "type": "object",
+        "description": "AWS CUR onboarding",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "stage",
+          "created_at",
+          "updated_at",
+          "issuer_url",
+          "audience",
+          "subject"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/OnboardingID"
+          },
+          "stage": {
+            "type": "string",
+            "description": "Stage of the onboarding process",
+            "x-go-name": "OnboardingStage"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-07-14T16:53:42Z"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-07-14T16:53:42Z"
+          },
+          "issuer_url": {
+            "type": "string",
+            "description": "URL of the OpenID server to use when setting up a trust relationship",
+            "x-go-name": "IssuerURL"
+          },
+          "audience": {
+            "type": "string",
+            "description": "OpenID audience claim for the trust relationship",
+            "x-go-name": "Audience"
+          },
+          "subject": {
+            "type": "string",
+            "description": "OpenID subject claim for the trust relationship",
+            "x-go-name": "Subject"
+          },
+          "sync_role_arn": {
+            "type": "string",
+            "description": "Role used to access the S3 bucket with CUR reports",
+            "x-go-name": "SyncRoleARN"
+          },
+          "s3_bucket_name": {
+            "type": "string",
+            "description": "Name of the S3 bucket containing CUR reports",
+            "x-go-name": "S3BucketName"
+          },
+          "s3_report_prefix": {
+            "type": "string",
+            "description": "Prefix path for CUR reports in the S3 bucket",
+            "x-go-name": "S3ReportPrefix"
+          },
+          "cur_report_name": {
+            "type": "string",
+            "description": "Name of the CUR report",
+            "x-go-name": "CURReportName"
+          },
+          "failure_reason": {
+            "type": "string",
+            "description": "Error details if the onboarding failed",
+            "x-go-name": "FailureReason"
+          }
+        }
+      },
+      "DeployedCURNotification": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseNotification"
+          },
+          {
+            "type": "object",
+            "required": [
+              "main_role_arn",
+              "sync_role_arn",
+              "s3_bucket_name",
+              "s3_report_prefix",
+              "cur_report_name",
+              "stack_id"
+            ],
+            "properties": {
+              "status": {
+                "enum": [
+                  "deployed_cur"
+                ]
+              },
+              "main_role_arn": {
+                "type": "string"
+              },
+              "sync_role_arn": {
+                "type": "string"
+              },
+              "s3_bucket_name": {
+                "type": "string"
+              },
+              "s3_report_prefix": {
+                "type": "string"
+              },
+              "cur_report_name": {
+                "type": "string"
+              },
+              "stack_id": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "OnboardingAWSCURNotification": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/StartedNotification"
+          },
+          {
+            "$ref": "#/components/schemas/RevokedNotification"
+          },
+          {
+            "$ref": "#/components/schemas/FailedNotification"
+          },
+          {
+            "$ref": "#/components/schemas/DeployedCURNotification"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "status",
+          "mapping": {
+            "started": "#/components/schemas/StartedNotification",
+            "revoked": "#/components/schemas/RevokedNotification",
+            "failed": "#/components/schemas/FailedNotification",
+            "deployed_cur": "#/components/schemas/DeployedCURNotification"
+          }
+        }
+      },
       "QueryExpression": {
         "title": "QueryExpression",
         "type": "string",
@@ -15085,6 +16618,14 @@
             "items": {
               "$ref": "#/components/schemas/QueryTag"
             },
+            "x-go-type-skip-optional-pointer": true
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Columns returned by this query",
             "x-go-type-skip-optional-pointer": true
           },
           "created_at": {
@@ -15244,6 +16785,14 @@
             },
             "x-go-type-skip-optional-pointer": true
           },
+          "columns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Columns returned by this query",
+            "x-go-type-skip-optional-pointer": true
+          },
           "created_at": {
             "example": "2017-07-14T16:53:42Z",
             "format": "date-time",
@@ -15359,6 +16908,510 @@
             "example": "Filter to find all EC2 instances of type t2.micro from the aws_ec2_instance raw table"
           }
         }
+      },
+      "InsightSeverity": {
+        "description": "Insight severity level",
+        "type": "string",
+        "enum": [
+          "Low",
+          "Medium",
+          "High",
+          "Critical"
+        ],
+        "x-go-name": "InsightSeverity"
+      },
+      "InsightID": {
+        "description": "Unique identifier for the insight",
+        "type": "string",
+        "x-go-name": "InsightID"
+      },
+      "Insight": {
+        "title": "Insight",
+        "type": "object",
+        "description": "Security or compliance insight summary",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "title",
+          "severity",
+          "insight_category",
+          "source",
+          "source_category",
+          "resource_types",
+          "resources_count",
+          "accounts_count",
+          "created_at",
+          "detected_at",
+          "last_synced_at"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/InsightID"
+          },
+          "title": {
+            "type": "string",
+            "description": "Title of the insight"
+          },
+          "evidence": {
+            "type": "string",
+            "description": "Detailed evidence (description) of the insight (Markdown)"
+          },
+          "mitigation": {
+            "type": "string",
+            "description": "Mitigation steps for the insight (Markdown)"
+          },
+          "severity": {
+            "$ref": "#/components/schemas/InsightSeverity"
+          },
+          "insight_category": {
+            "type": "string",
+            "description": "Category (e.g. Security, Cost Optimization)"
+          },
+          "source": {
+            "type": "string",
+            "description": "Source (e.g. Platform, Wiz, Lacework)"
+          },
+          "source_category": {
+            "type": "string",
+            "description": "Source category (e.g. Platform, Third Party, Custom)"
+          },
+          "subcategory": {
+            "type": "string",
+            "nullable": true
+          },
+          "resource_types": {
+            "type": "string",
+            "description": "Resource types affected"
+          },
+          "resources_count": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Number of resources affected"
+          },
+          "accounts_count": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Number of accounts affected"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Tags associated with the insight"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the insight record was created"
+          },
+          "detected_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the insight was first detected"
+          },
+          "last_synced_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the insight was last synced"
+          }
+        }
+      },
+      "InsightsListMetadata": {
+        "required": [
+          "page_size"
+        ],
+        "properties": {
+          "total_count": {
+            "type": "integer"
+          },
+          "resource_count": {
+            "type": "integer"
+          },
+          "resource_types": {
+            "type": "integer"
+          },
+          "last_page": {
+            "type": "integer"
+          },
+          "page_size": {
+            "type": "integer"
+          },
+          "time_ms": {
+            "type": "integer"
+          }
+        }
+      },
+      "PlatformInsightFilter": {
+        "title": "Insight Filter",
+        "type": "object",
+        "description": "Saved insight filter details",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "created_at",
+          "updated_at"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "12345678-1234-1234-1234-1234567890ab"
+          },
+          "name": {
+            "type": "string",
+            "example": "My Saved Security Filter"
+          },
+          "description": {
+            "type": "string",
+            "example": "Filters for critical security insights in AWS"
+          },
+          "search": {
+            "type": "string",
+            "example": "s3 bucket"
+          },
+          "insight_category": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "Security",
+              "Compliance"
+            ]
+          },
+          "severities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InsightSeverity"
+            },
+            "example": [
+              "Critical",
+              "High"
+            ]
+          },
+          "resource_types": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "aws_s3_bucket",
+              "aws_ec2_instance"
+            ]
+          },
+          "source": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "Platform",
+              "Wiz"
+            ]
+          },
+          "source_category": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "Platform",
+              "Third Party"
+            ]
+          },
+          "clouds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "aws",
+              "azure"
+            ]
+          },
+          "accounts": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "prod-account",
+              "staging-account"
+            ]
+          },
+          "regions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "us-east-1",
+              "eu-west-1"
+            ]
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "production",
+              "critical"
+            ]
+          },
+          "ownership_tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "description": "Ownership tag filters keyed by tag name",
+            "example": {
+              "team": [
+                "engineering",
+                "platform"
+              ],
+              "org": [
+                "cloud"
+              ]
+            }
+          },
+          "group_by": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "severity"
+            ]
+          },
+          "user_id": {
+            "$ref": "#/components/schemas/UserID"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-07-14T16:53:42Z"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-07-14T16:53:42Z"
+          }
+        }
+      },
+      "PlatformInsightFilterCreate": {
+        "title": "Insight Filter Create",
+        "type": "object",
+        "description": "Definition for creating a new saved insight filter",
+        "additionalProperties": false,
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "My Saved Security Filter"
+          },
+          "description": {
+            "type": "string",
+            "example": "Filters for critical security insights in AWS"
+          },
+          "search": {
+            "type": "string",
+            "example": "s3 bucket"
+          },
+          "insight_category": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "severities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InsightSeverity"
+            }
+          },
+          "resource_types": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "source": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "source_category": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "clouds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "accounts": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "regions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ownership_tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "description": "Ownership tag filters keyed by tag name",
+            "example": {
+              "team": [
+                "engineering",
+                "platform"
+              ],
+              "org": [
+                "cloud"
+              ]
+            }
+          },
+          "group_by": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "PlatformInsightFilterID": {
+        "description": "The unique ID for the insight filter",
+        "type": "string",
+        "format": "uuid",
+        "x-go-name": "InsightFilterID"
+      },
+      "PlatformInsightFilterUpdate": {
+        "title": "Insight Filter Update",
+        "type": "object",
+        "description": "Definition for updating an existing saved insight filter",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "search": {
+            "type": "string"
+          },
+          "insight_category": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "severities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InsightSeverity"
+            }
+          },
+          "resource_types": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "source": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "source_category": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "clouds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "accounts": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "regions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ownership_tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "description": "Ownership tag filters keyed by tag name",
+            "example": {
+              "team": [
+                "engineering",
+                "platform"
+              ],
+              "org": [
+                "cloud"
+              ]
+            }
+          },
+          "group_by": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "TableRowID": {
+        "description": "ID of the Resource",
+        "type": "string",
+        "example": "table_12345678-1234-1234-1234-1234567890ab"
       },
       "ReportSortBy": {
         "title": "ReportSortBy",
@@ -16498,8 +18551,7 @@
         "title": "Sync Integration Test Connection creation definition",
         "type": "object",
         "required": [
-          "path",
-          "version"
+          "path"
         ],
         "properties": {
           "path": {
@@ -17525,18 +19577,18 @@
         "description": "Sync with its associated tables",
         "type": "object",
         "required": [
-          "sync_name",
+          "source_name",
           "tables"
         ],
         "properties": {
-          "sync_name": {
+          "source_name": {
             "type": "string",
-            "description": "The unique name of the sync (source_name from synced_tables)",
+            "description": "The unique name of the source (source_name from synced_tables)",
             "example": "aws-integration"
           },
           "display_name": {
             "type": "string",
-            "description": "Human-readable display name of the sync",
+            "description": "Human-readable display name of the source",
             "example": "AWS Integration"
           },
           "plugin": {
@@ -17576,7 +19628,7 @@
           }
         },
         "example": {
-          "sync_name": "aws-integration",
+          "source_name": "aws-integration",
           "display_name": "AWS Integration",
           "plugin": "cloudquery/aws",
           "tables": [
@@ -17600,7 +19652,7 @@
         "type": "object",
         "required": [
           "action",
-          "syncs"
+          "sources"
         ],
         "properties": {
           "action": {
@@ -17610,9 +19662,9 @@
             ],
             "description": "The action to perform on the table data"
           },
-          "syncs": {
+          "sources": {
             "type": "object",
-            "description": "Map of sync names to arrays of table names",
+            "description": "Map of source names to arrays of table names",
             "additionalProperties": {
               "type": "array",
               "items": {
@@ -17624,21 +19676,16 @@
         },
         "example": {
           "action": "delete",
-          "syncs": {
-            "sync_name_1": [
+          "sources": {
+            "source_name_1": [
               "table_1",
               "table_2"
             ],
-            "sync_name_2": [
+            "source_name_2": [
               "table_3"
             ]
           }
         }
-      },
-      "TableRowID": {
-        "description": "ID of the Resource",
-        "type": "string",
-        "example": "table_12345678-1234-1234-1234-1234567890ab"
       },
       "TableRow": {
         "additionalProperties": true,
@@ -17739,6 +19786,61 @@
         },
         "title": "TableSchema",
         "type": "array"
+      },
+      "RelationColumnDef": {
+        "type": "object",
+        "required": [
+          "field",
+          "label"
+        ],
+        "properties": {
+          "field": {
+            "type": "string",
+            "description": "Column field name in the query result."
+          },
+          "label": {
+            "type": "string",
+            "description": "Display label for the column."
+          },
+          "type": {
+            "type": "string",
+            "description": "Column render type (e.g. text, tags, boolean, json, code)."
+          },
+          "hidden": {
+            "type": "boolean",
+            "description": "Whether the column is present for navigation but not displayed."
+          }
+        }
+      },
+      "RelationDef": {
+        "type": "object",
+        "required": [
+          "title",
+          "resource_type",
+          "columns",
+          "sql_query"
+        ],
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Display title for the relation tab/section."
+          },
+          "resource_type": {
+            "type": "string",
+            "description": "Target CloudQuery table name."
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RelationColumnDef"
+            },
+            "description": "Column definitions for the relation view."
+          },
+          "sql_query": {
+            "type": "string",
+            "description": "ClickHouse SQL template with {{field_name}} placeholders."
+          }
+        }
       },
       "BatchTableSchemaItem": {
         "title": "BatchTableSchemaItem",
@@ -18066,6 +20168,24 @@
           "can_enable": {
             "type": "boolean",
             "description": "Whether SAML can be enabled"
+          },
+          "certificate_fingerprint": {
+            "type": "string",
+            "description": "Fingerprint of the current SAML certificate"
+          },
+          "certificate_expires_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Expiration time of the current SAML certificate"
+          },
+          "rollover_certificate_fingerprint": {
+            "type": "string",
+            "description": "Fingerprint of the SAML certificate that will be used after rollover"
+          },
+          "rollover_certificate_expires_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Expiration time of the SAML certificate that will be used after rollover"
           }
         }
       },
@@ -18182,8 +20302,7 @@
         "title": "Sync Destination Test Connection creation definition",
         "type": "object",
         "required": [
-          "path",
-          "version"
+          "path"
         ],
         "properties": {
           "path": {
@@ -18571,6 +20690,16 @@
           }
         },
         "description": "Method not allowed"
+      },
+      "Conflict": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/FieldError"
+            }
+          }
+        },
+        "description": "Conflict"
       }
     }
   }

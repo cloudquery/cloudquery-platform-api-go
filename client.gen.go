@@ -92,6 +92,14 @@ const (
 	CustomColumnSortDirectionDesc CustomColumnSortDirection = "desc"
 )
 
+// Defines values for InsightSeverity.
+const (
+	InsightSeverityCritical InsightSeverity = "Critical"
+	InsightSeverityHigh     InsightSeverity = "High"
+	InsightSeverityLow      InsightSeverity = "Low"
+	InsightSeverityMedium   InsightSeverity = "Medium"
+)
+
 // Defines values for NotificationDestinationType.
 const (
 	NotificationDestinationTypeSlack   NotificationDestinationType = "slack"
@@ -458,6 +466,48 @@ const (
 // Defines values for VersionSortBy.
 const (
 	VersionSortByCreatedAt VersionSortBy = "created_at"
+)
+
+// Defines values for ListPlatformInsightsParamsSortBy.
+const (
+	ListPlatformInsightsParamsSortByAccount         ListPlatformInsightsParamsSortBy = "account"
+	ListPlatformInsightsParamsSortByAccountsCount   ListPlatformInsightsParamsSortBy = "accounts_count"
+	ListPlatformInsightsParamsSortByCreatedAt       ListPlatformInsightsParamsSortBy = "created_at"
+	ListPlatformInsightsParamsSortByDetectedAt      ListPlatformInsightsParamsSortBy = "detected_at"
+	ListPlatformInsightsParamsSortByInsightCategory ListPlatformInsightsParamsSortBy = "insight_category"
+	ListPlatformInsightsParamsSortByResourceTypes   ListPlatformInsightsParamsSortBy = "resource_types"
+	ListPlatformInsightsParamsSortByResourcesCount  ListPlatformInsightsParamsSortBy = "resources_count"
+	ListPlatformInsightsParamsSortBySeverity        ListPlatformInsightsParamsSortBy = "severity"
+	ListPlatformInsightsParamsSortBySource          ListPlatformInsightsParamsSortBy = "source"
+	ListPlatformInsightsParamsSortBySourceCategory  ListPlatformInsightsParamsSortBy = "source_category"
+	ListPlatformInsightsParamsSortByTitle           ListPlatformInsightsParamsSortBy = "title"
+)
+
+// Defines values for ListPlatformInsightsParamsSortDir.
+const (
+	ListPlatformInsightsParamsSortDirAsc  ListPlatformInsightsParamsSortDir = "asc"
+	ListPlatformInsightsParamsSortDirDesc ListPlatformInsightsParamsSortDir = "desc"
+)
+
+// Defines values for GetPlatformAssetInsightsParamsSortBy.
+const (
+	GetPlatformAssetInsightsParamsSortByAccount         GetPlatformAssetInsightsParamsSortBy = "account"
+	GetPlatformAssetInsightsParamsSortByAccountsCount   GetPlatformAssetInsightsParamsSortBy = "accounts_count"
+	GetPlatformAssetInsightsParamsSortByCreatedAt       GetPlatformAssetInsightsParamsSortBy = "created_at"
+	GetPlatformAssetInsightsParamsSortByDetectedAt      GetPlatformAssetInsightsParamsSortBy = "detected_at"
+	GetPlatformAssetInsightsParamsSortByInsightCategory GetPlatformAssetInsightsParamsSortBy = "insight_category"
+	GetPlatformAssetInsightsParamsSortByResourceTypes   GetPlatformAssetInsightsParamsSortBy = "resource_types"
+	GetPlatformAssetInsightsParamsSortByResourcesCount  GetPlatformAssetInsightsParamsSortBy = "resources_count"
+	GetPlatformAssetInsightsParamsSortBySeverity        GetPlatformAssetInsightsParamsSortBy = "severity"
+	GetPlatformAssetInsightsParamsSortBySource          GetPlatformAssetInsightsParamsSortBy = "source"
+	GetPlatformAssetInsightsParamsSortBySourceCategory  GetPlatformAssetInsightsParamsSortBy = "source_category"
+	GetPlatformAssetInsightsParamsSortByTitle           GetPlatformAssetInsightsParamsSortBy = "title"
+)
+
+// Defines values for GetPlatformAssetInsightsParamsSortDir.
+const (
+	GetPlatformAssetInsightsParamsSortDirAsc  GetPlatformAssetInsightsParamsSortDir = "asc"
+	GetPlatformAssetInsightsParamsSortDirDesc GetPlatformAssetInsightsParamsSortDir = "desc"
 )
 
 // Defines values for ListPluginsParamsSortBy.
@@ -895,7 +945,7 @@ type CreateSyncDestinationTestConnectionV2 struct {
 	SyncGroupID *string                 `json:"sync_group_id,omitempty"`
 
 	// Version Version of the plugin
-	Version string `json:"version"`
+	Version *string `json:"version,omitempty"`
 
 	// WriteMode Write mode for the destination
 	WriteMode *SyncDestinationWriteMode `json:"write_mode,omitempty"`
@@ -979,6 +1029,17 @@ type CustomColumnSortDirection string
 // CustomColumnValueExpr The SQL expression for the custom column.
 type CustomColumnValueExpr = string
 
+// DeployedCURNotification defines model for DeployedCURNotification.
+type DeployedCURNotification struct {
+	CurReportName  string      `json:"cur_report_name"`
+	MainRoleArn    string      `json:"main_role_arn"`
+	S3BucketName   string      `json:"s3_bucket_name"`
+	S3ReportPrefix string      `json:"s3_report_prefix"`
+	StackId        string      `json:"stack_id"`
+	Status         interface{} `json:"status"`
+	SyncRoleArn    string      `json:"sync_role_arn"`
+}
+
 // DeployedNotification defines model for DeployedNotification.
 type DeployedNotification struct {
 	DeploymentMode    string      `json:"deployment_mode"`
@@ -1057,6 +1118,71 @@ type FilterUpdate struct {
 	Expression *FilterExpression `json:"expression,omitempty"`
 	Name       *string           `json:"name,omitempty"`
 	Tags       *[]FilterTag      `json:"tags,omitempty"`
+}
+
+// Insight Security or compliance insight summary
+type Insight struct {
+	// AccountsCount Number of accounts affected
+	AccountsCount int64 `json:"accounts_count"`
+
+	// CreatedAt When the insight record was created
+	CreatedAt time.Time `json:"created_at"`
+
+	// DetectedAt When the insight was first detected
+	DetectedAt time.Time `json:"detected_at"`
+
+	// Evidence Detailed evidence (description) of the insight (Markdown)
+	Evidence *string `json:"evidence,omitempty"`
+
+	// InsightID Unique identifier for the insight
+	InsightID InsightID `json:"id"`
+
+	// InsightCategory Category (e.g. Security, Cost Optimization)
+	InsightCategory string `json:"insight_category"`
+
+	// LastSyncedAt When the insight was last synced
+	LastSyncedAt time.Time `json:"last_synced_at"`
+
+	// Mitigation Mitigation steps for the insight (Markdown)
+	Mitigation *string `json:"mitigation,omitempty"`
+
+	// ResourceTypes Resource types affected
+	ResourceTypes string `json:"resource_types"`
+
+	// ResourcesCount Number of resources affected
+	ResourcesCount int64 `json:"resources_count"`
+
+	// InsightSeverity Insight severity level
+	InsightSeverity InsightSeverity `json:"severity"`
+
+	// Source Source (e.g. Platform, Wiz, Lacework)
+	Source string `json:"source"`
+
+	// SourceCategory Source category (e.g. Platform, Third Party, Custom)
+	SourceCategory string  `json:"source_category"`
+	Subcategory    *string `json:"subcategory"`
+
+	// Tags Tags associated with the insight
+	Tags *[]string `json:"tags,omitempty"`
+
+	// Title Title of the insight
+	Title string `json:"title"`
+}
+
+// InsightID Unique identifier for the insight
+type InsightID = string
+
+// InsightSeverity Insight severity level
+type InsightSeverity string
+
+// InsightsListMetadata defines model for InsightsListMetadata.
+type InsightsListMetadata struct {
+	LastPage      *int `json:"last_page,omitempty"`
+	PageSize      int  `json:"page_size"`
+	ResourceCount *int `json:"resource_count,omitempty"`
+	ResourceTypes *int `json:"resource_types,omitempty"`
+	TimeMs        *int `json:"time_ms,omitempty"`
+	TotalCount    *int `json:"total_count,omitempty"`
 }
 
 // ListMetadata defines model for ListMetadata.
@@ -1307,6 +1433,9 @@ type NotificationDestinationListItem struct {
 	NotificationDestinationID NotificationDestinationID `json:"id"`
 	Name                      string                    `json:"name"`
 
+	// SlackChannels List of Slack channel names (only for slack type)
+	SlackChannels *[]string `json:"slack_channels,omitempty"`
+
 	// Type Type of notification destination
 	Type      NotificationDestinationListItemType `json:"type"`
 	UpdatedAt time.Time                           `json:"updated_at"`
@@ -1442,6 +1571,76 @@ type OnboardingAWSAccounts struct {
 // OnboardingAWSAccountsType Type of the account
 type OnboardingAWSAccountsType string
 
+// OnboardingAWSCUR AWS CUR onboarding
+type OnboardingAWSCUR struct {
+	// Audience OpenID audience claim for the trust relationship
+	Audience  string    `json:"audience"`
+	CreatedAt time.Time `json:"created_at"`
+
+	// CURReportName Name of the CUR report
+	CURReportName *string `json:"cur_report_name,omitempty"`
+
+	// FailureReason Error details if the onboarding failed
+	FailureReason *string `json:"failure_reason,omitempty"`
+
+	// OnboardingID ID of the cloud provider onboarding session
+	OnboardingID OnboardingID `json:"id"`
+
+	// IssuerURL URL of the OpenID server to use when setting up a trust relationship
+	IssuerURL string `json:"issuer_url"`
+
+	// S3BucketName Name of the S3 bucket containing CUR reports
+	S3BucketName *string `json:"s3_bucket_name,omitempty"`
+
+	// S3ReportPrefix Prefix path for CUR reports in the S3 bucket
+	S3ReportPrefix *string `json:"s3_report_prefix,omitempty"`
+
+	// OnboardingStage Stage of the onboarding process
+	OnboardingStage string `json:"stage"`
+
+	// Subject OpenID subject claim for the trust relationship
+	Subject string `json:"subject"`
+
+	// SyncRoleARN Role used to access the S3 bucket with CUR reports
+	SyncRoleARN *string   `json:"sync_role_arn,omitempty"`
+	UpdatedAt   time.Time `json:"updated_at"`
+}
+
+// OnboardingAWSCURCreateResponse AWS CUR onboarding create response
+type OnboardingAWSCURCreateResponse struct {
+	// Audience OpenID audience claim for the trust relationship
+	Audience string `json:"audience"`
+
+	// OnboardingID ID of the cloud provider onboarding session
+	OnboardingID OnboardingID `json:"id"`
+
+	// IssuerURL URL of the OpenID server to use when setting up a trust relationship
+	IssuerURL string `json:"issuer_url"`
+
+	// NotifyPath Path of the notify endpoint to use for status updates
+	NotifyPath string `json:"notify_path"`
+
+	// NotifyToken An authentication token that should be used for notifications
+	NotifyToken string `json:"notify_token"`
+
+	// Region AWS region where the CUR stack must be deployed. Always 'us-east-1' because AWS Cost and Usage Reports are only available in that region.
+	Region string `json:"region"`
+
+	// StackName Stack name that should be used
+	StackName *string `json:"stack_name,omitempty"`
+
+	// Subject OpenID subject claim for the trust relationship
+	Subject string `json:"subject"`
+
+	// TemplateURL URL of the CloudFormation template to use for the CUR setup
+	TemplateURL string `json:"template_url"`
+}
+
+// OnboardingAWSCURNotification defines model for OnboardingAWSCURNotification.
+type OnboardingAWSCURNotification struct {
+	union json.RawMessage
+}
+
 // OnboardingAWSCreateResponse AWS OpenID onboarding
 type OnboardingAWSCreateResponse struct {
 	// Audience OpenID audience claim for the trust realshionship
@@ -1505,6 +1704,75 @@ type PlatformDataSettings struct {
 type PlatformDataSettingsUpdate struct {
 	// OwnershipTags List of tag names for asset ownership
 	OwnershipTags *[]string `json:"ownership_tags,omitempty"`
+}
+
+// PlatformInsightFilter Saved insight filter details
+type PlatformInsightFilter struct {
+	Accounts        *[]string          `json:"accounts,omitempty"`
+	Clouds          *[]string          `json:"clouds,omitempty"`
+	CreatedAt       time.Time          `json:"created_at"`
+	Description     *string            `json:"description,omitempty"`
+	GroupBy         *[]string          `json:"group_by,omitempty"`
+	Id              openapi_types.UUID `json:"id"`
+	InsightCategory *[]string          `json:"insight_category,omitempty"`
+	Name            string             `json:"name"`
+
+	// OwnershipTags Ownership tag filters keyed by tag name
+	OwnershipTags  *map[string][]string `json:"ownership_tags,omitempty"`
+	Regions        *[]string            `json:"regions,omitempty"`
+	ResourceTypes  *[]string            `json:"resource_types,omitempty"`
+	Search         *string              `json:"search,omitempty"`
+	Severities     *[]InsightSeverity   `json:"severities,omitempty"`
+	Source         *[]string            `json:"source,omitempty"`
+	SourceCategory *[]string            `json:"source_category,omitempty"`
+	Tags           *[]string            `json:"tags,omitempty"`
+	UpdatedAt      time.Time            `json:"updated_at"`
+
+	// UserID ID of the User
+	UserID *UserID `json:"user_id,omitempty"`
+}
+
+// PlatformInsightFilterCreate Definition for creating a new saved insight filter
+type PlatformInsightFilterCreate struct {
+	Accounts        *[]string `json:"accounts,omitempty"`
+	Clouds          *[]string `json:"clouds,omitempty"`
+	Description     *string   `json:"description,omitempty"`
+	GroupBy         *[]string `json:"group_by,omitempty"`
+	InsightCategory *[]string `json:"insight_category,omitempty"`
+	Name            string    `json:"name"`
+
+	// OwnershipTags Ownership tag filters keyed by tag name
+	OwnershipTags  *map[string][]string `json:"ownership_tags,omitempty"`
+	Regions        *[]string            `json:"regions,omitempty"`
+	ResourceTypes  *[]string            `json:"resource_types,omitempty"`
+	Search         *string              `json:"search,omitempty"`
+	Severities     *[]InsightSeverity   `json:"severities,omitempty"`
+	Source         *[]string            `json:"source,omitempty"`
+	SourceCategory *[]string            `json:"source_category,omitempty"`
+	Tags           *[]string            `json:"tags,omitempty"`
+}
+
+// InsightFilterID The unique ID for the insight filter
+type InsightFilterID = openapi_types.UUID
+
+// PlatformInsightFilterUpdate Definition for updating an existing saved insight filter
+type PlatformInsightFilterUpdate struct {
+	Accounts        *[]string `json:"accounts,omitempty"`
+	Clouds          *[]string `json:"clouds,omitempty"`
+	Description     *string   `json:"description,omitempty"`
+	GroupBy         *[]string `json:"group_by,omitempty"`
+	InsightCategory *[]string `json:"insight_category,omitempty"`
+	Name            *string   `json:"name,omitempty"`
+
+	// OwnershipTags Ownership tag filters keyed by tag name
+	OwnershipTags  *map[string][]string `json:"ownership_tags,omitempty"`
+	Regions        *[]string            `json:"regions,omitempty"`
+	ResourceTypes  *[]string            `json:"resource_types,omitempty"`
+	Search         *string              `json:"search,omitempty"`
+	Severities     *[]InsightSeverity   `json:"severities,omitempty"`
+	Source         *[]string            `json:"source,omitempty"`
+	SourceCategory *[]string            `json:"source_category,omitempty"`
+	Tags           *[]string            `json:"tags,omitempty"`
 }
 
 // PlatformSettings Platform settings definition
@@ -2004,6 +2272,9 @@ type PolicyViolation struct {
 	Name              string `json:"name"`
 	Region            string `json:"region"`
 	ResourceTypeLabel string `json:"resource_type_label"`
+
+	// Tags Tags associated with the resource (e.g. for insights)
+	Tags *[]string `json:"tags,omitempty"`
 }
 
 // PromoteSyncDestinationTestConnection Sync Destination Definition
@@ -2052,9 +2323,12 @@ type Query struct {
 	Alert *Alert `json:"alert,omitempty"`
 
 	// AlertConfigured Indicates if the query has an alert configured
-	AlertConfigured bool      `json:"alert_configured"`
-	CreatedAt       time.Time `json:"created_at"`
-	Description     *string   `json:"description,omitempty"`
+	AlertConfigured bool `json:"alert_configured"`
+
+	// Columns Columns returned by this query
+	Columns     []string  `json:"columns,omitempty"`
+	CreatedAt   time.Time `json:"created_at"`
+	Description *string   `json:"description,omitempty"`
 
 	// QueryID The unique ID for the query.
 	QueryID QueryID `json:"id"`
@@ -2091,9 +2365,12 @@ type QueryDetail struct {
 	Alert *AlertDetail `json:"alert,omitempty"`
 
 	// AlertConfigured Indicates if the query has an alert configured. When this is set, the alert field will be populated with the alert details.
-	AlertConfigured bool      `json:"alert_configured"`
-	CreatedAt       time.Time `json:"created_at"`
-	Description     *string   `json:"description,omitempty"`
+	AlertConfigured bool `json:"alert_configured"`
+
+	// Columns Columns returned by this query
+	Columns     []string  `json:"columns,omitempty"`
+	CreatedAt   time.Time `json:"created_at"`
+	Description *string   `json:"description,omitempty"`
 
 	// QueryID The unique ID for the query.
 	QueryID QueryID `json:"id"`
@@ -2193,6 +2470,36 @@ type RBACRoleUpdate struct {
 	Description *string             `json:"description,omitempty"`
 	Name        *string             `json:"name,omitempty"`
 	Permissions *[]RBACPermissionID `json:"permissions,omitempty"`
+}
+
+// RelationColumnDef defines model for RelationColumnDef.
+type RelationColumnDef struct {
+	// Field Column field name in the query result.
+	Field string `json:"field"`
+
+	// Hidden Whether the column is present for navigation but not displayed.
+	Hidden *bool `json:"hidden,omitempty"`
+
+	// Label Display label for the column.
+	Label string `json:"label"`
+
+	// Type Column render type (e.g. text, tags, boolean, json, code).
+	Type *string `json:"type,omitempty"`
+}
+
+// RelationDef defines model for RelationDef.
+type RelationDef struct {
+	// Columns Column definitions for the relation view.
+	Columns []RelationColumnDef `json:"columns"`
+
+	// ResourceType Target CloudQuery table name.
+	ResourceType string `json:"resource_type"`
+
+	// SqlQuery ClickHouse SQL template with {{field_name}} placeholders.
+	SqlQuery string `json:"sql_query"`
+
+	// Title Display title for the relation tab/section.
+	Title string `json:"title"`
 }
 
 // Report defines model for Report.
@@ -2296,6 +2603,12 @@ type SAMLConfig struct {
 	// CanEnable Whether SAML can be enabled
 	CanEnable bool `json:"can_enable"`
 
+	// CertificateExpiresAt Expiration time of the current SAML certificate
+	CertificateExpiresAt *time.Time `json:"certificate_expires_at,omitempty"`
+
+	// CertificateFingerprint Fingerprint of the current SAML certificate
+	CertificateFingerprint *string `json:"certificate_fingerprint,omitempty"`
+
 	// DefaultRoles Default roles for new users who are not in any group
 	DefaultRoles []Role `json:"default_roles"`
 
@@ -2331,6 +2644,12 @@ type SAMLConfig struct {
 
 	// RoleMappings Mapping from IdP group names to roles. Each key is a potential IdP group value for the specified role_group_key, and each value is an array of roles to assign to users in that group.
 	RoleMappings map[string][]Role `json:"role_mappings,omitempty"`
+
+	// RolloverCertificateExpiresAt Expiration time of the SAML certificate that will be used after rollover
+	RolloverCertificateExpiresAt *time.Time `json:"rollover_certificate_expires_at,omitempty"`
+
+	// RolloverCertificateFingerprint Fingerprint of the SAML certificate that will be used after rollover
+	RolloverCertificateFingerprint *string `json:"rollover_certificate_fingerprint,omitempty"`
 }
 
 // SAMLConfigUpdate defines model for SAMLConfigUpdate.
@@ -2870,7 +3189,7 @@ type SyncIntegrationTestConnectionCreateV2 struct {
 	Spec       *map[string]interface{} `json:"spec,omitempty"`
 
 	// Version Version of the plugin
-	Version string `json:"version"`
+	Version *string `json:"version,omitempty"`
 }
 
 // SyncIntegrationTestConnectionV2 defines model for SyncIntegrationTestConnectionV2.
@@ -3459,8 +3778,8 @@ type TableDataAction struct {
 	// Action The action to perform on the table data
 	Action TableDataActionAction `json:"action"`
 
-	// Syncs Map of sync names to arrays of table names
-	Syncs map[string][]string `json:"syncs"`
+	// Sources Map of source names to arrays of table names
+	Sources map[string][]string `json:"sources"`
 }
 
 // TableDataActionAction The action to perform on the table data
@@ -3468,14 +3787,14 @@ type TableDataActionAction string
 
 // TableDataListItem Sync with its associated tables
 type TableDataListItem struct {
-	// DisplayName Human-readable display name of the sync
+	// DisplayName Human-readable display name of the source
 	DisplayName *string `json:"display_name,omitempty"`
 
 	// Plugin Plugin path in CloudQuery registry
 	Plugin *SyncPluginPath `json:"plugin,omitempty"`
 
-	// SyncName The unique name of the sync (source_name from synced_tables)
-	SyncName string `json:"sync_name"`
+	// SourceName The unique name of the source (source_name from synced_tables)
+	SourceName string `json:"source_name"`
 
 	// Tables List of tables synced by this integration with their deletion status
 	Tables []struct {
@@ -3718,6 +4037,9 @@ type AlertMessageFilter = string
 // AlertStates defines model for alert_states.
 type AlertStates = []AlertState
 
+// AssetID ID of the Resource
+type AssetID = TableRowID
+
 // ColumnName The name of a table column.
 type ColumnName = string
 
@@ -3754,6 +4076,9 @@ type IncludeFips = bool
 // IncludePrereleases defines model for include_prereleases.
 type IncludePrereleases = bool
 
+// InsightColumnName defines model for insight_column_name.
+type InsightColumnName = string
+
 // MigrationFilter Filter by migration
 type MigrationFilter = bool
 
@@ -3777,6 +4102,9 @@ type PluginSortBy string
 
 // PluginTeam The unique name for the team.
 type PluginTeam = TeamName
+
+// QueryColumnFilter defines model for query_column_filter.
+type QueryColumnFilter = []string
 
 // QueryFilter Filter by query
 type QueryFilter = string
@@ -3895,6 +4223,9 @@ type VersionSortBy string
 // BadRequest defines model for BadRequest.
 type BadRequest = FieldError
 
+// Conflict defines model for Conflict.
+type Conflict = FieldError
+
 // Forbidden defines model for Forbidden.
 type Forbidden = FieldError
 
@@ -3991,6 +4322,18 @@ type ListAuditLogsParams struct {
 	Search *string `form:"search,omitempty" json:"search,omitempty"`
 }
 
+// DeleteSAMLRolloverCertificateJSONBody defines parameters for DeleteSAMLRolloverCertificate.
+type DeleteSAMLRolloverCertificateJSONBody struct {
+	// Fingerprint The fingerprint of the rollover certificate to delete
+	Fingerprint string `json:"fingerprint"`
+}
+
+// PromoteSAMLRolloverCertificateJSONBody defines parameters for PromoteSAMLRolloverCertificate.
+type PromoteSAMLRolloverCertificateJSONBody struct {
+	// Fingerprint The fingerprint of the rollover certificate to promote
+	Fingerprint string `json:"fingerprint"`
+}
+
 // ListAllCustomColumnsParams defines parameters for ListAllCustomColumns.
 type ListAllCustomColumnsParams struct {
 	// PerPage The number of results per page (max 1000).
@@ -4030,6 +4373,180 @@ type ListFilterTagsParams struct {
 
 	// Page Page number of the results to fetch
 	Page *Page `form:"page,omitempty" json:"page,omitempty"`
+}
+
+// ListPlatformInsightsParams defines parameters for ListPlatformInsights.
+type ListPlatformInsightsParams struct {
+	// Page Page number of the results to fetch
+	Page *Page `form:"page,omitempty" json:"page,omitempty"`
+
+	// PerPage The number of results per page (max 1000).
+	PerPage *PerPage `form:"per_page,omitempty" json:"per_page,omitempty"`
+
+	// Search Search in title, evidence (description), mitigation, or related fields
+	Search *string `form:"search,omitempty" json:"search,omitempty"`
+
+	// Severities Filter by severities (any match)
+	Severities *[]InsightSeverity `form:"severities,omitempty" json:"severities,omitempty"`
+
+	// Cloud Filter by cloud
+	Cloud *string `form:"cloud,omitempty" json:"cloud,omitempty"`
+
+	// Account Filter by account
+	Account *string `form:"account,omitempty" json:"account,omitempty"`
+
+	// Region Filter by region
+	Region *string `form:"region,omitempty" json:"region,omitempty"`
+
+	// InsightCategory Filter by insight category
+	InsightCategory *string `form:"insight_category,omitempty" json:"insight_category,omitempty"`
+
+	// SourceCategory Filter by source category
+	SourceCategory *string `form:"source_category,omitempty" json:"source_category,omitempty"`
+
+	// Source Filter by source
+	Source *string `form:"source,omitempty" json:"source,omitempty"`
+
+	// ResourceTypes Filter by resource types
+	ResourceTypes *[]string `form:"resource_types,omitempty" json:"resource_types,omitempty"`
+
+	// Tags Filter by tags (any match)
+	Tags *[]string `form:"tags,omitempty" json:"tags,omitempty"`
+
+	// SortBy Field to sort by
+	SortBy *ListPlatformInsightsParamsSortBy `form:"sort_by,omitempty" json:"sort_by,omitempty"`
+
+	// SortDir Sort direction
+	SortDir *ListPlatformInsightsParamsSortDir `form:"sort_dir,omitempty" json:"sort_dir,omitempty"`
+}
+
+// ListPlatformInsightsParamsSortBy defines parameters for ListPlatformInsights.
+type ListPlatformInsightsParamsSortBy string
+
+// ListPlatformInsightsParamsSortDir defines parameters for ListPlatformInsights.
+type ListPlatformInsightsParamsSortDir string
+
+// GetPlatformAssetInsightsParams defines parameters for GetPlatformAssetInsights.
+type GetPlatformAssetInsightsParams struct {
+	// Page Page number of the results to fetch
+	Page *Page `form:"page,omitempty" json:"page,omitempty"`
+
+	// PerPage The number of results per page (max 1000).
+	PerPage *PerPage `form:"per_page,omitempty" json:"per_page,omitempty"`
+
+	// Search Search in asset name, account, region, etc.
+	Search *string `form:"search,omitempty" json:"search,omitempty"`
+
+	// SortBy Field to sort by
+	SortBy *GetPlatformAssetInsightsParamsSortBy `form:"sort_by,omitempty" json:"sort_by,omitempty"`
+
+	// SortDir Sort direction
+	SortDir *GetPlatformAssetInsightsParamsSortDir `form:"sort_dir,omitempty" json:"sort_dir,omitempty"`
+}
+
+// GetPlatformAssetInsightsParamsSortBy defines parameters for GetPlatformAssetInsights.
+type GetPlatformAssetInsightsParamsSortBy string
+
+// GetPlatformAssetInsightsParamsSortDir defines parameters for GetPlatformAssetInsights.
+type GetPlatformAssetInsightsParamsSortDir string
+
+// GetPlatformInsightColumnDistinctValuesParams defines parameters for GetPlatformInsightColumnDistinctValues.
+type GetPlatformInsightColumnDistinctValuesParams struct {
+	// Page Page number of the results to fetch
+	Page *Page `form:"page,omitempty" json:"page,omitempty"`
+
+	// PerPage The number of results per page (max 1000).
+	PerPage *PerPage `form:"per_page,omitempty" json:"per_page,omitempty"`
+
+	// OwnerTag When specified, returns distinct values for this ownership tag key (e.g., "team", "department"). The column_name parameter is ignored when owner_tag is provided.
+	OwnerTag *string `form:"owner_tag,omitempty" json:"owner_tag,omitempty"`
+
+	// Search Search in title, evidence (description), mitigation, or related fields
+	Search *string `form:"search,omitempty" json:"search,omitempty"`
+
+	// Severities Filter by severities (any match)
+	Severities *[]InsightSeverity `form:"severities,omitempty" json:"severities,omitempty"`
+
+	// Cloud Filter by cloud
+	Cloud *string `form:"cloud,omitempty" json:"cloud,omitempty"`
+
+	// Account Filter by account
+	Account *string `form:"account,omitempty" json:"account,omitempty"`
+
+	// Region Filter by region
+	Region *string `form:"region,omitempty" json:"region,omitempty"`
+
+	// InsightCategory Filter by insight category
+	InsightCategory *string `form:"insight_category,omitempty" json:"insight_category,omitempty"`
+
+	// SourceCategory Filter by source category
+	SourceCategory *string `form:"source_category,omitempty" json:"source_category,omitempty"`
+
+	// Source Filter by source
+	Source *string `form:"source,omitempty" json:"source,omitempty"`
+
+	// ResourceTypes Filter by resource types
+	ResourceTypes *[]string `form:"resource_types,omitempty" json:"resource_types,omitempty"`
+
+	// Tags Filter by tags (any match)
+	Tags *[]string `form:"tags,omitempty" json:"tags,omitempty"`
+}
+
+// PlatformListInsightFiltersParams defines parameters for PlatformListInsightFilters.
+type PlatformListInsightFiltersParams struct {
+	// PerPage The number of results per page (max 1000).
+	PerPage *PerPage `form:"per_page,omitempty" json:"per_page,omitempty"`
+
+	// Page Page number of the results to fetch
+	Page *Page `form:"page,omitempty" json:"page,omitempty"`
+
+	// SearchTerm Search in filter name or description
+	SearchTerm *string `form:"search_term,omitempty" json:"search_term,omitempty"`
+
+	// InsightCategory Filter by insight category
+	InsightCategory *[]string `form:"insight_category,omitempty" json:"insight_category,omitempty"`
+
+	// Severities Filter by severities (any match)
+	Severities *[]InsightSeverity `form:"severities,omitempty" json:"severities,omitempty"`
+
+	// ResourceTypes Filter by resource types
+	ResourceTypes *[]string `form:"resource_types,omitempty" json:"resource_types,omitempty"`
+
+	// Source Filter by source
+	Source *[]string `form:"source,omitempty" json:"source,omitempty"`
+
+	// SourceCategory Filter by source category
+	SourceCategory *[]string `form:"source_category,omitempty" json:"source_category,omitempty"`
+
+	// Tags Filter by tags (any match)
+	Tags *[]string `form:"tags,omitempty" json:"tags,omitempty"`
+
+	// GroupBy Filter by group by fields
+	GroupBy *[]string `form:"group_by,omitempty" json:"group_by,omitempty"`
+}
+
+// GetPlatformInsightAssetsParams defines parameters for GetPlatformInsightAssets.
+type GetPlatformInsightAssetsParams struct {
+	// Page Page number of the results to fetch
+	Page *Page `form:"page,omitempty" json:"page,omitempty"`
+
+	// PerPage The number of results per page (max 1000).
+	PerPage *PerPage `form:"per_page,omitempty" json:"per_page,omitempty"`
+
+	// Search Search in asset name, account, region, etc.
+	Search *string `form:"search,omitempty" json:"search,omitempty"`
+
+	// Accounts Filter by account IDs
+	Accounts *[]string `form:"accounts,omitempty" json:"accounts,omitempty"`
+
+	// Clouds Filter by cloud providers (e.g. aws, azure, gcp, github, backstage, digitalocean, wiz)
+	Clouds *[]string `form:"clouds,omitempty" json:"clouds,omitempty"`
+
+	// Regions Filter by regions
+	Regions *[]string `form:"regions,omitempty" json:"regions,omitempty"`
+
+	// ResourceType Filter by resource type
+	ResourceType *[]string `form:"resource_type,omitempty" json:"resource_type,omitempty"`
 }
 
 // ListNotificationsParams defines parameters for ListNotifications.
@@ -4288,6 +4805,9 @@ type ListAllQueriesParams struct {
 
 	// AlertEnabled Alert enabled
 	AlertEnabled *AlertEnabled `form:"alert_enabled,omitempty" json:"alert_enabled,omitempty"`
+
+	// ColumnFilter Filter queries that return all specified columns
+	ColumnFilter *QueryColumnFilter `form:"column_filter,omitempty" json:"column_filter,omitempty"`
 }
 
 // ExecuteAdHocQueryJSONBody defines parameters for ExecuteAdHocQuery.
@@ -4297,7 +4817,7 @@ type ExecuteAdHocQueryJSONBody struct {
 
 // ExecuteAdHocQueryParams defines parameters for ExecuteAdHocQuery.
 type ExecuteAdHocQueryParams struct {
-	// Selects Table selects. This filters the columns that are returned in the result set.
+	// Selects Table selects. This filters the columns that are returned in the result set. If empty, all default columns + internal _cq_* columns are returned. To select all columns, use the `*` wildcard.
 	Selects Selects `form:"select,omitempty" json:"select,omitempty"`
 
 	// FilterMode Table filter mode.
@@ -4349,7 +4869,7 @@ type ListQueryTagsParams struct {
 
 // ExecuteSavedQueryParams defines parameters for ExecuteSavedQuery.
 type ExecuteSavedQueryParams struct {
-	// Selects Table selects. This filters the columns that are returned in the result set.
+	// Selects Table selects. This filters the columns that are returned in the result set. If empty, all default columns + internal _cq_* columns are returned. To select all columns, use the `*` wildcard.
 	Selects Selects `form:"select,omitempty" json:"select,omitempty"`
 
 	// FilterMode Table filter mode.
@@ -4857,7 +5377,7 @@ type TableColumnListValuesParamsFilterMode string
 
 // TableListRowsParams defines parameters for TableListRows.
 type TableListRowsParams struct {
-	// Selects Table selects. This filters the columns that are returned in the result set.
+	// Selects Table selects. This filters the columns that are returned in the result set. If empty, all default columns + internal _cq_* columns are returned. To select all columns, use the `*` wildcard.
 	Selects Selects `form:"select,omitempty" json:"select,omitempty"`
 
 	// FilterMode Table filter mode.
@@ -5192,6 +5712,12 @@ type CreateAPIKeyJSONRequestBody CreateAPIKeyJSONBody
 // UpdateSAMLJSONRequestBody defines body for UpdateSAML for application/json ContentType.
 type UpdateSAMLJSONRequestBody = SAMLConfigUpdate
 
+// DeleteSAMLRolloverCertificateJSONRequestBody defines body for DeleteSAMLRolloverCertificate for application/json ContentType.
+type DeleteSAMLRolloverCertificateJSONRequestBody DeleteSAMLRolloverCertificateJSONBody
+
+// PromoteSAMLRolloverCertificateJSONRequestBody defines body for PromoteSAMLRolloverCertificate for application/json ContentType.
+type PromoteSAMLRolloverCertificateJSONRequestBody PromoteSAMLRolloverCertificateJSONBody
+
 // CreateConversationJSONRequestBody defines body for CreateConversation for application/json ContentType.
 type CreateConversationJSONRequestBody = ConversationCreate
 
@@ -5207,6 +5733,12 @@ type UpdateCustomColumnJSONRequestBody = CustomColumnCreateOrUpdate
 // UpdateFilterJSONRequestBody defines body for UpdateFilter for application/json ContentType.
 type UpdateFilterJSONRequestBody = FilterUpdate
 
+// PlatformCreateInsightFilterJSONRequestBody defines body for PlatformCreateInsightFilter for application/json ContentType.
+type PlatformCreateInsightFilterJSONRequestBody = PlatformInsightFilterCreate
+
+// PlatformUpdateInsightFilterJSONRequestBody defines body for PlatformUpdateInsightFilter for application/json ContentType.
+type PlatformUpdateInsightFilterJSONRequestBody = PlatformInsightFilterUpdate
+
 // UpdateNotificationDestinationJSONRequestBody defines body for UpdateNotificationDestination for application/json ContentType.
 type UpdateNotificationDestinationJSONRequestBody = NotificationDestinationUpdate
 
@@ -5215,6 +5747,9 @@ type CreateNotificationDestinationJSONRequestBody = NotificationDestinationCreat
 
 // TestUnsavedNotificationDestinationJSONRequestBody defines body for TestUnsavedNotificationDestination for application/json ContentType.
 type TestUnsavedNotificationDestinationJSONRequestBody = NotificationDestinationData
+
+// NotifyAWSCUROnboardingJSONRequestBody defines body for NotifyAWSCUROnboarding for application/json ContentType.
+type NotifyAWSCUROnboardingJSONRequestBody = OnboardingAWSCURNotification
 
 // CreateAWSOnboardingJSONRequestBody defines body for CreateAWSOnboarding for application/json ContentType.
 type CreateAWSOnboardingJSONRequestBody CreateAWSOnboardingJSONBody
@@ -5383,6 +5918,155 @@ type CreateV2SyncIntegrationJSONRequestBody = SyncIntegrationCreateV2
 
 // UpdateV2SyncIntegrationJSONRequestBody defines body for UpdateV2SyncIntegration for application/json ContentType.
 type UpdateV2SyncIntegrationJSONRequestBody = SyncIntegrationUpdateV2
+
+// AsStartedNotification returns the union data inside the OnboardingAWSCURNotification as a StartedNotification
+func (t OnboardingAWSCURNotification) AsStartedNotification() (StartedNotification, error) {
+	var body StartedNotification
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromStartedNotification overwrites any union data inside the OnboardingAWSCURNotification as the provided StartedNotification
+func (t *OnboardingAWSCURNotification) FromStartedNotification(v StartedNotification) error {
+	v.Status = "started"
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeStartedNotification performs a merge with any union data inside the OnboardingAWSCURNotification, using the provided StartedNotification
+func (t *OnboardingAWSCURNotification) MergeStartedNotification(v StartedNotification) error {
+	v.Status = "started"
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsRevokedNotification returns the union data inside the OnboardingAWSCURNotification as a RevokedNotification
+func (t OnboardingAWSCURNotification) AsRevokedNotification() (RevokedNotification, error) {
+	var body RevokedNotification
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromRevokedNotification overwrites any union data inside the OnboardingAWSCURNotification as the provided RevokedNotification
+func (t *OnboardingAWSCURNotification) FromRevokedNotification(v RevokedNotification) error {
+	v.Status = "revoked"
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeRevokedNotification performs a merge with any union data inside the OnboardingAWSCURNotification, using the provided RevokedNotification
+func (t *OnboardingAWSCURNotification) MergeRevokedNotification(v RevokedNotification) error {
+	v.Status = "revoked"
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsFailedNotification returns the union data inside the OnboardingAWSCURNotification as a FailedNotification
+func (t OnboardingAWSCURNotification) AsFailedNotification() (FailedNotification, error) {
+	var body FailedNotification
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromFailedNotification overwrites any union data inside the OnboardingAWSCURNotification as the provided FailedNotification
+func (t *OnboardingAWSCURNotification) FromFailedNotification(v FailedNotification) error {
+	v.Status = "failed"
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeFailedNotification performs a merge with any union data inside the OnboardingAWSCURNotification, using the provided FailedNotification
+func (t *OnboardingAWSCURNotification) MergeFailedNotification(v FailedNotification) error {
+	v.Status = "failed"
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsDeployedCURNotification returns the union data inside the OnboardingAWSCURNotification as a DeployedCURNotification
+func (t OnboardingAWSCURNotification) AsDeployedCURNotification() (DeployedCURNotification, error) {
+	var body DeployedCURNotification
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromDeployedCURNotification overwrites any union data inside the OnboardingAWSCURNotification as the provided DeployedCURNotification
+func (t *OnboardingAWSCURNotification) FromDeployedCURNotification(v DeployedCURNotification) error {
+	v.Status = "deployed_cur"
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeDeployedCURNotification performs a merge with any union data inside the OnboardingAWSCURNotification, using the provided DeployedCURNotification
+func (t *OnboardingAWSCURNotification) MergeDeployedCURNotification(v DeployedCURNotification) error {
+	v.Status = "deployed_cur"
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t OnboardingAWSCURNotification) Discriminator() (string, error) {
+	var discriminator struct {
+		Discriminator string `json:"status"`
+	}
+	err := json.Unmarshal(t.union, &discriminator)
+	return discriminator.Discriminator, err
+}
+
+func (t OnboardingAWSCURNotification) ValueByDiscriminator() (interface{}, error) {
+	discriminator, err := t.Discriminator()
+	if err != nil {
+		return nil, err
+	}
+	switch discriminator {
+	case "deployed_cur":
+		return t.AsDeployedCURNotification()
+	case "failed":
+		return t.AsFailedNotification()
+	case "revoked":
+		return t.AsRevokedNotification()
+	case "started":
+		return t.AsStartedNotification()
+	default:
+		return nil, errors.New("unknown discriminator value: " + discriminator)
+	}
+}
+
+func (t OnboardingAWSCURNotification) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	return b, err
+}
+
+func (t *OnboardingAWSCURNotification) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	return err
+}
 
 // AsStartedNotification returns the union data inside the OnboardingAWSNotification as a StartedNotification
 func (t OnboardingAWSNotification) AsStartedNotification() (StartedNotification, error) {
@@ -5705,6 +6389,19 @@ type ClientInterface interface {
 
 	UpdateSAML(ctx context.Context, body UpdateSAMLJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// DeleteSAMLRolloverCertificateWithBody request with any body
+	DeleteSAMLRolloverCertificateWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	DeleteSAMLRolloverCertificate(ctx context.Context, body DeleteSAMLRolloverCertificateJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateSAMLRolloverCertificate request
+	CreateSAMLRolloverCertificate(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// PromoteSAMLRolloverCertificateWithBody request with any body
+	PromoteSAMLRolloverCertificateWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	PromoteSAMLRolloverCertificate(ctx context.Context, body PromoteSAMLRolloverCertificateJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// CreateConversationWithBody request with any body
 	CreateConversationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -5760,6 +6457,40 @@ type ClientInterface interface {
 	// HealthCheckHead request
 	HealthCheckHead(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// ListPlatformInsights request
+	ListPlatformInsights(ctx context.Context, params *ListPlatformInsightsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetPlatformAssetInsights request
+	GetPlatformAssetInsights(ctx context.Context, assetID AssetID, params *GetPlatformAssetInsightsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetPlatformInsightColumnDistinctValues request
+	GetPlatformInsightColumnDistinctValues(ctx context.Context, insightColumnName InsightColumnName, params *GetPlatformInsightColumnDistinctValuesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// PlatformListInsightFilters request
+	PlatformListInsightFilters(ctx context.Context, params *PlatformListInsightFiltersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// PlatformCreateInsightFilterWithBody request with any body
+	PlatformCreateInsightFilterWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	PlatformCreateInsightFilter(ctx context.Context, body PlatformCreateInsightFilterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// PlatformDeleteInsightFilter request
+	PlatformDeleteInsightFilter(ctx context.Context, insightFilterID InsightFilterID, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// PlatformGetInsightFilterByID request
+	PlatformGetInsightFilterByID(ctx context.Context, insightFilterID InsightFilterID, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// PlatformUpdateInsightFilterWithBody request with any body
+	PlatformUpdateInsightFilterWithBody(ctx context.Context, insightFilterID InsightFilterID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	PlatformUpdateInsightFilter(ctx context.Context, insightFilterID InsightFilterID, body PlatformUpdateInsightFilterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetPlatformInsight request
+	GetPlatformInsight(ctx context.Context, insightID InsightID, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetPlatformInsightAssets request
+	GetPlatformInsightAssets(ctx context.Context, insightID InsightID, params *GetPlatformInsightAssetsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// ListNotifications request
 	ListNotifications(ctx context.Context, params *ListNotificationsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -5792,6 +6523,20 @@ type ClientInterface interface {
 	TestUnsavedNotificationDestinationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	TestUnsavedNotificationDestination(ctx context.Context, body TestUnsavedNotificationDestinationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateAWSCUROnboarding request
+	CreateAWSCUROnboarding(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetAWSCUROnboarding request
+	GetAWSCUROnboarding(ctx context.Context, onboardingID OnboardingID, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// NotifyAWSCUROnboardingWithBody request with any body
+	NotifyAWSCUROnboardingWithBody(ctx context.Context, onboardingID OnboardingID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	NotifyAWSCUROnboarding(ctx context.Context, onboardingID OnboardingID, body NotifyAWSCUROnboardingJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// VerifyAWSCUROnboarding request
+	VerifyAWSCUROnboarding(ctx context.Context, onboardingID OnboardingID, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateAWSOnboardingWithBody request with any body
 	CreateAWSOnboardingWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -6219,6 +6964,9 @@ type ClientInterface interface {
 
 	TablesDataAction(ctx context.Context, body TablesDataActionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// GetTablesRelations request
+	GetTablesRelations(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// BatchTableSchemas request
 	BatchTableSchemas(ctx context.Context, params *BatchTableSchemasParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -6554,6 +7302,66 @@ func (c *Client) UpdateSAML(ctx context.Context, body UpdateSAMLJSONRequestBody,
 	return c.Client.Do(req)
 }
 
+func (c *Client) DeleteSAMLRolloverCertificateWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteSAMLRolloverCertificateRequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteSAMLRolloverCertificate(ctx context.Context, body DeleteSAMLRolloverCertificateJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteSAMLRolloverCertificateRequest(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateSAMLRolloverCertificate(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateSAMLRolloverCertificateRequest(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) PromoteSAMLRolloverCertificateWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPromoteSAMLRolloverCertificateRequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) PromoteSAMLRolloverCertificate(ctx context.Context, body PromoteSAMLRolloverCertificateJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPromoteSAMLRolloverCertificateRequest(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) CreateConversationWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewCreateConversationRequestWithBody(c.Server, contentType, body)
 	if err != nil {
@@ -6794,6 +7602,150 @@ func (c *Client) HealthCheckHead(ctx context.Context, reqEditors ...RequestEdito
 	return c.Client.Do(req)
 }
 
+func (c *Client) ListPlatformInsights(ctx context.Context, params *ListPlatformInsightsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListPlatformInsightsRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetPlatformAssetInsights(ctx context.Context, assetID AssetID, params *GetPlatformAssetInsightsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetPlatformAssetInsightsRequest(c.Server, assetID, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetPlatformInsightColumnDistinctValues(ctx context.Context, insightColumnName InsightColumnName, params *GetPlatformInsightColumnDistinctValuesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetPlatformInsightColumnDistinctValuesRequest(c.Server, insightColumnName, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) PlatformListInsightFilters(ctx context.Context, params *PlatformListInsightFiltersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPlatformListInsightFiltersRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) PlatformCreateInsightFilterWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPlatformCreateInsightFilterRequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) PlatformCreateInsightFilter(ctx context.Context, body PlatformCreateInsightFilterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPlatformCreateInsightFilterRequest(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) PlatformDeleteInsightFilter(ctx context.Context, insightFilterID InsightFilterID, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPlatformDeleteInsightFilterRequest(c.Server, insightFilterID)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) PlatformGetInsightFilterByID(ctx context.Context, insightFilterID InsightFilterID, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPlatformGetInsightFilterByIDRequest(c.Server, insightFilterID)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) PlatformUpdateInsightFilterWithBody(ctx context.Context, insightFilterID InsightFilterID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPlatformUpdateInsightFilterRequestWithBody(c.Server, insightFilterID, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) PlatformUpdateInsightFilter(ctx context.Context, insightFilterID InsightFilterID, body PlatformUpdateInsightFilterJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPlatformUpdateInsightFilterRequest(c.Server, insightFilterID, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetPlatformInsight(ctx context.Context, insightID InsightID, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetPlatformInsightRequest(c.Server, insightID)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetPlatformInsightAssets(ctx context.Context, insightID InsightID, params *GetPlatformInsightAssetsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetPlatformInsightAssetsRequest(c.Server, insightID, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) ListNotifications(ctx context.Context, params *ListNotificationsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewListNotificationsRequest(c.Server, params)
 	if err != nil {
@@ -6928,6 +7880,66 @@ func (c *Client) TestUnsavedNotificationDestinationWithBody(ctx context.Context,
 
 func (c *Client) TestUnsavedNotificationDestination(ctx context.Context, body TestUnsavedNotificationDestinationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewTestUnsavedNotificationDestinationRequest(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateAWSCUROnboarding(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateAWSCUROnboardingRequest(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetAWSCUROnboarding(ctx context.Context, onboardingID OnboardingID, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetAWSCUROnboardingRequest(c.Server, onboardingID)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) NotifyAWSCUROnboardingWithBody(ctx context.Context, onboardingID OnboardingID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewNotifyAWSCUROnboardingRequestWithBody(c.Server, onboardingID, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) NotifyAWSCUROnboarding(ctx context.Context, onboardingID OnboardingID, body NotifyAWSCUROnboardingJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewNotifyAWSCUROnboardingRequest(c.Server, onboardingID, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) VerifyAWSCUROnboarding(ctx context.Context, onboardingID OnboardingID, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewVerifyAWSCUROnboardingRequest(c.Server, onboardingID)
 	if err != nil {
 		return nil, err
 	}
@@ -8786,6 +9798,18 @@ func (c *Client) TablesDataAction(ctx context.Context, body TablesDataActionJSON
 	return c.Client.Do(req)
 }
 
+func (c *Client) GetTablesRelations(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetTablesRelationsRequest(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) BatchTableSchemas(ctx context.Context, params *BatchTableSchemasParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewBatchTableSchemasRequest(c.Server, params)
 	if err != nil {
@@ -10197,6 +11221,113 @@ func NewUpdateSAMLRequestWithBody(server string, contentType string, body io.Rea
 	return req, nil
 }
 
+// NewDeleteSAMLRolloverCertificateRequest calls the generic DeleteSAMLRolloverCertificate builder with application/json body
+func NewDeleteSAMLRolloverCertificateRequest(server string, body DeleteSAMLRolloverCertificateJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewDeleteSAMLRolloverCertificateRequestWithBody(server, "application/json", bodyReader)
+}
+
+// NewDeleteSAMLRolloverCertificateRequestWithBody generates requests for DeleteSAMLRolloverCertificate with any type of body
+func NewDeleteSAMLRolloverCertificateRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/auth/saml/rollover")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewCreateSAMLRolloverCertificateRequest generates requests for CreateSAMLRolloverCertificate
+func NewCreateSAMLRolloverCertificateRequest(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/auth/saml/rollover")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewPromoteSAMLRolloverCertificateRequest calls the generic PromoteSAMLRolloverCertificate builder with application/json body
+func NewPromoteSAMLRolloverCertificateRequest(server string, body PromoteSAMLRolloverCertificateJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewPromoteSAMLRolloverCertificateRequestWithBody(server, "application/json", bodyReader)
+}
+
+// NewPromoteSAMLRolloverCertificateRequestWithBody generates requests for PromoteSAMLRolloverCertificate with any type of body
+func NewPromoteSAMLRolloverCertificateRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/auth/saml/rollover/promote")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewCreateConversationRequest calls the generic CreateConversation builder with application/json body
 func NewCreateConversationRequest(server string, body CreateConversationJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
@@ -10933,6 +12064,1165 @@ func NewHealthCheckHeadRequest(server string) (*http.Request, error) {
 	return req, nil
 }
 
+// NewListPlatformInsightsRequest generates requests for ListPlatformInsights
+func NewListPlatformInsightsRequest(server string, params *ListPlatformInsightsParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/insights")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Page != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page", runtime.ParamLocationQuery, *params.Page); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PerPage != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "per_page", runtime.ParamLocationQuery, *params.PerPage); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Search != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "search", runtime.ParamLocationQuery, *params.Search); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Severities != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "severities", runtime.ParamLocationQuery, params.Severities); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Cloud != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "cloud", runtime.ParamLocationQuery, *params.Cloud); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Account != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "account", runtime.ParamLocationQuery, *params.Account); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Region != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "region", runtime.ParamLocationQuery, *params.Region); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.InsightCategory != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "insight_category", runtime.ParamLocationQuery, *params.InsightCategory); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.SourceCategory != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "source_category", runtime.ParamLocationQuery, *params.SourceCategory); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Source != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "source", runtime.ParamLocationQuery, *params.Source); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.ResourceTypes != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "resource_types", runtime.ParamLocationQuery, params.ResourceTypes); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Tags != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "tags", runtime.ParamLocationQuery, params.Tags); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.SortBy != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort_by", runtime.ParamLocationQuery, *params.SortBy); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.SortDir != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort_dir", runtime.ParamLocationQuery, *params.SortDir); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetPlatformAssetInsightsRequest generates requests for GetPlatformAssetInsights
+func NewGetPlatformAssetInsightsRequest(server string, assetID AssetID, params *GetPlatformAssetInsightsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "asset_id", runtime.ParamLocationPath, assetID)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/insights/assets/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Page != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page", runtime.ParamLocationQuery, *params.Page); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PerPage != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "per_page", runtime.ParamLocationQuery, *params.PerPage); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Search != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "search", runtime.ParamLocationQuery, *params.Search); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.SortBy != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort_by", runtime.ParamLocationQuery, *params.SortBy); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.SortDir != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "sort_dir", runtime.ParamLocationQuery, *params.SortDir); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetPlatformInsightColumnDistinctValuesRequest generates requests for GetPlatformInsightColumnDistinctValues
+func NewGetPlatformInsightColumnDistinctValuesRequest(server string, insightColumnName InsightColumnName, params *GetPlatformInsightColumnDistinctValuesParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "column_name", runtime.ParamLocationPath, insightColumnName)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/insights/columns/%s/distinct-values", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Page != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page", runtime.ParamLocationQuery, *params.Page); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PerPage != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "per_page", runtime.ParamLocationQuery, *params.PerPage); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.OwnerTag != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "owner_tag", runtime.ParamLocationQuery, *params.OwnerTag); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Search != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "search", runtime.ParamLocationQuery, *params.Search); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Severities != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "severities", runtime.ParamLocationQuery, params.Severities); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Cloud != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "cloud", runtime.ParamLocationQuery, *params.Cloud); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Account != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "account", runtime.ParamLocationQuery, *params.Account); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Region != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "region", runtime.ParamLocationQuery, *params.Region); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.InsightCategory != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "insight_category", runtime.ParamLocationQuery, *params.InsightCategory); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.SourceCategory != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "source_category", runtime.ParamLocationQuery, *params.SourceCategory); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Source != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "source", runtime.ParamLocationQuery, *params.Source); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.ResourceTypes != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "resource_types", runtime.ParamLocationQuery, params.ResourceTypes); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Tags != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "tags", runtime.ParamLocationQuery, params.Tags); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewPlatformListInsightFiltersRequest generates requests for PlatformListInsightFilters
+func NewPlatformListInsightFiltersRequest(server string, params *PlatformListInsightFiltersParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/insights/saved-filters")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.PerPage != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "per_page", runtime.ParamLocationQuery, *params.PerPage); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Page != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page", runtime.ParamLocationQuery, *params.Page); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.SearchTerm != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "search_term", runtime.ParamLocationQuery, *params.SearchTerm); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.InsightCategory != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "insight_category", runtime.ParamLocationQuery, params.InsightCategory); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Severities != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "severities", runtime.ParamLocationQuery, params.Severities); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.ResourceTypes != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "resource_types", runtime.ParamLocationQuery, params.ResourceTypes); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Source != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "source", runtime.ParamLocationQuery, params.Source); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.SourceCategory != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "source_category", runtime.ParamLocationQuery, params.SourceCategory); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Tags != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "tags", runtime.ParamLocationQuery, params.Tags); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.GroupBy != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "group_by", runtime.ParamLocationQuery, params.GroupBy); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewPlatformCreateInsightFilterRequest calls the generic PlatformCreateInsightFilter builder with application/json body
+func NewPlatformCreateInsightFilterRequest(server string, body PlatformCreateInsightFilterJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewPlatformCreateInsightFilterRequestWithBody(server, "application/json", bodyReader)
+}
+
+// NewPlatformCreateInsightFilterRequestWithBody generates requests for PlatformCreateInsightFilter with any type of body
+func NewPlatformCreateInsightFilterRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/insights/saved-filters")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewPlatformDeleteInsightFilterRequest generates requests for PlatformDeleteInsightFilter
+func NewPlatformDeleteInsightFilterRequest(server string, insightFilterID InsightFilterID) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "insight_filter_id", runtime.ParamLocationPath, insightFilterID)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/insights/saved-filters/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewPlatformGetInsightFilterByIDRequest generates requests for PlatformGetInsightFilterByID
+func NewPlatformGetInsightFilterByIDRequest(server string, insightFilterID InsightFilterID) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "insight_filter_id", runtime.ParamLocationPath, insightFilterID)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/insights/saved-filters/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewPlatformUpdateInsightFilterRequest calls the generic PlatformUpdateInsightFilter builder with application/json body
+func NewPlatformUpdateInsightFilterRequest(server string, insightFilterID InsightFilterID, body PlatformUpdateInsightFilterJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewPlatformUpdateInsightFilterRequestWithBody(server, insightFilterID, "application/json", bodyReader)
+}
+
+// NewPlatformUpdateInsightFilterRequestWithBody generates requests for PlatformUpdateInsightFilter with any type of body
+func NewPlatformUpdateInsightFilterRequestWithBody(server string, insightFilterID InsightFilterID, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "insight_filter_id", runtime.ParamLocationPath, insightFilterID)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/insights/saved-filters/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PATCH", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewGetPlatformInsightRequest generates requests for GetPlatformInsight
+func NewGetPlatformInsightRequest(server string, insightID InsightID) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "insight_id", runtime.ParamLocationPath, insightID)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/insights/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetPlatformInsightAssetsRequest generates requests for GetPlatformInsightAssets
+func NewGetPlatformInsightAssetsRequest(server string, insightID InsightID, params *GetPlatformInsightAssetsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "insight_id", runtime.ParamLocationPath, insightID)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/insights/%s/assets", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Page != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "page", runtime.ParamLocationQuery, *params.Page); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PerPage != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "per_page", runtime.ParamLocationQuery, *params.PerPage); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Search != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "search", runtime.ParamLocationQuery, *params.Search); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Accounts != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "accounts", runtime.ParamLocationQuery, params.Accounts); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Clouds != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "clouds", runtime.ParamLocationQuery, params.Clouds); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Regions != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "regions", runtime.ParamLocationQuery, params.Regions); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.ResourceType != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "resource_type", runtime.ParamLocationQuery, params.ResourceType); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewListNotificationsRequest generates requests for ListNotifications
 func NewListNotificationsRequest(server string, params *ListNotificationsParams) (*http.Request, error) {
 	var err error
@@ -11392,6 +13682,148 @@ func NewTestUnsavedNotificationDestinationRequestWithBody(server string, content
 	}
 
 	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewCreateAWSCUROnboardingRequest generates requests for CreateAWSCUROnboarding
+func NewCreateAWSCUROnboardingRequest(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/onboardings/aws/cur")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetAWSCUROnboardingRequest generates requests for GetAWSCUROnboarding
+func NewGetAWSCUROnboardingRequest(server string, onboardingID OnboardingID) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "onboarding_id", runtime.ParamLocationPath, onboardingID)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/onboardings/aws/cur/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewNotifyAWSCUROnboardingRequest calls the generic NotifyAWSCUROnboarding builder with application/json body
+func NewNotifyAWSCUROnboardingRequest(server string, onboardingID OnboardingID, body NotifyAWSCUROnboardingJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewNotifyAWSCUROnboardingRequestWithBody(server, onboardingID, "application/json", bodyReader)
+}
+
+// NewNotifyAWSCUROnboardingRequestWithBody generates requests for NotifyAWSCUROnboarding with any type of body
+func NewNotifyAWSCUROnboardingRequestWithBody(server string, onboardingID OnboardingID, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "onboarding_id", runtime.ParamLocationPath, onboardingID)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/onboardings/aws/cur/%s/notify", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewVerifyAWSCUROnboardingRequest generates requests for VerifyAWSCUROnboarding
+func NewVerifyAWSCUROnboardingRequest(server string, onboardingID OnboardingID) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "onboarding_id", runtime.ParamLocationPath, onboardingID)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/onboardings/aws/cur/%s/verify", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
 
 	return req, nil
 }
@@ -13632,6 +16064,22 @@ func NewListAllQueriesRequest(server string, params *ListAllQueriesParams) (*htt
 		if params.AlertEnabled != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "alert_enabled", runtime.ParamLocationQuery, *params.AlertEnabled); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.ColumnFilter != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "column_filter", runtime.ParamLocationQuery, params.ColumnFilter); err != nil {
 				return nil, err
 			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
 				return nil, err
@@ -18905,6 +21353,33 @@ func NewTablesDataActionRequestWithBody(server string, contentType string, body 
 	return req, nil
 }
 
+// NewGetTablesRelationsRequest generates requests for GetTablesRelations
+func NewGetTablesRelationsRequest(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/tables/relations")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewBatchTableSchemasRequest generates requests for BatchTableSchemas
 func NewBatchTableSchemasRequest(server string, params *BatchTableSchemasParams) (*http.Request, error) {
 	var err error
@@ -21652,6 +24127,19 @@ type ClientWithResponsesInterface interface {
 
 	UpdateSAMLWithResponse(ctx context.Context, body UpdateSAMLJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateSAMLResponse, error)
 
+	// DeleteSAMLRolloverCertificateWithBodyWithResponse request with any body
+	DeleteSAMLRolloverCertificateWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*DeleteSAMLRolloverCertificateResponse, error)
+
+	DeleteSAMLRolloverCertificateWithResponse(ctx context.Context, body DeleteSAMLRolloverCertificateJSONRequestBody, reqEditors ...RequestEditorFn) (*DeleteSAMLRolloverCertificateResponse, error)
+
+	// CreateSAMLRolloverCertificateWithResponse request
+	CreateSAMLRolloverCertificateWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*CreateSAMLRolloverCertificateResponse, error)
+
+	// PromoteSAMLRolloverCertificateWithBodyWithResponse request with any body
+	PromoteSAMLRolloverCertificateWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PromoteSAMLRolloverCertificateResponse, error)
+
+	PromoteSAMLRolloverCertificateWithResponse(ctx context.Context, body PromoteSAMLRolloverCertificateJSONRequestBody, reqEditors ...RequestEditorFn) (*PromoteSAMLRolloverCertificateResponse, error)
+
 	// CreateConversationWithBodyWithResponse request with any body
 	CreateConversationWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateConversationResponse, error)
 
@@ -21707,6 +24195,40 @@ type ClientWithResponsesInterface interface {
 	// HealthCheckHeadWithResponse request
 	HealthCheckHeadWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*HealthCheckHeadResponse, error)
 
+	// ListPlatformInsightsWithResponse request
+	ListPlatformInsightsWithResponse(ctx context.Context, params *ListPlatformInsightsParams, reqEditors ...RequestEditorFn) (*ListPlatformInsightsResponse, error)
+
+	// GetPlatformAssetInsightsWithResponse request
+	GetPlatformAssetInsightsWithResponse(ctx context.Context, assetID AssetID, params *GetPlatformAssetInsightsParams, reqEditors ...RequestEditorFn) (*GetPlatformAssetInsightsResponse, error)
+
+	// GetPlatformInsightColumnDistinctValuesWithResponse request
+	GetPlatformInsightColumnDistinctValuesWithResponse(ctx context.Context, insightColumnName InsightColumnName, params *GetPlatformInsightColumnDistinctValuesParams, reqEditors ...RequestEditorFn) (*GetPlatformInsightColumnDistinctValuesResponse, error)
+
+	// PlatformListInsightFiltersWithResponse request
+	PlatformListInsightFiltersWithResponse(ctx context.Context, params *PlatformListInsightFiltersParams, reqEditors ...RequestEditorFn) (*PlatformListInsightFiltersResponse, error)
+
+	// PlatformCreateInsightFilterWithBodyWithResponse request with any body
+	PlatformCreateInsightFilterWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PlatformCreateInsightFilterResponse, error)
+
+	PlatformCreateInsightFilterWithResponse(ctx context.Context, body PlatformCreateInsightFilterJSONRequestBody, reqEditors ...RequestEditorFn) (*PlatformCreateInsightFilterResponse, error)
+
+	// PlatformDeleteInsightFilterWithResponse request
+	PlatformDeleteInsightFilterWithResponse(ctx context.Context, insightFilterID InsightFilterID, reqEditors ...RequestEditorFn) (*PlatformDeleteInsightFilterResponse, error)
+
+	// PlatformGetInsightFilterByIDWithResponse request
+	PlatformGetInsightFilterByIDWithResponse(ctx context.Context, insightFilterID InsightFilterID, reqEditors ...RequestEditorFn) (*PlatformGetInsightFilterByIDResponse, error)
+
+	// PlatformUpdateInsightFilterWithBodyWithResponse request with any body
+	PlatformUpdateInsightFilterWithBodyWithResponse(ctx context.Context, insightFilterID InsightFilterID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PlatformUpdateInsightFilterResponse, error)
+
+	PlatformUpdateInsightFilterWithResponse(ctx context.Context, insightFilterID InsightFilterID, body PlatformUpdateInsightFilterJSONRequestBody, reqEditors ...RequestEditorFn) (*PlatformUpdateInsightFilterResponse, error)
+
+	// GetPlatformInsightWithResponse request
+	GetPlatformInsightWithResponse(ctx context.Context, insightID InsightID, reqEditors ...RequestEditorFn) (*GetPlatformInsightResponse, error)
+
+	// GetPlatformInsightAssetsWithResponse request
+	GetPlatformInsightAssetsWithResponse(ctx context.Context, insightID InsightID, params *GetPlatformInsightAssetsParams, reqEditors ...RequestEditorFn) (*GetPlatformInsightAssetsResponse, error)
+
 	// ListNotificationsWithResponse request
 	ListNotificationsWithResponse(ctx context.Context, params *ListNotificationsParams, reqEditors ...RequestEditorFn) (*ListNotificationsResponse, error)
 
@@ -21739,6 +24261,20 @@ type ClientWithResponsesInterface interface {
 	TestUnsavedNotificationDestinationWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*TestUnsavedNotificationDestinationResponse, error)
 
 	TestUnsavedNotificationDestinationWithResponse(ctx context.Context, body TestUnsavedNotificationDestinationJSONRequestBody, reqEditors ...RequestEditorFn) (*TestUnsavedNotificationDestinationResponse, error)
+
+	// CreateAWSCUROnboardingWithResponse request
+	CreateAWSCUROnboardingWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*CreateAWSCUROnboardingResponse, error)
+
+	// GetAWSCUROnboardingWithResponse request
+	GetAWSCUROnboardingWithResponse(ctx context.Context, onboardingID OnboardingID, reqEditors ...RequestEditorFn) (*GetAWSCUROnboardingResponse, error)
+
+	// NotifyAWSCUROnboardingWithBodyWithResponse request with any body
+	NotifyAWSCUROnboardingWithBodyWithResponse(ctx context.Context, onboardingID OnboardingID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*NotifyAWSCUROnboardingResponse, error)
+
+	NotifyAWSCUROnboardingWithResponse(ctx context.Context, onboardingID OnboardingID, body NotifyAWSCUROnboardingJSONRequestBody, reqEditors ...RequestEditorFn) (*NotifyAWSCUROnboardingResponse, error)
+
+	// VerifyAWSCUROnboardingWithResponse request
+	VerifyAWSCUROnboardingWithResponse(ctx context.Context, onboardingID OnboardingID, reqEditors ...RequestEditorFn) (*VerifyAWSCUROnboardingResponse, error)
 
 	// CreateAWSOnboardingWithBodyWithResponse request with any body
 	CreateAWSOnboardingWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateAWSOnboardingResponse, error)
@@ -22165,6 +24701,9 @@ type ClientWithResponsesInterface interface {
 	TablesDataActionWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*TablesDataActionResponse, error)
 
 	TablesDataActionWithResponse(ctx context.Context, body TablesDataActionJSONRequestBody, reqEditors ...RequestEditorFn) (*TablesDataActionResponse, error)
+
+	// GetTablesRelationsWithResponse request
+	GetTablesRelationsWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetTablesRelationsResponse, error)
 
 	// BatchTableSchemasWithResponse request
 	BatchTableSchemasWithResponse(ctx context.Context, params *BatchTableSchemasParams, reqEditors ...RequestEditorFn) (*BatchTableSchemasResponse, error)
@@ -22620,6 +25159,84 @@ func (r UpdateSAMLResponse) StatusCode() int {
 	return 0
 }
 
+type DeleteSAMLRolloverCertificateResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON400      *BadRequest
+	JSON404      *NotFound
+	JSON422      *UnprocessableEntity
+	JSON500      *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteSAMLRolloverCertificateResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteSAMLRolloverCertificateResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateSAMLRolloverCertificateResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *SAMLConfig
+	JSON400      *BadRequest
+	JSON404      *NotFound
+	JSON409      *Conflict
+	JSON422      *UnprocessableEntity
+	JSON500      *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateSAMLRolloverCertificateResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateSAMLRolloverCertificateResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type PromoteSAMLRolloverCertificateResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *SAMLConfig
+	JSON400      *BadRequest
+	JSON404      *NotFound
+	JSON422      *UnprocessableEntity
+	JSON500      *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r PromoteSAMLRolloverCertificateResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r PromoteSAMLRolloverCertificateResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type CreateConversationResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -23029,6 +25646,284 @@ func (r HealthCheckHeadResponse) StatusCode() int {
 	return 0
 }
 
+type ListPlatformInsightsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *struct {
+		Items    []Insight            `json:"items"`
+		Metadata InsightsListMetadata `json:"metadata"`
+	}
+	JSON400 *BadRequest
+	JSON401 *RequiresAuthentication
+	JSON403 *Forbidden
+	JSON500 *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r ListPlatformInsightsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListPlatformInsightsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetPlatformAssetInsightsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *struct {
+		Items    []Insight    `json:"items"`
+		Metadata ListMetadata `json:"metadata"`
+	}
+	JSON400 *BadRequest
+	JSON401 *RequiresAuthentication
+	JSON403 *Forbidden
+	JSON404 *NotFound
+	JSON500 *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r GetPlatformAssetInsightsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetPlatformAssetInsightsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetPlatformInsightColumnDistinctValuesResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *struct {
+		Values []string `json:"values"`
+	}
+	JSON400 *BadRequest
+	JSON401 *RequiresAuthentication
+	JSON403 *Forbidden
+	JSON500 *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r GetPlatformInsightColumnDistinctValuesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetPlatformInsightColumnDistinctValuesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type PlatformListInsightFiltersResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *struct {
+		Items    []PlatformInsightFilter `json:"items"`
+		Metadata ListMetadata            `json:"metadata"`
+	}
+	JSON401 *RequiresAuthentication
+	JSON403 *Forbidden
+	JSON404 *NotFound
+	JSON422 *UnprocessableEntity
+	JSON500 *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r PlatformListInsightFiltersResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r PlatformListInsightFiltersResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type PlatformCreateInsightFilterResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON201      *PlatformInsightFilter
+	JSON401      *RequiresAuthentication
+	JSON403      *Forbidden
+	JSON422      *UnprocessableEntity
+	JSON500      *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r PlatformCreateInsightFilterResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r PlatformCreateInsightFilterResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type PlatformDeleteInsightFilterResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON401      *RequiresAuthentication
+	JSON403      *Forbidden
+	JSON404      *NotFound
+	JSON422      *UnprocessableEntity
+	JSON500      *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r PlatformDeleteInsightFilterResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r PlatformDeleteInsightFilterResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type PlatformGetInsightFilterByIDResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *PlatformInsightFilter
+	JSON401      *RequiresAuthentication
+	JSON403      *Forbidden
+	JSON404      *NotFound
+	JSON422      *UnprocessableEntity
+	JSON500      *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r PlatformGetInsightFilterByIDResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r PlatformGetInsightFilterByIDResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type PlatformUpdateInsightFilterResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *PlatformInsightFilter
+	JSON401      *RequiresAuthentication
+	JSON403      *Forbidden
+	JSON404      *NotFound
+	JSON422      *UnprocessableEntity
+	JSON500      *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r PlatformUpdateInsightFilterResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r PlatformUpdateInsightFilterResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetPlatformInsightResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *Insight
+	JSON401      *RequiresAuthentication
+	JSON403      *Forbidden
+	JSON404      *NotFound
+	JSON500      *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r GetPlatformInsightResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetPlatformInsightResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetPlatformInsightAssetsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *struct {
+		Items    []PolicyViolation `json:"items"`
+		Metadata ListMetadata      `json:"metadata"`
+	}
+	JSON401 *RequiresAuthentication
+	JSON403 *Forbidden
+	JSON404 *NotFound
+	JSON500 *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r GetPlatformInsightAssetsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetPlatformInsightAssetsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type ListNotificationsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -23285,6 +26180,106 @@ func (r TestUnsavedNotificationDestinationResponse) StatusCode() int {
 	return 0
 }
 
+type CreateAWSCUROnboardingResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON201      *OnboardingAWSCURCreateResponse
+	JSON400      *BadRequest
+	JSON401      *RequiresAuthentication
+	JSON500      *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateAWSCUROnboardingResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateAWSCUROnboardingResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetAWSCUROnboardingResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *OnboardingAWSCUR
+	JSON400      *BadRequest
+	JSON401      *RequiresAuthentication
+	JSON404      *NotFound
+	JSON500      *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r GetAWSCUROnboardingResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetAWSCUROnboardingResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type NotifyAWSCUROnboardingResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON400      *BadRequest
+	JSON401      *RequiresAuthentication
+	JSON500      *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r NotifyAWSCUROnboardingResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r NotifyAWSCUROnboardingResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type VerifyAWSCUROnboardingResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON400      *BadRequest
+	JSON401      *RequiresAuthentication
+	JSON404      *NotFound
+	JSON500      *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r VerifyAWSCUROnboardingResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r VerifyAWSCUROnboardingResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type CreateAWSOnboardingResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -23466,7 +26461,10 @@ type GetPlatformInfoResponse struct {
 	HTTPResponse *http.Response
 	JSON200      *struct {
 		// PublicIPs List of public IPs for the platform
-		PublicIPs *[]string `json:"public_ips,omitempty"`
+		PublicIPs []string `json:"public_ips"`
+
+		// TenantID The tenant ID of the current user
+		TenantID openapi_types.UUID `json:"tenant_id"`
 
 		// Version Version of the platform
 		Version string `json:"version"`
@@ -26442,7 +29440,7 @@ type GetTablesDataResponse struct {
 	HTTPResponse *http.Response
 	JSON200      *struct {
 		Metadata ListMetadata        `json:"metadata"`
-		Syncs    []TableDataListItem `json:"syncs"`
+		Sources  []TableDataListItem `json:"sources"`
 	}
 	JSON401 *RequiresAuthentication
 	JSON403 *Forbidden
@@ -26485,6 +29483,30 @@ func (r TablesDataActionResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r TablesDataActionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetTablesRelationsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *map[string][]RelationDef
+	JSON401      *RequiresAuthentication
+	JSON500      *InternalError
+}
+
+// Status returns HTTPResponse.Status
+func (r GetTablesRelationsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetTablesRelationsResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -27932,6 +30954,49 @@ func (c *ClientWithResponses) UpdateSAMLWithResponse(ctx context.Context, body U
 	return ParseUpdateSAMLResponse(rsp)
 }
 
+// DeleteSAMLRolloverCertificateWithBodyWithResponse request with arbitrary body returning *DeleteSAMLRolloverCertificateResponse
+func (c *ClientWithResponses) DeleteSAMLRolloverCertificateWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*DeleteSAMLRolloverCertificateResponse, error) {
+	rsp, err := c.DeleteSAMLRolloverCertificateWithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteSAMLRolloverCertificateResponse(rsp)
+}
+
+func (c *ClientWithResponses) DeleteSAMLRolloverCertificateWithResponse(ctx context.Context, body DeleteSAMLRolloverCertificateJSONRequestBody, reqEditors ...RequestEditorFn) (*DeleteSAMLRolloverCertificateResponse, error) {
+	rsp, err := c.DeleteSAMLRolloverCertificate(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteSAMLRolloverCertificateResponse(rsp)
+}
+
+// CreateSAMLRolloverCertificateWithResponse request returning *CreateSAMLRolloverCertificateResponse
+func (c *ClientWithResponses) CreateSAMLRolloverCertificateWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*CreateSAMLRolloverCertificateResponse, error) {
+	rsp, err := c.CreateSAMLRolloverCertificate(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateSAMLRolloverCertificateResponse(rsp)
+}
+
+// PromoteSAMLRolloverCertificateWithBodyWithResponse request with arbitrary body returning *PromoteSAMLRolloverCertificateResponse
+func (c *ClientWithResponses) PromoteSAMLRolloverCertificateWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PromoteSAMLRolloverCertificateResponse, error) {
+	rsp, err := c.PromoteSAMLRolloverCertificateWithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParsePromoteSAMLRolloverCertificateResponse(rsp)
+}
+
+func (c *ClientWithResponses) PromoteSAMLRolloverCertificateWithResponse(ctx context.Context, body PromoteSAMLRolloverCertificateJSONRequestBody, reqEditors ...RequestEditorFn) (*PromoteSAMLRolloverCertificateResponse, error) {
+	rsp, err := c.PromoteSAMLRolloverCertificate(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParsePromoteSAMLRolloverCertificateResponse(rsp)
+}
+
 // CreateConversationWithBodyWithResponse request with arbitrary body returning *CreateConversationResponse
 func (c *ClientWithResponses) CreateConversationWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateConversationResponse, error) {
 	rsp, err := c.CreateConversationWithBody(ctx, contentType, body, reqEditors...)
@@ -28107,6 +31172,112 @@ func (c *ClientWithResponses) HealthCheckHeadWithResponse(ctx context.Context, r
 	return ParseHealthCheckHeadResponse(rsp)
 }
 
+// ListPlatformInsightsWithResponse request returning *ListPlatformInsightsResponse
+func (c *ClientWithResponses) ListPlatformInsightsWithResponse(ctx context.Context, params *ListPlatformInsightsParams, reqEditors ...RequestEditorFn) (*ListPlatformInsightsResponse, error) {
+	rsp, err := c.ListPlatformInsights(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListPlatformInsightsResponse(rsp)
+}
+
+// GetPlatformAssetInsightsWithResponse request returning *GetPlatformAssetInsightsResponse
+func (c *ClientWithResponses) GetPlatformAssetInsightsWithResponse(ctx context.Context, assetID AssetID, params *GetPlatformAssetInsightsParams, reqEditors ...RequestEditorFn) (*GetPlatformAssetInsightsResponse, error) {
+	rsp, err := c.GetPlatformAssetInsights(ctx, assetID, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetPlatformAssetInsightsResponse(rsp)
+}
+
+// GetPlatformInsightColumnDistinctValuesWithResponse request returning *GetPlatformInsightColumnDistinctValuesResponse
+func (c *ClientWithResponses) GetPlatformInsightColumnDistinctValuesWithResponse(ctx context.Context, insightColumnName InsightColumnName, params *GetPlatformInsightColumnDistinctValuesParams, reqEditors ...RequestEditorFn) (*GetPlatformInsightColumnDistinctValuesResponse, error) {
+	rsp, err := c.GetPlatformInsightColumnDistinctValues(ctx, insightColumnName, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetPlatformInsightColumnDistinctValuesResponse(rsp)
+}
+
+// PlatformListInsightFiltersWithResponse request returning *PlatformListInsightFiltersResponse
+func (c *ClientWithResponses) PlatformListInsightFiltersWithResponse(ctx context.Context, params *PlatformListInsightFiltersParams, reqEditors ...RequestEditorFn) (*PlatformListInsightFiltersResponse, error) {
+	rsp, err := c.PlatformListInsightFilters(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParsePlatformListInsightFiltersResponse(rsp)
+}
+
+// PlatformCreateInsightFilterWithBodyWithResponse request with arbitrary body returning *PlatformCreateInsightFilterResponse
+func (c *ClientWithResponses) PlatformCreateInsightFilterWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PlatformCreateInsightFilterResponse, error) {
+	rsp, err := c.PlatformCreateInsightFilterWithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParsePlatformCreateInsightFilterResponse(rsp)
+}
+
+func (c *ClientWithResponses) PlatformCreateInsightFilterWithResponse(ctx context.Context, body PlatformCreateInsightFilterJSONRequestBody, reqEditors ...RequestEditorFn) (*PlatformCreateInsightFilterResponse, error) {
+	rsp, err := c.PlatformCreateInsightFilter(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParsePlatformCreateInsightFilterResponse(rsp)
+}
+
+// PlatformDeleteInsightFilterWithResponse request returning *PlatformDeleteInsightFilterResponse
+func (c *ClientWithResponses) PlatformDeleteInsightFilterWithResponse(ctx context.Context, insightFilterID InsightFilterID, reqEditors ...RequestEditorFn) (*PlatformDeleteInsightFilterResponse, error) {
+	rsp, err := c.PlatformDeleteInsightFilter(ctx, insightFilterID, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParsePlatformDeleteInsightFilterResponse(rsp)
+}
+
+// PlatformGetInsightFilterByIDWithResponse request returning *PlatformGetInsightFilterByIDResponse
+func (c *ClientWithResponses) PlatformGetInsightFilterByIDWithResponse(ctx context.Context, insightFilterID InsightFilterID, reqEditors ...RequestEditorFn) (*PlatformGetInsightFilterByIDResponse, error) {
+	rsp, err := c.PlatformGetInsightFilterByID(ctx, insightFilterID, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParsePlatformGetInsightFilterByIDResponse(rsp)
+}
+
+// PlatformUpdateInsightFilterWithBodyWithResponse request with arbitrary body returning *PlatformUpdateInsightFilterResponse
+func (c *ClientWithResponses) PlatformUpdateInsightFilterWithBodyWithResponse(ctx context.Context, insightFilterID InsightFilterID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PlatformUpdateInsightFilterResponse, error) {
+	rsp, err := c.PlatformUpdateInsightFilterWithBody(ctx, insightFilterID, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParsePlatformUpdateInsightFilterResponse(rsp)
+}
+
+func (c *ClientWithResponses) PlatformUpdateInsightFilterWithResponse(ctx context.Context, insightFilterID InsightFilterID, body PlatformUpdateInsightFilterJSONRequestBody, reqEditors ...RequestEditorFn) (*PlatformUpdateInsightFilterResponse, error) {
+	rsp, err := c.PlatformUpdateInsightFilter(ctx, insightFilterID, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParsePlatformUpdateInsightFilterResponse(rsp)
+}
+
+// GetPlatformInsightWithResponse request returning *GetPlatformInsightResponse
+func (c *ClientWithResponses) GetPlatformInsightWithResponse(ctx context.Context, insightID InsightID, reqEditors ...RequestEditorFn) (*GetPlatformInsightResponse, error) {
+	rsp, err := c.GetPlatformInsight(ctx, insightID, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetPlatformInsightResponse(rsp)
+}
+
+// GetPlatformInsightAssetsWithResponse request returning *GetPlatformInsightAssetsResponse
+func (c *ClientWithResponses) GetPlatformInsightAssetsWithResponse(ctx context.Context, insightID InsightID, params *GetPlatformInsightAssetsParams, reqEditors ...RequestEditorFn) (*GetPlatformInsightAssetsResponse, error) {
+	rsp, err := c.GetPlatformInsightAssets(ctx, insightID, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetPlatformInsightAssetsResponse(rsp)
+}
+
 // ListNotificationsWithResponse request returning *ListNotificationsResponse
 func (c *ClientWithResponses) ListNotificationsWithResponse(ctx context.Context, params *ListNotificationsParams, reqEditors ...RequestEditorFn) (*ListNotificationsResponse, error) {
 	rsp, err := c.ListNotifications(ctx, params, reqEditors...)
@@ -28210,6 +31381,50 @@ func (c *ClientWithResponses) TestUnsavedNotificationDestinationWithResponse(ctx
 		return nil, err
 	}
 	return ParseTestUnsavedNotificationDestinationResponse(rsp)
+}
+
+// CreateAWSCUROnboardingWithResponse request returning *CreateAWSCUROnboardingResponse
+func (c *ClientWithResponses) CreateAWSCUROnboardingWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*CreateAWSCUROnboardingResponse, error) {
+	rsp, err := c.CreateAWSCUROnboarding(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateAWSCUROnboardingResponse(rsp)
+}
+
+// GetAWSCUROnboardingWithResponse request returning *GetAWSCUROnboardingResponse
+func (c *ClientWithResponses) GetAWSCUROnboardingWithResponse(ctx context.Context, onboardingID OnboardingID, reqEditors ...RequestEditorFn) (*GetAWSCUROnboardingResponse, error) {
+	rsp, err := c.GetAWSCUROnboarding(ctx, onboardingID, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetAWSCUROnboardingResponse(rsp)
+}
+
+// NotifyAWSCUROnboardingWithBodyWithResponse request with arbitrary body returning *NotifyAWSCUROnboardingResponse
+func (c *ClientWithResponses) NotifyAWSCUROnboardingWithBodyWithResponse(ctx context.Context, onboardingID OnboardingID, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*NotifyAWSCUROnboardingResponse, error) {
+	rsp, err := c.NotifyAWSCUROnboardingWithBody(ctx, onboardingID, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseNotifyAWSCUROnboardingResponse(rsp)
+}
+
+func (c *ClientWithResponses) NotifyAWSCUROnboardingWithResponse(ctx context.Context, onboardingID OnboardingID, body NotifyAWSCUROnboardingJSONRequestBody, reqEditors ...RequestEditorFn) (*NotifyAWSCUROnboardingResponse, error) {
+	rsp, err := c.NotifyAWSCUROnboarding(ctx, onboardingID, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseNotifyAWSCUROnboardingResponse(rsp)
+}
+
+// VerifyAWSCUROnboardingWithResponse request returning *VerifyAWSCUROnboardingResponse
+func (c *ClientWithResponses) VerifyAWSCUROnboardingWithResponse(ctx context.Context, onboardingID OnboardingID, reqEditors ...RequestEditorFn) (*VerifyAWSCUROnboardingResponse, error) {
+	rsp, err := c.VerifyAWSCUROnboarding(ctx, onboardingID, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseVerifyAWSCUROnboardingResponse(rsp)
 }
 
 // CreateAWSOnboardingWithBodyWithResponse request with arbitrary body returning *CreateAWSOnboardingResponse
@@ -29562,6 +32777,15 @@ func (c *ClientWithResponses) TablesDataActionWithResponse(ctx context.Context, 
 	return ParseTablesDataActionResponse(rsp)
 }
 
+// GetTablesRelationsWithResponse request returning *GetTablesRelationsResponse
+func (c *ClientWithResponses) GetTablesRelationsWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetTablesRelationsResponse, error) {
+	rsp, err := c.GetTablesRelations(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetTablesRelationsResponse(rsp)
+}
+
 // BatchTableSchemasWithResponse request returning *BatchTableSchemasResponse
 func (c *ClientWithResponses) BatchTableSchemasWithResponse(ctx context.Context, params *BatchTableSchemasParams, reqEditors ...RequestEditorFn) (*BatchTableSchemasResponse, error) {
 	rsp, err := c.BatchTableSchemas(ctx, params, reqEditors...)
@@ -30667,6 +33891,168 @@ func ParseUpdateSAMLResponse(rsp *http.Response) (*UpdateSAMLResponse, error) {
 	return response, nil
 }
 
+// ParseDeleteSAMLRolloverCertificateResponse parses an HTTP response from a DeleteSAMLRolloverCertificateWithResponse call
+func ParseDeleteSAMLRolloverCertificateResponse(rsp *http.Response) (*DeleteSAMLRolloverCertificateResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteSAMLRolloverCertificateResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest UnprocessableEntity
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateSAMLRolloverCertificateResponse parses an HTTP response from a CreateSAMLRolloverCertificateWithResponse call
+func ParseCreateSAMLRolloverCertificateResponse(rsp *http.Response) (*CreateSAMLRolloverCertificateResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateSAMLRolloverCertificateResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest SAMLConfig
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest Conflict
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest UnprocessableEntity
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParsePromoteSAMLRolloverCertificateResponse parses an HTTP response from a PromoteSAMLRolloverCertificateWithResponse call
+func ParsePromoteSAMLRolloverCertificateResponse(rsp *http.Response) (*PromoteSAMLRolloverCertificateResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &PromoteSAMLRolloverCertificateResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest SAMLConfig
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest UnprocessableEntity
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseCreateConversationResponse parses an HTTP response from a CreateConversationWithResponse call
 func ParseCreateConversationResponse(rsp *http.Response) (*CreateConversationResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -31556,6 +34942,588 @@ func ParseHealthCheckHeadResponse(rsp *http.Response) (*HealthCheckHeadResponse,
 	return response, nil
 }
 
+// ParseListPlatformInsightsResponse parses an HTTP response from a ListPlatformInsightsWithResponse call
+func ParseListPlatformInsightsResponse(rsp *http.Response) (*ListPlatformInsightsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListPlatformInsightsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest struct {
+			Items    []Insight            `json:"items"`
+			Metadata InsightsListMetadata `json:"metadata"`
+		}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetPlatformAssetInsightsResponse parses an HTTP response from a GetPlatformAssetInsightsWithResponse call
+func ParseGetPlatformAssetInsightsResponse(rsp *http.Response) (*GetPlatformAssetInsightsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetPlatformAssetInsightsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest struct {
+			Items    []Insight    `json:"items"`
+			Metadata ListMetadata `json:"metadata"`
+		}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetPlatformInsightColumnDistinctValuesResponse parses an HTTP response from a GetPlatformInsightColumnDistinctValuesWithResponse call
+func ParseGetPlatformInsightColumnDistinctValuesResponse(rsp *http.Response) (*GetPlatformInsightColumnDistinctValuesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetPlatformInsightColumnDistinctValuesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest struct {
+			Values []string `json:"values"`
+		}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParsePlatformListInsightFiltersResponse parses an HTTP response from a PlatformListInsightFiltersWithResponse call
+func ParsePlatformListInsightFiltersResponse(rsp *http.Response) (*PlatformListInsightFiltersResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &PlatformListInsightFiltersResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest struct {
+			Items    []PlatformInsightFilter `json:"items"`
+			Metadata ListMetadata            `json:"metadata"`
+		}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest UnprocessableEntity
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParsePlatformCreateInsightFilterResponse parses an HTTP response from a PlatformCreateInsightFilterWithResponse call
+func ParsePlatformCreateInsightFilterResponse(rsp *http.Response) (*PlatformCreateInsightFilterResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &PlatformCreateInsightFilterResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest PlatformInsightFilter
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest UnprocessableEntity
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParsePlatformDeleteInsightFilterResponse parses an HTTP response from a PlatformDeleteInsightFilterWithResponse call
+func ParsePlatformDeleteInsightFilterResponse(rsp *http.Response) (*PlatformDeleteInsightFilterResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &PlatformDeleteInsightFilterResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest UnprocessableEntity
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParsePlatformGetInsightFilterByIDResponse parses an HTTP response from a PlatformGetInsightFilterByIDWithResponse call
+func ParsePlatformGetInsightFilterByIDResponse(rsp *http.Response) (*PlatformGetInsightFilterByIDResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &PlatformGetInsightFilterByIDResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest PlatformInsightFilter
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest UnprocessableEntity
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParsePlatformUpdateInsightFilterResponse parses an HTTP response from a PlatformUpdateInsightFilterWithResponse call
+func ParsePlatformUpdateInsightFilterResponse(rsp *http.Response) (*PlatformUpdateInsightFilterResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &PlatformUpdateInsightFilterResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest PlatformInsightFilter
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 422:
+		var dest UnprocessableEntity
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetPlatformInsightResponse parses an HTTP response from a GetPlatformInsightWithResponse call
+func ParseGetPlatformInsightResponse(rsp *http.Response) (*GetPlatformInsightResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetPlatformInsightResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest Insight
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetPlatformInsightAssetsResponse parses an HTTP response from a GetPlatformInsightAssetsWithResponse call
+func ParseGetPlatformInsightAssetsResponse(rsp *http.Response) (*GetPlatformInsightAssetsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetPlatformInsightAssetsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest struct {
+			Items    []PolicyViolation `json:"items"`
+			Metadata ListMetadata      `json:"metadata"`
+		}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseListNotificationsResponse parses an HTTP response from a ListNotificationsWithResponse call
 func ParseListNotificationsResponse(rsp *http.Response) (*ListNotificationsResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -32142,6 +36110,194 @@ func ParseTestUnsavedNotificationDestinationResponse(rsp *http.Response) (*TestU
 	return response, nil
 }
 
+// ParseCreateAWSCUROnboardingResponse parses an HTTP response from a CreateAWSCUROnboardingWithResponse call
+func ParseCreateAWSCUROnboardingResponse(rsp *http.Response) (*CreateAWSCUROnboardingResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateAWSCUROnboardingResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest OnboardingAWSCURCreateResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetAWSCUROnboardingResponse parses an HTTP response from a GetAWSCUROnboardingWithResponse call
+func ParseGetAWSCUROnboardingResponse(rsp *http.Response) (*GetAWSCUROnboardingResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetAWSCUROnboardingResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest OnboardingAWSCUR
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseNotifyAWSCUROnboardingResponse parses an HTTP response from a NotifyAWSCUROnboardingWithResponse call
+func ParseNotifyAWSCUROnboardingResponse(rsp *http.Response) (*NotifyAWSCUROnboardingResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &NotifyAWSCUROnboardingResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseVerifyAWSCUROnboardingResponse parses an HTTP response from a VerifyAWSCUROnboardingWithResponse call
+func ParseVerifyAWSCUROnboardingResponse(rsp *http.Response) (*VerifyAWSCUROnboardingResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &VerifyAWSCUROnboardingResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseCreateAWSOnboardingResponse parses an HTTP response from a CreateAWSOnboardingWithResponse call
 func ParseCreateAWSOnboardingResponse(rsp *http.Response) (*CreateAWSOnboardingResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -32495,7 +36651,10 @@ func ParseGetPlatformInfoResponse(rsp *http.Response) (*GetPlatformInfoResponse,
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest struct {
 			// PublicIPs List of public IPs for the platform
-			PublicIPs *[]string `json:"public_ips,omitempty"`
+			PublicIPs []string `json:"public_ips"`
+
+			// TenantID The tenant ID of the current user
+			TenantID openapi_types.UUID `json:"tenant_id"`
 
 			// Version Version of the platform
 			Version string `json:"version"`
@@ -38658,7 +42817,7 @@ func ParseGetTablesDataResponse(rsp *http.Response) (*GetTablesDataResponse, err
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest struct {
 			Metadata ListMetadata        `json:"metadata"`
-			Syncs    []TableDataListItem `json:"syncs"`
+			Sources  []TableDataListItem `json:"sources"`
 		}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
@@ -38732,6 +42891,46 @@ func ParseTablesDataActionResponse(rsp *http.Response) (*TablesDataActionRespons
 			return nil, err
 		}
 		response.JSON422 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
+		var dest InternalError
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON500 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetTablesRelationsResponse parses an HTTP response from a GetTablesRelationsWithResponse call
+func ParseGetTablesRelationsResponse(rsp *http.Response) (*GetTablesRelationsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetTablesRelationsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest map[string][]RelationDef
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest RequiresAuthentication
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 500:
 		var dest InternalError
