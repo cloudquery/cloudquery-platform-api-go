@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/cloudquery/cloudquery-platform-api-go/compare/v1.0.7...v2.0.0) (2026-04-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* Platform API v2 ([#48](https://github.com/cloudquery/cloudquery-platform-api-go/issues/48))
+
+### Features
+
+* Platform API v2 ([#48](https://github.com/cloudquery/cloudquery-platform-api-go/issues/48)) ([5aca93c](https://github.com/cloudquery/cloudquery-platform-api-go/commit/5aca93c7b39c393d5283cf95c9387734c33af343))
+
 ## [1.0.7](https://github.com/cloudquery/cloudquery-platform-api-go/compare/v1.0.6...v1.0.7) (2026-03-26)
 
 
