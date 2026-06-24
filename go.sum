@@ -1,7 +1,7 @@
 github.com/adrg/xdg v0.5.3 h1:xRnxJXne7+oWDatRhR1JLnvuccuIeCoBu2rtuLqQB78=
 github.com/adrg/xdg v0.5.3/go.mod h1:nlTsY+NNiCBGCK2tpm09vRqfVzrc2fLmXGpBLF0zlTQ=
-github.com/cloudquery/cloudquery-api-go v1.14.11 h1:AMd2g0k0CWWD9pKLK8yF1b/oI3LM6ccE0fN2tfEnbso=
-github.com/cloudquery/cloudquery-api-go v1.14.11/go.mod h1:lXGJ0XbzQUUFN/xLUOosw/+yvlwNeeLD/GxlstUBc6w=
+github.com/cloudquery/cloudquery-api-go v1.14.12 h1:iSJGYJGYnWlDPSky5lESuaghngWw5pdZrUHq43m9Ekk=
+github.com/cloudquery/cloudquery-api-go v1.14.12/go.mod h1:lXGJ0XbzQUUFN/xLUOosw/+yvlwNeeLD/GxlstUBc6w=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/fatih/color v1.16.0 h1:zmkK9Ngbjj+K0yRhTVONQh1p/HknKYSlNT+vZCzyokM=
