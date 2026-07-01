@@ -17644,7 +17644,8 @@
             "type": "string",
             "description": "Short machine-friendly reason populated when refused is true. Either the classifier's reason (e.g. \"mixed_off_topic\") or \"scope_check_error\" when the guardrail itself failed."
           }
-        }
+        },
+        "x-go-name": "AgentChatResult"
       },
       "AgentChatSessionCreated": {
         "description": "A freshly-created agent conversation session.",

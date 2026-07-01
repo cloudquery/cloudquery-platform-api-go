@@ -973,8 +973,8 @@ type AgentChatRequest struct {
 // AgentChatRequestMode Orchestration mode. 0 (default) runs the full AI assistant. 1 is query-writer mode: the agent is narrowed to schema-discovery tools and steered to produce a single ClickHouse SQL statement. Selecting query-writer mode is the frontend's choice (it owns the rollout flag). The mode is sticky per session.
 type AgentChatRequestMode int
 
-// AgentChatResponse defines model for AgentChatResponse.
-type AgentChatResponse struct {
+// AgentChatResult defines model for AgentChatResponse.
+type AgentChatResult struct {
 	// Plan The agent orchestrator's execution plan, assembled from the tool-use trajectory.
 	Plan *AgentChatExecutionPlan `json:"plan,omitempty"`
 
@@ -30426,7 +30426,7 @@ func (r IndexResponse) StatusCode() int {
 type AgentChatResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *AgentChatResponse
+	JSON200      *AgentChatResult
 	JSON400      *BadRequest
 	JSON401      *RequiresAuthentication
 	JSON404      *NotFound
@@ -40816,7 +40816,7 @@ func ParseAgentChatResponse(rsp *http.Response) (*AgentChatResponse, error) {
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest AgentChatResponse
+		var dest AgentChatResult
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
