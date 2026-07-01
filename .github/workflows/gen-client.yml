@@ -15,14 +15,41 @@ jobs:
           private-key: ${{ secrets.CQ_APP_PRIVATE_KEY }}
           permission-contents: write
           permission-pull-requests: write
+      - name: Generate GitHub App token for platform repo
+        id: app-token-platform
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3
+        with:
+          app-id: ${{ secrets.CQ_APP_ID }}
+          private-key: ${{ secrets.CQ_APP_PRIVATE_KEY }}
+          repositories: |
+            platform
+          permission-contents: read
       - name: Checkout
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
         with:
           token: ${{ steps.app-token.outputs.token }}
 
       - name: Get Specs File
+        env:
+          GH_TOKEN: ${{ steps.app-token-platform.outputs.token }}
         run: |
-          curl -H "Authorization: token ${{ steps.app-token.outputs.token }}" https://raw.githubusercontent.com/cloudquery/platform/main/platform/api/servergen/spec.json -o spec.json
+          curl --fail-with-body --silent --show-error --location \
+            -H "Authorization: token ${GH_TOKEN}" \
+            https://raw.githubusercontent.com/cloudquery/platform/main/platform/api/servergen/spec.json \
+            -o spec.json
+
+      - name: Validate spec
+        run: |
+          if ! jq empty spec.json 2>/dev/null; then
+            echo "::error::spec.json is not valid JSON — refusing to regenerate the client"
+            cat spec.json
+            exit 1
+          fi
+          paths_count=$(jq '.paths | length' spec.json)
+          if [ "${paths_count:-0}" -lt 1 ]; then
+            echo "::error::spec.json has no paths — refusing to regenerate an empty client"
+            exit 1
+          fi
 
       - name: Set up Go 1.x
         uses: actions/setup-go@924ae3a1cded613372ab5595356fb5720e22ba16 # v6
