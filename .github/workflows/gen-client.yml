@@ -35,7 +35,7 @@ jobs:
         run: |
           curl --fail-with-body --silent --show-error --location \
             -H "Authorization: token ${GH_TOKEN}" \
-            https://raw.githubusercontent.com/cloudquery/platform/main/platform/api/servergen/spec.json \
+            https://raw.githubusercontent.com/cloudquery/platform/main/api/servergen/spec.json \
             -o spec.json
 
       - name: Validate spec
