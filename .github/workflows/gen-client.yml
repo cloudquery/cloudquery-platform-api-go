@@ -51,6 +51,16 @@ jobs:
             exit 1
           fi
 
+      - name: Patch spec for codegen
+        run: |
+          # The AgentChatResponse schema collides with the AgentChat operation's
+          # generated <OperationID>Response wrapper type. Rename the body model via
+          # x-go-name so both can coexist.
+          if [ "$(jq 'has("components") and (.components | has("schemas")) and (.components.schemas | has("AgentChatResponse"))' spec.json)" = "true" ]; then
+            jq '.components.schemas.AgentChatResponse["x-go-name"] = "AgentChatResult"' spec.json > spec.json.tmp
+            mv spec.json.tmp spec.json
+          fi
+
       - name: Set up Go 1.x
         uses: actions/setup-go@924ae3a1cded613372ab5595356fb5720e22ba16 # v6
         with:
@@ -59,6 +69,7 @@ jobs:
       - name: Regenerate client
         run: |
           go generate ./...
+          go mod tidy
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8
