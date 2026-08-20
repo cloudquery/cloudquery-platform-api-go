@@ -1,0 +1,5 @@
+{
+  "name": "cloudquery-platform-api-go",
+  "user": "ubuntu",
+  "install": "./.cursor/install.sh"
+}
