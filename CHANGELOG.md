@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.0.3](https://github.com/cloudquery/cloudquery-platform-api-go/compare/v2.0.2...v2.0.3) (2026-09-01)
+
+
+### Bug Fixes
+
+* **deps:** Update go module directive to v1.26.5 ([#75](https://github.com/cloudquery/cloudquery-platform-api-go/issues/75)) ([01f2121](https://github.com/cloudquery/cloudquery-platform-api-go/commit/01f21211f164b540030339b1505a6dcb3dd3c781))
+* **deps:** Update module github.com/oapi-codegen/runtime to v1.6.0 ([#76](https://github.com/cloudquery/cloudquery-platform-api-go/issues/76)) ([902f189](https://github.com/cloudquery/cloudquery-platform-api-go/commit/902f18908ab78f4659c0d25f54f239987dfe6487))
+* **deps:** Update module github.com/oapi-codegen/runtime to v1.7.0 ([#82](https://github.com/cloudquery/cloudquery-platform-api-go/issues/82)) ([9956cf7](https://github.com/cloudquery/cloudquery-platform-api-go/commit/9956cf7d91e68aa56b8c858821f746385b4ce38f))
+* **deps:** Update module github.com/stretchr/testify to v1.12.1 ([#83](https://github.com/cloudquery/cloudquery-platform-api-go/issues/83)) ([0993885](https://github.com/cloudquery/cloudquery-platform-api-go/commit/0993885dda2ea52008c64ed2f08b9be2cfd8540c))
+
 ## [2.0.2](https://github.com/cloudquery/cloudquery-platform-api-go/compare/v2.0.1...v2.0.2) (2026-07-01)
 
 
