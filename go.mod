@@ -1,6 +1,6 @@
 module github.com/cloudquery/cloudquery-platform-api-go/v2
 
-go 1.26.5
+go 1.27.1
 
 require (
 	github.com/adrg/xdg v0.5.3
